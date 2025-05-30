@@ -1,0 +1,272 @@
+﻿
+@{
+        ViewData["Title"] = "Instructor Dashboard";
+}
+<!-- Navigation -->
+<nav class="glass-effect sticky top-0 z-50 border-b border-white/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                        <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-teal-500 rounded-xl flex items-center justify-center shadow-lg">
+                                        <i class="fas fa-chalkboard-teacher text-white text-lg"></i>
+                                </div>
+                                <div>
+                                        <h1 class="text-xl font-bold bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent">
+                                                UniManage Pro
+                                        </h1>
+                                        <p class="text-xs text-gray-500">Professor Dashboard</p>
+                                </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                                <div class="flex space-x-2">
+                                        <a href="admin.html" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-green-600 transition-colors">
+                                                <i class="fas fa-user-shield mr-2"></i>Admin
+                                        </a>
+                                        <a href="student.html" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-green-600 transition-colors">
+                                                <i class="fas fa-user-graduate mr-2"></i>Student
+                                        </a>
+                                </div>
+                                <div class="px-4 py-2 bg-white/50 rounded-lg">
+                        <span class="text-sm font-medium text-gray-700">
+                            <i class="fas fa-chalkboard-teacher mr-2 text-green-600"></i>Dr. Smith
+                        </span>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</nav>
+
+<!-- Main Content -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Dashboard Header -->
+        <div id="dashboardView" class="animate-fade-in">
+                <div class="mb-8">
+                        <h2 class="text-4xl font-bold text-gray-800 mb-2">Professor Dashboard</h2>
+                        <p class="text-gray-600 text-lg">Manage your classes and student grades</p>
+                </div>
+
+                <!-- Professor Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+                                <div class="flex items-center justify-between">
+                                        <div>
+                                                <p class="text-sm font-medium text-gray-600">My Classes</p>
+                                                <p class="text-3xl font-bold text-green-600" id="myClasses">0</p>
+                                        </div>
+                                        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                                                <i class="fas fa-chalkboard text-green-600 text-xl"></i>
+                                        </div>
+                                </div>
+                        </div>
+
+                        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+                                <div class="flex items-center justify-between">
+                                        <div>
+                                                <p class="text-sm font-medium text-gray-600">Total Students</p>
+                                                <p class="text-3xl font-bold text-blue-600" id="totalStudents">0</p>
+                                        </div>
+                                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                                                <i class="fas fa-users text-blue-600 text-xl"></i>
+                                        </div>
+                                </div>
+                        </div>
+
+                        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+                                <div class="flex items-center justify-between">
+                                        <div>
+                                                <p class="text-sm font-medium text-gray-600">Pending Grades</p>
+                                                <p class="text-3xl font-bold text-orange-600" id="pendingGrades">0</p>
+                                        </div>
+                                        <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                                                <i class="fas fa-clipboard-list text-orange-600 text-xl"></i>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+
+                <!-- Professor Menu -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div onclick="showSection('professorClasses')" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+                                <div class="text-center">
+                                        <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
+                                                <i class="fas fa-calendar-alt text-white text-2xl"></i>
+                                        </div>
+                                        <h3 class="text-xl font-bold text-gray-800 mb-2">My Classes</h3>
+                                        <p class="text-gray-600">View assigned classes and schedules</p>
+                                </div>
+                        </div>
+
+                        <div onclick="showSection('gradeManagement')" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+                                <div class="text-center">
+                                        <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
+                                                <i class="fas fa-chart-line text-white text-2xl"></i>
+                                        </div>
+                                        <h3 class="text-xl font-bold text-gray-800 mb-2">Grade Management</h3>
+                                        <p class="text-gray-600">Record and manage student grades</p>
+                                </div>
+                        </div>
+
+                        <div onclick="showSection('studentList')" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+                                <div class="text-center">
+                                        <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
+                                                <i class="fas fa-users text-white text-2xl"></i>
+                                        </div>
+                                        <h3 class="text-xl font-bold text-gray-800 mb-2">Student Lists</h3>
+                                        <p class="text-gray-600">View students in each class</p>
+                                </div>
+                        </div>
+                </div>
+        </div>
+
+        <!-- Content Sections -->
+        <div id="contentArea" class="hidden animate-slide-up">
+                <!-- Back Button -->
+                <button onclick="goBack()" class="mb-6 flex items-center text-gray-600 hover:text-gray-800 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Dashboard
+                </button>
+
+                <!-- Professor Classes -->
+                <div id="professorClasses" class="hidden">
+                        <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden">
+                                <div class="bg-gradient-to-r from-green-500 to-teal-500 p-6">
+                                        <div class="flex justify-between items-center">
+                                                <div>
+                                                        <h3 class="text-2xl font-bold text-white mb-2">My Classes</h3>
+                                                        <p class="text-white/80">View your assigned classes and schedules</p>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="p-6">
+                                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="classCards">
+                                                <!-- Dynamic content -->
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+
+                <!-- Grade Management -->
+                <div id="gradeManagement" class="hidden">
+                        <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden">
+                                <div class="bg-gradient-to-r from-blue-500 to-purple-500 p-6">
+                                        <div class="flex justify-between items-center">
+                                                <div>
+                                                        <h3 class="text-2xl font-bold text-white mb-2">Grade Management</h3>
+                                                        <p class="text-white/80">Record and manage student grades</p>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="p-6">
+                                        <div class="mb-6">
+                                                <label class="block text-sm font-semibold text-gray-700 mb-2">Select Class</label>
+                                                <select id="gradeClassSelect" onchange="loadStudentsForGrading()" class="w-full max-w-md p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                                                        <option value="">Select a class</option>
+                                                </select>
+                                        </div>
+
+                                        <div id="gradeTable" class="hidden">
+                                                <div class="overflow-x-auto">
+                                                        <table class="w-full">
+                                                                <thead>
+                                                                <tr class="border-b border-gray-200">
+                                                                        <th class="text-left py-4 px-4 font-semibold text-gray-700">Student ID</th>
+                                                                        <th class="text-left py-4 px-4 font-semibold text-gray-700">Student Name</th>
+                                                                        <th class="text-left py-4 px-4 font-semibold text-gray-700">Midterm Grade</th>
+                                                                        <th class="text-left py-4 px-4 font-semibold text-gray-700">Final Grade</th>
+                                                                        <th class="text-left py-4 px-4 font-semibold text-gray-700">Total Grade</th>
+                                                                        <th class="text-left py-4 px-4 font-semibold text-gray-700">Actions</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody id="gradeTableBody" class="divide-y divide-gray-100">
+                                                                <!-- Dynamic content -->
+                                                                </tbody>
+                                                        </table>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+
+                <!-- Student List -->
+                <div id="studentList" class="hidden">
+                        <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden">
+                                <div class="bg-gradient-to-r from-purple-500 to-pink-500 p-6">
+                                        <div class="flex justify-between items-center">
+                                                <div>
+                                                        <h3 class="text-2xl font-bold text-white mb-2">Student Lists</h3>
+                                                        <p class="text-white/80">View students in each class</p>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="p-6">
+                                        <div class="mb-6">
+                                                <label class="block text-sm font-semibold text-gray-700 mb-2">Select Class</label>
+                                                <select id="studentClassSelect" onchange="loadStudentsList()" class="w-full max-w-md p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200">
+                                                        <option value="">Select a class</option>
+                                                </select>
+                                        </div>
+
+                                        <div id="studentListTable" class="hidden">
+                                                <div class="overflow-x-auto">
+                                                        <table class="w-full">
+                                                                <thead>
+                                                                <tr class="border-b border-gray-200">
+                                                                        <th class="text-left py-4 px-4 font-semibold text-gray-700">Student ID</th>
+                                                                        <th class="text-left py-4 px-4 font-semibold text-gray-700">Student Name</th>
+                                                                        <th class="text-left py-4 px-4 font-semibold text-gray-700">Faculty</th>
+                                                                        <th class="text-left py-4 px-4 font-semibold text-gray-700">Actions</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody id="studentListTableBody" class="divide-y divide-gray-100">
+                                                                <!-- Dynamic content -->
+                                                                </tbody>
+                                                        </table>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</div>
+
+<!-- Grade Modal -->
+<div id="gradeModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 animate-bounce-in">
+                <div class="bg-gradient-to-r from-blue-500 to-purple-500 p-6 rounded-t-2xl">
+                        <div class="flex justify-between items-center">
+                                <h4 class="text-xl font-bold text-white">Update Grade</h4>
+                                <button onclick="hideModal('gradeModal')" class="text-white/80 hover:text-white text-2xl">×</button>
+                        </div>
+                </div>
+
+                <form id="gradeForm" class="p-6 space-y-4">
+                        <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Student Name</label>
+                                <input type="text" id="gradeStudentName" class="w-full p-3 border border-gray-200 rounded-xl bg-gray-50" readonly>
+                        </div>
+
+                        <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Midterm Grade (0-20)</label>
+                                <input type="number" id="midtermGrade" min="0" max="20" step="0.1" class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" placeholder="Enter midterm grade">
+                        </div>
+
+                        <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Final Grade (0-20)</label>
+                                <input type="number" id="finalGrade" min="0" max="20" step="0.1" class="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" placeholder="Enter final grade">
+                        </div>
+
+                        <div class="flex space-x-3 pt-4">
+                                <button type="submit" class="flex-1 bg-gradient-to-r from-blue-500 to-purple-500 text-white py-3 rounded-xl hover:opacity-90 transition-all duration-200 font-semibold">
+                                        <i class="fas fa-save mr-2"></i>Save Grade
+                                </button>
+                                <button type="button" onclick="hideModal('gradeModal')" class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-xl hover:bg-gray-200 transition-all duration-200 font-semibold">
+                                        Cancel
+                                </button>
+                        </div>
+                </form>
+        </div>
+</div>
+

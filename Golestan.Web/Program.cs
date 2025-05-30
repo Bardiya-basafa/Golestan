@@ -79,7 +79,7 @@ app.UseAuthorization();
 // 9. Endpoints
 app.MapControllerRoute(
 "default",
-"{controller=Home}/{action=Index}/{id?}");
+"{controller=Admin}/{action=Index}/{id?}");
 
 
 

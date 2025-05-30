@@ -3,7 +3,7 @@
 
 namespace Golestan.Web.Controllers;
 
-public class HomeController : Controller {
+public class InstructorsController : Controller {
 
     // GET
     public IActionResult Index()

@@ -11,8 +11,6 @@ public class AppUser : IdentityUser {
 
     public string LastName { get; set; }
 
-    public string NationalId { get; set; }
-
     public UserType UserType { get; set; }// Discriminator property
 
 }

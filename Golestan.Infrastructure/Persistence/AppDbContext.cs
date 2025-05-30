@@ -17,10 +17,11 @@ public class AppDbContext : IdentityDbContext<AppUser> {
     {
         base.OnModelCreating(modelBuilder);
 
-        // customize  entity tables names 
+
+        // Custom table names
         modelBuilder.Entity<AppUser>().ToTable("Users");
-        modelBuilder.Entity<IdentityRole>().ToTable("Roles");
-        modelBuilder.Entity<IdentityRole<string>>().ToTable("UserRoles");
+        modelBuilder.Entity<IdentityRole<string>>().ToTable("Roles");
+        modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
         modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
         modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
         modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");

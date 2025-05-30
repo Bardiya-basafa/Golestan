@@ -1505,6 +1505,30 @@
             "rid": "win"
           }
         }
+      },
+      "Golestan.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity": "2.3.1",
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.5"
+        },
+        "compile": {
+          "bin/placeholder/Golestan.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Golestan.Domain.dll": {}
+        }
+      },
+      "Golestan.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Golestan.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Golestan.Shared.dll": {}
+        }
       }
     }
   },
@@ -3802,10 +3826,22 @@
         "system.windows.extensions.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "Golestan.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Golestan.Domain/Golestan.Domain.csproj",
+      "msbuildProject": "../Golestan.Domain/Golestan.Domain.csproj"
+    },
+    "Golestan.Shared/1.0.0": {
+      "type": "project",
+      "path": "../Golestan.Shared/Golestan.Shared.csproj",
+      "msbuildProject": "../Golestan.Shared/Golestan.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "Golestan.Domain >= 1.0.0",
+      "Golestan.Shared >= 1.0.0",
       "Microsoft.AspNetCore.Identity >= 2.3.1",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 9.0.5",
       "Microsoft.EntityFrameworkCore >= 9.0.5",
@@ -3844,7 +3880,14 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj": {
+              "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj"
+            },
+            "E:\\AspNetCore-Projects\\Golestan\\Golestan.Shared\\Golestan.Shared.csproj": {
+              "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Shared\\Golestan.Shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -1534,6 +1534,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Golestan.Domain": "1.0.0",
+          "Golestan.Shared": "1.0.0",
           "Microsoft.AspNetCore.Identity": "2.3.1",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "9.0.5",
           "Microsoft.EntityFrameworkCore": "9.0.5",
@@ -1545,6 +1547,16 @@
         },
         "runtime": {
           "bin/placeholder/Golestan.Infrastructure.dll": {}
+        }
+      },
+      "Golestan.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Golestan.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Golestan.Shared.dll": {}
         }
       }
     }
@@ -3861,6 +3873,11 @@
       "type": "project",
       "path": "../Golestan.Infrastructure/Golestan.Infrastructure.csproj",
       "msbuildProject": "../Golestan.Infrastructure/Golestan.Infrastructure.csproj"
+    },
+    "Golestan.Shared/1.0.0": {
+      "type": "project",
+      "path": "../Golestan.Shared/Golestan.Shared.csproj",
+      "msbuildProject": "../Golestan.Shared/Golestan.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {

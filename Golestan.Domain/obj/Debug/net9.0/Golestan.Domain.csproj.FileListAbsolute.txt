@@ -1,0 +1,11 @@
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\bin\Debug\net9.0\Golestan.Domain.deps.json
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\bin\Debug\net9.0\Golestan.Domain.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\bin\Debug\net9.0\Golestan.Domain.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Debug\net9.0\Golestan.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Debug\net9.0\Golestan.Domain.AssemblyInfoInputs.cache
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Debug\net9.0\Golestan.Domain.AssemblyInfo.cs
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Debug\net9.0\Golestan.Domain.csproj.CoreCompileInputs.cache
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Debug\net9.0\Golestan.Domain.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Debug\net9.0\refint\Golestan.Domain.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Debug\net9.0\Golestan.Domain.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Debug\net9.0\ref\Golestan.Domain.dll

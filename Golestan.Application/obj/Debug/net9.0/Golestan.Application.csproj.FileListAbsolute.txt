@@ -1,0 +1,11 @@
+E:\AspNetCore-Projects\Golestan\Golestan.Application\bin\Debug\net9.0\Golestan.Application.deps.json
+E:\AspNetCore-Projects\Golestan\Golestan.Application\bin\Debug\net9.0\Golestan.Application.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Application\bin\Debug\net9.0\Golestan.Application.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\Golestan.Application.GeneratedMSBuildEditorConfig.editorconfig
+E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\Golestan.Application.AssemblyInfoInputs.cache
+E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\Golestan.Application.AssemblyInfo.cs
+E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\Golestan.Application.csproj.CoreCompileInputs.cache
+E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\Golestan.Application.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\refint\Golestan.Application.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\Golestan.Application.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\ref\Golestan.Application.dll

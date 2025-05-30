@@ -1,0 +1,12 @@
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\bin\Debug\net9.0\Golestan.Infrastructure.deps.json
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\bin\Debug\net9.0\Golestan.Infrastructure.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\bin\Debug\net9.0\Golestan.Infrastructure.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\Golestan.Infrastructure.csproj.AssemblyReference.cache
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\Golestan.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\Golestan.Infrastructure.AssemblyInfoInputs.cache
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\Golestan.Infrastructure.AssemblyInfo.cs
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\Golestan.Infrastructure.csproj.CoreCompileInputs.cache
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\Golestan.Infrastructure.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\refint\Golestan.Infrastructure.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\Golestan.Infrastructure.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\ref\Golestan.Infrastructure.dll

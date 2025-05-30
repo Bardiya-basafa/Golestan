@@ -21,8 +21,6 @@ public class Student {
 
     public Faculty Faculty { get; set; }
 
-    public ICollection<Course> Courses { get; set; }
-
-    public ICollection<Instructor> Instructors { get; set; }
+    public ICollection<Section> Sections { get; set; }
 
 }

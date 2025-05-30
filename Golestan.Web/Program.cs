@@ -1,6 +1,8 @@
 using System.Globalization;
+using Golestan.Domain.Entities;
 using Golestan.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -21,6 +23,15 @@ builder.Services.AddControllersWithViews();
 // 4. Database Context (EF Core)
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GolestanDB")));
+
+builder.Services.AddIdentity<AppUser, IdentityRole>(options => {
+        options.Password.RequireDigit = true;
+        options.Password.RequiredLength = 6;
+        options.Password.RequireNonAlphanumeric = true;
+        options.User.RequireUniqueEmail = true;
+    })
+    .AddEntityFrameworkStores<AppDbContext>()
+    .AddDefaultTokenProviders();
 
 
 // 7. Authentication & Authorization
@@ -60,7 +71,6 @@ else{
 }
 
 
-
 // 3. Static Files
 app.UseStaticFiles(new StaticFileOptions
 {
@@ -79,10 +89,7 @@ app.UseAuthorization();
 // 9. Endpoints
 app.MapControllerRoute(
 "default",
-"{controller=Home}/{action=Index}/{id?}");
-
-
-
+"{controller=Admin}/{action=Index}/{id?}");
 
 
 app.Run();

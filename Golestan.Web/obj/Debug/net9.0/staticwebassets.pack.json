@@ -1,8 +1,8 @@
 {
   "Files": [
     {
-      "Id": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.css",
-      "PackagePath": "staticwebassets\\app.css"
+      "Id": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.js",
+      "PackagePath": "staticwebassets\\app.js"
     },
     {
       "Id": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\favicon.png",
@@ -183,6 +183,10 @@
     {
       "Id": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\style.css",
+      "PackagePath": "staticwebassets\\style.css"
     },
     {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.Golestan.Web.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

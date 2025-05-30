@@ -13,7 +13,6 @@ E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\Golestan.Web.Assem
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\Golestan.Web.csproj.CoreCompileInputs.cache
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\Golestan.Web.MvcApplicationPartsAssemblyInfo.cache
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\scopedcss\bundle\Golestan.Web.styles.css
-E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\compressed\d1cwh78b5o-khy4lop6wu.gz
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\compressed\q6nguvdarg-t1cqhe9u97.gz
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\compressed\np1qmfgzwh-c2jlpeoesf.gz
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\compressed\zlgy6fp3vr-sejl45xvog.gz
@@ -132,3 +131,6 @@ E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\Golestan.Web.cspro
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\Golestan.6827A7A2.Up2Date
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\Golestan.Web.RazorAssemblyInfo.cache
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\Golestan.Web.RazorAssemblyInfo.cs
+E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\Golestan.Web.sourcelink.json
+E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\compressed\npjt4o0ood-3kiy4y5fb3.gz
+E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\compressed\af53hxmrbf-sslr04cwy3.gz

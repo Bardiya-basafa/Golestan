@@ -20,7 +20,10 @@ builder.Configuration
 
 
 // 3. MVC Services
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddViewOptions(options => {
+        options.HtmlHelperOptions.ClientValidationEnabled = true;
+    });
 
 // 4. Database Context (EF Core)
 builder.Services.AddDbContext<AppDbContext>(options =>

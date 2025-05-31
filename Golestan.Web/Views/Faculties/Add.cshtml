@@ -1,0 +1,168 @@
+﻿@using Golestan.Domain.Enums
+@model AddFacultyDto
+
+<!-- Navigation -->
+<nav class="glass-effect sticky top-0 z-50 border-b border-white/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center space-x-4">
+                <div class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg">
+                    <i class="fas fa-university text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                        UniManage Pro
+                    </h1>
+                    <p class="text-xs text-gray-500">Add New Faculty</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <a href="faculty-management.html"
+                   class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Faculty List
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Header -->
+    <div class="text-center mb-8 animate-fade-in">
+        <div class="w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+            <i class="fas fa-university text-white text-3xl"></i>
+        </div>
+        <h2 class="text-4xl font-bold text-gray-800 mb-2">Add New Faculty</h2>
+        <p class="text-gray-600 text-lg">Create a new faculty member record</p>
+    </div>
+
+    <!-- Form -->
+    <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 form-section animate-slide-up">
+        <form action="#" method="POST" class="space-y-6">
+            <!-- Faculty Name -->
+            <div>
+                <label asp-for="FacultyName" class="block text-sm font-bold text-gray-700 mb-2">
+                    <i class="fas fa-user mr-2 text-purple-500"></i>Faculty Name *
+                </label>
+                <input
+                        type="text"
+                        asp-for="FacultyName"
+                        required
+                        maxlength="100"
+                        class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                        placeholder="Enter full name (e.g., Dr. Sarah Johnson)"
+                >
+                <p class="text-xs text-gray-500 mt-1">Full name including title and credentials</p>
+            </div>
+
+            <!-- Major -->
+            <div>
+                <label for="major" class="block text-sm font-bold text-gray-700 mb-2">
+                    <i class="fas fa-graduation-cap mr-2 text-teal-500"></i>Major/Department *
+                </label>
+                <select
+                        id="major"
+                        name="Major"
+                        required
+                        class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                >
+                    <option value="">Select Major/Department</option>
+                    <option value="ComputerScience">@Major.Mechanical</option>
+                    <option value="SoftwareEngineering">@Major.Civil</option>
+                    <option value="InformationTechnology">@Major.Electrical</option>
+                    <option value="DataScience">@Major.Chemical</option>
+                    <option value="CyberSecurity">@Major.Computer</option>
+
+                </select>
+                <p class="text-xs text-gray-500 mt-1">Primary department or field of expertise</p>
+            </div>
+
+            <!-- Badge Number -->
+            <div>
+                <label asp-for="Badge" class="block text-sm font-bold text-gray-700 mb-2">
+                    <i class="fas fa-id-badge mr-2 text-orange-500"></i>Badge Number *
+                </label>
+                <input
+                        type="number"
+                        asp-for="Badge"
+                        required
+                        min="1"
+                        class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                        placeholder="Enter badge number (e.g., 12345)"
+                >
+                <p class="text-xs text-gray-500 mt-1">Official university badge/ID number</p>
+            </div>
+
+            <!-- Start Date -->
+            <div>
+                <label for="startDate" class="block text-sm font-bold text-gray-700 mb-2">
+                    <i class="fas fa-calendar-plus mr-2 text-green-500"></i>Start Date *
+                </label>
+                <input
+                        type="date"
+                        id="startDate"
+                        name="StartDate"
+                        required
+                        class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                >
+                <p class="text-xs text-gray-500 mt-1">Date when the faculty member started working</p>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
+                <button
+                        type="reset"
+                        class="flex-1 bg-white/70 backdrop-blur-sm text-gray-700 py-4 px-6 rounded-xl hover:bg-white/90 transition-all duration-200 font-semibold border border-white/20 shadow-lg"
+                >
+                    <i class="fas fa-undo mr-2"></i>Reset Form
+                </button>
+                <button
+                        type="submit"
+                        class="flex-1 bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-4 px-6 rounded-xl hover:from-indigo-600 hover:to-purple-600 transition-all duration-200 font-semibold shadow-lg"
+                >
+                    <i class="fas fa-plus mr-2"></i>Add Faculty
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Form Information -->
+    <div class="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
+        <div class="flex items-start">
+            <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mr-4 mt-1">
+                <i class="fas fa-info text-white text-sm"></i>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-blue-800 mb-2">Form Guidelines</h3>
+                <ul class="text-blue-700 space-y-1 text-sm">
+                    <li><strong>Faculty ID:</strong> Must be unique and numeric</li>
+                    <li><strong>Name:</strong> Include full name with appropriate titles (Dr., Prof., etc.)</li>
+                    <li><strong>Major:</strong> Select the primary department or field of expertise</li>
+                    <li><strong>Badge Number:</strong> Official university identification number</li>
+                    <li><strong>Start Date:</strong> The date when employment began</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sample Data Reference -->
+    <div class="mt-6 bg-gray-50 border border-gray-200 rounded-xl p-6">
+        <div class="flex items-start">
+            <div class="w-8 h-8 bg-gray-500 rounded-lg flex items-center justify-center mr-4 mt-1">
+                <i class="fas fa-lightbulb text-white text-sm"></i>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold text-gray-800 mb-2">Example Entry</h3>
+                <div class="text-gray-700 text-sm space-y-1">
+                    <p><strong>ID:</strong> 1001</p>
+                    <p><strong>Name:</strong> Dr. Sarah Johnson</p>
+                    <p><strong>Major:</strong> Computer Science</p>
+                    <p><strong>Badge:</strong> 12345</p>
+                    <p><strong>Start Date:</strong> 2020-09-01</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

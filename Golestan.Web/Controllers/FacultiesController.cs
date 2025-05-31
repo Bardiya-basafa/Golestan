@@ -4,6 +4,7 @@
 namespace Golestan.Web.Controllers;
 
 using Application.Interfaces;
+using Domain.Enums;
 
 
 public class FacultiesController : Controller {

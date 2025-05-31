@@ -7,8 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Interfaces\" />
-      <Folder Include="Services\" />
+      <ProjectReference Include="..\Golestan.Domain\Golestan.Domain.csproj" />
+      <ProjectReference Include="..\Golestan.Infrastructure\Golestan.Infrastructure.csproj" />
+      <ProjectReference Include="..\Golestan.Shared\Golestan.Shared.csproj" />
     </ItemGroup>
 
 </Project>

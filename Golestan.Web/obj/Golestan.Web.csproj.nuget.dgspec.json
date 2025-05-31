@@ -31,7 +31,17 @@
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj": {
+                "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj"
+              },
+              "E:\\AspNetCore-Projects\\Golestan\\Golestan.Infrastructure\\Golestan.Infrastructure.csproj": {
+                "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Infrastructure\\Golestan.Infrastructure.csproj"
+              },
+              "E:\\AspNetCore-Projects\\Golestan\\Golestan.Shared\\Golestan.Shared.csproj": {
+                "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Shared\\Golestan.Shared.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

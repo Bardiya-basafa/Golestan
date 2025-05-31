@@ -13,6 +13,8 @@ public class Faculty {
 
     public int Badge { get; set; }
 
+    public DateTime StartDate { get; set; }
+
     public ICollection<Student> Students { get; set; }
 
     public ICollection<Instructor> Instructors { get; set; }

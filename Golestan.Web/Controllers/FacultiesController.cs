@@ -3,10 +3,32 @@
 
 namespace Golestan.Web.Controllers;
 
+using Application.Interfaces;
+
+
 public class FacultiesController : Controller {
 
+    private readonly IFacultyService _facultyService;
+
+    public FacultiesController(IFacultyService facultyService)
+    {
+        _facultyService = facultyService;
+    }
+
     // GET
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
+    {
+        var faculties = await _facultyService.GetFaculties();
+
+        return View(faculties);
+    }
+
+    public async Task<IActionResult> Details(int? id)
+    {
+        return View();
+    }
+
+    public async Task<IActionResult> Add()
     {
         return View();
     }

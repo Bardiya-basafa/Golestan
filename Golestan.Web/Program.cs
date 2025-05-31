@@ -1,4 +1,6 @@
 using System.Globalization;
+using Golestan.Application.Interfaces;
+using Golestan.Application.Services;
 using Golestan.Domain.Entities;
 using Golestan.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -23,6 +25,9 @@ builder.Services.AddControllersWithViews();
 // 4. Database Context (EF Core)
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GolestanDB")));
+
+// 5. Services 
+builder.Services.AddScoped<IFacultyService, FacultyService>();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options => {
         options.Password.RequireDigit = true;

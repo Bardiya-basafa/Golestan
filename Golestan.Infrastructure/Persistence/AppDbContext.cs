@@ -59,6 +59,9 @@ public class AppDbContext : IdentityDbContext<AppUser> {
             .WithMany(s => s.Students)
             .UsingEntity(j => j.ToTable("StudentSections"));
 
+        modelBuilder.Entity<Student>()
+            .HasIndex(s => s.StudentNumber)
+            .IsUnique();
         // Instructor 
         modelBuilder.Entity<Instructor>()
             .HasOne(s => s.AppUser)

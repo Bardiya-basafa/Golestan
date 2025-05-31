@@ -1206,6 +1206,11 @@
         }
       },
       "Golestan.Application/1.0.0": {
+        "dependencies": {
+          "Golestan.Domain": "1.0.0",
+          "Golestan.Infrastructure": "1.0.0",
+          "Golestan.Shared": "1.0.0"
+        },
         "runtime": {
           "Golestan.Application.dll": {
             "assemblyVersion": "1.0.0.0",

@@ -56,6 +56,7 @@ public class AppDbContext : IdentityDbContext<AppUser> {
             .HasForeignKey(s => s.FacultyId)
             .OnDelete(DeleteBehavior.NoAction);
 
+
         modelBuilder.Entity<Student>()
             .HasMany(s => s.Sections)
             .WithMany(s => s.Students)

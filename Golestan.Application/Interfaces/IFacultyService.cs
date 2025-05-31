@@ -8,4 +8,5 @@ public interface IFacultyService {
 
     Task<List<Faculty>> GetFaculties();
 
+
 }

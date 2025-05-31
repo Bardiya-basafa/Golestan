@@ -7,14 +7,15 @@ public class Faculty {
 
     public int Id { get; set; }
 
-    public string Name { get; set; }
+    public string BuildingName { get; set; }
 
-    public Major Major { get; set; }
+    public string MajorName { get; set; }
 
     public int Badge { get; set; }
 
     public DateTime StartDate { get; set; }
 
+   
     public ICollection<Student> Students { get; set; }
 
     public ICollection<Instructor> Instructors { get; set; }

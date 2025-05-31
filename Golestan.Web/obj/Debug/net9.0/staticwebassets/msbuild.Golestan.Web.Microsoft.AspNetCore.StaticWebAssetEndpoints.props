@@ -1,16 +1,16 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAssetEndpoint Include="_content/Golestan.Web/app.3kiy4y5fb3.js">
+    <StaticWebAssetEndpoint Include="_content/Golestan.Web/app.29uauxowdn.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\app.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"3kiy4y5fb3"},{"Name":"integrity","Value":"sha256-c\u002B7wVzvd325ptpmHj/of0WeuYz3iYH81u1Sxq1Jx\u002Bcs="},{"Name":"label","Value":"_content/Golestan.Web/app.js"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"39518"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022c\u002B7wVzvd325ptpmHj/of0WeuYz3iYH81u1Sxq1Jx\u002Bcs=\u0022"},{"Name":"Last-Modified","Value":"Fri, 30 May 2025 18:42:57 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"29uauxowdn"},{"Name":"integrity","Value":"sha256-pjny7LjhL3EKjdq9ZcgnAb8sBeZg2a5Aw7pp7Yqi7KA="},{"Name":"label","Value":"_content/Golestan.Web/app.js"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"54535"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022pjny7LjhL3EKjdq9ZcgnAb8sBeZg2a5Aw7pp7Yqi7KA=\u0022"},{"Name":"Last-Modified","Value":"Sat, 31 May 2025 18:39:47 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Golestan.Web/app.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\app.js'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-c\u002B7wVzvd325ptpmHj/of0WeuYz3iYH81u1Sxq1Jx\u002Bcs="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"39518"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022c\u002B7wVzvd325ptpmHj/of0WeuYz3iYH81u1Sxq1Jx\u002Bcs=\u0022"},{"Name":"Last-Modified","Value":"Fri, 30 May 2025 18:42:57 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-pjny7LjhL3EKjdq9ZcgnAb8sBeZg2a5Aw7pp7Yqi7KA="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"54535"},{"Name":"Content-Type","Value":"text/javascript"},{"Name":"ETag","Value":"\u0022pjny7LjhL3EKjdq9ZcgnAb8sBeZg2a5Aw7pp7Yqi7KA=\u0022"},{"Name":"Last-Modified","Value":"Sat, 31 May 2025 18:39:47 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Golestan.Web/favicon.ifv42okdf2.png">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.png'))</AssetFile>

@@ -19,7 +19,10 @@ public class FacultyService : IFacultyService {
     public async Task<List<Faculty>> GetFaculties()
     {
         var faculties = await _context.Faculties.ToListAsync();
+
         return faculties;
     }
+
+   
 
 }

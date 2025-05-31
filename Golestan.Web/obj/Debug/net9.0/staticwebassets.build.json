@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UYjBS3h2/8vv42D+nT4BhLNpVHGteVx9AMowr92hQOU=",
+  "Hash": "7exJTSmHQX9qd6B1jnIG+YtKbj99cR4L8SdQ2K2mytQ=",
   "Source": "Golestan.Web",
   "BasePath": "_content/Golestan.Web",
   "Mode": "Default",
@@ -647,12 +647,12 @@
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\npjt4o0ood-3kiy4y5fb3.gz",
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\npjt4o0ood-29uauxowdn.gz",
       "SourceId": "Golestan.Web",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Golestan.Web",
-      "RelativePath": "app#[.{fingerprint=3kiy4y5fb3}]?.js.gz",
+      "RelativePath": "app#[.{fingerprint=29uauxowdn}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -661,8 +661,8 @@
       "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "15j3d6uguo",
-      "Integrity": "pWgVDXGFg8xftTW4PY9d4xSs/blnWCWJ3mrmdFMcumk=",
+      "Fingerprint": "jfs9zbwtsx",
+      "Integrity": "L0fMoS9xNFoaCNNMme9aJT2XCz6Iv+QOh2bKYHSHjbM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.js"
@@ -997,8 +997,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "3kiy4y5fb3",
-      "Integrity": "c+7wVzvd325ptpmHj/of0WeuYz3iYH81u1Sxq1Jx+cs=",
+      "Fingerprint": "29uauxowdn",
+      "Integrity": "pjny7LjhL3EKjdq9ZcgnAb8sBeZg2a5Aw7pp7Yqi7KA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\app.js"
@@ -1972,13 +1972,13 @@
   ],
   "Endpoints": [
     {
-      "Route": "app.3kiy4y5fb3.js",
-      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\npjt4o0ood-3kiy4y5fb3.gz",
+      "Route": "app.29uauxowdn.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\npjt4o0ood-29uauxowdn.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000172087420"
+          "Quality": "0.000120510966"
         }
       ],
       "ResponseHeaders": [
@@ -1988,15 +1988,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5810"
+          "Value": "8297"
         },
         {
           "Name": "ETag",
-          "Value": "\"pWgVDXGFg8xftTW4PY9d4xSs/blnWCWJ3mrmdFMcumk=\""
+          "Value": "\"L0fMoS9xNFoaCNNMme9aJT2XCz6Iv+QOh2bKYHSHjbM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 30 May 2025 18:42:57 GMT"
+          "Value": "Sat, 31 May 2025 18:39:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2016,13 +2016,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"c+7wVzvd325ptpmHj/of0WeuYz3iYH81u1Sxq1Jx+cs=\""
+          "Value": "W/\"pjny7LjhL3EKjdq9ZcgnAb8sBeZg2a5Aw7pp7Yqi7KA=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3kiy4y5fb3"
+          "Value": "29uauxowdn"
         },
         {
           "Name": "label",
@@ -2030,12 +2030,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-c+7wVzvd325ptpmHj/of0WeuYz3iYH81u1Sxq1Jx+cs="
+          "Value": "sha256-pjny7LjhL3EKjdq9ZcgnAb8sBeZg2a5Aw7pp7Yqi7KA="
         }
       ]
     },
     {
-      "Route": "app.3kiy4y5fb3.js",
+      "Route": "app.29uauxowdn.js",
       "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.js",
       "Selectors": [],
       "ResponseHeaders": [
@@ -2045,7 +2045,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "39518"
+          "Value": "54535"
         },
         {
           "Name": "Content-Type",
@@ -2053,11 +2053,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"c+7wVzvd325ptpmHj/of0WeuYz3iYH81u1Sxq1Jx+cs=\""
+          "Value": "\"pjny7LjhL3EKjdq9ZcgnAb8sBeZg2a5Aw7pp7Yqi7KA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 30 May 2025 18:42:57 GMT"
+          "Value": "Sat, 31 May 2025 18:39:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2067,7 +2067,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3kiy4y5fb3"
+          "Value": "29uauxowdn"
         },
         {
           "Name": "label",
@@ -2075,13 +2075,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-c+7wVzvd325ptpmHj/of0WeuYz3iYH81u1Sxq1Jx+cs="
+          "Value": "sha256-pjny7LjhL3EKjdq9ZcgnAb8sBeZg2a5Aw7pp7Yqi7KA="
         }
       ]
     },
     {
-      "Route": "app.3kiy4y5fb3.js.gz",
-      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\npjt4o0ood-3kiy4y5fb3.gz",
+      "Route": "app.29uauxowdn.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\npjt4o0ood-29uauxowdn.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2090,7 +2090,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5810"
+          "Value": "8297"
         },
         {
           "Name": "Content-Type",
@@ -2098,11 +2098,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"pWgVDXGFg8xftTW4PY9d4xSs/blnWCWJ3mrmdFMcumk=\""
+          "Value": "\"L0fMoS9xNFoaCNNMme9aJT2XCz6Iv+QOh2bKYHSHjbM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 30 May 2025 18:42:57 GMT"
+          "Value": "Sat, 31 May 2025 18:39:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2120,7 +2120,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "3kiy4y5fb3"
+          "Value": "29uauxowdn"
         },
         {
           "Name": "label",
@@ -2128,18 +2128,18 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-pWgVDXGFg8xftTW4PY9d4xSs/blnWCWJ3mrmdFMcumk="
+          "Value": "sha256-L0fMoS9xNFoaCNNMme9aJT2XCz6Iv+QOh2bKYHSHjbM="
         }
       ]
     },
     {
       "Route": "app.js",
-      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\npjt4o0ood-3kiy4y5fb3.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\npjt4o0ood-29uauxowdn.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000172087420"
+          "Quality": "0.000120510966"
         }
       ],
       "ResponseHeaders": [
@@ -2149,15 +2149,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5810"
+          "Value": "8297"
         },
         {
           "Name": "ETag",
-          "Value": "\"pWgVDXGFg8xftTW4PY9d4xSs/blnWCWJ3mrmdFMcumk=\""
+          "Value": "\"L0fMoS9xNFoaCNNMme9aJT2XCz6Iv+QOh2bKYHSHjbM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 30 May 2025 18:42:57 GMT"
+          "Value": "Sat, 31 May 2025 18:39:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2177,13 +2177,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"c+7wVzvd325ptpmHj/of0WeuYz3iYH81u1Sxq1Jx+cs=\""
+          "Value": "W/\"pjny7LjhL3EKjdq9ZcgnAb8sBeZg2a5Aw7pp7Yqi7KA=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-c+7wVzvd325ptpmHj/of0WeuYz3iYH81u1Sxq1Jx+cs="
+          "Value": "sha256-pjny7LjhL3EKjdq9ZcgnAb8sBeZg2a5Aw7pp7Yqi7KA="
         }
       ]
     },
@@ -2198,7 +2198,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "39518"
+          "Value": "54535"
         },
         {
           "Name": "Content-Type",
@@ -2206,11 +2206,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"c+7wVzvd325ptpmHj/of0WeuYz3iYH81u1Sxq1Jx+cs=\""
+          "Value": "\"pjny7LjhL3EKjdq9ZcgnAb8sBeZg2a5Aw7pp7Yqi7KA=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 30 May 2025 18:42:57 GMT"
+          "Value": "Sat, 31 May 2025 18:39:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2220,13 +2220,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-c+7wVzvd325ptpmHj/of0WeuYz3iYH81u1Sxq1Jx+cs="
+          "Value": "sha256-pjny7LjhL3EKjdq9ZcgnAb8sBeZg2a5Aw7pp7Yqi7KA="
         }
       ]
     },
     {
       "Route": "app.js.gz",
-      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\npjt4o0ood-3kiy4y5fb3.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\npjt4o0ood-29uauxowdn.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2235,7 +2235,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "5810"
+          "Value": "8297"
         },
         {
           "Name": "Content-Type",
@@ -2243,11 +2243,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"pWgVDXGFg8xftTW4PY9d4xSs/blnWCWJ3mrmdFMcumk=\""
+          "Value": "\"L0fMoS9xNFoaCNNMme9aJT2XCz6Iv+QOh2bKYHSHjbM=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 30 May 2025 18:42:57 GMT"
+          "Value": "Sat, 31 May 2025 18:39:47 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2265,7 +2265,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-pWgVDXGFg8xftTW4PY9d4xSs/blnWCWJ3mrmdFMcumk="
+          "Value": "sha256-L0fMoS9xNFoaCNNMme9aJT2XCz6Iv+QOh2bKYHSHjbM="
         }
       ]
     },

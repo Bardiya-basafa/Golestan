@@ -3,6 +3,7 @@
 
 namespace Golestan.Web.Controllers;
 
+using Application.DTOs;
 using Application.Interfaces;
 using Domain.Enums;
 
@@ -29,7 +30,15 @@ public class FacultiesController : Controller {
         return View();
     }
 
-    public async Task<IActionResult> Add()
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AddFaculty(AddFacultyDto faculty)
+    {
+        return View();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> AddFaculty()
     {
         return View();
     }

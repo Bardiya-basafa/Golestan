@@ -10,16 +10,17 @@ public class Student {
     public string AppUserId { get; set; }// foreign key to AppUser 
 
     public AppUser AppUser { get; set; }
-
-    public Major Major { get; set; }
-
+    
     public string StudentNumber { get; set; }
 
     public DateTime EnteredDate { get; set; }
 
     public int FacultyId { get; set; }
 
+
     public Faculty Faculty { get; set; }
+
+
 
     public ICollection<Section> Sections { get; set; }
 

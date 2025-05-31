@@ -10,7 +10,6 @@ public class Section {
 
     public int InstructorId { get; set; }
 
-    public int TimeSlotId { get; set; }
 
     public Course Course { get; set; }
 

@@ -47,12 +47,14 @@ public class AppDbContext : IdentityDbContext<AppUser> {
         modelBuilder.Entity<Student>()
             .HasOne(s => s.AppUser)
             .WithOne(au => au.StudentProfile)
-            .HasForeignKey<Student>(s => s.AppUserId);
+            .HasForeignKey<Student>(s => s.AppUserId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Student>()
             .HasOne(s => s.Faculty)
             .WithMany(f => f.Students)
-            .HasForeignKey(s => s.FacultyId);
+            .HasForeignKey(s => s.FacultyId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Student>()
             .HasMany(s => s.Sections)
@@ -62,91 +64,103 @@ public class AppDbContext : IdentityDbContext<AppUser> {
         modelBuilder.Entity<Student>()
             .HasIndex(s => s.StudentNumber)
             .IsUnique();
+
         // Instructor 
         modelBuilder.Entity<Instructor>()
             .HasOne(s => s.AppUser)
             .WithOne(au => au.ProfessorProfile)
-            .HasForeignKey<Instructor>(s => s.AppUserId);
+            .HasForeignKey<Instructor>(s => s.AppUserId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Instructor>()
             .HasOne(s => s.Faculty)
             .WithMany(f => f.Instructors)
-            .HasForeignKey(s => s.FacultyId);
+            .HasForeignKey(s => s.FacultyId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Instructor>()
             .HasMany(i => i.Sections)
             .WithOne(s => s.Instructor)
-            .HasForeignKey(s => s.InstructorId);
+            .HasForeignKey(s => s.InstructorId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         // Course 
         modelBuilder.Entity<Course>()
             .HasMany(c => c.Sections)
             .WithOne(s => s.Course)
-            .HasForeignKey(s => s.CourseId);
+            .HasForeignKey(s => s.CourseId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Course>()
             .HasOne(c => c.Faculty)
             .WithMany(s => s.Courses)
-            .HasForeignKey(s => s.FacultyId);
+            .HasForeignKey(s => s.FacultyId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         // Classroom
         modelBuilder.Entity<Classroom>()
             .HasOne(c => c.Faculty)
             .WithMany(f => f.Classrooms)
-            .HasForeignKey(c => c.FacultyId);
+            .HasForeignKey(c => c.FacultyId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Classroom>()
             .HasMany(c => c.Sections)
             .WithOne(s => s.Classroom)
-            .HasForeignKey(s => s.ClassroomId);
+            .HasForeignKey(s => s.ClassroomId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         // Time slot 
         modelBuilder.Entity<TimeSlot>()
             .HasOne(t => t.Section)
             .WithOne(s => s.TimeSlot)
-            .HasForeignKey<TimeSlot>(t => t.SectionId);
+            .HasForeignKey<TimeSlot>(t => t.SectionId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         // Section 
         modelBuilder.Entity<Section>()
             .HasOne(s => s.Classroom)
             .WithMany(c => c.Sections)
-            .HasForeignKey(s => s.ClassroomId);
+            .HasForeignKey(s => s.ClassroomId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Section>()
             .HasOne(s => s.Course)
             .WithMany(c => c.Sections)
-            .HasForeignKey(s => s.CourseId);
+            .HasForeignKey(s => s.CourseId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Section>()
             .HasOne(s => s.Instructor)
             .WithMany(i => i.Sections)
-            .HasForeignKey(s => s.InstructorId);
+            .HasForeignKey(s => s.InstructorId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Section>()
             .HasOne(s => s.TimeSlot)
             .WithOne(s => s.Section)
-            .HasForeignKey<Section>(s => s.TimeSlotId);
+            .OnDelete(DeleteBehavior.NoAction);
 
         // Faculty
         modelBuilder.Entity<Faculty>()
             .HasMany(f => f.Classrooms)
             .WithOne(c => c.Faculty)
-            .HasForeignKey(c => c.FacultyId);
+            .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Faculty>()
             .HasMany(f => f.Instructors)
             .WithOne(i => i.Faculty)
-            .HasForeignKey(i => i.FacultyId);
+            .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Faculty>()
             .HasMany(f => f.Students)
             .WithOne(s => s.Faculty)
-            .HasForeignKey(s => s.FacultyId);
+            .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Faculty>()
             .HasMany(f => f.Courses)
             .WithOne(c => c.Faculty)
-            .HasForeignKey(c => c.FacultyId);
+            .OnDelete(DeleteBehavior.NoAction);
 
 
         // seed roles 

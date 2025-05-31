@@ -145,9 +145,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SectionId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Unit")
                         .HasColumnType("int");
 
@@ -232,9 +229,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Property<int>("InstructorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TimeSlotId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ClassroomId");
@@ -242,9 +236,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasIndex("CourseId");
 
                     b.HasIndex("InstructorId");
-
-                    b.HasIndex("TimeSlotId")
-                        .IsUnique();
 
                     b.ToTable("Sections");
                 });
@@ -317,6 +308,9 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ClassroomId");
 
+                    b.HasIndex("SectionId")
+                        .IsUnique();
+
                     b.ToTable("TimeSlots");
                 });
 
@@ -349,19 +343,19 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "0b9c3594-5876-42bb-aa64-ad49aa0c183d",
+                            Id = "df378605-0833-41d5-92f2-a153b3b1330f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "3e69681c-c0c3-4c85-b950-50bdf44732b2",
+                            Id = "ee0e37d2-a4b1-4582-82d2-d6fa1b72fcee",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         },
                         new
                         {
-                            Id = "f7a2b4cb-0b7f-4aa1-80c3-ba99b7faedcb",
+                            Id = "6abf27ba-3909-486c-abed-5a50d64aaa6d",
                             Name = "Instructor",
                             NormalizedName = "INSTRUCTOR"
                         });
@@ -512,7 +506,7 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasOne("Golestan.Domain.Entities.Faculty", "Faculty")
                         .WithMany("Classrooms")
                         .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Faculty");
@@ -523,7 +517,7 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasOne("Golestan.Domain.Entities.Faculty", "Faculty")
                         .WithMany("Courses")
                         .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Faculty");
@@ -534,13 +528,13 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasOne("Golestan.Domain.Entities.AppUser", "AppUser")
                         .WithOne("ProfessorProfile")
                         .HasForeignKey("Golestan.Domain.Entities.Instructor", "AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Golestan.Domain.Entities.Faculty", "Faculty")
                         .WithMany("Instructors")
                         .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("AppUser");
@@ -553,25 +547,19 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasOne("Golestan.Domain.Entities.Classroom", "Classroom")
                         .WithMany("Sections")
                         .HasForeignKey("ClassroomId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Golestan.Domain.Entities.Course", "Course")
                         .WithMany("Sections")
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Golestan.Domain.Entities.Instructor", "Instructor")
                         .WithMany("Sections")
                         .HasForeignKey("InstructorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Golestan.Domain.Entities.TimeSlot", "TimeSlot")
-                        .WithOne("Section")
-                        .HasForeignKey("Golestan.Domain.Entities.Section", "TimeSlotId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Classroom");
@@ -579,8 +567,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Navigation("Course");
 
                     b.Navigation("Instructor");
-
-                    b.Navigation("TimeSlot");
                 });
 
             modelBuilder.Entity("Golestan.Domain.Entities.Student", b =>
@@ -588,13 +574,13 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasOne("Golestan.Domain.Entities.AppUser", "AppUser")
                         .WithOne("StudentProfile")
                         .HasForeignKey("Golestan.Domain.Entities.Student", "AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("Golestan.Domain.Entities.Faculty", "Faculty")
                         .WithMany("Students")
                         .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("AppUser");
@@ -607,6 +593,14 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasOne("Golestan.Domain.Entities.Classroom", null)
                         .WithMany("TimeSlots")
                         .HasForeignKey("ClassroomId");
+
+                    b.HasOne("Golestan.Domain.Entities.Section", "Section")
+                        .WithOne("TimeSlot")
+                        .HasForeignKey("Golestan.Domain.Entities.TimeSlot", "SectionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Section");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -712,9 +706,9 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Navigation("Sections");
                 });
 
-            modelBuilder.Entity("Golestan.Domain.Entities.TimeSlot", b =>
+            modelBuilder.Entity("Golestan.Domain.Entities.Section", b =>
                 {
-                    b.Navigation("Section")
+                    b.Navigation("TimeSlot")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Golestan.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class Add_Entities_Relations : Migration
+    public partial class InitialSchema : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -60,8 +60,7 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         name: "FK_Classrooms_Faculties_FacultyId",
                         column: x => x.FacultyId,
                         principalTable: "Faculties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -74,7 +73,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     Unit = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ExamTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SectionId = table.Column<int>(type: "int", nullable: false),
                     FacultyId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -84,8 +82,7 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         name: "FK_Courses_Faculties_FacultyId",
                         column: x => x.FacultyId,
                         principalTable: "Faculties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -107,14 +104,12 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         name: "FK_Instructors_Faculties_FacultyId",
                         column: x => x.FacultyId,
                         principalTable: "Faculties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Instructors_Users_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -136,36 +131,11 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         name: "FK_Students_Faculties_FacultyId",
                         column: x => x.FacultyId,
                         principalTable: "Faculties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Students_Users_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TimeSlots",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DayOfWeek = table.Column<int>(type: "int", nullable: false),
-                    IsActive = table.Column<bool>(type: "bit", nullable: false),
-                    SectionId = table.Column<int>(type: "int", nullable: false),
-                    ClassroomId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TimeSlots", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TimeSlots_Classrooms_ClassroomId",
-                        column: x => x.ClassroomId,
-                        principalTable: "Classrooms",
                         principalColumn: "Id");
                 });
 
@@ -177,8 +147,7 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CourseId = table.Column<int>(type: "int", nullable: false),
                     ClassroomId = table.Column<int>(type: "int", nullable: false),
-                    InstructorId = table.Column<int>(type: "int", nullable: false),
-                    TimeSlotId = table.Column<int>(type: "int", nullable: false)
+                    InstructorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -187,26 +156,17 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         name: "FK_Sections_Classrooms_ClassroomId",
                         column: x => x.ClassroomId,
                         principalTable: "Classrooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Sections_Courses_CourseId",
                         column: x => x.CourseId,
                         principalTable: "Courses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Sections_Instructors_InstructorId",
                         column: x => x.InstructorId,
                         principalTable: "Instructors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Sections_TimeSlots_TimeSlotId",
-                        column: x => x.TimeSlotId,
-                        principalTable: "TimeSlots",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -233,14 +193,42 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TimeSlots",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DayOfWeek = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    SectionId = table.Column<int>(type: "int", nullable: false),
+                    ClassroomId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TimeSlots", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TimeSlots_Classrooms_ClassroomId",
+                        column: x => x.ClassroomId,
+                        principalTable: "Classrooms",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TimeSlots_Sections_SectionId",
+                        column: x => x.SectionId,
+                        principalTable: "Sections",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "0b9c3594-5876-42bb-aa64-ad49aa0c183d", null, "Admin", "ADMIN" },
-                    { "3e69681c-c0c3-4c85-b950-50bdf44732b2", null, "Student", "STUDENT" },
-                    { "f7a2b4cb-0b7f-4aa1-80c3-ba99b7faedcb", null, "Instructor", "INSTRUCTOR" }
+                    { "6abf27ba-3909-486c-abed-5a50d64aaa6d", null, "Instructor", "INSTRUCTOR" },
+                    { "df378605-0833-41d5-92f2-a153b3b1330f", null, "Admin", "ADMIN" },
+                    { "ee0e37d2-a4b1-4582-82d2-d6fa1b72fcee", null, "Student", "STUDENT" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -280,12 +268,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                 column: "InstructorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sections_TimeSlotId",
-                table: "Sections",
-                column: "TimeSlotId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Students_AppUserId",
                 table: "Students",
                 column: "AppUserId",
@@ -311,6 +293,12 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                 name: "IX_TimeSlots_ClassroomId",
                 table: "TimeSlots",
                 column: "ClassroomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TimeSlots_SectionId",
+                table: "TimeSlots",
+                column: "SectionId",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -320,10 +308,16 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                 name: "StudentSections");
 
             migrationBuilder.DropTable(
-                name: "Sections");
+                name: "TimeSlots");
 
             migrationBuilder.DropTable(
                 name: "Students");
+
+            migrationBuilder.DropTable(
+                name: "Sections");
+
+            migrationBuilder.DropTable(
+                name: "Classrooms");
 
             migrationBuilder.DropTable(
                 name: "Courses");
@@ -332,28 +326,22 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                 name: "Instructors");
 
             migrationBuilder.DropTable(
-                name: "TimeSlots");
-
-            migrationBuilder.DropTable(
-                name: "Classrooms");
-
-            migrationBuilder.DropTable(
                 name: "Faculties");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "0b9c3594-5876-42bb-aa64-ad49aa0c183d");
+                keyValue: "6abf27ba-3909-486c-abed-5a50d64aaa6d");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "3e69681c-c0c3-4c85-b950-50bdf44732b2");
+                keyValue: "df378605-0833-41d5-92f2-a153b3b1330f");
 
             migrationBuilder.DeleteData(
                 table: "AspNetRoles",
                 keyColumn: "Id",
-                keyValue: "f7a2b4cb-0b7f-4aa1-80c3-ba99b7faedcb");
+                keyValue: "ee0e37d2-a4b1-4582-82d2-d6fa1b72fcee");
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",

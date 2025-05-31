@@ -75,6 +75,76 @@ public class AppDbContext : IdentityDbContext<AppUser> {
             .WithOne(s => s.Instructor)
             .HasForeignKey(s => s.InstructorId);
 
+        // Course 
+        modelBuilder.Entity<Course>()
+            .HasMany(c => c.Sections)
+            .WithOne(s => s.Course)
+            .HasForeignKey(s => s.CourseId);
+
+        modelBuilder.Entity<Course>()
+            .HasOne(c => c.Faculty)
+            .WithMany(s => s.Courses)
+            .HasForeignKey(s => s.FacultyId);
+
+        // Classroom
+        modelBuilder.Entity<Classroom>()
+            .HasOne(c => c.Faculty)
+            .WithMany(f => f.Classrooms)
+            .HasForeignKey(c => c.FacultyId);
+
+        modelBuilder.Entity<Classroom>()
+            .HasMany(c => c.Sections)
+            .WithOne(s => s.Classroom)
+            .HasForeignKey(s => s.ClassroomId);
+
+        // Time slot 
+        modelBuilder.Entity<TimeSlot>()
+            .HasOne(t => t.Section)
+            .WithOne(s => s.TimeSlot)
+            .HasForeignKey<TimeSlot>(t => t.SectionId);
+
+        // Section 
+        modelBuilder.Entity<Section>()
+            .HasOne(s => s.Classroom)
+            .WithMany(c => c.Sections)
+            .HasForeignKey(s => s.ClassroomId);
+
+        modelBuilder.Entity<Section>()
+            .HasOne(s => s.Course)
+            .WithMany(c => c.Sections)
+            .HasForeignKey(s => s.CourseId);
+
+        modelBuilder.Entity<Section>()
+            .HasOne(s => s.Instructor)
+            .WithMany(i => i.Sections)
+            .HasForeignKey(s => s.InstructorId);
+
+        modelBuilder.Entity<Section>()
+            .HasOne(s => s.TimeSlot)
+            .WithOne(s => s.Section)
+            .HasForeignKey<Section>(s => s.TimeSlotId);
+
+        // Faculty
+        modelBuilder.Entity<Faculty>()
+            .HasMany(f => f.Classrooms)
+            .WithOne(c => c.Faculty)
+            .HasForeignKey(c => c.FacultyId);
+
+        modelBuilder.Entity<Faculty>()
+            .HasMany(f => f.Instructors)
+            .WithOne(i => i.Faculty)
+            .HasForeignKey(i => i.FacultyId);
+
+        modelBuilder.Entity<Faculty>()
+            .HasMany(f => f.Students)
+            .WithOne(s => s.Faculty)
+            .HasForeignKey(s => s.FacultyId);
+
+        modelBuilder.Entity<Faculty>()
+            .HasMany(f => f.Courses)
+            .WithOne(c => c.Faculty)
+            .HasForeignKey(c => c.FacultyId);
+
 
         // seed roles 
         modelBuilder.Entity<IdentityRole>().HasData(

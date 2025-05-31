@@ -16,8 +16,8 @@ public class Course {
 
     public int FacultyId { get; set; }
 
-    public Section Section { get; set; }
-
     public Faculty Faculty { get; set; }
+
+    public ICollection<Section> Sections { get; set; } 
 
 }

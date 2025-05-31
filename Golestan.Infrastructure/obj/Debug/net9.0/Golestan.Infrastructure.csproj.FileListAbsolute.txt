@@ -10,3 +10,11 @@ E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\Golesta
 E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\refint\Golestan.Infrastructure.dll
 E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\Golestan.Infrastructure.pdb
 E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\ref\Golestan.Infrastructure.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\bin\Debug\net9.0\Golestan.Infrastructure.runtimeconfig.json
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\bin\Debug\net9.0\Golestan.Domain.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\bin\Debug\net9.0\Golestan.Shared.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\bin\Debug\net9.0\Golestan.Domain.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\bin\Debug\net9.0\Golestan.Shared.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\Golestan.Infrastructure.sourcelink.json
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\Golestan.C9EC7B12.Up2Date
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Debug\net9.0\Golestan.Infrastructure.genruntimeconfig.cache

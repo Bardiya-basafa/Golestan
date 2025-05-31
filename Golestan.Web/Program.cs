@@ -55,10 +55,10 @@ var app = builder.Build();
 
 // ========== MIDDLEWARE PIPELINE ========== //
 
-using (var scope = app.Services.CreateAsyncScope()){
-    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    await dbContext.Database.MigrateAsync();
-}
+// using (var scope = app.Services.CreateAsyncScope()){
+//     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+//     await dbContext.Database.MigrateAsync();
+// }
 
 
 // 1. Exception Handling

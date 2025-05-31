@@ -9,3 +9,4 @@ E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\Golestan.A
 E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\refint\Golestan.Application.dll
 E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\Golestan.Application.pdb
 E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\ref\Golestan.Application.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\Golestan.Application.sourcelink.json

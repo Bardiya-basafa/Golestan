@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\Tailwind\\tailwind.css",
+      "PackagePath": "staticwebassets\\Tailwind\\tailwind.css"
+    },
+    {
       "Id": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.js",
       "PackagePath": "staticwebassets\\app.js"
     },

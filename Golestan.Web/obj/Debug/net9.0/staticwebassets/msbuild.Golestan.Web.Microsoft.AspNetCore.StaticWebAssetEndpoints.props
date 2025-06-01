@@ -555,14 +555,26 @@
     <StaticWebAssetEndpoint Include="_content/Golestan.Web/style.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\style.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-HPfo54UEZHFTteMUVudL1WdTzG/xKSj9chkQ/2FutvM="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"451"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022HPfo54UEZHFTteMUVudL1WdTzG/xKSj9chkQ/2FutvM=\u0022"},{"Name":"Last-Modified","Value":"Fri, 30 May 2025 18:42:57 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-qJ0pEyGs0mj6\u002BYzXA\u002BQbb0SQdm3zIzEPrAFyTDDGNSQ="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"497"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022qJ0pEyGs0mj6\u002BYzXA\u002BQbb0SQdm3zIzEPrAFyTDDGNSQ=\u0022"},{"Name":"Last-Modified","Value":"Sat, 31 May 2025 21:11:28 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/Golestan.Web/style.sslr04cwy3.css">
+    <StaticWebAssetEndpoint Include="_content/Golestan.Web/style.k1upa1lrgf.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\style.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"sslr04cwy3"},{"Name":"integrity","Value":"sha256-HPfo54UEZHFTteMUVudL1WdTzG/xKSj9chkQ/2FutvM="},{"Name":"label","Value":"_content/Golestan.Web/style.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"451"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022HPfo54UEZHFTteMUVudL1WdTzG/xKSj9chkQ/2FutvM=\u0022"},{"Name":"Last-Modified","Value":"Fri, 30 May 2025 18:42:57 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"k1upa1lrgf"},{"Name":"integrity","Value":"sha256-qJ0pEyGs0mj6\u002BYzXA\u002BQbb0SQdm3zIzEPrAFyTDDGNSQ="},{"Name":"label","Value":"_content/Golestan.Web/style.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"497"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022qJ0pEyGs0mj6\u002BYzXA\u002BQbb0SQdm3zIzEPrAFyTDDGNSQ=\u0022"},{"Name":"Last-Modified","Value":"Sat, 31 May 2025 21:11:28 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Golestan.Web/Tailwind/tailwind.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Tailwind\tailwind.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-uPrlFifUHA37mu69OkB5PvtXG5L2ZugzqBpG3KaWE1Y="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"174488"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022uPrlFifUHA37mu69OkB5PvtXG5L2ZugzqBpG3KaWE1Y=\u0022"},{"Name":"Last-Modified","Value":"Sun, 01 Jun 2025 05:58:46 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Golestan.Web/Tailwind/tailwind.o0r6zhd2ni.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Tailwind\tailwind.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"o0r6zhd2ni"},{"Name":"integrity","Value":"sha256-uPrlFifUHA37mu69OkB5PvtXG5L2ZugzqBpG3KaWE1Y="},{"Name":"label","Value":"_content/Golestan.Web/Tailwind/tailwind.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"174488"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022uPrlFifUHA37mu69OkB5PvtXG5L2ZugzqBpG3KaWE1Y=\u0022"},{"Name":"Last-Modified","Value":"Sun, 01 Jun 2025 05:58:46 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
   </ItemGroup>
 </Project>

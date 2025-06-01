@@ -34,13 +34,33 @@ public class FacultiesController : Controller {
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> AddFaculty(AddFacultyDto faculty)
     {
-        return View();
+        var result = await _facultyService.AddFaculty(faculty);
+
+        if (result){
+            return RedirectToAction("Index", "Faculties");
+        }
+
+        return RedirectToAction("Index", "Error", new { message = "Faculty could not be added." });
     }
 
     [HttpGet]
     public async Task<IActionResult> AddFaculty()
     {
         return View();
+    }
+
+    public async Task<IActionResult> VerifyMajor(string major)
+    {
+        var exist = await _facultyService.VerifyMajor(major);
+
+        return Json(!exist);
+    }
+
+    public async Task<IActionResult> VerifyBuildingName(string buildingName)
+    {
+        var exist = await _facultyService.VerifyBuilding(buildingName);
+
+        return Json(!exist);
     }
 
 }

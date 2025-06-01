@@ -15,13 +15,13 @@ public class Faculty {
 
     public DateTime StartDate { get; set; }
 
-   
-    public ICollection<Student> Students { get; set; }
 
-    public ICollection<Instructor> Instructors { get; set; }
+    public ICollection<Student> Students { get; set; } = new HashSet<Student>();
 
-    public ICollection<Course> Courses { get; set; }
+    public ICollection<Instructor> Instructors { get; set; } = new HashSet<Instructor>();
 
-    public ICollection<Classroom> Classrooms { get; set; }
+    public ICollection<Course> Courses { get; set; } = new HashSet<Course>();
+
+    public ICollection<Classroom> Classrooms { get; set; } = new HashSet<Classroom>();
 
 }

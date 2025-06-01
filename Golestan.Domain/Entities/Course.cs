@@ -11,11 +11,11 @@ public class Course {
     public string Description { get; set; }
 
     public DateTime ExamTime { get; set; }
-    
+
     public int FacultyId { get; set; }
 
     public Faculty Faculty { get; set; }
 
-    public ICollection<Section> Sections { get; set; }
+    public ICollection<Section> Sections { get; set; } = new HashSet<Section>();
 
 }

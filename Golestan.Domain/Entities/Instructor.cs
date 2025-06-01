@@ -22,7 +22,6 @@ public class Instructor {
     public Faculty Faculty { get; set; }
 
 
-
-    public ICollection<Section> Sections { get; set; }
+    public ICollection<Section> Sections { get; set; } = new HashSet<Section>();
 
 }

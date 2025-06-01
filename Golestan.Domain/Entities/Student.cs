@@ -10,7 +10,7 @@ public class Student {
     public string AppUserId { get; set; }// foreign key to AppUser 
 
     public AppUser AppUser { get; set; }
-    
+
     public string StudentNumber { get; set; }
 
     public DateTime EnteredDate { get; set; }
@@ -21,7 +21,6 @@ public class Student {
     public Faculty Faculty { get; set; }
 
 
-
-    public ICollection<Section> Sections { get; set; }
+    public ICollection<Section> Sections { get; set; } = new HashSet<Section>();
 
 }

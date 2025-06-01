@@ -21,6 +21,7 @@ public class FacultiesController : Controller {
     public async Task<IActionResult> Index()
     {
         var faculties = await _facultyService.GetFaculties();
+        
 
         return View(faculties);
     }

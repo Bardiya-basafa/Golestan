@@ -224,3 +224,7 @@ E:\AspNetCore-Projects\Golestan\Golestan.Web\bin\Debug\net9.0\zh-Hant\Microsoft.
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\compressed\npjt4o0ood-29uauxowdn.gz
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\compressed\af53hxmrbf-k1upa1lrgf.gz
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\compressed\0hgw7apm40-o0r6zhd2ni.gz
+E:\AspNetCore-Projects\Golestan\Golestan.Web\bin\Debug\net9.0\Microsoft.AspNetCore.JsonPatch.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Web\bin\Debug\net9.0\Newtonsoft.Json.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Web\bin\Debug\net9.0\Newtonsoft.Json.Bson.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Debug\net9.0\Golestan.Web.MvcApplicationPartsAssemblyInfo.cs

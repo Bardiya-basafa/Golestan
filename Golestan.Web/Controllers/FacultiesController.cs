@@ -21,14 +21,32 @@ public class FacultiesController : Controller {
     public async Task<IActionResult> Index()
     {
         var faculties = await _facultyService.GetFaculties();
-        
+
 
         return View(faculties);
     }
 
-    public async Task<IActionResult> Details(int? id)
+    public async Task<IActionResult> DetailsFaculty(int id)
     {
-        return View();
+        var faculty = await _facultyService.GetDetailsFacultyById(id);
+
+        if (faculty == null){
+            RedirectToAction("Index", "Faculties");
+        }
+
+        return View(faculty);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> EditFaculty(int id)
+    {
+        var faculty = await _facultyService.GetEditFacultyById(id);
+
+        if (faculty == null){
+            RedirectToAction("Index", "Faculties");
+        }
+
+        return View(faculty);
     }
 
     [HttpPost]

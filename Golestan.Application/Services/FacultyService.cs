@@ -23,6 +23,57 @@ public class FacultyService : IFacultyService {
         return faculties;
     }
 
+
+    public async Task<DetailsFacultyDto?> GetDetailsFacultyById(int id)
+    {
+        try{
+            var faculty = await _context.Faculties
+                .Where(f => f.Id == id)
+                .Select(f => new DetailsFacultyDto()
+                {
+                    Id = f.Id,
+                    MajorName = f.MajorName,
+                    BuildingName = f.BuildingName,
+                    Budget = f.Badge,
+                    StartDate = f.StartDate,
+                    StudentsCount = f.Students.Count,
+                    InstructorsCount = f.Instructors.Count,
+                    ClassesCount = f.Classrooms.Count,
+                    CoursesCount = f.Courses.Count,
+                })
+                .FirstOrDefaultAsync();
+
+            return faculty;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+
+            throw;
+        }
+    }
+
+    public async Task<EditFacultyDto?> GetEditFacultyById(int id)
+    {
+        try{
+            var faculty = await _context.Faculties
+                .Where(f => f.Id == id)
+                .Select(f => new EditFacultyDto()
+                {
+                    MajorName = f.MajorName,
+                    BuildingName = f.BuildingName,
+                    Budget = f.Badge,
+                })
+                .FirstOrDefaultAsync();
+
+            return faculty;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+
+            throw;
+        }
+    }
+
     public async Task<bool> AddFaculty(AddFacultyDto addFacultyDto)
     {
         try{

@@ -6,6 +6,7 @@ namespace Golestan.Web.Controllers;
 using Application.DTOs;
 using Application.Interfaces;
 using Domain.Enums;
+using Newtonsoft.Json;
 
 
 public class FacultiesController : Controller {
@@ -63,6 +64,9 @@ public class FacultiesController : Controller {
             return RedirectToAction("Index", "Error", new { message = "Faculty could not be updated" });
         }
 
+        TempData["NotificationMessage"] = "Faculty edited successfully.";
+        TempData["Success"] = true;
+
         return RedirectToAction("Index");
     }
 
@@ -73,6 +77,9 @@ public class FacultiesController : Controller {
         var result = await _facultyService.AddFaculty(faculty);
 
         if (result){
+            TempData["NotificationMessage"] = "Faculty added successfully.";
+            TempData["Success"] = true;
+
             return RedirectToAction("Index", "Faculties");
         }
 

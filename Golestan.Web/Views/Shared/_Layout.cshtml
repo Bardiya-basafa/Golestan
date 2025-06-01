@@ -11,12 +11,78 @@
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.0/dist/css/uikit.min.css"/>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
                 <link rel="stylesheet" href="~/Tailwind/tailwind.css"/>
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
                 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
                 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
         </head>
 </head>
+
+@if (TempData["NotificationMessage"] != null){
+        <!-- Success Notification -->
+        <div id="notification" class="fixed top-20 left-5 z-50 animate-slide-in-left z-10">
+                <div class="min-w-80 max-w-md bg-white rounded-xl shadow-2xl overflow-hidden border-l-4 border-green-500 transform transition-all duration-300 hover:scale-105">
+                        @if (TempData["Success"] as bool? == true){
+                                <!-- Success Content -->
+                                <div class="flex items-center p-4 bg-gradient-to-r from-green-50 to-emerald-50">
+                                        <div class="flex-shrink-0">
+                                                <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
+                                                        <i class="fas fa-check text-white text-sm"></i>
+                                                </div>
+                                        </div>
+                                        <div class="ml-3 flex-1">
+                                                <p class="text-sm font-semibold text-green-800">
+                                                        @TempData["NotificationMessage"]
+                                                </p>
+
+                                        </div>
+                                        <div class="ml-4">
+                                                <button class="close-button text-green-400 hover:text-green-600 transition-colors duration-200">
+                                                        <i class="fas fa-times text-sm"></i>
+                                                </button>
+                                        </div>
+                                </div>
+                                <!-- Progress Bar -->
+                                <div class="h-1 bg-green-200">
+                                        <div class="h-full bg-gradient-to-r from-green-500 to-emerald-500 animate-progress"></div>
+                                </div>
+                        }
+                        else if (TempData["Success"] as bool? == false){
+                                <!-- Error Content -->
+                                <div class="flex items-center p-4 bg-gradient-to-r from-red-50 to-rose-50">
+                                        <div class="flex-shrink-0">
+                                                <div class="w-10 h-10 bg-gradient-to-r from-red-500 to-rose-500 rounded-full flex items-center justify-center shadow-lg">
+                                                        <i class="fas fa-times text-white text-sm"></i>
+                                                </div>
+                                        </div>
+                                        <div class="ml-3 flex-1">
+                                                <p class="text-sm font-semibold text-red-800">
+                                                        @TempData["NotificationMessage"]
+                                                </p>
+
+                                        </div>
+                                        <div class="ml-4">
+                                                <button class="close-button text-red-400 hover:text-red-600 transition-colors duration-200">
+                                                        <i class="fas fa-times text-sm"></i>
+                                                </button>
+                                        </div>
+                                </div>
+                                <!-- Progress Bar -->
+                                <div class="h-1 bg-red-200">
+                                        <div class="h-full bg-gradient-to-r from-red-500 to-rose-500 animate-progress"></div>
+                                </div>
+                        }
+                </div>
+        </div>
+        <script>
+                setTimeout(function () {
+                        document.getElementById('notification').style.display = 'none';
+                }, 3000); // Hide after 3 seconds
+              
+        </script>
+}
+
 <body class="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 min-h-screen">
 
 @RenderBody()

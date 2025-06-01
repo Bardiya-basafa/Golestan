@@ -1349,3 +1349,90 @@ function showNotification(message, type = 'info') {
         notification.remove();
     }, 3000);
 }
+
+function showNotifications(message, isSuccess) {
+    const icon = isSuccess ? 'fa-check-circle' : 'fa-exclamation-circle';
+    const notification = `
+        <div class="alert alert-${isSuccess ? 'success' : 'danger'}" 
+             style="min-width: 300px; direction: rtl;">
+            <i class="fas ${icon} notification-icon"></i>
+            ${message}
+        </div>
+    `;
+
+    $('#notification').html(notification).fadeIn();
+    setTimeout(() => $('#notification').fadeOut(), 5000);
+}
+function hideNotifications() {
+    document.getElementById('notification').style.display = 'none';
+}
+tailwind.config = {
+    theme: {
+        extend: {
+            animation: {
+                'slide-in-left': 'slideInLeft 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+                'slide-out-left': 'slideOutLeft 0.4s ease-in-out',
+                'fade-in': 'fadeIn 0.5s ease-out',
+                'fade-out': 'fadeOut 0.3s ease-in',
+                'progress': 'progress 4s linear',
+                'bounce-in': 'bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+            },
+            keyframes: {
+                slideInLeft: {
+                    '0%': {
+                        transform: 'translateX(-100%) translateY(-10px)',
+                        opacity: '0'
+                    },
+                    '60%': {
+                        transform: 'translateX(10px) translateY(-5px)',
+                        opacity: '0.8'
+                    },
+                    '100%': {
+                        transform: 'translateX(0) translateY(0)',
+                        opacity: '1'
+                    }
+                },
+                slideOutLeft: {
+                    '0%': {
+                        transform: 'translateX(0) translateY(0)',
+                        opacity: '1'
+                    },
+                    '100%': {
+                        transform: 'translateX(-100%) translateY(-10px)',
+                        opacity: '0'
+                    }
+                },
+                fadeIn: {
+                    '0%': { opacity: '0' },
+                    '100%': { opacity: '1' }
+                },
+                fadeOut: {
+                    '0%': { opacity: '1' },
+                    '100%': { opacity: '0' }
+                },
+                progress: {
+                    '0%': { width: '100%' },
+                    '100%': { width: '0%' }
+                },
+                bounceIn: {
+                    '0%': {
+                        transform: 'scale(0.3) translateX(-100%)',
+                        opacity: '0'
+                    },
+                    '50%': {
+                        transform: 'scale(1.05) translateX(5px)',
+                        opacity: '0.8'
+                    },
+                    '70%': {
+                        transform: 'scale(0.9) translateX(-2px)',
+                        opacity: '0.9'
+                    },
+                    '100%': {
+                        transform: 'scale(1) translateX(0)',
+                        opacity: '1'
+                    }
+                }
+            }
+        }
+    }
+}

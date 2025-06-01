@@ -59,6 +59,7 @@ public class FacultyService : IFacultyService {
                 .Where(f => f.Id == id)
                 .Select(f => new EditFacultyDto()
                 {
+                    Id = f.Id,
                     MajorName = f.MajorName,
                     BuildingName = f.BuildingName,
                     Budget = f.Badge,
@@ -71,6 +72,39 @@ public class FacultyService : IFacultyService {
             Console.WriteLine(e);
 
             throw;
+        }
+    }
+
+    public async Task<bool> EditFaculty(EditFacultyDto dto)
+    {
+        try{
+            var buildingExist = await VerifyBuilding(dto.BuildingName);
+            var majorExist = await VerifyMajor(dto.MajorName);
+
+            if (buildingExist || majorExist){
+                return false;
+            }
+
+            var faculty = await _context.Faculties
+                .FirstOrDefaultAsync(f => f.Id == dto.Id);
+
+            if (faculty == null){
+                return false;
+            }
+
+            faculty.MajorName = dto.MajorName;
+            faculty.BuildingName = dto.BuildingName;
+            faculty.StartDate = dto.StartDate;
+            faculty.Badge = dto.Budget;
+            _context.Faculties.Update(faculty);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+
+            return false;
         }
     }
 

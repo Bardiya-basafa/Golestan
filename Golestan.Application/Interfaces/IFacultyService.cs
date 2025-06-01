@@ -12,6 +12,8 @@ public interface IFacultyService {
 
     Task<EditFacultyDto?> GetEditFacultyById(int id);
 
+    Task<bool> EditFaculty(EditFacultyDto dto);
+
     Task<bool> AddFaculty(AddFacultyDto addFacultyDto);
 
     Task<bool> VerifyMajor(string major);

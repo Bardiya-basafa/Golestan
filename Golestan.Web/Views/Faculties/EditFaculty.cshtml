@@ -1,0 +1,251 @@
+﻿@model EditFacultyDto
+
+@{
+        ViewData["title"] = "Edit Faculty Information";
+}
+
+<!-- Navigation -->
+<nav class="glass-effect sticky top-0 z-50 border-b border-white/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                        <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg">
+                                        <i class="fas fa-university text-white text-lg"></i>
+                                </div>
+                                <div>
+                                        <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                                                UniManage Pro
+                                        </h1>
+                                        <p class="text-xs text-gray-500">Edit Faculty</p>
+                                </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4">
+                                <a asp-controller="Faculties" asp-action="Index"
+                                   class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors">
+                                        <i class="fas fa-arrow-left mr-2"></i>Back to Faculty List
+                                </a>
+                                <a asp-controller="Faculties" asp-action="DetailsFaculty" asp-route-id="@Model.Id"
+                                   class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-green-600 transition-colors">
+                                        <i class="fas fa-eye mr-2"></i>View Details
+                                </a>
+                        </div>
+                </div>
+        </div>
+</nav>
+
+<!-- Main Content -->
+<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header -->
+        <div class="text-center mb-8 animate-fade-in">
+                <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                        <i class="fas fa-edit text-white text-3xl"></i>
+                </div>
+                <h2 class="text-4xl font-bold text-gray-800 mb-2">Edit Faculty</h2>
+                <p class="text-gray-600 text-lg">Update faculty member information</p>
+                <div class="mt-2 text-sm text-gray-500">
+                        <i class="fas fa-hashtag mr-1"></i>Faculty ID: @Model.Id
+                </div>
+        </div>
+
+        <!-- Validation Summary -->
+        @if (!ViewData.ModelState.IsValid){
+                <div class="bg-red-50 border border-red-200 rounded-xl p-6 mb-8 animate-fade-in">
+                        <div class="flex items-start">
+                                <div class="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center mr-4 mt-1">
+                                        <i class="fas fa-exclamation-triangle text-white text-sm"></i>
+                                </div>
+                                <div>
+                                        <h3 class="text-lg font-semibold text-red-800 mb-2">Please correct the following
+                                                errors:</h3>
+                                        <div asp-validation-summary="All" class="text-red-700 text-sm"></div>
+                                </div>
+                        </div>
+                </div>
+        }
+
+        <!-- Form -->
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 form-section animate-slide-up">
+                <form asp-controller="Faculties" asp-action="EditFaculty" method="POST" class="space-y-6">
+                        @Html.AntiForgeryToken()
+
+                        <!-- Hidden ID field -->
+                        <input asp-for="Id" type="hidden"/>
+
+                        <!-- Building Name -->
+                        <div>
+                                <label asp-for="BuildingName" class="block text-sm font-bold text-gray-700 mb-2">
+                                        <i class="fas fa-building mr-2 text-purple-500"></i>Building Name *
+                                </label>
+                                <input
+                                                type="text"
+                                                asp-for="BuildingName"
+                                                value="@Model.BuildingName"
+                                                required
+                                                maxlength="100"
+                                                class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                                                placeholder="Enter building name (e.g., Science Hall)"
+                                                data-val="true"
+                                                data-val-required="Building name is required"
+                                                data-val-remote="Building is already taken"
+                                                data-val-remote-url="/Faculties/VerifyBuildingName"
+                                                data-val-remote-additionalfields="*.Id"
+                                >
+                                <span asp-validation-for="BuildingName" class="error-message"></span>
+                                <p class="text-xs text-gray-500 mt-1">Official building name where faculty is
+                                        located</p>
+                        </div>
+
+                        <!-- Major Name -->
+                        <div>
+                                <label asp-for="MajorName" class="block text-sm font-bold text-gray-700 mb-2">
+                                        <i class="fas fa-graduation-cap mr-2 text-teal-500"></i>Major Name *
+                                </label>
+                                <input
+                                                type="text"
+                                                asp-for="MajorName"
+                                                value="@Model.MajorName"
+                                                required
+                                                maxlength="100"
+                                                class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                                                placeholder="Enter major name (e.g., Computer Science)"
+                                                data-val="true"
+                                                data-val-required="Major name is required"
+                                                data-val-remote="Major is already taken"
+                                                data-val-remote-url="/Faculties/VerifyMajor"
+                                                data-val-remote-additionalfields="*.Id"
+                                >
+                                <span asp-validation-for="MajorName" class="field-validation-error">
+                                        </span>
+                                <p class="text-xs text-gray-500 mt-1">Primary academic major or department name</p>
+                        </div>
+
+                        <!-- Budget -->
+                        <div>
+                                <label asp-for="Budget" class="block text-sm font-bold text-gray-700 mb-2">
+                                        <i class="fas fa-dollar-sign mr-2 text-orange-500"></i>Budget Amount *
+                                </label>
+                                <input
+                                                type="number"
+                                                asp-for="Budget"
+                                                value="@Model.Budget"
+                                                required
+                                                min="1"
+                                                step="1"
+                                                class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                                                placeholder="Enter budget amount (e.g., 500000)"
+                                                data-val="true"
+                                                data-val-required="Faculty Number is required"
+                                >
+                                <span asp-validation-for="Budget" class="error-message"></span>
+                                <p class="text-xs text-gray-500 mt-1">Annual budget allocation for the faculty</p>
+                        </div>
+
+                        <!-- Start Date -->
+                        <div>
+                                <label asp-for="StartDate" class="block text-sm font-bold text-gray-700 mb-2">
+                                        <i class="fas fa-calendar-plus mr-2 text-green-500"></i>Start Date *
+                                </label>
+                                <input
+                                                type="date"
+                                                asp-for="StartDate"
+                                                value="@Model.StartDate.ToString("yyyy-MM-dd")"
+                                                required
+                                                class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                                                data-val="true"
+                                                data-val-required="Start date is required"
+                                >
+                                <span asp-validation-for="StartDate" class="error-message"></span>
+                                <p class="text-xs text-gray-500 mt-1">Date when the faculty was established</p>
+                        </div>
+
+                        <!-- Form Actions -->
+                        <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
+                                <a asp-controller="Faculties" asp-action="DetailsFaculty" asp-route-id="@Model.Id"
+                                   class="flex-1 bg-white/70 backdrop-blur-sm text-gray-700 py-4 px-6 rounded-xl hover:bg-white/90 transition-all duration-200 font-semibold border border-white/20 shadow-lg text-center">
+                                        <i class="fas fa-times mr-2"></i>Cancel Changes
+                                </a>
+                                <button
+                                                type="submit"
+                                                class="flex-1 bg-gradient-to-r from-green-500 to-teal-500 text-white py-4 px-6 rounded-xl hover:from-green-600 hover:to-teal-600 transition-all duration-200 font-semibold shadow-lg">
+                                        <i class="fas fa-save mr-2"></i>Update Faculty
+                                </button>
+                        </div>
+                </form>
+        </div>
+
+        <!-- Current Values Display -->
+        <div class="mt-8 bg-gray-50 border border-gray-200 rounded-xl p-6">
+                <div class="flex items-start">
+                        <div class="w-8 h-8 bg-gray-500 rounded-lg flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-info text-white text-sm"></i>
+                        </div>
+                        <div>
+                                <h3 class="text-lg font-semibold text-gray-800 mb-2">Current Faculty Information</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+                                        <div>
+                                                <strong>Faculty ID:</strong> @Model.Id
+                                        </div>
+                                        <div>
+                                                <strong>Building:</strong> @Model.BuildingName
+                                        </div>
+                                        <div>
+                                                <strong>Major:</strong> @Model.MajorName
+                                        </div>
+                                        <div>
+                                                <strong>Budget:</strong> $@Model.Budget
+                                        </div>
+                                        <div>
+                                                <strong>Start Date:</strong> @Model.StartDate.ToString("MMMM dd, yyyy")
+                                        </div>
+                                        <div>
+                                                <strong>Last Updated:</strong> @DateTime.Now.ToString("MMMM dd, yyyy")
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+
+        <!-- Form Guidelines -->
+        <div class="mt-6 bg-blue-50 border border-blue-200 rounded-xl p-6">
+                <div class="flex items-start">
+                        <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-lightbulb text-white text-sm"></i>
+                        </div>
+                        <div>
+                                <h3 class="text-lg font-semibold text-blue-800 mb-2">Edit Guidelines</h3>
+                                <ul class="text-blue-700 space-y-1 text-sm">
+                                        <li><strong>Building Name:</strong> Must be unique across all faculties</li>
+                                        <li><strong>Major Name:</strong> Must be unique and represent the primary
+                                                academic focus
+                                        </li>
+                                        <li><strong>Budget:</strong> Enter the annual budget allocation amount</li>
+                                        <li><strong>Start Date:</strong> The original establishment date of the faculty
+                                        </li>
+                                        <li><strong>Validation:</strong> System will check for duplicate names in
+                                                real-time
+                                        </li>
+                                </ul>
+                        </div>
+                </div>
+        </div>
+
+        <!-- Change History (Optional) -->
+        <div class="mt-6 bg-yellow-50 border border-yellow-200 rounded-xl p-6">
+                <div class="flex items-start">
+                        <div class="w-8 h-8 bg-yellow-500 rounded-lg flex items-center justify-center mr-4 mt-1">
+                                <i class="fas fa-history text-white text-sm"></i>
+                        </div>
+                        <div>
+                                <h3 class="text-lg font-semibold text-yellow-800 mb-2">Important Notice</h3>
+                                <p class="text-yellow-700 text-sm">
+                                        Changes to faculty information may affect related students, instructors,
+                                        courses, and classrooms.
+                                        Please ensure all information is accurate before saving. The system will
+                                        automatically update
+                                        all related records.
+                                </p>
+                        </div>
+                </div>
+        </div>
+</div>

@@ -51,6 +51,23 @@ public class FacultiesController : Controller {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    public async Task<IActionResult> EditFaculty(EditFacultyDto dto)
+    {
+        if (!ModelState.IsValid){
+            return View(dto);
+        }
+
+        var result = await _facultyService.EditFaculty(dto);
+
+        if (!result){
+            return RedirectToAction("Index", "Error", new { message = "Faculty could not be updated" });
+        }
+
+        return RedirectToAction("Index");
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> AddFaculty(AddFacultyDto faculty)
     {
         var result = await _facultyService.AddFaculty(faculty);
@@ -68,9 +85,9 @@ public class FacultiesController : Controller {
         return View();
     }
 
-    public async Task<IActionResult> VerifyMajor(string major)
+    public async Task<IActionResult> VerifyMajor(string majorName)
     {
-        var exist = await _facultyService.VerifyMajor(major);
+        var exist = await _facultyService.VerifyMajor(majorName);
 
         return Json(!exist);
     }

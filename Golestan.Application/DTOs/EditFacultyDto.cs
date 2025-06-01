@@ -17,4 +17,9 @@ public class EditFacultyDto {
     [Required(ErrorMessage = "Faculty Number is required")]
     public int Budget { get; set; }
 
+    [Required(ErrorMessage = "Faculty start date is required")]
+    public DateTime StartDate { get; set; }
+
+    public int Id { get; set; }
+
 }

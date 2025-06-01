@@ -54,6 +54,7 @@
                         class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
                         placeholder="Enter full building name"
                 >
+                <span asp-validation-for="BuildingName" class="error-message"></span>
                 <p class="text-xs text-gray-500 mt-1">Full building name</p>
             </div>
             <!-- Major -->
@@ -69,6 +70,7 @@
                         class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
                         placeholder="Enter full major name"
                 >
+                <span asp-validation-for="MajorName" class="error-message"></span>
                 <p class="text-xs text-gray-500 mt-1">Full major name</p>
             </div>
 
@@ -84,6 +86,7 @@
                         min="1"
                         class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
                         placeholder="Enter badge amount (e.g., 12345)">
+                <span asp-validation-for="Budget" class="error-message"></span>
                 <p class="text-xs text-gray-500 mt-1">Official university badge</p>
             </div>
 

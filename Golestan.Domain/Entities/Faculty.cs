@@ -11,7 +11,7 @@ public class Faculty {
 
     public string MajorName { get; set; }
 
-    public int Badge { get; set; }
+    public int Budget { get; set; }
 
     public DateTime StartDate { get; set; }
 

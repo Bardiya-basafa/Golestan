@@ -43,6 +43,17 @@ public class AppDbContext : IdentityDbContext<AppUser> {
         modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
 
         // Relations configurations 
+        // AppUser
+        modelBuilder.Entity<AppUser>()
+            .HasOne(a => a.StudentProfile)
+            .WithOne(s => s.AppUser)
+            .HasForeignKey<AppUser>(a => a.StudentId);
+
+        modelBuilder.Entity<AppUser>()
+            .HasOne(a => a.InstructorProfile)
+            .WithOne(i => i.AppUser)
+            .HasForeignKey<AppUser>(a => a.InstructorId);
+
         // Students
         modelBuilder.Entity<Student>()
             .HasOne(s => s.AppUser)
@@ -69,7 +80,7 @@ public class AppDbContext : IdentityDbContext<AppUser> {
         // Instructor 
         modelBuilder.Entity<Instructor>()
             .HasOne(s => s.AppUser)
-            .WithOne(au => au.ProfessorProfile)
+            .WithOne(au => au.InstructorProfile)
             .HasForeignKey<Instructor>(s => s.AppUserId)
             .OnDelete(DeleteBehavior.NoAction);
 

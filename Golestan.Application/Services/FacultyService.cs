@@ -35,7 +35,7 @@ public class FacultyService : IFacultyService {
                     Id = f.Id,
                     MajorName = f.MajorName,
                     BuildingName = f.BuildingName,
-                    Budget = f.Badge,
+                    Budget = f.Budget,
                     StartDate = f.StartDate,
                     StudentsCount = f.Students.Count,
                     InstructorsCount = f.Instructors.Count,
@@ -63,7 +63,7 @@ public class FacultyService : IFacultyService {
                     Id = f.Id,
                     MajorName = f.MajorName,
                     BuildingName = f.BuildingName,
-                    Budget = f.Badge,
+                    Budget = f.Budget,
                 })
                 .FirstOrDefaultAsync();
 
@@ -103,7 +103,7 @@ public class FacultyService : IFacultyService {
             faculty.MajorName = dto.MajorName;
             faculty.BuildingName = dto.BuildingName;
             faculty.StartDate = dto.StartDate;
-            faculty.Badge = dto.Budget;
+            faculty.Budget = dto.Budget;
             _context.Faculties.Update(faculty);
             await _context.SaveChangesAsync();
 
@@ -121,7 +121,7 @@ public class FacultyService : IFacultyService {
         try{
             var faculty = new Faculty()
             {
-                Badge = addFacultyDto.Budget,
+                Budget = addFacultyDto.Budget,
                 BuildingName = addFacultyDto.BuildingName,
                 MajorName = addFacultyDto.MajorName,
                 StartDate = addFacultyDto.StartDate,

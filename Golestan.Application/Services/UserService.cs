@@ -33,6 +33,7 @@ public class UserService : IUserService {
             FirstName = dto.FirstName,
             LastName = dto.LastName,
             Email = dto.Email,
+            UserName = dto.Email,
             UserType = UserType.Instructor
         };
 

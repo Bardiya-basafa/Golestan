@@ -5,20 +5,24 @@ namespace Golestan.Web.Controllers;
 
 using Application.DTOs.Instructor;
 using Application.Interfaces;
+using Base;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 
 
-public class InstructorsController : Controller {
+public class InstructorsController : BaseController {
 
     private readonly IFacultyService _facultyService;
 
     private readonly UserManager<AppUser> _userManager;
 
-    public InstructorsController(IFacultyService facultyService, UserManager<AppUser> userManager)
+    private readonly IUserService _userService;
+
+    public InstructorsController(IFacultyService facultyService, UserManager<AppUser> userManager, IUserService userService)
     {
         _facultyService = facultyService;
         _userManager = userManager;
+        _userService = userService;
     }
 
     // GET
@@ -51,7 +55,15 @@ public class InstructorsController : Controller {
             return View(dto);
         }
 
-        return View();
+        var result = await _userService.RegisterNewInstructor(dto);
+        ShowMessage(result.Message, result.Succeeded);
+
+        if (result.Succeeded){
+            return RedirectToAction("InstructorsManagement", "Admin");
+        }
+
+
+        return View(dto);
     }
 
     public async Task<IActionResult> VerifyEmail(string email)

@@ -2,6 +2,7 @@
 
 using Domain.Entities;
 using DTOs;
+using DTOs.Faculty;
 using Infrastructure.Persistence;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -73,6 +74,13 @@ public class FacultyService : IFacultyService {
 
             throw;
         }
+    }
+
+    public async Task<Dictionary<int, string>?> GetFacultiesMajorNames()
+    {
+        var facultyOptions = await _context.Faculties.Select(f => new { f.Id, f.MajorName }).Distinct().ToDictionaryAsync(f => f.Id, f => f.MajorName);
+
+        return facultyOptions;
     }
 
     public async Task<bool> EditFaculty(EditFacultyDto dto)

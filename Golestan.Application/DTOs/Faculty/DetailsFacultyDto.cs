@@ -1,4 +1,4 @@
-﻿namespace Golestan.Application.DTOs;
+﻿namespace Golestan.Application.DTOs.Faculty;
 
 public class DetailsFacultyDto {
 

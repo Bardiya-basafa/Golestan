@@ -34,7 +34,7 @@ builder.Services.AddScoped<IFacultyService, FacultyService>();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options => {
         options.Password.RequireDigit = true;
-        options.Password.RequiredLength = 6;
+        options.Password.RequiredLength = 8;
         options.Password.RequireNonAlphanumeric = true;
         options.User.RequireUniqueEmail = true;
     })
@@ -97,7 +97,7 @@ app.UseAuthorization();
 // 9. Endpoints
 app.MapControllerRoute(
 "default",
-"{controller=Admin}/{action=Index}/{id?}");
+"{controller=Admin}/{action=Dashboard}/{id?}");
 
 
 app.Run();

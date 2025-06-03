@@ -1,10 +1,10 @@
-﻿namespace Golestan.Application.DTOs;
+﻿namespace Golestan.Application.DTOs.Faculty;
 
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 
 
-public class EditFacultyDto {
+public class AddFacultyDto {
 
     [Required(ErrorMessage = "Major name is required")]
     [Remote(controller: "Faculties", action: "VerifyMajor", ErrorMessage = "Major is already taken")]
@@ -19,7 +19,5 @@ public class EditFacultyDto {
 
     [Required(ErrorMessage = "Faculty start date is required")]
     public DateTime StartDate { get; set; }
-
-    public int Id { get; set; }
 
 }

@@ -4,6 +4,7 @@
 namespace Golestan.Web.Controllers;
 
 using Application.DTOs;
+using Application.DTOs.Faculty;
 using Application.Interfaces;
 using Domain.Enums;
 using Newtonsoft.Json;

@@ -5,15 +5,20 @@ namespace Golestan.Web.Controllers;
 
 using Application.DTOs.Instructor;
 using Application.Interfaces;
+using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 
 public class InstructorsController : Controller {
 
     private readonly IFacultyService _facultyService;
 
-    public InstructorsController(IFacultyService facultyService)
+    private readonly UserManager<AppUser> _userManager;
+
+    public InstructorsController(IFacultyService facultyService, UserManager<AppUser> userManager)
     {
         _facultyService = facultyService;
+        _userManager = userManager;
     }
 
     // GET
@@ -39,9 +44,25 @@ public class InstructorsController : Controller {
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> AddInstructor(AddInstructorDto dto)
     {
-        if (!ModelState.IsValid) return View(dto);
+        if (!ModelState.IsValid){
+            var facultyOptions = await _facultyService.GetFacultiesMajorNames();
+            dto.FacultyOptions = facultyOptions;
+
+            return View(dto);
+        }
 
         return View();
+    }
+
+    public async Task<IActionResult> VerifyEmail(string email)
+    {
+        var user = await _userManager.GetUserAsync(User);
+
+        if (user != null){
+            return Json(false);
+        }
+
+        return Json(true);
     }
 
 }

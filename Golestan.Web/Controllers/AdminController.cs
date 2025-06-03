@@ -29,9 +29,12 @@ public class AdminController : Controller {
         return View();
     }
 
-    public IActionResult FacultiesManagement()
+    public async Task<IActionResult> FacultiesManagement()
     {
-        return View();
+        var faculties = await _facultyService.GetFaculties();
+
+
+        return View(faculties);
     }
 
 }

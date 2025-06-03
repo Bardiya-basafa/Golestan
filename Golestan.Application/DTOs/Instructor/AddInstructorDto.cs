@@ -1,6 +1,8 @@
 ﻿namespace Golestan.Application.DTOs.Instructor;
 
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
+using Validations;
 
 
 public class AddInstructorDto {
@@ -17,6 +19,8 @@ public class AddInstructorDto {
 
     [Required(ErrorMessage = "You must provide a email address")]
     [EmailAddress(ErrorMessage = "You must provide a valid email address")]
+    [UniqueEmail]
+    [Remote("VerifyEmail", "Instructors", ErrorMessage = "Email address already exists")]
 
     public string Email { get; set; }
 
@@ -32,10 +36,12 @@ public class AddInstructorDto {
     public string ConfirmPassword { get; set; }
 
     [Required(ErrorMessage = "You must provide the hire date")]
+    [NotInFuture]
 
     public DateTime HireDate { get; set; }
 
     [Required(ErrorMessage = "You must provide the salary")]
+    [BiggerThanZero]
 
     public int Salary { get; set; }
 

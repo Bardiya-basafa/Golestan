@@ -19,14 +19,6 @@ public class FacultiesController : Controller {
         _facultyService = facultyService;
     }
 
-    // GET
-    public async Task<IActionResult> Index()
-    {
-        var faculties = await _facultyService.GetFaculties();
-
-
-        return View(faculties);
-    }
 
     public async Task<IActionResult> DetailsFaculty(int id)
     {

@@ -32,6 +32,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // 5. Services 
 builder.Services.AddScoped<IFacultyService, FacultyService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IInstructorService, InstructorService>();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options => {
         options.Password.RequireDigit = true;

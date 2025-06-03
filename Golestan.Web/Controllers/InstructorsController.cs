@@ -68,7 +68,7 @@ public class InstructorsController : BaseController {
 
     public async Task<IActionResult> VerifyEmail(string email)
     {
-        var user = await _userManager.GetUserAsync(User);
+        var user = await _userManager.FindByEmailAsync(email);
 
         if (user != null){
             return Json(false);

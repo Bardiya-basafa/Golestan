@@ -19,9 +19,16 @@ public class FacultyService : IFacultyService {
 
     public async Task<List<Faculty>> GetFaculties()
     {
-        var faculties = await _context.Faculties.ToListAsync();
+        try{
+            var faculties = await _context.Faculties.ToListAsync();
 
-        return faculties;
+            return faculties;
+        }
+        catch (Exception ex){
+            Console.WriteLine(ex.Message);
+
+            throw;
+        }
     }
 
 

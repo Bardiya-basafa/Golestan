@@ -8,25 +8,25 @@ using Validations;
 public class AddInstructorDto {
 
     [Required(ErrorMessage = "You must provide a first name")]
-    [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "The field must contain only letters.")]
+    [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "The field must contain only letters")]
 
     public string FirstName { get; set; }
 
     [Required(ErrorMessage = "You must provide a last name")]
-    [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "The field must contain only letters.")]
+    [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "The field must contain only letters")]
 
     public string LastName { get; set; }
 
+    [Remote("VerifyEmail", "Instructors", ErrorMessage = "Email address already exists")]
     [Required(ErrorMessage = "You must provide a email address")]
     [EmailAddress(ErrorMessage = "You must provide a valid email address")]
     [UniqueEmail]
-    [Remote("VerifyEmail", "Instructors", ErrorMessage = "Email address already exists")]
 
     public string Email { get; set; }
 
     [Required(ErrorMessage = "You must provide a password")]
     [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{8,}$",
-    ErrorMessage = "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character.")]
+    ErrorMessage = "Least 8 characters long, Digits, Uppercase letters, Lowercase letters and numbers")]
 
     public string Password { get; set; }
 

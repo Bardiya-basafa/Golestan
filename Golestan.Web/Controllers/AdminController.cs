@@ -10,9 +10,12 @@ public class AdminController : Controller {
 
     private readonly IFacultyService _facultyService;
 
-    public AdminController(IFacultyService facultyService)
+    private readonly IInstructorService _instructorService;
+
+    public AdminController(IFacultyService facultyService, IInstructorService instructorService)
     {
         _facultyService = facultyService;
+        _instructorService = instructorService;
     }
 
     // GET
@@ -24,9 +27,11 @@ public class AdminController : Controller {
         return View(faculties);
     }
 
-    public IActionResult InstructorsManagement()
+    public async Task<IActionResult> InstructorsManagement()
     {
-        return View();
+        var instructorsDto = await _instructorService.GetInstructors();
+
+        return View(instructorsDto);
     }
 
     public async Task<IActionResult> FacultiesManagement()

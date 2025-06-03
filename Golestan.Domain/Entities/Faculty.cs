@@ -7,18 +7,21 @@ public class Faculty {
 
     public int Id { get; set; }
 
-    public string Name { get; set; }
+    public string BuildingName { get; set; }
 
-    public Major Major { get; set; }
+    public string MajorName { get; set; }
 
     public int Badge { get; set; }
 
-    public ICollection<Student> Students { get; set; }
+    public DateTime StartDate { get; set; }
 
-    public ICollection<Instructor> Instructors { get; set; }
 
-    public ICollection<Course> Courses { get; set; }
+    public ICollection<Student> Students { get; set; } = new HashSet<Student>();
 
-    public ICollection<Classroom> Classrooms { get; set; }
+    public ICollection<Instructor> Instructors { get; set; } = new HashSet<Instructor>();
+
+    public ICollection<Course> Courses { get; set; } = new HashSet<Course>();
+
+    public ICollection<Classroom> Classrooms { get; set; } = new HashSet<Classroom>();
 
 }

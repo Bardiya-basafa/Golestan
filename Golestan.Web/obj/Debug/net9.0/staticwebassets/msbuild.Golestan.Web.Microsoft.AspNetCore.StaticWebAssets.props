@@ -12,8 +12,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>3kiy4y5fb3</Fingerprint>
-      <Integrity>c+7wVzvd325ptpmHj/of0WeuYz3iYH81u1Sxq1Jx+cs=</Integrity>
+      <Fingerprint>xkis4bs5pc</Fingerprint>
+      <Integrity>Ed3F7lmeqr0db8JCUfALZbCzqZmNwWGB+a9GgFBZ5yU=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\app.js'))</OriginalItemSpec>
@@ -840,11 +840,29 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>sslr04cwy3</Fingerprint>
-      <Integrity>HPfo54UEZHFTteMUVudL1WdTzG/xKSj9chkQ/2FutvM=</Integrity>
+      <Fingerprint>07az7mjt73</Fingerprint>
+      <Integrity>pPIapwQxAozy4IBdQE+QWEZV7XD0utrQONCQa7IZsys=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\style.css'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Tailwind\tailwind.css'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Golestan.Web</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Golestan.Web</BasePath>
+      <RelativePath>Tailwind/tailwind.css</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>o0r6zhd2ni</Fingerprint>
+      <Integrity>uPrlFifUHA37mu69OkB5PvtXG5L2ZugzqBpG3KaWE1Y=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\Tailwind\tailwind.css'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

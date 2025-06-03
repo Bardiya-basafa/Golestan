@@ -19,6 +19,6 @@ public class Section {
 
     public TimeSlot TimeSlot { get; set; }
 
-    public ICollection<Student> Students { get; set; }
+    public ICollection<Student> Students { get; set; } = new HashSet<Student>();
 
 }

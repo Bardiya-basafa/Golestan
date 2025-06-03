@@ -7,11 +7,10 @@ public class Instructor {
 
     public int Id { get; set; }
 
-    public string AppUserId { get; set; }// foreign key to AppUser
+    public string AppUserId { get; set; }
 
     public AppUser AppUser { get; set; }
 
-    public Major Major { get; set; }
 
     public DateTime HireDate { get; set; }
 
@@ -19,8 +18,10 @@ public class Instructor {
 
     public int FacultyId { get; set; }
 
+
     public Faculty Faculty { get; set; }
 
-    public ICollection<Section> Sections { get; set; }
+
+    public ICollection<Section> Sections { get; set; } = new HashSet<Section>();
 
 }

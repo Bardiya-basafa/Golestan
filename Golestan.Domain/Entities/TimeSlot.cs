@@ -17,5 +17,4 @@ public class TimeSlot {
 
     public Section Section { get; set; }
 
-
 }

@@ -6,4 +6,15 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Golestan.Domain\Golestan.Domain.csproj" />
+      <ProjectReference Include="..\Golestan.Infrastructure\Golestan.Infrastructure.csproj" />
+      <ProjectReference Include="..\Golestan.Shared\Golestan.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.3.0" />
+    </ItemGroup>
+
 </Project>

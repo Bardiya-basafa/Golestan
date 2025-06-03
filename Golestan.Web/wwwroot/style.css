@@ -1,3 +1,7 @@
+a {
+    text-decoration: none !important;
+}
+
 .glass-effect {
     background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(10px);
@@ -18,6 +22,43 @@
 }
 
 
+/* Custom remote validation error style */
+.field-validation-error {
+    color: #dc3545; /* Red color */
+    font-size: 0.875rem;
+    display: block;
+    margin-top: 0.25rem;
+    text-align: right; /* RTL support */
+    direction: rtl;
+    font-family: 'Yekan', 'Tanha', sans-serif; /* Persian fonts */
+}
 
+/* For valid fields */
+.field-validation-valid {
+    display: none;
+}
 
+/* Input error state */
+.input-validation-error {
+    border-color: #dc3545;
+    background-color: #fff3f3; /* Light red background */
+}
 
+/* Valid input state */
+.input-validation-valid {
+    border-color: #28a745; /* Green border */
+}
+
+.field-validation-error {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    height: 0;
+    overflow: hidden;
+}
+
+.input-validation-error + .field-validation-error {
+    opacity: 1;
+    transform: translateY(0);
+    height: auto;
+}

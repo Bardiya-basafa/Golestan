@@ -11,16 +11,16 @@ public class Student {
 
     public AppUser AppUser { get; set; }
 
-    public Major Major { get; set; }
-
     public string StudentNumber { get; set; }
 
     public DateTime EnteredDate { get; set; }
 
     public int FacultyId { get; set; }
 
+
     public Faculty Faculty { get; set; }
 
-    public ICollection<Section> Sections { get; set; }
+
+    public ICollection<Section> Sections { get; set; } = new HashSet<Section>();
 
 }

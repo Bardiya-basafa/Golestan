@@ -7,7 +7,7 @@ using DTOs.Faculty;
 
 public interface IFacultyService {
 
-    Task<List<Faculty>> GetFaculties();
+    Task<List<DetailsFacultyDto>> GetFaculties();
 
     Task<DetailsFacultyDto?> GetDetailsFacultyById(int id);
 

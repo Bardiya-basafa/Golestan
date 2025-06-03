@@ -1,0 +1,213 @@
+﻿@model List<DetailsFacultyDto>
+<div class="container mx-auto px-4 py-8">
+        <!-- Header Section -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6">
+                <div class="px-6 py-4 border-b border-gray-200">
+                        <div class="flex justify-between items-center">
+                                <div>
+                                        <h1 class="text-2xl font-bold text-gray-900">Available Faculties</h1>
+                                        <p class="text-gray-600 mt-1">View your available faculties for class
+                                                management </p>
+                                </div>
+                                <a asp-controller="Faculties" asp-action="AddFaculty" class="flex space-x-3">
+                                        <div
+                                                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium transition-colors duration-200 flex items-center">
+                                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor"
+                                                     viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                              stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                                </svg>
+                                                Add New Faculty
+                                        </div>
+                                </a>
+                        </div>
+                </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center">
+                                <div class="p-2 bg-blue-100 rounded-lg">
+                                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor"
+                                             viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                                        </svg>
+                                </div>
+                                <div class="ml-4">
+                                        <p class="text-sm font-medium text-gray-600">Total Faculties</p>
+                                        <p class="text-2xl font-bold text-gray-900">@Model.Count</p>
+                                </div>
+                        </div>
+                </div>
+
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center">
+                                <div class="p-2 bg-purple-100 rounded-lg">
+                                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor"
+                                             viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                      d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                        </svg>
+                                </div>
+                                <div class="ml-4">
+                                        <p class="text-sm font-medium text-gray-600">Total Classrooms</p>
+                                        <p class="text-2xl font-bold text-gray-900">@Model.Count</p>
+                                </div>
+                        </div>
+                </div>
+
+        </div>
+
+        <!-- Instructors Table -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                <div class="px-6 py-4 border-b border-gray-200">
+                        <h2 class="text-lg font-semibold text-gray-900">Faculties List</h2>
+                </div>
+
+                @if (true){
+                        <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-50">
+                                        <tr>
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Faculty ID
+                                                </th>
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Faculty
+                                                </th>
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Total Classrooms
+                                                </th>
+                                                <th scope="col"
+                                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                        Actions
+                                                </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                        @if (Model.Count == 0){
+                                                <tr class="hover:bg-gray-50 transition-colors duration-200">There is no
+                                                        Faculty in system
+                                                </tr>
+                                        }
+                                        else{
+                                                @foreach (var faculty in Model){
+                                                        <tr class="hover:bg-gray-50 transition-colors duration-200">
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">
+                                                                        #@faculty.Id
+                                                                </td>
+                                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                                                                                @faculty.MajorName
+                                                                        </span>
+                                                                </td>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                                        <span class="font-medium">@faculty.ClassesCount</span>
+                                                                </td>
+                                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                                                        <a asp-controller="Admin"
+                                                                           asp-action="ManageFacultyClassrooms"
+                                                                           asp-route-facultyId="@faculty.Id"
+                                                                           class="text-blue-600 hover:text-blue-900 transition-colors duration-200 inline-flex items-center">
+                                                                                Manage Classrooms
+                                                                                <svg class="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1"
+                                                                                     fill="none"
+                                                                                     stroke="currentColor"
+                                                                                     viewBox="0 0 24 24">
+                                                                                        <path stroke-linecap="round"
+                                                                                              stroke-linejoin="round"
+                                                                                              stroke-width="2"
+                                                                                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14">
+                                                                                        </path>
+                                                                                </svg>
+                                                                        </a>
+                                                                </td>
+
+
+                                                        </tr>
+                                                }
+                                        }
+                                        </tbody>
+                                </table>
+                        </div>
+                }
+                else{
+                        <div class="text-center py-12">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24"
+                                     stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+                                </svg>
+                                <h3 class="mt-2 text-sm font-medium text-gray-900">No instructors found</h3>
+                                <p class="mt-1 text-sm text-gray-500">Get started by adding a new instructor.</p>
+                                <div class="mt-6">
+                                        <a href="@Url.Action("Create")"
+                                           class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                                                <svg class="-ml-1 mr-2 h-5 w-5" fill="none" stroke="currentColor"
+                                                     viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                              stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                                </svg>
+                                                Add New Instructor
+                                        </a>
+                                </div>
+                        </div>
+                }
+        </div>
+
+        <!-- Pagination (if needed) -->
+        <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6 mt-6 rounded-lg shadow-sm border border-gray-200">
+                <div class="flex-1 flex justify-between sm:hidden">
+                        <a href="#"
+                           class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                Previous
+                        </a>
+                        <a href="#"
+                           class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                Next
+                        </a>
+                </div>
+                <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                        <div>
+                                <p class="text-sm text-gray-700">
+                                        Showing <span class="font-medium">1</span> to <span
+                                                        class="font-medium"></span> of <span
+                                                        class="font-medium"></span> results
+                                </p>
+                        </div>
+                        <div>
+                                <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
+                                     aria-label="Pagination">
+                                        <a href="#"
+                                           class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                                <span class="sr-only">Previous</span>
+                                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fill-rule="evenodd"
+                                                              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                                              clip-rule="evenodd"/>
+                                                </svg>
+                                        </a>
+                                        <a href="#"
+                                           class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                                1
+                                        </a>
+                                        <a href="#"
+                                           class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                                <span class="sr-only">Next</span>
+                                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                                        <path fill-rule="evenodd"
+                                                              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                                              clip-rule="evenodd"/>
+                                                </svg>
+                                        </a>
+                                </nav>
+                        </div>
+                </div>
+        </div>
+</div>

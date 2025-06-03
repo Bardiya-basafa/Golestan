@@ -17,10 +17,22 @@ public class FacultyService : IFacultyService {
         _context = context;
     }
 
-    public async Task<List<Faculty>> GetFaculties()
+    public async Task<List<DetailsFacultyDto>> GetFaculties()
     {
         try{
-            var faculties = await _context.Faculties.ToListAsync();
+            var faculties = await _context.Faculties
+                .Select(f => new DetailsFacultyDto()
+                {
+                    Id = f.Id,
+                    MajorName = f.MajorName,
+                    BuildingName = f.BuildingName,
+                    Budget = f.Budget,
+                    StartDate = f.StartDate,
+                    StudentsCount = f.Students.Count,
+                    InstructorsCount = f.Instructors.Count,
+                    ClassesCount = f.Classrooms.Count,
+                    CoursesCount = f.Courses.Count,
+                }).ToListAsync();
 
             return faculties;
         }

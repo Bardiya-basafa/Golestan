@@ -1,8 +1,11 @@
 ﻿namespace Golestan.Application.Services;
 
+using Domain.Entities;
 using DTOs.Classroom;
 using Infrastructure.Persistence;
+using Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Shared.Helpers;
 
 
 public class ClassroomService : IClassroomService {
@@ -35,7 +38,6 @@ public class ClassroomService : IClassroomService {
             };
 
             dto.FacultyName = await _context.Faculties.Where(f => f.Id == facultyId).Select(f => f.MajorName).FirstOrDefaultAsync();
-            
 
 
             return dto;
@@ -45,6 +47,47 @@ public class ClassroomService : IClassroomService {
 
             throw;
         }
+    }
+
+    public async Task<Result> AddClassroom(AddClassroomDto dto)
+    {
+        var finalResult = new Result();
+
+        try{
+            var classroom = new Classroom()
+            {
+                ClassNumber = dto.ClassNumber,
+                Capacity = dto.Capacity,
+                FacultyId = dto.FacultyId,
+            };
+
+            _context.Classrooms.Add(classroom);
+            await _context.SaveChangesAsync();
+            finalResult.Succeeded = true;
+            finalResult.Message = "Classroom added";
+
+            return finalResult;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+
+            finalResult.Message = "Failed to create classroom";
+
+            return finalResult;
+        }
+    }
+
+    public async Task<bool> VerifyClassroomNumber(string classNumber, int facultyId)
+    {
+        var classroom = await _context.Classrooms
+            .Where(c => c.ClassNumber == classNumber && c.FacultyId == facultyId)
+            .FirstOrDefaultAsync();
+
+        if (classroom == null){
+            return false;
+        }
+
+        return true;
     }
 
 }

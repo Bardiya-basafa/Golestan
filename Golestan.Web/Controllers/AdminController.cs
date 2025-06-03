@@ -4,6 +4,7 @@
 namespace Golestan.Web.Controllers;
 
 using Application.Interfaces;
+using Application.Services;
 
 
 public class AdminController : Controller {
@@ -12,10 +13,13 @@ public class AdminController : Controller {
 
     private readonly IInstructorService _instructorService;
 
-    public AdminController(IFacultyService facultyService, IInstructorService instructorService)
+    private readonly IClassroomService _classroomService;
+
+    public AdminController(IFacultyService facultyService, IInstructorService instructorService, IClassroomService classroomService)
     {
         _facultyService = facultyService;
         _instructorService = instructorService;
+        _classroomService = classroomService;
     }
 
     // GET
@@ -44,8 +48,9 @@ public class AdminController : Controller {
     [HttpGet]
     public async Task<IActionResult> ManageFacultyClassrooms(int facultyId)
     {
-        
-        return View();
+        var dto = await _classroomService.GetFacultyClassrooms(facultyId);
+
+        return View(dto);
     }
 
     public async Task<IActionResult> FacultiesManagement()

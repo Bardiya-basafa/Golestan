@@ -8,6 +8,5 @@ public class ClassroomDetailsDto {
 
     public int Capacity { get; set; }
 
-    public int FacultyId { get; set; }
 
 }

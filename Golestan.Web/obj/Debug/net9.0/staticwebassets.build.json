@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "7OG/RPKWQljCcVLI2Aj5w/71C+LQtbC1SsduOWgVEMw=",
+  "Hash": "jSgXzGr2EFayabtgocJ3IQhDz5Tg7weLKPOHBF7X08A=",
   "Source": "Golestan.Web",
   "BasePath": "_content/Golestan.Web",
   "Mode": "Default",
@@ -36,6 +36,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\0hgw7apm40-o0r6zhd2ni.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "Tailwind/tailwind#[.{fingerprint=o0r6zhd2ni}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\Tailwind\\tailwind.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "34jr8ynwei",
+      "Integrity": "g9my6fXTFHA/C2xDtTYWsqZD5LX6Eu0OMsEtaivQAWo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\Tailwind\\tailwind.css"
     },
     {
       "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\1eh4yg8sww-kbrnm935zg.gz",
@@ -143,6 +164,27 @@
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\4fohldp8cz-48y08845bh.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min#[.{fingerprint=48y08845bh}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "5hgi50qbud",
+      "Integrity": "F1eM1vgG9PaT7pF5Hubo7swbaVAWhXsjYwxoJvyk5+s=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js"
+    },
+    {
       "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\5i5a3nl5um-22vffe00uq.gz",
       "SourceId": "Golestan.Web",
       "SourceType": "Discovered",
@@ -185,6 +227,27 @@
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\61h6t6ffyh-ttgo8qnofa.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery/dist/jquery.min#[.{fingerprint=ttgo8qnofa}]?.map.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "hq2hiirxit",
+      "Integrity": "GfL7M76amKU+B+H1o4WVh7q13GpiC7L6scp3ODOz3ag=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
       "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\63ahztmvdt-u9q1upor1n.gz",
       "SourceId": "Golestan.Web",
       "SourceType": "Discovered",
@@ -225,6 +288,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\776cp3k9fv-356vix0kms.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery-validation-unobtrusive/LICENSE#[.{fingerprint=356vix0kms}]?.txt.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "2yhmugv22u",
+      "Integrity": "WpL0kbwDHONKwUu+fAC6nKQXtZOBY20Gsspcn336Iz4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
       "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\79zs3yqd0a-8vyfqsqgz1.gz",
@@ -353,6 +437,48 @@
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\ab6lvm3vlr-gk0pw8i4co.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery-validation/dist/jquery.validate.min#[.{fingerprint=gk0pw8i4co}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "q07w49iitf",
+      "Integrity": "itOFoWDZSqZIyZRKcH5nH/mbWKG8zHsAz7G0W9zjagg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\af53hxmrbf-07az7mjt73.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "style#[.{fingerprint=07az7mjt73}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\style.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "rd2z3vjpti",
+      "Integrity": "Mdo4TgpJ6FL3tcJyzn86Ogicm7+6dm5+wEDfoSWAGTA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\style.css"
+    },
+    {
       "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\apenxjqblr-fsbi9cje9m.gz",
       "SourceId": "Golestan.Web",
       "SourceType": "Discovered",
@@ -416,25 +542,46 @@
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\d1cwh78b5o-khy4lop6wu.gz",
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\dpw2zyflmx-73m6tmcwis.gz",
       "SourceId": "Golestan.Web",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/Golestan.Web",
-      "RelativePath": "app#[.{fingerprint=khy4lop6wu}]?.css.gz",
+      "RelativePath": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive#[.{fingerprint=73m6tmcwis}]?.js.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
       "AssetMergeBehavior": "",
       "AssetMergeSource": "",
-      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.css",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "596e5mu3rg",
-      "Integrity": "KfTtGgOr4gFqWP6bDC3erwKnY0fchsCFGM8SFQeyGO0=",
+      "Fingerprint": "cfz8dwe2ri",
+      "Integrity": "qI2ljPQNStuy2gCzq5iFUo8wyJZKq8wjiEleI0XDX98=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.css"
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\eem6sixcfc-mlv21k5csn.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery/LICENSE#[.{fingerprint=mlv21k5csn}]?.txt.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "k2cjzt041l",
+      "Integrity": "JKWeHUaANNuffeRatdc54UCb84RoxjEw/nTq8Mops8Y=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\LICENSE.txt"
     },
     {
       "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\ehkyt6k89q-4094rpi4f9.gz",
@@ -479,6 +626,27 @@
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\f2e1pkvjjg-baaf9gv4dd.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery-validation/dist/jquery.validate#[.{fingerprint=baaf9gv4dd}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "uhjtb8hxko",
+      "Integrity": "8mKeCHGJQ9w6RSdRAx+BH1aD+jjKmWGPrMblTw9rd+c=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
       "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\fmw2l94gxd-h1s4sie4z3.gz",
       "SourceId": "Golestan.Web",
       "SourceType": "Discovered",
@@ -498,6 +666,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\fyn67cjrne-mrlpezrjn3.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery-validation/dist/additional-methods.min#[.{fingerprint=mrlpezrjn3}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "uya4g6am6w",
+      "Integrity": "hhhjkgaWyJk2NWrF/LyhTIDOF42U+kBX72IU2K4RWJg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
       "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\ga2ofz1oap-v0zj4ognzu.gz",
@@ -540,6 +729,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\hrn0exjeb8-87fc7y1x7t.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery/dist/jquery.slim.min#[.{fingerprint=87fc7y1x7t}]?.map.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "p5ev1mo4sb",
+      "Integrity": "bZLUSM9fRhNJKF4yFjKvv9iU/j2aC1lJtEqR9u5n6y8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map"
     },
     {
       "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\iz6zd59yx3-nvvlpmu67g.gz",
@@ -626,6 +836,27 @@
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\n3b7vmhiqt-x0q3zqp4vz.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery-validation/LICENSE#[.{fingerprint=x0q3zqp4vz}]?.md.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "1fp9w2itex",
+      "Integrity": "7bAe2yT3obcUnzDyFQyuh4GI4iC/NGB4Bs4gZaY3Wj4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
       "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\np1qmfgzwh-c2jlpeoesf.gz",
       "SourceId": "Golestan.Web",
       "SourceType": "Discovered",
@@ -645,6 +876,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\npjt4o0ood-xkis4bs5pc.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "app#[.{fingerprint=xkis4bs5pc}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "nxihuxghc3",
+      "Integrity": "G7z35ft16EVqlAmaAXjToOyctgV2VR4mG4b5fevkTGE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.js"
     },
     {
       "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\p7v0oz99ya-xvp3kq03qx.gz",
@@ -773,6 +1025,27 @@
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\rz2lzhlf1o-idek2eh7ao.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery/dist/jquery.slim#[.{fingerprint=idek2eh7ao}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "gysipfoj9f",
+      "Integrity": "6Aeld52CerSyjbaNwozrJzrBYhEYeyV1n+xXV8cN9SM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js"
+    },
+    {
       "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\s4zqwj5jxl-pj5nd1wqec.gz",
       "SourceId": "Golestan.Web",
       "SourceType": "Discovered",
@@ -834,6 +1107,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\tybtsxany8-m9qm4tazc0.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery/dist/jquery.min#[.{fingerprint=m9qm4tazc0}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "1s03qn3l9f",
+      "Integrity": "T1Mxz6b5tcPGdGYeBLTL5A9PUSvbDbkClvy0G7J1r2k=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
       "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\v749e50my9-43atpzeawx.gz",
@@ -899,6 +1193,48 @@
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\wu0hk24so0-cwmfesb6rc.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery-validation/dist/additional-methods#[.{fingerprint=cwmfesb6rc}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "j16s1uxj4u",
+      "Integrity": "aUkHyLRU1V/qnVH6w3QdKATmSWw24M7JdA4rtnbsrSM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\xby5l9l2ks-qu4k6ngvdi.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery/dist/jquery#[.{fingerprint=qu4k6ngvdi}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "a2sbqw9z1h",
+      "Integrity": "0oymyibhMuwGsWBXVPpN1pZQd4M2NO0odKKKmL7SIx8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
       "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\xe4fm6hlg3-6pdc2jztkx.gz",
       "SourceId": "Golestan.Web",
       "SourceType": "Discovered",
@@ -962,12 +1298,33 @@
       "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.css",
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\zqmp9kcg1w-9vr69e8ynj.gz",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery/dist/jquery.slim.min#[.{fingerprint=9vr69e8ynj}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "mulfwnbtpa",
+      "Integrity": "oheIXejBlri6EJgnT3rCEOV8cSc0XnYutP+KQ6pSvDc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.js",
       "SourceId": "Golestan.Web",
       "SourceType": "Discovered",
       "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
       "BasePath": "_content/Golestan.Web",
-      "RelativePath": "app#[.{fingerprint}]?.css",
+      "RelativePath": "app#[.{fingerprint}]?.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -976,11 +1333,11 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "khy4lop6wu",
-      "Integrity": "aNPcLFwdCCGS2v1guSR64Htd4Ly5uclT7taAptnMPbs=",
+      "Fingerprint": "xkis4bs5pc",
+      "Integrity": "Ed3F7lmeqr0db8JCUfALZbCzqZmNwWGB+a9GgFBZ5yU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\app.css"
+      "OriginalItemSpec": "wwwroot\\app.js"
     },
     {
       "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\favicon.png",
@@ -1926,17 +2283,374 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "73m6tmcwis",
+      "Integrity": "U8rkJByfQdRoKMavp84N/yQfiQkK3olRmGRHhNKOvCY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "48y08845bh",
+      "Integrity": "RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery-validation-unobtrusive/LICENSE#[.{fingerprint}]?.txt",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "356vix0kms",
+      "Integrity": "16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery-validation/dist/additional-methods#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "cwmfesb6rc",
+      "Integrity": "VPDt8yrTHTi/pgj3flU52FlqCc/U6MuuqHqjqXHxmrU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery-validation/dist/additional-methods.min#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "mrlpezrjn3",
+      "Integrity": "jhvKRxZo6eW/PyCe+4rjBLzqesJlE8rnyQGEjk8l2k8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery-validation/dist/jquery.validate#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "baaf9gv4dd",
+      "Integrity": "07pYHWNR3OQhWAxrfN1TdiHSmU5tuPjnWcrNgqbyP0k=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery-validation/dist/jquery.validate.min#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "gk0pw8i4co",
+      "Integrity": "4NCwFlQ/wYiXS/TiueaKHFZND6AibX0E5NEBx9i3ar0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery-validation/LICENSE#[.{fingerprint}]?.md",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "x0q3zqp4vz",
+      "Integrity": "geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery/dist/jquery#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "qu4k6ngvdi",
+      "Integrity": "kpfsfoDHCSV6D8C+JzsVXRlzjLBqrBgx+l/w3mfKYUs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery/dist/jquery.min#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "m9qm4tazc0",
+      "Integrity": "eqaw4I9IoPldjffqieTL/h7z0ejA9zc/fyXt+05KMl4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery/dist/jquery.min#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ttgo8qnofa",
+      "Integrity": "z3TVHGLSmRiZiRMOu0I7MEU1Mv3ImI2OK3GxuRZagLg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery/dist/jquery.slim#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "idek2eh7ao",
+      "Integrity": "xo80E+OknWwS22ESvEJqnvyxyqPiblflQQGDUtiV9bM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.slim.js"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery/dist/jquery.slim.min#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "9vr69e8ynj",
+      "Integrity": "a4xPRM7I0Iu95emrjGFRPWtNfn31f7PRjqVT5MIQMuc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery/dist/jquery.slim.min#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "87fc7y1x7t",
+      "Integrity": "9FYmcgtx8qZo1OPPiPt/BJ/sz0EI8SRNUYsFLZDEEt4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "lib/jquery/LICENSE#[.{fingerprint}]?.txt",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "mlv21k5csn",
+      "Integrity": "hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\style.css",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "style#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "07az7mjt73",
+      "Integrity": "pPIapwQxAozy4IBdQE+QWEZV7XD0utrQONCQa7IZsys=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\style.css"
+    },
+    {
+      "Identity": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\Tailwind\\tailwind.css",
+      "SourceId": "Golestan.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\",
+      "BasePath": "_content/Golestan.Web",
+      "RelativePath": "Tailwind/tailwind#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "o0r6zhd2ni",
+      "Integrity": "uPrlFifUHA37mu69OkB5PvtXG5L2ZugzqBpG3KaWE1Y=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Tailwind\\tailwind.css"
     }
   ],
   "Endpoints": [
     {
-      "Route": "app.css",
-      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\d1cwh78b5o-khy4lop6wu.gz",
+      "Route": "app.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\npjt4o0ood-xkis4bs5pc.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000636132316"
+          "Quality": "0.000112714157"
         }
       ],
       "ResponseHeaders": [
@@ -1946,15 +2660,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1571"
+          "Value": "8871"
         },
         {
           "Name": "ETag",
-          "Value": "\"KfTtGgOr4gFqWP6bDC3erwKnY0fchsCFGM8SFQeyGO0=\""
+          "Value": "\"G7z35ft16EVqlAmaAXjToOyctgV2VR4mG4b5fevkTGE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 30 May 2025 15:26:51 GMT"
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1970,23 +2684,23 @@
         },
         {
           "Name": "Content-Type",
-          "Value": "text/css"
+          "Value": "text/javascript"
         },
         {
           "Name": "ETag",
-          "Value": "W/\"aNPcLFwdCCGS2v1guSR64Htd4Ly5uclT7taAptnMPbs=\""
+          "Value": "W/\"Ed3F7lmeqr0db8JCUfALZbCzqZmNwWGB+a9GgFBZ5yU=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-aNPcLFwdCCGS2v1guSR64Htd4Ly5uclT7taAptnMPbs="
+          "Value": "sha256-Ed3F7lmeqr0db8JCUfALZbCzqZmNwWGB+a9GgFBZ5yU="
         }
       ]
     },
     {
-      "Route": "app.css",
-      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.css",
+      "Route": "app.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -1995,19 +2709,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2900"
+          "Value": "57729"
         },
         {
           "Name": "Content-Type",
-          "Value": "text/css"
+          "Value": "text/javascript"
         },
         {
           "Name": "ETag",
-          "Value": "\"aNPcLFwdCCGS2v1guSR64Htd4Ly5uclT7taAptnMPbs=\""
+          "Value": "\"Ed3F7lmeqr0db8JCUfALZbCzqZmNwWGB+a9GgFBZ5yU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 30 May 2025 15:26:51 GMT"
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2017,13 +2731,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-aNPcLFwdCCGS2v1guSR64Htd4Ly5uclT7taAptnMPbs="
+          "Value": "sha256-Ed3F7lmeqr0db8JCUfALZbCzqZmNwWGB+a9GgFBZ5yU="
         }
       ]
     },
     {
-      "Route": "app.css.gz",
-      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\d1cwh78b5o-khy4lop6wu.gz",
+      "Route": "app.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\npjt4o0ood-xkis4bs5pc.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2032,19 +2746,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1571"
+          "Value": "8871"
         },
         {
           "Name": "Content-Type",
-          "Value": "text/css"
+          "Value": "text/javascript"
         },
         {
           "Name": "ETag",
-          "Value": "\"KfTtGgOr4gFqWP6bDC3erwKnY0fchsCFGM8SFQeyGO0=\""
+          "Value": "\"G7z35ft16EVqlAmaAXjToOyctgV2VR4mG4b5fevkTGE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 30 May 2025 15:26:51 GMT"
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2062,18 +2776,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-KfTtGgOr4gFqWP6bDC3erwKnY0fchsCFGM8SFQeyGO0="
+          "Value": "sha256-G7z35ft16EVqlAmaAXjToOyctgV2VR4mG4b5fevkTGE="
         }
       ]
     },
     {
-      "Route": "app.khy4lop6wu.css",
-      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\d1cwh78b5o-khy4lop6wu.gz",
+      "Route": "app.xkis4bs5pc.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\npjt4o0ood-xkis4bs5pc.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000636132316"
+          "Quality": "0.000112714157"
         }
       ],
       "ResponseHeaders": [
@@ -2083,15 +2797,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1571"
+          "Value": "8871"
         },
         {
           "Name": "ETag",
-          "Value": "\"KfTtGgOr4gFqWP6bDC3erwKnY0fchsCFGM8SFQeyGO0=\""
+          "Value": "\"G7z35ft16EVqlAmaAXjToOyctgV2VR4mG4b5fevkTGE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 30 May 2025 15:26:51 GMT"
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2107,31 +2821,31 @@
         },
         {
           "Name": "Content-Type",
-          "Value": "text/css"
+          "Value": "text/javascript"
         },
         {
           "Name": "ETag",
-          "Value": "W/\"aNPcLFwdCCGS2v1guSR64Htd4Ly5uclT7taAptnMPbs=\""
+          "Value": "W/\"Ed3F7lmeqr0db8JCUfALZbCzqZmNwWGB+a9GgFBZ5yU=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "khy4lop6wu"
+          "Value": "xkis4bs5pc"
         },
         {
           "Name": "label",
-          "Value": "app.css"
+          "Value": "app.js"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-aNPcLFwdCCGS2v1guSR64Htd4Ly5uclT7taAptnMPbs="
+          "Value": "sha256-Ed3F7lmeqr0db8JCUfALZbCzqZmNwWGB+a9GgFBZ5yU="
         }
       ]
     },
     {
-      "Route": "app.khy4lop6wu.css",
-      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.css",
+      "Route": "app.xkis4bs5pc.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\app.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2140,19 +2854,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "2900"
+          "Value": "57729"
         },
         {
           "Name": "Content-Type",
-          "Value": "text/css"
+          "Value": "text/javascript"
         },
         {
           "Name": "ETag",
-          "Value": "\"aNPcLFwdCCGS2v1guSR64Htd4Ly5uclT7taAptnMPbs=\""
+          "Value": "\"Ed3F7lmeqr0db8JCUfALZbCzqZmNwWGB+a9GgFBZ5yU=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 30 May 2025 15:26:51 GMT"
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2162,21 +2876,21 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "khy4lop6wu"
+          "Value": "xkis4bs5pc"
         },
         {
           "Name": "label",
-          "Value": "app.css"
+          "Value": "app.js"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-aNPcLFwdCCGS2v1guSR64Htd4Ly5uclT7taAptnMPbs="
+          "Value": "sha256-Ed3F7lmeqr0db8JCUfALZbCzqZmNwWGB+a9GgFBZ5yU="
         }
       ]
     },
     {
-      "Route": "app.khy4lop6wu.css.gz",
-      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\d1cwh78b5o-khy4lop6wu.gz",
+      "Route": "app.xkis4bs5pc.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\npjt4o0ood-xkis4bs5pc.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -2185,19 +2899,19 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "1571"
+          "Value": "8871"
         },
         {
           "Name": "Content-Type",
-          "Value": "text/css"
+          "Value": "text/javascript"
         },
         {
           "Name": "ETag",
-          "Value": "\"KfTtGgOr4gFqWP6bDC3erwKnY0fchsCFGM8SFQeyGO0=\""
+          "Value": "\"G7z35ft16EVqlAmaAXjToOyctgV2VR4mG4b5fevkTGE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 30 May 2025 15:26:51 GMT"
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -2215,15 +2929,15 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "khy4lop6wu"
+          "Value": "xkis4bs5pc"
         },
         {
           "Name": "label",
-          "Value": "app.css.gz"
+          "Value": "app.js.gz"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-KfTtGgOr4gFqWP6bDC3erwKnY0fchsCFGM8SFQeyGO0="
+          "Value": "sha256-G7z35ft16EVqlAmaAXjToOyctgV2VR4mG4b5fevkTGE="
         }
       ]
     },
@@ -15418,6 +16132,5072 @@
         {
           "Name": "integrity",
           "Value": "sha256-pf2AOjAOccWBEl9ORfBaaHo0t3lQUfisiqfIeMW9tqI="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.73m6tmcwis.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\dpw2zyflmx-73m6tmcwis.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000213903743"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4674"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qI2ljPQNStuy2gCzq5iFUo8wyJZKq8wjiEleI0XDX98=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"U8rkJByfQdRoKMavp84N/yQfiQkK3olRmGRHhNKOvCY=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "73m6tmcwis"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-U8rkJByfQdRoKMavp84N/yQfiQkK3olRmGRHhNKOvCY="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.73m6tmcwis.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "19780"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"U8rkJByfQdRoKMavp84N/yQfiQkK3olRmGRHhNKOvCY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "73m6tmcwis"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-U8rkJByfQdRoKMavp84N/yQfiQkK3olRmGRHhNKOvCY="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.73m6tmcwis.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\dpw2zyflmx-73m6tmcwis.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4674"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qI2ljPQNStuy2gCzq5iFUo8wyJZKq8wjiEleI0XDX98=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "73m6tmcwis"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qI2ljPQNStuy2gCzq5iFUo8wyJZKq8wjiEleI0XDX98="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\dpw2zyflmx-73m6tmcwis.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000213903743"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4674"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qI2ljPQNStuy2gCzq5iFUo8wyJZKq8wjiEleI0XDX98=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"U8rkJByfQdRoKMavp84N/yQfiQkK3olRmGRHhNKOvCY=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-U8rkJByfQdRoKMavp84N/yQfiQkK3olRmGRHhNKOvCY="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "19780"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"U8rkJByfQdRoKMavp84N/yQfiQkK3olRmGRHhNKOvCY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-U8rkJByfQdRoKMavp84N/yQfiQkK3olRmGRHhNKOvCY="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\dpw2zyflmx-73m6tmcwis.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4674"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"qI2ljPQNStuy2gCzq5iFUo8wyJZKq8wjiEleI0XDX98=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-qI2ljPQNStuy2gCzq5iFUo8wyJZKq8wjiEleI0XDX98="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.48y08845bh.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\4fohldp8cz-48y08845bh.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000453103761"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2206"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"F1eM1vgG9PaT7pF5Hubo7swbaVAWhXsjYwxoJvyk5+s=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "48y08845bh"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.48y08845bh.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5831"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "48y08845bh"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.48y08845bh.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\4fohldp8cz-48y08845bh.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2206"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"F1eM1vgG9PaT7pF5Hubo7swbaVAWhXsjYwxoJvyk5+s=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "48y08845bh"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-F1eM1vgG9PaT7pF5Hubo7swbaVAWhXsjYwxoJvyk5+s="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\4fohldp8cz-48y08845bh.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000453103761"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2206"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"F1eM1vgG9PaT7pF5Hubo7swbaVAWhXsjYwxoJvyk5+s=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5831"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\4fohldp8cz-48y08845bh.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "2206"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"F1eM1vgG9PaT7pF5Hubo7swbaVAWhXsjYwxoJvyk5+s=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-F1eM1vgG9PaT7pF5Hubo7swbaVAWhXsjYwxoJvyk5+s="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/LICENSE.356vix0kms.txt",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\776cp3k9fv-356vix0kms.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001438848921"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "694"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WpL0kbwDHONKwUu+fAC6nKQXtZOBY20Gsspcn336Iz4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "356vix0kms"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation-unobtrusive/LICENSE.txt"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/LICENSE.356vix0kms.txt",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1139"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "356vix0kms"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation-unobtrusive/LICENSE.txt"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/LICENSE.356vix0kms.txt.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\776cp3k9fv-356vix0kms.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "694"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WpL0kbwDHONKwUu+fAC6nKQXtZOBY20Gsspcn336Iz4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "356vix0kms"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation-unobtrusive/LICENSE.txt.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-WpL0kbwDHONKwUu+fAC6nKQXtZOBY20Gsspcn336Iz4="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\776cp3k9fv-356vix0kms.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001438848921"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "694"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WpL0kbwDHONKwUu+fAC6nKQXtZOBY20Gsspcn336Iz4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1139"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation-unobtrusive/LICENSE.txt.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\776cp3k9fv-356vix0kms.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "694"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"WpL0kbwDHONKwUu+fAC6nKQXtZOBY20Gsspcn336Iz4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-WpL0kbwDHONKwUu+fAC6nKQXtZOBY20Gsspcn336Iz4="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/additional-methods.cwmfesb6rc.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\wu0hk24so0-cwmfesb6rc.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000070209928"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "14242"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aUkHyLRU1V/qnVH6w3QdKATmSWw24M7JdA4rtnbsrSM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"VPDt8yrTHTi/pgj3flU52FlqCc/U6MuuqHqjqXHxmrU=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cwmfesb6rc"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/additional-methods.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VPDt8yrTHTi/pgj3flU52FlqCc/U6MuuqHqjqXHxmrU="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/additional-methods.cwmfesb6rc.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "60364"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VPDt8yrTHTi/pgj3flU52FlqCc/U6MuuqHqjqXHxmrU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cwmfesb6rc"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/additional-methods.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VPDt8yrTHTi/pgj3flU52FlqCc/U6MuuqHqjqXHxmrU="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/additional-methods.cwmfesb6rc.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\wu0hk24so0-cwmfesb6rc.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "14242"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aUkHyLRU1V/qnVH6w3QdKATmSWw24M7JdA4rtnbsrSM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "cwmfesb6rc"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/additional-methods.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-aUkHyLRU1V/qnVH6w3QdKATmSWw24M7JdA4rtnbsrSM="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/additional-methods.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\wu0hk24so0-cwmfesb6rc.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000070209928"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "14242"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aUkHyLRU1V/qnVH6w3QdKATmSWw24M7JdA4rtnbsrSM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"VPDt8yrTHTi/pgj3flU52FlqCc/U6MuuqHqjqXHxmrU=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VPDt8yrTHTi/pgj3flU52FlqCc/U6MuuqHqjqXHxmrU="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/additional-methods.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "60364"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"VPDt8yrTHTi/pgj3flU52FlqCc/U6MuuqHqjqXHxmrU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-VPDt8yrTHTi/pgj3flU52FlqCc/U6MuuqHqjqXHxmrU="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/additional-methods.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\wu0hk24so0-cwmfesb6rc.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "14242"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"aUkHyLRU1V/qnVH6w3QdKATmSWw24M7JdA4rtnbsrSM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-aUkHyLRU1V/qnVH6w3QdKATmSWw24M7JdA4rtnbsrSM="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/additional-methods.min.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\fyn67cjrne-mrlpezrjn3.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000154249576"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6482"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hhhjkgaWyJk2NWrF/LyhTIDOF42U+kBX72IU2K4RWJg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"jhvKRxZo6eW/PyCe+4rjBLzqesJlE8rnyQGEjk8l2k8=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jhvKRxZo6eW/PyCe+4rjBLzqesJlE8rnyQGEjk8l2k8="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/additional-methods.min.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "22125"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jhvKRxZo6eW/PyCe+4rjBLzqesJlE8rnyQGEjk8l2k8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jhvKRxZo6eW/PyCe+4rjBLzqesJlE8rnyQGEjk8l2k8="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/additional-methods.min.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\fyn67cjrne-mrlpezrjn3.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6482"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hhhjkgaWyJk2NWrF/LyhTIDOF42U+kBX72IU2K4RWJg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hhhjkgaWyJk2NWrF/LyhTIDOF42U+kBX72IU2K4RWJg="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/additional-methods.min.mrlpezrjn3.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\fyn67cjrne-mrlpezrjn3.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000154249576"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6482"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hhhjkgaWyJk2NWrF/LyhTIDOF42U+kBX72IU2K4RWJg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"jhvKRxZo6eW/PyCe+4rjBLzqesJlE8rnyQGEjk8l2k8=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "mrlpezrjn3"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/additional-methods.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jhvKRxZo6eW/PyCe+4rjBLzqesJlE8rnyQGEjk8l2k8="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/additional-methods.min.mrlpezrjn3.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "22125"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jhvKRxZo6eW/PyCe+4rjBLzqesJlE8rnyQGEjk8l2k8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "mrlpezrjn3"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/additional-methods.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jhvKRxZo6eW/PyCe+4rjBLzqesJlE8rnyQGEjk8l2k8="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/additional-methods.min.mrlpezrjn3.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\fyn67cjrne-mrlpezrjn3.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "6482"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hhhjkgaWyJk2NWrF/LyhTIDOF42U+kBX72IU2K4RWJg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "mrlpezrjn3"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/additional-methods.min.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hhhjkgaWyJk2NWrF/LyhTIDOF42U+kBX72IU2K4RWJg="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/jquery.validate.baaf9gv4dd.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\f2e1pkvjjg-baaf9gv4dd.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000067435431"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "14828"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8mKeCHGJQ9w6RSdRAx+BH1aD+jjKmWGPrMblTw9rd+c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"07pYHWNR3OQhWAxrfN1TdiHSmU5tuPjnWcrNgqbyP0k=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "baaf9gv4dd"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/jquery.validate.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-07pYHWNR3OQhWAxrfN1TdiHSmU5tuPjnWcrNgqbyP0k="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/jquery.validate.baaf9gv4dd.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "72441"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"07pYHWNR3OQhWAxrfN1TdiHSmU5tuPjnWcrNgqbyP0k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "baaf9gv4dd"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/jquery.validate.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-07pYHWNR3OQhWAxrfN1TdiHSmU5tuPjnWcrNgqbyP0k="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/jquery.validate.baaf9gv4dd.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\f2e1pkvjjg-baaf9gv4dd.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "14828"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8mKeCHGJQ9w6RSdRAx+BH1aD+jjKmWGPrMblTw9rd+c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "baaf9gv4dd"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/jquery.validate.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-8mKeCHGJQ9w6RSdRAx+BH1aD+jjKmWGPrMblTw9rd+c="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/jquery.validate.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\f2e1pkvjjg-baaf9gv4dd.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000067435431"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "14828"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8mKeCHGJQ9w6RSdRAx+BH1aD+jjKmWGPrMblTw9rd+c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"07pYHWNR3OQhWAxrfN1TdiHSmU5tuPjnWcrNgqbyP0k=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-07pYHWNR3OQhWAxrfN1TdiHSmU5tuPjnWcrNgqbyP0k="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/jquery.validate.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "72441"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"07pYHWNR3OQhWAxrfN1TdiHSmU5tuPjnWcrNgqbyP0k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-07pYHWNR3OQhWAxrfN1TdiHSmU5tuPjnWcrNgqbyP0k="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/jquery.validate.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\f2e1pkvjjg-baaf9gv4dd.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "14828"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"8mKeCHGJQ9w6RSdRAx+BH1aD+jjKmWGPrMblTw9rd+c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-8mKeCHGJQ9w6RSdRAx+BH1aD+jjKmWGPrMblTw9rd+c="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/jquery.validate.min.gk0pw8i4co.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\ab6lvm3vlr-gk0pw8i4co.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000123046635"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8126"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"itOFoWDZSqZIyZRKcH5nH/mbWKG8zHsAz7G0W9zjagg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"4NCwFlQ/wYiXS/TiueaKHFZND6AibX0E5NEBx9i3ar0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gk0pw8i4co"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/jquery.validate.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4NCwFlQ/wYiXS/TiueaKHFZND6AibX0E5NEBx9i3ar0="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/jquery.validate.min.gk0pw8i4co.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25311"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4NCwFlQ/wYiXS/TiueaKHFZND6AibX0E5NEBx9i3ar0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gk0pw8i4co"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/jquery.validate.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4NCwFlQ/wYiXS/TiueaKHFZND6AibX0E5NEBx9i3ar0="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/jquery.validate.min.gk0pw8i4co.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\ab6lvm3vlr-gk0pw8i4co.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8126"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"itOFoWDZSqZIyZRKcH5nH/mbWKG8zHsAz7G0W9zjagg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "gk0pw8i4co"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/jquery.validate.min.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-itOFoWDZSqZIyZRKcH5nH/mbWKG8zHsAz7G0W9zjagg="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/jquery.validate.min.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\ab6lvm3vlr-gk0pw8i4co.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000123046635"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8126"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"itOFoWDZSqZIyZRKcH5nH/mbWKG8zHsAz7G0W9zjagg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"4NCwFlQ/wYiXS/TiueaKHFZND6AibX0E5NEBx9i3ar0=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4NCwFlQ/wYiXS/TiueaKHFZND6AibX0E5NEBx9i3ar0="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/jquery.validate.min.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "25311"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"4NCwFlQ/wYiXS/TiueaKHFZND6AibX0E5NEBx9i3ar0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-4NCwFlQ/wYiXS/TiueaKHFZND6AibX0E5NEBx9i3ar0="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/jquery.validate.min.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\ab6lvm3vlr-gk0pw8i4co.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "8126"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"itOFoWDZSqZIyZRKcH5nH/mbWKG8zHsAz7G0W9zjagg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-itOFoWDZSqZIyZRKcH5nH/mbWKG8zHsAz7G0W9zjagg="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/LICENSE.md",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\n3b7vmhiqt-x0q3zqp4vz.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001461988304"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "683"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7bAe2yT3obcUnzDyFQyuh4GI4iC/NGB4Bs4gZaY3Wj4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/markdown"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/LICENSE.md",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1117"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/markdown"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/LICENSE.md.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\n3b7vmhiqt-x0q3zqp4vz.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "683"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/markdown"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7bAe2yT3obcUnzDyFQyuh4GI4iC/NGB4Bs4gZaY3Wj4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-7bAe2yT3obcUnzDyFQyuh4GI4iC/NGB4Bs4gZaY3Wj4="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/LICENSE.x0q3zqp4vz.md",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\n3b7vmhiqt-x0q3zqp4vz.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001461988304"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "683"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7bAe2yT3obcUnzDyFQyuh4GI4iC/NGB4Bs4gZaY3Wj4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/markdown"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "x0q3zqp4vz"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/LICENSE.md"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/LICENSE.x0q3zqp4vz.md",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1117"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/markdown"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "x0q3zqp4vz"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/LICENSE.md"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/LICENSE.x0q3zqp4vz.md.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\n3b7vmhiqt-x0q3zqp4vz.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "683"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/markdown"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"7bAe2yT3obcUnzDyFQyuh4GI4iC/NGB4Bs4gZaY3Wj4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "x0q3zqp4vz"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/LICENSE.md.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-7bAe2yT3obcUnzDyFQyuh4GI4iC/NGB4Bs4gZaY3Wj4="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\xby5l9l2ks-qu4k6ngvdi.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000011021834"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "90728"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0oymyibhMuwGsWBXVPpN1pZQd4M2NO0odKKKmL7SIx8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"kpfsfoDHCSV6D8C+JzsVXRlzjLBqrBgx+l/w3mfKYUs=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kpfsfoDHCSV6D8C+JzsVXRlzjLBqrBgx+l/w3mfKYUs="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "399105"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kpfsfoDHCSV6D8C+JzsVXRlzjLBqrBgx+l/w3mfKYUs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-kpfsfoDHCSV6D8C+JzsVXRlzjLBqrBgx+l/w3mfKYUs="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\xby5l9l2ks-qu4k6ngvdi.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "90728"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0oymyibhMuwGsWBXVPpN1pZQd4M2NO0odKKKmL7SIx8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-0oymyibhMuwGsWBXVPpN1pZQd4M2NO0odKKKmL7SIx8="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.min.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\tybtsxany8-m9qm4tazc0.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000032581780"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30691"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"T1Mxz6b5tcPGdGYeBLTL5A9PUSvbDbkClvy0G7J1r2k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"eqaw4I9IoPldjffqieTL/h7z0ejA9zc/fyXt+05KMl4=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-eqaw4I9IoPldjffqieTL/h7z0ejA9zc/fyXt+05KMl4="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.min.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "87535"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eqaw4I9IoPldjffqieTL/h7z0ejA9zc/fyXt+05KMl4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-eqaw4I9IoPldjffqieTL/h7z0ejA9zc/fyXt+05KMl4="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.min.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\tybtsxany8-m9qm4tazc0.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30691"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"T1Mxz6b5tcPGdGYeBLTL5A9PUSvbDbkClvy0G7J1r2k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-T1Mxz6b5tcPGdGYeBLTL5A9PUSvbDbkClvy0G7J1r2k="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.min.m9qm4tazc0.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\tybtsxany8-m9qm4tazc0.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000032581780"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30691"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"T1Mxz6b5tcPGdGYeBLTL5A9PUSvbDbkClvy0G7J1r2k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"eqaw4I9IoPldjffqieTL/h7z0ejA9zc/fyXt+05KMl4=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "m9qm4tazc0"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-eqaw4I9IoPldjffqieTL/h7z0ejA9zc/fyXt+05KMl4="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.min.m9qm4tazc0.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "87535"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"eqaw4I9IoPldjffqieTL/h7z0ejA9zc/fyXt+05KMl4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "m9qm4tazc0"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-eqaw4I9IoPldjffqieTL/h7z0ejA9zc/fyXt+05KMl4="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.min.m9qm4tazc0.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\tybtsxany8-m9qm4tazc0.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "30691"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"T1Mxz6b5tcPGdGYeBLTL5A9PUSvbDbkClvy0G7J1r2k=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "m9qm4tazc0"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.min.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-T1Mxz6b5tcPGdGYeBLTL5A9PUSvbDbkClvy0G7J1r2k="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.min.map",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\61h6t6ffyh-ttgo8qnofa.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000018363112"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "54456"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GfL7M76amKU+B+H1o4WVh7q13GpiC7L6scp3ODOz3ag=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"z3TVHGLSmRiZiRMOu0I7MEU1Mv3ImI2OK3GxuRZagLg=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-z3TVHGLSmRiZiRMOu0I7MEU1Mv3ImI2OK3GxuRZagLg="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.min.map",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "134755"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"z3TVHGLSmRiZiRMOu0I7MEU1Mv3ImI2OK3GxuRZagLg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-z3TVHGLSmRiZiRMOu0I7MEU1Mv3ImI2OK3GxuRZagLg="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.min.map.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\61h6t6ffyh-ttgo8qnofa.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "54456"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GfL7M76amKU+B+H1o4WVh7q13GpiC7L6scp3ODOz3ag=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-GfL7M76amKU+B+H1o4WVh7q13GpiC7L6scp3ODOz3ag="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.min.ttgo8qnofa.map",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\61h6t6ffyh-ttgo8qnofa.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000018363112"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "54456"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GfL7M76amKU+B+H1o4WVh7q13GpiC7L6scp3ODOz3ag=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"z3TVHGLSmRiZiRMOu0I7MEU1Mv3ImI2OK3GxuRZagLg=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ttgo8qnofa"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.min.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-z3TVHGLSmRiZiRMOu0I7MEU1Mv3ImI2OK3GxuRZagLg="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.min.ttgo8qnofa.map",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "134755"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"z3TVHGLSmRiZiRMOu0I7MEU1Mv3ImI2OK3GxuRZagLg=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ttgo8qnofa"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.min.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-z3TVHGLSmRiZiRMOu0I7MEU1Mv3ImI2OK3GxuRZagLg="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.min.ttgo8qnofa.map.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\61h6t6ffyh-ttgo8qnofa.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "54456"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"GfL7M76amKU+B+H1o4WVh7q13GpiC7L6scp3ODOz3ag=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "ttgo8qnofa"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.min.map.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-GfL7M76amKU+B+H1o4WVh7q13GpiC7L6scp3ODOz3ag="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.qu4k6ngvdi.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\xby5l9l2ks-qu4k6ngvdi.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000011021834"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "90728"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0oymyibhMuwGsWBXVPpN1pZQd4M2NO0odKKKmL7SIx8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"kpfsfoDHCSV6D8C+JzsVXRlzjLBqrBgx+l/w3mfKYUs=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qu4k6ngvdi"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kpfsfoDHCSV6D8C+JzsVXRlzjLBqrBgx+l/w3mfKYUs="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.qu4k6ngvdi.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "399105"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"kpfsfoDHCSV6D8C+JzsVXRlzjLBqrBgx+l/w3mfKYUs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qu4k6ngvdi"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-kpfsfoDHCSV6D8C+JzsVXRlzjLBqrBgx+l/w3mfKYUs="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.qu4k6ngvdi.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\xby5l9l2ks-qu4k6ngvdi.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "90728"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0oymyibhMuwGsWBXVPpN1pZQd4M2NO0odKKKmL7SIx8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qu4k6ngvdi"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-0oymyibhMuwGsWBXVPpN1pZQd4M2NO0odKKKmL7SIx8="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.idek2eh7ao.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\rz2lzhlf1o-idek2eh7ao.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000013564288"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "73722"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6Aeld52CerSyjbaNwozrJzrBYhEYeyV1n+xXV8cN9SM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"xo80E+OknWwS22ESvEJqnvyxyqPiblflQQGDUtiV9bM=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "idek2eh7ao"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.slim.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xo80E+OknWwS22ESvEJqnvyxyqPiblflQQGDUtiV9bM="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.idek2eh7ao.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "324258"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xo80E+OknWwS22ESvEJqnvyxyqPiblflQQGDUtiV9bM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "idek2eh7ao"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.slim.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xo80E+OknWwS22ESvEJqnvyxyqPiblflQQGDUtiV9bM="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.idek2eh7ao.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\rz2lzhlf1o-idek2eh7ao.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "73722"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6Aeld52CerSyjbaNwozrJzrBYhEYeyV1n+xXV8cN9SM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "idek2eh7ao"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.slim.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-6Aeld52CerSyjbaNwozrJzrBYhEYeyV1n+xXV8cN9SM="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\rz2lzhlf1o-idek2eh7ao.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000013564288"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "73722"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6Aeld52CerSyjbaNwozrJzrBYhEYeyV1n+xXV8cN9SM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"xo80E+OknWwS22ESvEJqnvyxyqPiblflQQGDUtiV9bM=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-xo80E+OknWwS22ESvEJqnvyxyqPiblflQQGDUtiV9bM="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "324258"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"xo80E+OknWwS22ESvEJqnvyxyqPiblflQQGDUtiV9bM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-xo80E+OknWwS22ESvEJqnvyxyqPiblflQQGDUtiV9bM="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\rz2lzhlf1o-idek2eh7ao.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "73722"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"6Aeld52CerSyjbaNwozrJzrBYhEYeyV1n+xXV8cN9SM=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-6Aeld52CerSyjbaNwozrJzrBYhEYeyV1n+xXV8cN9SM="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.min.87fc7y1x7t.map",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\hrn0exjeb8-87fc7y1x7t.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000023188944"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "43123"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bZLUSM9fRhNJKF4yFjKvv9iU/j2aC1lJtEqR9u5n6y8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"9FYmcgtx8qZo1OPPiPt/BJ/sz0EI8SRNUYsFLZDEEt4=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "87fc7y1x7t"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.slim.min.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9FYmcgtx8qZo1OPPiPt/BJ/sz0EI8SRNUYsFLZDEEt4="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.min.87fc7y1x7t.map",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "107143"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9FYmcgtx8qZo1OPPiPt/BJ/sz0EI8SRNUYsFLZDEEt4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "87fc7y1x7t"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.slim.min.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9FYmcgtx8qZo1OPPiPt/BJ/sz0EI8SRNUYsFLZDEEt4="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.min.87fc7y1x7t.map.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\hrn0exjeb8-87fc7y1x7t.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "43123"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bZLUSM9fRhNJKF4yFjKvv9iU/j2aC1lJtEqR9u5n6y8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "87fc7y1x7t"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.slim.min.map.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-bZLUSM9fRhNJKF4yFjKvv9iU/j2aC1lJtEqR9u5n6y8="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.min.9vr69e8ynj.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\zqmp9kcg1w-9vr69e8ynj.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000041044164"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24363"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"oheIXejBlri6EJgnT3rCEOV8cSc0XnYutP+KQ6pSvDc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"a4xPRM7I0Iu95emrjGFRPWtNfn31f7PRjqVT5MIQMuc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "9vr69e8ynj"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.slim.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-a4xPRM7I0Iu95emrjGFRPWtNfn31f7PRjqVT5MIQMuc="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.min.9vr69e8ynj.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "70266"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"a4xPRM7I0Iu95emrjGFRPWtNfn31f7PRjqVT5MIQMuc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "9vr69e8ynj"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.slim.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-a4xPRM7I0Iu95emrjGFRPWtNfn31f7PRjqVT5MIQMuc="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.min.9vr69e8ynj.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\zqmp9kcg1w-9vr69e8ynj.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24363"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"oheIXejBlri6EJgnT3rCEOV8cSc0XnYutP+KQ6pSvDc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "9vr69e8ynj"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/dist/jquery.slim.min.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-oheIXejBlri6EJgnT3rCEOV8cSc0XnYutP+KQ6pSvDc="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.min.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\zqmp9kcg1w-9vr69e8ynj.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000041044164"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24363"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"oheIXejBlri6EJgnT3rCEOV8cSc0XnYutP+KQ6pSvDc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"a4xPRM7I0Iu95emrjGFRPWtNfn31f7PRjqVT5MIQMuc=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-a4xPRM7I0Iu95emrjGFRPWtNfn31f7PRjqVT5MIQMuc="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.min.js",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "70266"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"a4xPRM7I0Iu95emrjGFRPWtNfn31f7PRjqVT5MIQMuc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-a4xPRM7I0Iu95emrjGFRPWtNfn31f7PRjqVT5MIQMuc="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.min.js.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\zqmp9kcg1w-9vr69e8ynj.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "24363"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"oheIXejBlri6EJgnT3rCEOV8cSc0XnYutP+KQ6pSvDc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-oheIXejBlri6EJgnT3rCEOV8cSc0XnYutP+KQ6pSvDc="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.min.map",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\hrn0exjeb8-87fc7y1x7t.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000023188944"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "43123"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bZLUSM9fRhNJKF4yFjKvv9iU/j2aC1lJtEqR9u5n6y8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"9FYmcgtx8qZo1OPPiPt/BJ/sz0EI8SRNUYsFLZDEEt4=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9FYmcgtx8qZo1OPPiPt/BJ/sz0EI8SRNUYsFLZDEEt4="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.min.map",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "107143"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9FYmcgtx8qZo1OPPiPt/BJ/sz0EI8SRNUYsFLZDEEt4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9FYmcgtx8qZo1OPPiPt/BJ/sz0EI8SRNUYsFLZDEEt4="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/dist/jquery.slim.min.map.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\hrn0exjeb8-87fc7y1x7t.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "43123"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"bZLUSM9fRhNJKF4yFjKvv9iU/j2aC1lJtEqR9u5n6y8=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-bZLUSM9fRhNJKF4yFjKvv9iU/j2aC1lJtEqR9u5n6y8="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/LICENSE.mlv21k5csn.txt",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\eem6sixcfc-mlv21k5csn.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001464128843"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "682"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JKWeHUaANNuffeRatdc54UCb84RoxjEw/nTq8Mops8Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "mlv21k5csn"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/LICENSE.txt"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/LICENSE.mlv21k5csn.txt",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1117"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "mlv21k5csn"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/LICENSE.txt"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/LICENSE.mlv21k5csn.txt.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\eem6sixcfc-mlv21k5csn.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "682"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JKWeHUaANNuffeRatdc54UCb84RoxjEw/nTq8Mops8Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "mlv21k5csn"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/LICENSE.txt.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JKWeHUaANNuffeRatdc54UCb84RoxjEw/nTq8Mops8Y="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/LICENSE.txt",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\eem6sixcfc-mlv21k5csn.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001464128843"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "682"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JKWeHUaANNuffeRatdc54UCb84RoxjEw/nTq8Mops8Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/LICENSE.txt",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1117"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/LICENSE.txt.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\eem6sixcfc-mlv21k5csn.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "682"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"JKWeHUaANNuffeRatdc54UCb84RoxjEw/nTq8Mops8Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 10:21:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-JKWeHUaANNuffeRatdc54UCb84RoxjEw/nTq8Mops8Y="
+        }
+      ]
+    },
+    {
+      "Route": "style.07az7mjt73.css",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\af53hxmrbf-07az7mjt73.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001644736842"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "607"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Mdo4TgpJ6FL3tcJyzn86Ogicm7+6dm5+wEDfoSWAGTA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"pPIapwQxAozy4IBdQE+QWEZV7XD0utrQONCQa7IZsys=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "07az7mjt73"
+        },
+        {
+          "Name": "label",
+          "Value": "style.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-pPIapwQxAozy4IBdQE+QWEZV7XD0utrQONCQa7IZsys="
+        }
+      ]
+    },
+    {
+      "Route": "style.07az7mjt73.css",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\style.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1413"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pPIapwQxAozy4IBdQE+QWEZV7XD0utrQONCQa7IZsys=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "07az7mjt73"
+        },
+        {
+          "Name": "label",
+          "Value": "style.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-pPIapwQxAozy4IBdQE+QWEZV7XD0utrQONCQa7IZsys="
+        }
+      ]
+    },
+    {
+      "Route": "style.07az7mjt73.css.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\af53hxmrbf-07az7mjt73.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "607"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Mdo4TgpJ6FL3tcJyzn86Ogicm7+6dm5+wEDfoSWAGTA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "07az7mjt73"
+        },
+        {
+          "Name": "label",
+          "Value": "style.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Mdo4TgpJ6FL3tcJyzn86Ogicm7+6dm5+wEDfoSWAGTA="
+        }
+      ]
+    },
+    {
+      "Route": "style.css",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\af53hxmrbf-07az7mjt73.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001644736842"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "607"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Mdo4TgpJ6FL3tcJyzn86Ogicm7+6dm5+wEDfoSWAGTA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"pPIapwQxAozy4IBdQE+QWEZV7XD0utrQONCQa7IZsys=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-pPIapwQxAozy4IBdQE+QWEZV7XD0utrQONCQa7IZsys="
+        }
+      ]
+    },
+    {
+      "Route": "style.css",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\style.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1413"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"pPIapwQxAozy4IBdQE+QWEZV7XD0utrQONCQa7IZsys=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-pPIapwQxAozy4IBdQE+QWEZV7XD0utrQONCQa7IZsys="
+        }
+      ]
+    },
+    {
+      "Route": "style.css.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\af53hxmrbf-07az7mjt73.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "607"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Mdo4TgpJ6FL3tcJyzn86Ogicm7+6dm5+wEDfoSWAGTA=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Mdo4TgpJ6FL3tcJyzn86Ogicm7+6dm5+wEDfoSWAGTA="
+        }
+      ]
+    },
+    {
+      "Route": "Tailwind/tailwind.css",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\0hgw7apm40-o0r6zhd2ni.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000044253662"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "22596"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"g9my6fXTFHA/C2xDtTYWsqZD5LX6Eu0OMsEtaivQAWo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"uPrlFifUHA37mu69OkB5PvtXG5L2ZugzqBpG3KaWE1Y=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-uPrlFifUHA37mu69OkB5PvtXG5L2ZugzqBpG3KaWE1Y="
+        }
+      ]
+    },
+    {
+      "Route": "Tailwind/tailwind.css",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\Tailwind\\tailwind.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "174488"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"uPrlFifUHA37mu69OkB5PvtXG5L2ZugzqBpG3KaWE1Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-uPrlFifUHA37mu69OkB5PvtXG5L2ZugzqBpG3KaWE1Y="
+        }
+      ]
+    },
+    {
+      "Route": "Tailwind/tailwind.css.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\0hgw7apm40-o0r6zhd2ni.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "22596"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"g9my6fXTFHA/C2xDtTYWsqZD5LX6Eu0OMsEtaivQAWo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-g9my6fXTFHA/C2xDtTYWsqZD5LX6Eu0OMsEtaivQAWo="
+        }
+      ]
+    },
+    {
+      "Route": "Tailwind/tailwind.o0r6zhd2ni.css",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\0hgw7apm40-o0r6zhd2ni.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000044253662"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "22596"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"g9my6fXTFHA/C2xDtTYWsqZD5LX6Eu0OMsEtaivQAWo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"uPrlFifUHA37mu69OkB5PvtXG5L2ZugzqBpG3KaWE1Y=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "o0r6zhd2ni"
+        },
+        {
+          "Name": "label",
+          "Value": "Tailwind/tailwind.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-uPrlFifUHA37mu69OkB5PvtXG5L2ZugzqBpG3KaWE1Y="
+        }
+      ]
+    },
+    {
+      "Route": "Tailwind/tailwind.o0r6zhd2ni.css",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\wwwroot\\Tailwind\\tailwind.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "174488"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"uPrlFifUHA37mu69OkB5PvtXG5L2ZugzqBpG3KaWE1Y=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "o0r6zhd2ni"
+        },
+        {
+          "Name": "label",
+          "Value": "Tailwind/tailwind.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-uPrlFifUHA37mu69OkB5PvtXG5L2ZugzqBpG3KaWE1Y="
+        }
+      ]
+    },
+    {
+      "Route": "Tailwind/tailwind.o0r6zhd2ni.css.gz",
+      "AssetFile": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Web\\obj\\Debug\\net9.0\\compressed\\0hgw7apm40-o0r6zhd2ni.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "22596"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"g9my6fXTFHA/C2xDtTYWsqZD5LX6Eu0OMsEtaivQAWo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 03 Jun 2025 07:31:49 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "o0r6zhd2ni"
+        },
+        {
+          "Name": "label",
+          "Value": "Tailwind/tailwind.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-g9my6fXTFHA/C2xDtTYWsqZD5LX6Eu0OMsEtaivQAWo="
         }
       ]
     }

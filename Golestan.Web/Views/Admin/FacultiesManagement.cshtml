@@ -1,0 +1,331 @@
+﻿@model List<DetailsFacultyDto>?
+@{
+    ViewData["Title"] = "Faculty Management";
+}
+<!-- Navigation -->
+<nav class="glass-effect sticky top-0 z-50 border-b border-white/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center space-x-4">
+                <div class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg">
+                    <i class="fas fa-university text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                        UniManage Pro
+                    </h1>
+                    <p class="text-xs text-gray-500">Faculty Management</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <div class="flex space-x-2">
+                    <a asp-controller="Admin" asp-action="Index"
+                       class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>Back to Admin
+                    </a>
+                </div>
+                <div class="px-4 py-2 bg-white/50 rounded-lg">
+                        <span class="text-sm font-medium text-gray-700">
+                            <i class="fas fa-university mr-2 text-indigo-600"></i>Faculty Management
+                        </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Header Section -->
+    <div class="mb-8 animate-fade-in">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+            <div class="mb-4 md:mb-0">
+                <h2 class="text-4xl font-bold text-gray-800 mb-2">Faculty Management</h2>
+                <p class="text-gray-600 text-lg">Manage university faculties and departments</p>
+            </div>
+            <div class="flex space-x-4">
+                @* <button onclick="exportFaculties()" *@
+                @*         class="flex items-center px-6 py-3 bg-white/70 backdrop-blur-sm text-gray-700 rounded-xl hover:bg-white/90 transition-all duration-200 shadow-lg border border-white/20"> *@
+                @*     <i class="fas fa-download mr-2"></i> *@
+                @*     Export *@
+                @* </button> *@
+                <a asp-controller="Faculties" asp-action="AddFaculty"
+                   class="flex items-center px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl hover:from-indigo-600 hover:to-purple-600 transition-all duration-200 shadow-lg">
+                    <i class="fas fa-plus mr-2"></i>
+                    Add New Faculty
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8 animate-scale-in">
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Total Faculties</p>
+                    <p class="text-3xl font-bold text-indigo-600" id="totalFaculties">0</p>
+                </div>
+                <div class="w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center">
+                    <i class="fas fa-university text-indigo-600 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Total Departments</p>
+                    <p class="text-3xl font-bold text-purple-600" id="totalDepartments">0</p>
+                </div>
+                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                    <i class="fas fa-building text-purple-600 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Active Programs</p>
+                    <p class="text-3xl font-bold text-teal-600" id="totalPrograms">0</p>
+                </div>
+                <div class="w-12 h-12 bg-teal-100 rounded-xl flex items-center justify-center">
+                    <i class="fas fa-graduation-cap text-teal-600 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Faculty Members</p>
+                    <p class="text-3xl font-bold text-orange-600" id="totalMembers">0</p>
+                </div>
+                <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                    <i class="fas fa-users text-orange-600 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 mb-8 animate-slide-up">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0 md:space-x-4">
+            <div class="flex-1 max-w-md">
+                <div class="relative">
+                    <input type="text" id="searchInput" placeholder="Search faculties..."
+                           class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
+                           oninput="filterFaculties()">
+                    <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+            </div>
+
+            <div class="flex space-x-4">
+                <select id="statusFilter" onchange="filterFaculties()"
+                        class="px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200">
+                    <option value="">All Status</option>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+
+                <select id="sortBy" onchange="sortFaculties()"
+                        class="px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200">
+                    <option value="name">Sort by Name</option>
+                    <option value="established">Sort by Established</option>
+                    <option value="departments">Sort by Departments</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Faculty Table -->
+    <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden animate-fade-in">
+        <div class="bg-gradient-to-r from-indigo-500 to-purple-500 p-6">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Faculty Directory</h3>
+                    <p class="text-white/80">Complete list of university faculties</p>
+                </div>
+                <div class="text-white/80">
+                    <i class="fas fa-table text-2xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-6">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <!-- Headers -->
+                    <thead>
+                    <tr class="border-b-2 border-gray-200">
+                        <th class="text-left py-4 px-6 font-bold text-gray-700 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                <i class="fas fa-university mr-2 text-indigo-500"></i>
+                                Faculty Building
+                            </div>
+                        </th>
+                        <th class="text-left py-4 px-6 font-bold text-gray-700 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                <i class="fas fa-building mr-2 text-teal-500"></i>
+                                Major
+                            </div>
+                        </th>
+                        <th class="text-left py-4 px-6 font-bold text-gray-700 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar mr-2 text-orange-500"></i>
+                                Established
+                            </div>
+                        </th>
+                        <th class="text-left py-4 px-6 font-bold text-gray-700 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                <i class="fas fa-users mr-2 text-green-500"></i>
+                                Students
+                            </div>
+                        </th>
+                        <th class="text-left py-4 px-6 font-bold text-gray-700 uppercase tracking-wider">
+                            <div class="flex items-center">
+                                <i class="fas fa-info-circle mr-2 text-blue-500"></i>
+                                Budget
+                            </div>
+                        </th>
+                        <th class="text-center py-4 px-6 font-bold text-gray-700 uppercase tracking-wider">
+                            <div class="flex items-center justify-center">
+                                <i class="fas fa-cogs mr-2 text-gray-500"></i>
+                                Actions
+                            </div>
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody id="facultyTableBody" class="divide-y divide-gray-100">
+                    <!-- Dynamic content will be inserted here -->
+                    @if (Model == null || Model.Count == 0){
+                        <div>There is no faculty in the system</div>
+                    }
+                    else{
+                        @foreach (var faculty in Model){
+                            <tr class="table-row-hover">
+                                <td class="py-6 px-6">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center mr-4">
+                                            <i class="fas fa-university text-white"></i>
+                                        </div>
+                                        <div>
+
+                                            <div class="text-sm text-gray-500">
+                                                @faculty.BuildingName
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-6 px-6">
+                                    <div class="flex items-center">
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-teal-100 text-teal-800">
+                                        <i class="fas fa-building mr-2"></i>
+                                        @faculty.MajorName
+                                    </span>
+                                    </div>
+                                </td>
+                                <td class="py-6 px-6">
+                                    <div class="text-sm text-gray-500">@faculty.StartDate.ToString("yyyy MMMM dd")</div>
+                                </td>
+                                <td class="py-6 px-6">
+                                    <div class="flex items-center">
+                                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                        <i class="fas fa-users mr-2"></i>
+                                        @(faculty.StudentsCount)
+                                    </span>
+                                    </div>
+                                </td>
+                                <td class="py-6 px-6">
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium text-green-600 bg-green-100">
+                                    <i class="fas fa-dollar-sign mr-2 text-xs"></i>
+                                    @faculty.Budget
+                                </span>
+                                </td>
+                                <td class="py-6 px-6">
+                                    <div class="flex items-center justify-center space-x-3">
+                                        <a asp-controller="Faculties" asp-action="DetailsFaculty"
+                                           asp-route-id="@faculty.Id"
+                                           class="p-2 text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-all duration-200"
+                                           title="View Details">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a asp-controller="Faculties" asp-action="EditFaculty"
+                                           asp-route-id="@faculty.Id"
+                                           class="p-2 text-green-600 hover:text-green-800 hover:bg-green-50 rounded-lg transition-all duration-200"
+                                           title="Edit Faculty">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        @* <a asp-controller="Faculties" asp-action="Delete" asp-route-id="@*@
+                                        @*    class="p-2 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-lg transition-all duration-200" *@
+                                        @*    title="Delete Faculty"> *@
+                                        @*     <i class="fas fa-trash"></i> *@
+                                        @* </a> *@
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="hidden text-center py-12">
+                <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-search text-gray-400 text-3xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-600 mb-2">No faculties found</h3>
+                <p class="text-gray-500">Try adjusting your search criteria or add a new faculty.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="flex justify-between items-center mt-8 animate-fade-in">
+        <div class="text-sm text-gray-600">
+            Showing <span id="showingStart">1</span> to <span id="showingEnd">10</span> of <span
+                    id="totalRecords">0</span> results
+        </div>
+        <div class="flex space-x-2" id="pagination">
+            <!-- Pagination buttons will be generated here -->
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 animate-bounce-in">
+        <div class="bg-gradient-to-r from-red-500 to-pink-500 p-6 rounded-t-2xl">
+            <div class="flex items-center">
+                <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mr-4">
+                    <i class="fas fa-exclamation-triangle text-white text-xl"></i>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold text-white">Confirm Deletion</h4>
+                    <p class="text-white/80">This action cannot be undone</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-6">
+            <p class="text-gray-700 mb-6">Are you sure you want to delete <strong id="deleteItemName"></strong>? This
+                will permanently remove the faculty and all associated data.</p>
+
+            <div class="flex space-x-3">
+                <button onclick="confirmDelete()"
+                        class="flex-1 bg-gradient-to-r from-red-500 to-pink-500 text-white py-3 rounded-xl hover:opacity-90 transition-all duration-200 font-semibold">
+                    <i class="fas fa-trash mr-2"></i>Delete Faculty
+                </button>
+                <button onclick="hideModal('deleteModal')"
+                        class="flex-1 bg-gray-100 text-gray-700 py-3 rounded-xl hover:bg-gray-200 transition-all duration-200 font-semibold">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

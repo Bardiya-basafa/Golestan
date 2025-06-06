@@ -1,0 +1,441 @@
+﻿@model Golestan.Application.DTOs.Faculty.DetailsFacultyDto
+
+@{
+    ViewData["Title"] = "Faculty Details";
+}
+<!-- Navigation -->
+<nav class="glass-effect sticky top-0 z-50 border-b border-white/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center space-x-4">
+                <div class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg">
+                    <i class="fas fa-university text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                        UniManage Pro
+                    </h1>
+                    <p class="text-xs text-gray-500">Faculty Details</p>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <a asp-controller="Faculties" asp-action="Index"
+                   class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Faculty List
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Faculty Header -->
+    <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 mb-8 animate-fade-in">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+            <div class="flex items-center mb-6 lg:mb-0">
+                <div class="w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mr-6 shadow-lg">
+                    <i class="fas fa-university text-white text-3xl"></i>
+                </div>
+                <div>
+                    <h2 class="text-4xl font-bold text-gray-800 mb-2">@Model.MajorName</h2>
+                    <p class="text-gray-600 text-lg">Description</p>
+                    <div class="flex items-center mt-2 text-sm text-gray-500">
+                        <i class="fas fa-calendar mr-2"></i>
+                        Established: @Model.StartDate.ToShortDateString()
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4">
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-indigo-600">@Model.Id</div>
+                    <div class="text-sm text-gray-500">Faculty ID</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-purple-600">@Model.Budget $</div>
+                    <div class="text-sm text-gray-500">Badge Amount</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Faculty Information -->
+    <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 mb-8 animate-scale-in">
+        <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center mr-4">
+                <i class="fas fa-info-circle text-white text-xl"></i>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold text-gray-800">Faculty Information</h3>
+                <p class="text-gray-600">Basic details and specifications</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-gradient-to-r from-indigo-100 to-purple-100 rounded-xl p-6 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Faculty ID</p>
+                        <p class="text-2xl font-bold text-indigo-600">@Model.Id</p>
+                    </div>
+                    <div class="w-12 h-12 bg-indigo-500 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-hashtag text-white"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-green-100 to-teal-100 rounded-xl p-6 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Building</p>
+                        <p class="text-xl font-bold text-green-600">@Model.BuildingName</p>
+                    </div>
+                    <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-building text-white"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-6 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Major</p>
+                        <p class="text-xl font-bold text-purple-600">@Model.MajorName</p>
+                    </div>
+                    <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-graduation-cap text-white"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-orange-100 to-red-100 rounded-xl p-6 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Budget</p>
+                        <p class="text-xl font-bold text-orange-600">@Model.Budget $</p>
+                    </div>
+                    <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-id-badge text-white"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Overview -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 animate-slide-up">
+        <div class="stat-card rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Total Students</p>
+                    <p class="text-3xl font-bold text-blue-600">@Model.StudentsCount</p>
+                    <p class="text-xs text-gray-500 mt-1">Active enrollments</p>
+                </div>
+                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                    <i class="fas fa-user-graduate text-blue-600 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Instructors</p>
+                    <p class="text-3xl font-bold text-green-600">@Model.InstructorsCount</p>
+                    <p class="text-xs text-gray-500 mt-1">Faculty members</p>
+                </div>
+                <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                    <i class="fas fa-chalkboard-teacher text-green-600 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Courses</p>
+                    <p class="text-3xl font-bold text-purple-600">@Model.CoursesCount</p>
+                    <p class="text-xs text-gray-500 mt-1">Available programs</p>
+                </div>
+                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                    <i class="fas fa-book text-purple-600 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="stat-card rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-medium text-gray-600">Classrooms</p>
+                    <p class="text-3xl font-bold text-orange-600">@Model.ClassesCount</p>
+                    <p class="text-xs text-gray-500 mt-1">Learning spaces</p>
+                </div>
+                <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                    <i class="fas fa-door-open text-orange-600 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Collections -->
+    @* <div class="grid grid-cols-1 lg:grid-cols-2 gap-8"> *@
+    @*     <!-- Students Section --> *@
+    @*     <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 overflow-hidden animate-fade-in"> *@
+    @*         <div class="bg-gradient-to-r from-blue-500 to-indigo-500 p-6"> *@
+    @*             <div class="flex items-center justify-between"> *@
+    @*                 <div> *@
+    @*                     <h3 class="text-xl font-bold text-white">Students</h3> *@
+    @*                     <p class="text-white/80">Enrolled students in this faculty</p> *@
+    @*                 </div> *@
+    @*                 <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"> *@
+    @*                     <i class="fas fa-user-graduate text-white"></i> *@
+    @*                 </div> *@
+    @*             </div> *@
+    @*         </div> *@
+    @* *@
+    @*         <div class="p-6"> *@
+    @*             <div class="space-y-4"> *@
+    @*                 <div class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"> *@
+    @*                     <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-4"> *@
+    @*                         <span class="text-white font-bold text-sm">JD</span> *@
+    @*                     </div> *@
+    @*                     <div class="flex-1"> *@
+    @*                         <div class="font-semibold text-gray-800">John Doe</div> *@
+    @*                         <div class="text-sm text-gray-500">Student ID: 2024001 • 4th Year</div> *@
+    @*                     </div> *@
+    @*                     <div class="text-right"> *@
+    @*                         <div class="text-sm font-medium text-blue-600">GPA: 3.8</div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+    @* *@
+    @*                 <div class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"> *@
+    @*                     <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center mr-4"> *@
+    @*                         <span class="text-white font-bold text-sm">JS</span> *@
+    @*                     </div> *@
+    @*                     <div class="flex-1"> *@
+    @*                         <div class="font-semibold text-gray-800">Jane Smith</div> *@
+    @*                         <div class="text-sm text-gray-500">Student ID: 2024002 • 3rd Year</div> *@
+    @*                     </div> *@
+    @*                     <div class="text-right"> *@
+    @*                         <div class="text-sm font-medium text-purple-600">GPA: 3.9</div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+    @* *@
+    @*                 <div class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"> *@
+    @*                     <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-4"> *@
+    @*                         <span class="text-white font-bold text-sm">BJ</span> *@
+    @*                     </div> *@
+    @*                     <div class="flex-1"> *@
+    @*                         <div class="font-semibold text-gray-800">Bob Johnson</div> *@
+    @*                         <div class="text-sm text-gray-500">Student ID: 2024003 • 2nd Year</div> *@
+    @*                     </div> *@
+    @*                     <div class="text-right"> *@
+    @*                         <div class="text-sm font-medium text-green-600">GPA: 3.7</div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+    @*             </div> *@
+    @* *@
+    @*             <div class="mt-6 text-center"> *@
+    @*                 <button class="text-blue-600 hover:text-blue-800 font-medium text-sm"> *@
+    @*                     View All 1,250 Students <i class="fas fa-arrow-right ml-1"></i> *@
+    @*                 </button> *@
+    @*             </div> *@
+    @*         </div> *@
+    @*     </div> *@
+    @* *@
+    @*     <!-- Instructors Section --> *@
+    @*     <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 overflow-hidden animate-fade-in"> *@
+    @*         <div class="bg-gradient-to-r from-green-500 to-teal-500 p-6"> *@
+    @*             <div class="flex items-center justify-between"> *@
+    @*                 <div> *@
+    @*                     <h3 class="text-xl font-bold text-white">Instructors</h3> *@
+    @*                     <p class="text-white/80">Faculty teaching staff</p> *@
+    @*                 </div> *@
+    @*                 <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"> *@
+    @*                     <i class="fas fa-chalkboard-teacher text-white"></i> *@
+    @*                 </div> *@
+    @*             </div> *@
+    @*         </div> *@
+    @* *@
+    @*         <div class="p-6"> *@
+    @*             <div class="space-y-4"> *@
+    @*                 <div class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"> *@
+    @*                     <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-4"> *@
+    @*                         <span class="text-white font-bold text-sm">SJ</span> *@
+    @*                     </div> *@
+    @*                     <div class="flex-1"> *@
+    @*                         <div class="font-semibold text-gray-800">Dr. Sarah Johnson</div> *@
+    @*                         <div class="text-sm text-gray-500">Professor • Department Head</div> *@
+    @*                     </div> *@
+    @*                     <div class="text-right"> *@
+    @*                         <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Active</div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+    @* *@
+    @*                 <div class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"> *@
+    @*                     <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-4"> *@
+    @*                         <span class="text-white font-bold text-sm">MC</span> *@
+    @*                     </div> *@
+    @*                     <div class="flex-1"> *@
+    @*                         <div class="font-semibold text-gray-800">Dr. Michael Chen</div> *@
+    @*                         <div class="text-sm text-gray-500">Associate Professor • AI Research</div> *@
+    @*                     </div> *@
+    @*                     <div class="text-right"> *@
+    @*                         <div class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Active</div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+    @* *@
+    @*                 <div class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"> *@
+    @*                     <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center mr-4"> *@
+    @*                         <span class="text-white font-bold text-sm">ER</span> *@
+    @*                     </div> *@
+    @*                     <div class="flex-1"> *@
+    @*                         <div class="font-semibold text-gray-800">Dr. Emily Rodriguez</div> *@
+    @*                         <div class="text-sm text-gray-500">Assistant Professor • Software Engineering</div> *@
+    @*                     </div> *@
+    @*                     <div class="text-right"> *@
+    @*                         <div class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Active</div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+    @*             </div> *@
+    @* *@
+    @*             <div class="mt-6 text-center"> *@
+    @*                 <button class="text-green-600 hover:text-green-800 font-medium text-sm"> *@
+    @*                     View All 45 Instructors <i class="fas fa-arrow-right ml-1"></i> *@
+    @*                 </button> *@
+    @*             </div> *@
+    @*         </div> *@
+    @*     </div> *@
+    @* *@
+    @*     <!-- Courses Section --> *@
+    @*     <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 overflow-hidden animate-fade-in"> *@
+    @*         <div class="bg-gradient-to-r from-purple-500 to-pink-500 p-6"> *@
+    @*             <div class="flex items-center justify-between"> *@
+    @*                 <div> *@
+    @*                     <h3 class="text-xl font-bold text-white">Courses</h3> *@
+    @*                     <p class="text-white/80">Available academic programs</p> *@
+    @*                 </div> *@
+    @*                 <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"> *@
+    @*                     <i class="fas fa-book text-white"></i> *@
+    @*                 </div> *@
+    @*             </div> *@
+    @*         </div> *@
+    @* *@
+    @*         <div class="p-6"> *@
+    @*             <div class="space-y-4"> *@
+    @*                 <div class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"> *@
+    @*                     <div class="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center mr-4"> *@
+    @*                         <i class="fas fa-code text-white text-sm"></i> *@
+    @*                     </div> *@
+    @*                     <div class="flex-1"> *@
+    @*                         <div class="font-semibold text-gray-800">CS101 - Introduction to Programming</div> *@
+    @*                         <div class="text-sm text-gray-500">3 Credits • Beginner Level</div> *@
+    @*                     </div> *@
+    @*                     <div class="text-right"> *@
+    @*                         <div class="text-sm font-medium text-purple-600">120 Students</div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+    @* *@
+    @*                 <div class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"> *@
+    @*                     <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center mr-4"> *@
+    @*                         <i class="fas fa-database text-white text-sm"></i> *@
+    @*                     </div> *@
+    @*                     <div class="flex-1"> *@
+    @*                         <div class="font-semibold text-gray-800">CS201 - Data Structures</div> *@
+    @*                         <div class="text-sm text-gray-500">3 Credits • Intermediate Level</div> *@
+    @*                     </div> *@
+    @*                     <div class="text-right"> *@
+    @*                         <div class="text-sm font-medium text-blue-600">85 Students</div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+    @* *@
+    @*                 <div class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"> *@
+    @*                     <div class="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center mr-4"> *@
+    @*                         <i class="fas fa-robot text-white text-sm"></i> *@
+    @*                     </div> *@
+    @*                     <div class="flex-1"> *@
+    @*                         <div class="font-semibold text-gray-800">CS401 - Artificial Intelligence</div> *@
+    @*                         <div class="text-sm text-gray-500">4 Credits • Advanced Level</div> *@
+    @*                     </div> *@
+    @*                     <div class="text-right"> *@
+    @*                         <div class="text-sm font-medium text-green-600">45 Students</div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+    @*             </div> *@
+    @* *@
+    @*             <div class="mt-6 text-center"> *@
+    @*                 <button class="text-purple-600 hover:text-purple-800 font-medium text-sm"> *@
+    @*                     View All 28 Courses <i class="fas fa-arrow-right ml-1"></i> *@
+    @*                 </button> *@
+    @*             </div> *@
+    @*         </div> *@
+    @*     </div> *@
+    @* *@
+    @*     <!-- Classrooms Section --> *@
+    @*     <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg border border-white/20 overflow-hidden animate-fade-in"> *@
+    @*         <div class="bg-gradient-to-r from-orange-500 to-red-500 p-6"> *@
+    @*             <div class="flex items-center justify-between"> *@
+    @*                 <div> *@
+    @*                     <h3 class="text-xl font-bold text-white">Classrooms</h3> *@
+    @*                     <p class="text-white/80">Learning and lab spaces</p> *@
+    @*                 </div> *@
+    @*                 <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"> *@
+    @*                     <i class="fas fa-door-open text-white"></i> *@
+    @*                 </div> *@
+    @*             </div> *@
+    @*         </div> *@
+    @* *@
+    @*         <div class="p-6"> *@
+    @*             <div class="space-y-4"> *@
+    @*                 <div class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"> *@
+    @*                     <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center mr-4"> *@
+    @*                         <span class="text-white font-bold text-xs">101</span> *@
+    @*                     </div> *@
+    @*                     <div class="flex-1"> *@
+    @*                         <div class="font-semibold text-gray-800">Room 101 - Lecture Hall</div> *@
+    @*                         <div class="text-sm text-gray-500">Capacity: 150 • Projector, Audio System</div> *@
+    @*                     </div> *@
+    @*                     <div class="text-right"> *@
+    @*                         <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Available</div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+    @* *@
+    @*                 <div class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"> *@
+    @*                     <div class="w-10 h-10 bg-blue-500 rounded-lg flex items-center justify-center mr-4"> *@
+    @*                         <span class="text-white font-bold text-xs">201</span> *@
+    @*                     </div> *@
+    @*                     <div class="flex-1"> *@
+    @*                         <div class="font-semibold text-gray-800">Lab 201 - Computer Lab</div> *@
+    @*                         <div class="text-sm text-gray-500">Capacity: 30 • 30 Workstations</div> *@
+    @*                     </div> *@
+    @*                     <div class="text-right"> *@
+    @*                         <div class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full">Occupied</div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+    @* *@
+    @*                 <div class="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"> *@
+    @*                     <div class="w-10 h-10 bg-purple-500 rounded-lg flex items-center justify-center mr-4"> *@
+    @*                         <span class="text-white font-bold text-xs">301</span> *@
+    @*                     </div> *@
+    @*                     <div class="flex-1"> *@
+    @*                         <div class="font-semibold text-gray-800">Room 301 - Seminar Room</div> *@
+    @*                         <div class="text-sm text-gray-500">Capacity: 25 • Interactive Whiteboard</div> *@
+    @*                     </div> *@
+    @*                     <div class="text-right"> *@
+    @*                         <div class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">Available</div> *@
+    @*                     </div> *@
+    @*                 </div> *@
+    @*             </div> *@
+    @* *@
+    @*             <div class="mt-6 text-center"> *@
+    @*                 <button class="text-orange-600 hover:text-orange-800 font-medium text-sm"> *@
+    @*                     View All 12 Classrooms <i class="fas fa-arrow-right ml-1"></i> *@
+    @*                 </button> *@
+    @*             </div> *@
+    @*         </div> *@
+    @*     </div> *@
+    @* </div> *@
+
+</div>

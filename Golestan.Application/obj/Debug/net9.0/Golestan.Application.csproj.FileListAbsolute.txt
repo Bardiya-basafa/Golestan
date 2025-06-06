@@ -9,3 +9,12 @@ E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\Golestan.A
 E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\refint\Golestan.Application.dll
 E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\Golestan.Application.pdb
 E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\ref\Golestan.Application.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\Golestan.Application.sourcelink.json
+E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\Golestan.Application.csproj.AssemblyReference.cache
+E:\AspNetCore-Projects\Golestan\Golestan.Application\bin\Debug\net9.0\Golestan.Domain.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Application\bin\Debug\net9.0\Golestan.Infrastructure.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Application\bin\Debug\net9.0\Golestan.Shared.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Application\bin\Debug\net9.0\Golestan.Domain.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Application\bin\Debug\net9.0\Golestan.Infrastructure.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Application\bin\Debug\net9.0\Golestan.Shared.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Application\obj\Debug\net9.0\Golestan.FD4F9F3E.Up2Date

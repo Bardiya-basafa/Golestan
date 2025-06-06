@@ -50,6 +50,7 @@ public class UserService : IUserService {
 
             var instructor = new Instructor()
             {
+                FullName = appUser.FirstName + " " + appUser.LastName,
                 AppUser = appUser,
                 HireDate = dto.HireDate,
                 Salary = dto.Salary,

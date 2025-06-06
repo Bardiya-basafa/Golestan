@@ -75,7 +75,7 @@ public class AdminController : Controller {
         var options = classroomOptions.Select(kvp => new
         {
             value = kvp.Key,
-            text = kvp.Value
+            text = "Class number : " + kvp.Value
         }).ToList();
 
         return Json(options);
@@ -84,8 +84,31 @@ public class AdminController : Controller {
     [HttpGet]
     public async Task<IActionResult> CourseOptions(int facultyId)
     {
-        
+        Dictionary<int, string>? courseOptions = await _facultyService.GetFacultyCourses(facultyId);
+
+        var options = courseOptions.Select(kvp => new
+        {
+            value = kvp.Key,
+            text = "Course : " + kvp.Value
+        }).ToList();
+
+        return Json(options);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> InstructorOptions(int facultyId)
+    {
+        Dictionary<int, string>? instructorOptions = await _facultyService.GetFacultyInstructors(facultyId);
+
+        var options = instructorOptions.Select(kvp => new
+        {
+            value = kvp.Key,
+            text = $"#{kvp.Key} " + kvp.Value
+        }).ToList();
+
+        return Json(options);
+    }
+
 
     public async Task<IActionResult> FacultiesManagement()
     {

@@ -11,6 +11,7 @@ public class Instructor {
 
     public AppUser AppUser { get; set; }
 
+    public string FullName { get; set; }
 
     public DateTime HireDate { get; set; }
 

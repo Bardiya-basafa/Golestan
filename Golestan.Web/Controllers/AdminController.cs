@@ -39,6 +39,11 @@ public class AdminController : Controller {
         return View(instructorsDto);
     }
 
+    public async Task<IActionResult> CourseManagement()
+    {
+        return View();
+    }
+
     public async Task<IActionResult> ChooseFaculty()
     {
         var faculties = await _facultyService.GetFaculties();

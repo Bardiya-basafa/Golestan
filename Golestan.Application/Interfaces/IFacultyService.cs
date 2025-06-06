@@ -3,6 +3,7 @@
 using Domain.Entities;
 using DTOs;
 using DTOs.Faculty;
+using DTOs.Section;
 
 
 public interface IFacultyService {
@@ -14,6 +15,13 @@ public interface IFacultyService {
     Task<EditFacultyDto?> GetEditFacultyById(int id);
 
     Task<Dictionary<int, string>?> GetFacultiesMajorNames();
+
+    Task<Dictionary<int, string>> GetFacultyClassrooms(int facultyId);
+
+    Task<Dictionary<int, string>?> GetFacultyInstructors(int facultyId);
+
+    Task<Dictionary<int, string>?> GetFacultyCourses(int facultyId);
+
 
     Task<bool> EditFaculty(EditFacultyDto dto);
 

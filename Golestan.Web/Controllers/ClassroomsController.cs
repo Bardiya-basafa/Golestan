@@ -56,6 +56,14 @@ public class ClassroomsController : BaseController {
         return View(dto);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Manage(int classroomId)
+    {
+        var model = await _classroomService.GetClassroomManagementDto(classroomId);
+
+        return View(model);
+    }
+
     public async Task<IActionResult> VerifyClassNumber(string classNumber, int facultyId)
     {
         var exist = await _classroomService.VerifyClassroomNumber(classNumber, facultyId);

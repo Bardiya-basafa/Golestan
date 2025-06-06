@@ -102,6 +102,40 @@ public class FacultyService : IFacultyService {
         return facultyOptions;
     }
 
+    public async Task<Dictionary<int, string>> GetFacultyClassrooms(int facultyId)
+    {
+        try{
+            var classroomOptions = await _context.Classrooms
+                .Where(c => c.FacultyId == facultyId)
+                .Select(c => new { c.Id, c.ClassNumber })
+                .Distinct()
+                .ToDictionaryAsync(c => c.Id, c => c.ClassNumber);
+
+            return classroomOptions;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+
+            throw;
+        }
+    }
+
+    public Task<Dictionary<int, string>?> GetFacultyInstructors(int facultyId)
+    {
+        try{
+            var instructorsOptions = _context.Instructors
+                .Where(i => i.FacultyId == facultyId)
+                .Select(i => new { i.Id, i.AppUser.FirstName + " " + i.AppUser.LastName })
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+
+            throw;
+        }
+    }
+
+    public Task<Dictionary<int, string>?> GetFacultyCourses(int facultyId) => throw new NotImplementedException();
+
     public async Task<bool> EditFaculty(EditFacultyDto dto)
     {
         try{

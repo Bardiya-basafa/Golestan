@@ -1,0 +1,307 @@
+﻿@model AddSectionDto
+
+@{
+    ViewData["Title"] = "Add New Section";
+}
+
+
+<div class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 min-h-screen">
+    <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl w-full space-y-8">
+            <!-- Header -->
+            <div class="text-center">
+                <div class="mx-auto h-16 w-16 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
+                    <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                    </svg>
+                </div>
+                <h2 class="mt-6 text-4xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">
+                    Add New Section </h2>
+                <p class="mt-3 text-lg text-slate-600">Create a new course section with scheduling details</p>
+            </div>
+
+            <!-- Form Card -->
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
+                <div class="px-8 py-6 bg-gradient-to-r from-emerald-500 to-emerald-600">
+                    <h3 class="text-xl font-semibold text-white">Section Information</h3>
+                    <p class="text-emerald-100 mt-1">Please fill in all required fields to create the section</p>
+                </div>
+                <form class="px-8 py-8 space-y-8" action="@Url.Action("Create")" method="post">
+                    @Html.AntiForgeryToken()
+
+                    <!-- Course & Faculty Section -->
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-emerald-500 pl-4">
+                            <h4 class="text-lg font-semibold text-slate-900 mb-4">Course & Faculty Information</h4>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Faculty Selection -->
+                            <div class="group">
+                                <label for="FacultyId" class="block text-sm font-medium text-slate-700 mb-2"> Faculty Department
+                                    <span class="text-red-500">*</span> </label>
+                                <div class="relative">
+                                    <select id="FacultyId" name="FacultyId" class="w-full px-4 py-3 pl-12 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 group-hover:border-slate-400 appearance-none bg-white" required>
+                                        <option value="">Select a faculty department</option>
+                                        @if (Model.FacultyMajorNames != null){
+                                            @foreach (var faculty in Model.FacultyMajorNames){
+                                                <option value="@faculty.Key">@faculty.Value</option>
+                                            }
+                                        } </select>
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-slate-400 group-focus-within:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.CourseId, "", new { @class = "text-red-500 text-sm mt-1 block" })
+                            </div>
+                            <!-- Course Selection -->
+                            <div class="group">
+                                <label for="CourseId" class="block text-sm font-medium text-slate-700 mb-2"> Course
+                                    <span class="text-red-500">*</span> </label>
+                                <div class="relative">
+                                    <select id="CourseId" name="CourseId" class="w-full px-4 py-3 pl-12 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 group-hover:border-slate-400 appearance-none bg-white" required>
+                                        <option value="">Select a course</option>
+                                        @* @if (ViewBag.Courses != null){ *@
+                                        @*     @foreach (var course in (IEnumerable<dynamic>)ViewBag.Courses){ *@
+                                        @*         <option value="@course.Id">@course.Name (@course.Code)</option> *@
+                                        @*     } *@
+                                        @* }  *@
+                                        <option value="">Select course</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-slate-400 group-focus-within:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.CourseId, "", new { @class = "text-red-500 text-sm mt-1 block" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Instructor & Classroom Section -->
+                    <div class="space-y-6 pt-6 border-t border-slate-200">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h4 class="text-lg font-semibold text-slate-900 mb-4">Assignment & Location</h4>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Instructor Selection -->
+                            <div class="group">
+                                <label for="InstructorId" class="block text-sm font-medium text-slate-700 mb-2"> Instructor
+                                    <span class="text-red-500">*</span> </label>
+                                <div class="relative">
+                                    <select id="InstructorId" name="InstructorId" class="w-full px-4 py-3 pl-12 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 group-hover:border-slate-400 appearance-none bg-white" required>
+                                        <option value="">Select an instructor</option>
+                                        @if (ViewBag.Instructors != null){
+                                            @foreach (var instructor in (IEnumerable<dynamic>)ViewBag.Instructors){
+                                                <option value="@instructor.Id">@instructor.FirstName @instructor.LastName</option>
+                                            }
+                                        } </select>
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-slate-400 group-focus-within:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.InstructorId, "", new { @class = "text-red-500 text-sm mt-1 block" })
+                            </div>
+                            <!-- Classroom Selection -->
+                            <div class="group">
+                                <label for="ClassroomId" class="block text-sm font-medium text-slate-700 mb-2"> Classroom
+                                    <span class="text-red-500">*</span> </label>
+                                <div class="relative">
+                                    <select id="ClassroomId" name="ClassroomId" class="w-full px-4 py-3 pl-12 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 group-hover:border-slate-400 appearance-none bg-white" required>
+                                        <option value="">Select a classroom</option>
+                                        @* @if (ViewBag.Classrooms != null){ *@
+                                        @*     @foreach (var classroom in (IEnumerable<dynamic>)ViewBag.Classrooms){ *@
+                                        @*         <option value="@classroom.Id">Room @classroom.ClassNumber (Capacity: @classroom.Capacity)</option> *@
+                                        @*     } *@
+                                        @* } *@
+                                    </select>
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-slate-400 group-focus-within:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(m => m.ClassroomId, "", new { @class = "text-red-500 text-sm mt-1 block" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Time Slot Section -->
+                    <div class="space-y-6 pt-6 border-t border-slate-200">
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h4 class="text-lg font-semibold text-slate-900 mb-4">Schedule Information</h4>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- Day of Week -->
+                            <div class="group">
+                                <label for="DayOfWeek" class="block text-sm font-medium text-slate-700 mb-2"> Day of Week
+                                    <span class="text-red-500">*</span> </label>
+                                <div class="relative">
+                                    <select id="DayOfWeek" name="TimeSlot.DayOfWeek" class="w-full px-4 py-3 pl-12 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 group-hover:border-slate-400 appearance-none bg-white" required>
+                                        <option value="">Select day</option>
+                                        <option value="Monday">Monday</option>
+                                        <option value="Tuesday">Tuesday</option>
+                                        <option value="Wednesday">Wednesday</option>
+                                        <option value="Thursday">Thursday</option>
+                                        <option value="Friday">Friday</option>
+                                        <option value="Saturday">Saturday</option>
+                                        <option value="Sunday">Sunday</option>
+                                    </select>
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-slate-400 group-focus-within:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Start Time -->
+                            <div class="group">
+                                <label for="StartTime" class="block text-sm font-medium text-slate-700 mb-2"> Start Time
+                                    <span class="text-red-500">*</span> </label>
+                                <div class="relative">
+                                    <input type="time" id="StartTime" name="TimeSlot.StartTime" class="w-full px-4 py-3 pl-12 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 group-hover:border-slate-400" required>
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-slate-400 group-focus-within:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Time -->
+                            <div class="group">
+                                <label for="EndTime" class="block text-sm font-medium text-slate-700 mb-2"> End Time
+                                    <span class="text-red-500">*</span> </label>
+                                <div class="relative">
+                                    <input type="time" id="EndTime" name="TimeSlot.EndTime" class="w-full px-4 py-3 pl-12 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all duration-200 group-hover:border-slate-400" required>
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <svg class="h-5 w-5 text-slate-400 group-focus-within:text-emerald-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-500 mt-2">Please ensure the time slot doesn't conflict with existing sections</p>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 pt-8 border-t border-slate-200">
+                        <button type="submit" class="flex-1 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
+                            <span class="flex items-center justify-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                </svg>
+                                Create Section
+                            </span>
+                        </button>
+                        <a href="@Url.Action("Index")" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 text-center focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">
+                            <span class="flex items-center justify-center">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                                Cancel
+                            </span> </a>
+                    </div>
+
+                    <!-- Back Link -->
+                    <div class="text-center pt-4">
+                        <a href="@Url.Action("Index")" class="inline-flex items-center text-sm text-emerald-600 hover:text-emerald-500 transition-colors group">
+                            <svg class="w-4 h-4 mr-1 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            Back to Sections List </a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Validation Summary -->
+            @if (!ViewData.ModelState.IsValid){
+                <div class="bg-red-50 border-l-4 border-red-400 rounded-lg p-6 shadow-md">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <svg class="h-6 w-6 text-red-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <h3 class="text-lg font-medium text-red-800">Please correct the following errors:</h3>
+                            <div class="mt-3 text-sm text-red-700">
+                                @Html.ValidationSummary(false, "", new { @class = "space-y-1" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async function () {
+        const facultyInput = document.getElementById('FacultyId')
+        const courseInput = document.getElementById('CourseId');
+        const classInput = document.getElementById('ClassroomId');
+        const instructorInput = document.getElementById('InstructorId');
+        facultyInput.addEventListener('change', async function () {
+            const selectedValue = this.value
+            resetDropdown(courseInput);
+            resetDropdown(classInput);
+            resetDropdown(instructorInput);
+            if (!selectedValue) {
+                courseInput.disabled = true;
+
+                return;
+            }
+            const response = await fetch(`/Admin/ClassroomOptions?facultyId=${this.value}`)
+            const data = await response.json();
+            console.log(data);
+            populateDropdown(courseInput, data);
+            courseInput.disabled = false;
+            classInput.disabled = false;
+
+        });
+
+        function resetDropdown(dropdown) {
+            dropdown.innerHTML = '<option value="">-- Select --</option>';
+            dropdown.disabled = true;
+        }
+
+        function populateDropdown(dropdown, data) {
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.value;
+                option.textContent = item.text;
+                dropdown.appendChild(option);
+            });
+        }
+    });
+</script>

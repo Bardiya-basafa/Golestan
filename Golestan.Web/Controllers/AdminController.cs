@@ -3,6 +3,7 @@
 
 namespace Golestan.Web.Controllers;
 
+using Application.DTOs.Section;
 using Application.Interfaces;
 using Application.Services;
 
@@ -51,6 +52,39 @@ public class AdminController : Controller {
         var dto = await _classroomService.GetFacultyClassrooms(facultyId);
 
         return View(dto);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> AddSection()
+    {
+        var facultiesMajorNames = await _facultyService.GetFacultiesMajorNames();
+
+        var model = new AddSectionDto()
+        {
+            FacultyMajorNames = facultiesMajorNames
+        };
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ClassroomOptions(int facultyId)
+    {
+        Dictionary<int, string>? classroomOptions = await _facultyService.GetFacultyClassrooms(facultyId);
+
+        var options = classroomOptions.Select(kvp => new
+        {
+            value = kvp.Key,
+            text = kvp.Value
+        }).ToList();
+
+        return Json(options);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> CourseOptions(int facultyId)
+    {
+        
     }
 
     public async Task<IActionResult> FacultiesManagement()

@@ -2,6 +2,7 @@
 
 using Domain.Entities;
 using DTOs.Classroom;
+using DTOs.Section;
 using Infrastructure.Persistence;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -46,6 +47,47 @@ public class ClassroomService : IClassroomService {
             Console.WriteLine(e);
 
             throw;
+        }
+    }
+
+    public async Task<ManageClassroomDto> GetClassroomManagementDto(int classroomId)
+    {
+        try{
+            var dto = await _context.Classrooms
+                .Where(c => c.Id == classroomId)
+                .Select(classroom => new ManageClassroomDto()
+                {
+                    FacultyId = classroom.FacultyId,
+                    ClassroomId = classroom.Id,
+                    ClassroomNumber = classroom.ClassNumber,
+                    Capacity = classroom.Capacity,
+                    FacultyName = classroom.Faculty.MajorName,
+                })
+                .FirstOrDefaultAsync();
+
+            if (dto == null){
+                throw new NullReferenceException("Class room not found");
+            }
+
+            dto.Sections = await _context.Sections
+                .Where(s => s.ClassroomId == classroomId)
+                .Select(s => new SectionDetailsDto()
+                {
+                    Id = s.Id,
+                    InstructorAppUser = s.Instructor.AppUser,
+                    InstructorId = s.InstructorId,
+                    Course = s.Course,
+                    TimeSlot = s.TimeSlot,
+                })
+                .ToListAsync();
+
+
+            return dto;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+
+            throw new ArgumentException();
         }
     }
 

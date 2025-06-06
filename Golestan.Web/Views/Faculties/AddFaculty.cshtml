@@ -10,17 +10,13 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                        UniManage Pro
-                    </h1>
+                        UniManage Pro </h1>
                     <p class="text-xs text-gray-500">Add New Faculty</p>
                 </div>
             </div>
-
             <div class="flex items-center space-x-4">
-                <a asp-controller="Faculties" asp-action="Index"
-                   class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors">
-                    <i class="fas fa-arrow-left mr-2"></i>Back to Faculty List
-                </a>
+                <a asp-controller="Faculties" asp-action="Index" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Faculty List </a>
             </div>
         </div>
     </div>
@@ -36,7 +32,6 @@
         <h2 class="text-4xl font-bold text-gray-800 mb-2">Add New Faculty</h2>
         <p class="text-gray-600 text-lg">Create a new faculty member record</p>
     </div>
-
     <!-- Form -->
     <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 form-section animate-slide-up">
         <form asp-controller="Faculties" asp-action="AddFaculty" method="POST" class="space-y-6">
@@ -44,32 +39,16 @@
             <!-- Building name -->
             <div>
                 <label asp-for="BuildingName" class="block text-sm font-bold text-gray-700 mb-2">
-                    <i class="fas fa-user mr-2 text-purple-500"></i>Faculty Name *
-                </label>
-                <input
-                        type="text"
-                        asp-for="BuildingName"
-                        required
-                        maxlength="100"
-                        class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
-                        placeholder="Enter full building name"
-                >
+                    <i class="fas fa-user mr-2 text-purple-500"></i>Faculty Name * </label>
+                <input type="text" asp-for="BuildingName" required maxlength="100" class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200" placeholder="Enter full building name">
                 <span asp-validation-for="BuildingName" class="error-message"></span>
                 <p class="text-xs text-gray-500 mt-1">Full building name</p>
             </div>
             <!-- Major -->
             <div>
                 <label asp-for="MajorName" class="block text-sm font-bold text-gray-700 mb-2">
-                    <i class="fas fa-user mr-2 text-purple-500"></i>Faculty Name *
-                </label>
-                <input
-                        type="text"
-                        asp-for="MajorName"
-                        required
-                        maxlength="100"
-                        class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
-                        placeholder="Enter full major name"
-                >
+                    <i class="fas fa-user mr-2 text-purple-500"></i>Faculty Name * </label>
+                <input type="text" asp-for="MajorName" required maxlength="100" class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200" placeholder="Enter full major name">
                 <span asp-validation-for="MajorName" class="error-message"></span>
                 <p class="text-xs text-gray-500 mt-1">Full major name</p>
             </div>
@@ -77,15 +56,8 @@
             <!-- Badge Number -->
             <div>
                 <label asp-for="Budget" class="block text-sm font-bold text-gray-700 mb-2">
-                    <i class="fas fa-id-badge mr-2 text-orange-500"></i>Badge Number *
-                </label>
-                <input
-                        type="number"
-                        asp-for="Budget"
-                        required
-                        min="1"
-                        class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200"
-                        placeholder="Enter badge amount (e.g., 12345)">
+                    <i class="fas fa-id-badge mr-2 text-orange-500"></i>Badge Number * </label>
+                <input type="number" asp-for="Budget" required min="1" class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200" placeholder="Enter badge amount (e.g., 12345)">
                 <span asp-validation-for="Budget" class="error-message"></span>
                 <p class="text-xs text-gray-500 mt-1">Official university badge</p>
             </div>
@@ -93,32 +65,22 @@
             <!-- Start Date -->
             <div>
                 <label asp-for="StartDate" class="block text-sm font-bold text-gray-700 mb-2">
-                    <i class="fas fa-calendar-plus mr-2 text-green-500"></i>Start Date *
-                </label>
-                <input
-                        type="date"
-                        asp-for="StartDate"
-                        required
-                        class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200">
+                    <i class="fas fa-calendar-plus mr-2 text-green-500"></i>Start Date * </label>
+                <input type="date" asp-for="StartDate" required class="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200">
                 <p class="text-xs text-gray-500 mt-1">Date when the faculty member started working</p>
             </div>
 
             <!-- Form Actions -->
             <div class="flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
-                <button
-                        type="reset"
-                        class="flex-1 bg-white/70 backdrop-blur-sm text-gray-700 py-4 px-6 rounded-xl hover:bg-white/90 transition-all duration-200 font-semibold border border-white/20 shadow-lg">
+                <button type="reset" class="flex-1 bg-white/70 backdrop-blur-sm text-gray-700 py-4 px-6 rounded-xl hover:bg-white/90 transition-all duration-200 font-semibold border border-white/20 shadow-lg">
                     <i class="fas fa-undo mr-2"></i>Reset Form
                 </button>
-                <button
-                        type="submit"
-                        class="flex-1 bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-4 px-6 rounded-xl hover:from-indigo-600 hover:to-purple-600 transition-all duration-200 font-semibold shadow-lg">
+                <button type="submit" class="flex-1 bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-4 px-6 rounded-xl hover:from-indigo-600 hover:to-purple-600 transition-all duration-200 font-semibold shadow-lg">
                     <i class="fas fa-plus mr-2"></i>Add Faculty
                 </button>
             </div>
         </form>
     </div>
-
     <!-- Form Information -->
     <div class="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
         <div class="flex items-start">
@@ -136,6 +98,4 @@
             </div>
         </div>
     </div>
-
-
 </div>

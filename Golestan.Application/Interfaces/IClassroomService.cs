@@ -8,6 +8,9 @@ public interface IClassroomService {
 
     Task<ManageFucultyClassroomDto> GetFacultyClassrooms(int facultyId);
 
+    Task<ManageClassroomDto> GetClassroomManagementDto(int classroomId);
+
+
     Task<Result> AddClassroom(AddClassroomDto dto);
 
     Task<bool> VerifyClassroomNumber(string classNumber, int facultyId);

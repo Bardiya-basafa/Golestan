@@ -1,4 +1,6 @@
 using System.Globalization;
+using Golestan.Application.Interfaces;
+using Golestan.Application.Services;
 using Golestan.Domain.Entities;
 using Golestan.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -18,15 +20,24 @@ builder.Configuration
 
 
 // 3. MVC Services
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddViewOptions(options => {
+        options.HtmlHelperOptions.ClientValidationEnabled = true;
+    });
 
 // 4. Database Context (EF Core)
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GolestanDB")));
 
+// 5. Services 
+builder.Services.AddScoped<IFacultyService, FacultyService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IInstructorService, InstructorService>();
+builder.Services.AddScoped<IClassroomService, ClassroomService>();
+
 builder.Services.AddIdentity<AppUser, IdentityRole>(options => {
         options.Password.RequireDigit = true;
-        options.Password.RequiredLength = 6;
+        options.Password.RequiredLength = 8;
         options.Password.RequireNonAlphanumeric = true;
         options.User.RequireUniqueEmail = true;
     })
@@ -55,10 +66,10 @@ var app = builder.Build();
 
 // ========== MIDDLEWARE PIPELINE ========== //
 
-using (var scope = app.Services.CreateAsyncScope()){
-    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    await dbContext.Database.MigrateAsync();
-}
+// using (var scope = app.Services.CreateAsyncScope()){
+//     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+//     await dbContext.Database.MigrateAsync();
+// }
 
 
 // 1. Exception Handling
@@ -89,7 +100,7 @@ app.UseAuthorization();
 // 9. Endpoints
 app.MapControllerRoute(
 "default",
-"{controller=Admin}/{action=Index}/{id?}");
+"{controller=Admin}/{action=Dashboard}/{id?}");
 
 
 app.Run();

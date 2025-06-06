@@ -10,13 +10,11 @@ public class TimeSlot {
 
     public DayOfWeek DayOfWeek { get; set; }
 
-    public int ClassroomId { get; set; }
+    public bool IsActive { get; set; }
 
-    public int CourseId { get; set; }
+    public int SectionId { get; set; }
 
 
-    public Classroom Classroom { get; set; }
-
-    public Course Course { get; set; }
+    public Section Section { get; set; }
 
 }

@@ -12,12 +12,10 @@ public class Course {
 
     public DateTime ExamTime { get; set; }
 
-    public int SectionId { get; set; }
-
     public int FacultyId { get; set; }
 
-    public Section Section { get; set; }
-
     public Faculty Faculty { get; set; }
+
+    public ICollection<Section> Sections { get; set; } = new HashSet<Section>();
 
 }

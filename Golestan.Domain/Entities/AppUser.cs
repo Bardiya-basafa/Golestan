@@ -13,4 +13,13 @@ public class AppUser : IdentityUser {
 
     public UserType UserType { get; set; }// Discriminator property
 
+    public int InstructorId { get; set; }
+
+    public int StudentId { get; set; }
+
+    // Navigation properties 
+    public Instructor InstructorProfile { get; set; }
+
+    public Student StudentProfile { get; set; }
+
 }

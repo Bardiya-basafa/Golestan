@@ -11,7 +11,7 @@ public class Student {
 
     public AppUser AppUser { get; set; }
 
-    public Major Major { get; set; }
+    public string FullName { get; set; }
 
     public string StudentNumber { get; set; }
 
@@ -19,10 +19,10 @@ public class Student {
 
     public int FacultyId { get; set; }
 
+
     public Faculty Faculty { get; set; }
 
-    public ICollection<Course> Courses { get; set; }
 
-    public ICollection<Instructor> Instructors { get; set; }
+    public ICollection<Section> Sections { get; set; } = new HashSet<Section>();
 
 }

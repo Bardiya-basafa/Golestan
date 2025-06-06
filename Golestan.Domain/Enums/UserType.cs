@@ -4,7 +4,7 @@ public enum UserType {
 
     Student,
 
-    Professor,
+    Instructor,
 
     Admin,
 

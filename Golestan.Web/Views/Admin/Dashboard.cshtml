@@ -1,0 +1,147 @@
+﻿
+@{
+    ViewData["Title"] = "Admin Dashboard - UniManage Pro";
+}
+<!-- Navigation -->
+<nav class="glass-effect sticky top-0 z-50 border-b border-white/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center space-x-4">
+                <div class="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center shadow-lg">
+                    <i class="fas fa-graduation-cap text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                        UniManage Pro </h1>
+                    <p class="text-xs text-gray-500">Admin Dashboard</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="flex space-x-2">
+                    <a href="professor.html" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">
+                        <i class="fas fa-chalkboard-teacher mr-2"></i>Professor </a>
+                    <a href="student.html" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors">
+                        <i class="fas fa-user-graduate mr-2"></i>Student </a>
+                </div>
+                <div class="px-4 py-2 bg-white/50 rounded-lg">
+                        <span class="text-sm font-medium text-gray-700">
+                            <i class="fas fa-user-shield mr-2 text-blue-600"></i>Admin Panel
+                        </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav><!-- Main Content -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Dashboard Header -->
+    <div id="dashboardView" class="animate-fade-in">
+        <div class="mb-8">
+            <h2 class="text-4xl font-bold text-gray-800 mb-2">Admin Dashboard</h2>
+            <p class="text-gray-600 text-lg">Complete control over the university system</p>
+        </div>
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Total Courses</p>
+                        <p class="text-3xl font-bold text-blue-600" id="totalCourses">0</p>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-book text-blue-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Active Classes</p>
+                        <p class="text-3xl font-bold text-green-600" id="totalClasses">0</p>
+                    </div>
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-chalkboard text-green-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Professors</p>
+                        <p class="text-3xl font-bold text-purple-600" id="totalProfessors">0</p>
+                    </div>
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-chalkboard-teacher text-purple-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Students</p>
+                        <p class="text-3xl font-bold text-orange-600" id="totalStudents">0</p>
+                    </div>
+                    <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
+                        <i class="fas fa-user-graduate text-orange-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Admin Menu -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <a asp-controller="Admin" asp-action="CourseManagement" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+                <div class="text-center">
+                    <div class="w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
+                        <i class="fas fa-book text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Course Management</h3>
+                    <p class="text-gray-600">Add, edit, and manage courses</p>
+                </div>
+            </a>
+            <a asp-controller="Admin" asp-action="ChooseFaculty" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
+                        <i class="fas fa-chalkboard text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Class Management</h3>
+                    <p class="text-gray-600">Create and manage class schedules</p>
+                </div>
+            </a>
+            <a asp-controller="Admin" asp-action="InstructorsManagement" onclick="showSection('professorManagement')" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
+                        <i class="fas fa-chalkboard-teacher text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Professor Management</h3>
+                    <p class="text-gray-600">Add and manage professors</p>
+                </div>
+            </a>
+            <div onclick="showSection('studentManagement')" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
+                        <i class="fas fa-user-graduate text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Student Management</h3>
+                    <p class="text-gray-600">Add and manage students</p>
+                </div>
+            </div>
+            <div onclick="showSection('assignmentManagement')" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
+                        <i class="fas fa-tasks text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Assignment Management</h3>
+                    <p class="text-gray-600">Assign professors and students to classes</p>
+                </div>
+            </div>
+            <a asp-controller="Admin" asp-action="FacultiesManagement" onclick="showSection('facultyManagement')" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
+                        <i class="fas fa-university text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Faculty Management</h3>
+                    <p class="text-gray-600">Manage faculties and departments</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

@@ -59,7 +59,7 @@ public class InstructorsController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("InstructorsManagement", "Admin");
+            return RedirectToAction("InstructorManagement", "Admin");
         }
 
 

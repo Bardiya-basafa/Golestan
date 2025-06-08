@@ -1,7 +1,8 @@
 ﻿namespace Golestan.Application.Services;
 
-public class SectionService {
+using Interfaces;
 
-    
+
+public class SectionService : ISectionService {
 
 }

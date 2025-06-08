@@ -26,8 +26,8 @@ public class AdminController : Controller {
         _courseService = courseService;
     }
 
-    // GET
-    public async Task<IActionResult> Dashboard()
+    // Admin Dashboard
+    public async Task<IActionResult> AdminDashboard()
     {
         var faculties = await _facultyService.GetFaculties();
 
@@ -44,9 +44,10 @@ public class AdminController : Controller {
         return View(instructorsDto);
     }
 
-    public async Task<IActionResult> CourseManagement()
+    [HttpGet]
+    public async Task<IActionResult> CourseManagement(int facultyId)
     {
-        var model = await _courseService.GetCoursesDto();
+        var model = await _courseService.GetFacultyCourses(facultyId);
 
         return View(model);
     }
@@ -54,10 +55,17 @@ public class AdminController : Controller {
     [HttpGet]
     public async Task<IActionResult> ClassroomManagement(int facultyId)
     {
-        var dto = await _classroomService.GetFacultyClassrooms(facultyId);
+        var model = await _classroomService.GetFacultyClassrooms(facultyId);
 
-        return View(dto);
+        return View(model);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> SectionManagement(int facultyId)
+    {
+        
+    }
+
 
     // Total overview at the system resources
     public async Task<IActionResult> FacultiesClassrooms()
@@ -74,7 +82,15 @@ public class AdminController : Controller {
         return View(model);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> FacultiesSections()
+    {
+        var model = await _facultyService.GetFaculties();
 
+        return View(model);
+    }
+
+    // Actions 
     [HttpGet]
     public async Task<IActionResult> AddSection()
     {

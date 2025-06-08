@@ -102,7 +102,7 @@ app.UseAuthorization();
 // 9. Endpoints
 app.MapControllerRoute(
 "default",
-"{controller=Admin}/{action=Dashboard}/{id?}");
+"{controller=Admin}/{action=AdminDashboard}/{id?}");
 
 
 app.Run();

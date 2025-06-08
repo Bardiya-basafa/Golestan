@@ -16,11 +16,11 @@ public class InstructorService : IInstructorService {
         _context = context;
     }
 
-    public async Task<List<InstructorsDto>> GetInstructors()
+    public async Task<List<InstructorDetailsDto>> GetInstructors()
     {
         try{
             var instructors = await _context.Instructors
-                .Select(i => new InstructorsDto()
+                .Select(i => new InstructorDetailsDto()
                 {
                     Id = i.Id,
                     AppUserId = i.AppUserId,

@@ -1,24 +1,31 @@
 ﻿namespace Golestan.Application.Services;
 
+using Domain.Entities;
 using DTOs.Course;
 using Infrastructure.Persistence;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Shared.Helpers;
 
 
 public class CourseService : ICourseService {
 
     private readonly AppDbContext _context;
 
-    public CourseService(AppDbContext context)
+    private readonly IFacultyService _facultyService;
+
+    public CourseService(AppDbContext context, IFacultyService facultyService)
     {
         _context = context;
+        _facultyService = facultyService;
     }
 
-    public async Task<List<CourseDto>> GetCoursesDto()
+    public async Task<CourseManagementDto> GetFacultyCourses(int facultyId)
     {
         try{
-            var dto = await _context.Courses.Select(c => new CourseDto()
+            var dto = new CourseManagementDto();
+
+            dto.Courses = await _context.Courses.Select(c => new CourseDetailsDto()
                 {
                     Id = c.Id,
                     Name = c.Name,
@@ -32,6 +39,13 @@ public class CourseService : ICourseService {
                 .Take(10)
                 .ToListAsync();
 
+            var facultyDetails = await _facultyService.GetDetailsFacultyById(facultyId);
+
+           
+
+            dto.FacultyId = facultyDetails.Id;
+            dto.FacultyName = facultyDetails.MajorName;
+
             return dto;
         }
         catch (Exception e){
@@ -39,6 +53,33 @@ public class CourseService : ICourseService {
 
             throw;
         }
+    }
+
+    public async Task<Result> AddCourse(AddCourseDto dto)
+    {
+        var finalResult = new Result();
+
+        try{
+            var course = new Course()
+            {
+                Name = dto.Name,
+                Description = dto.Description,
+                FacultyId = dto.FacultyId,
+                Unit = dto.Unit,
+                ExamTime = dto.ExamTime,
+            };
+
+            _context.Courses.Add(course);
+            await _context.SaveChangesAsync();
+            finalResult.Succeeded = true;
+            finalResult.Message = "Course added";
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+            finalResult.Message = "Failed to create course";
+        }
+
+        return finalResult;
     }
 
 }

@@ -1,4 +1,4 @@
-﻿@model List<DetailsFacultyDto>
+﻿@model List<FacultyDetailsDto>
 
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
         <div class="container mx-auto px-6 py-12">
@@ -8,7 +8,7 @@
                                 <div class="flex justify-between items-center">
                                         <div>
                                                 <p class="text-3xl shadow font-bold text-white mb-2">Faculty Management System</p>
-                                                <p class="text-slate-300 text-lg">Comprehensive faculty and classroom administration</p>
+                                                <p class="text-slate-300 text-lg">Comprehensive faculty and sections administration</p>
                                         </div>
                                         <a asp-controller="Faculties" asp-action="AddFaculty" class="group">
                                                 <div class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1">
@@ -21,73 +21,16 @@
                                 </div>
                         </div>
                 </div>
-                <!-- Enhanced Statistics Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
-                        <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                                <div class="flex items-center justify-between">
-                                        <div>
-                                                <div class="p-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl shadow-lg mb-4 justify-center flex">
-                                                        <svg class="w-8 h-8 !text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                                                        </svg>
-                                                </div>
-                                                <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-1">Total Faculties</p>
-                                                <p class="text-3xl font-bold text-slate-900">@Model.Count</p>
-                                        </div>
-                                </div>
-                        </div>
-                        <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                                <div class="flex items-center justify-between">
-                                        <div>
-                                                <div class="p-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl shadow-lg mb-4 justify-center flex">
-                                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
-                                                        </svg>
-                                                </div>
-                                                <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-1">Total Classrooms</p>
-                                                <p class="text-3xl font-bold text-slate-900">@Model.Sum(f => f.ClassesCount)</p>
-                                        </div>
-                                </div>
-                        </div>
-                        <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                                <div class="flex items-center justify-between">
-                                        <div>
-                                                <div class="p-4 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl shadow-lg mb-4 justify-center flex">
-                                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                                                        </svg>
-                                                </div>
-                                                <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-1">Active Programs</p>
-                                                <p class="text-3xl font-bold text-slate-900">@Model.Count(f => f.ClassesCount > 0)</p>
-                                        </div>
-                                </div>
-                        </div>
-                        <div class="bg-white rounded-2xl shadow-lg border border-slate-200 p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                                <div class="flex items-center justify-between">
-                                        <div>
-                                                <div class="p-4 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl shadow-lg mb-4 justify-center flex">
-                                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                                        </svg>
-                                                </div>
-                                                <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-1">Avg Capacity</p>
-                                                <p class="text-3xl font-bold text-slate-900">@(Model.Count > 0 ? Math.Round((double)Model.Sum(f => f.ClassesCount) / Model.Count, 1) : 0)</p>
-                                        </div>
-                                </div>
-                        </div>
-                </div>
                 <!-- Enhanced Faculty Table -->
                 <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
                         <div class="bg-gradient-to-r from-slate-50 to-slate-100 px-8 py-6 border-b border-slate-200">
                                 <div class="flex items-center justify-between">
                                         <div>
                                                 <h2 class="text-2xl font-bold text-slate-900">Faculty Directory</h2>
-                                                <p class="text-slate-600 mt-1">Manage faculty departments and classroom assignments</p>
+                                                <p class="text-slate-600 mt-1">Manage faculty departments and sections</p>
                                         </div>
                                         <div class="flex items-center space-x-2">
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                            @Model.Count Total
-                        </span>
+                                                <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">@Model.Count Total</span>
                                         </div>
                                 </div>
                         </div>
@@ -101,10 +44,7 @@
                                                                         Faculty ID
                                                                 </th>
                                                                 <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">
-                                                                        Department
-                                                                </th>
-                                                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">
-                                                                        Classroom Count
+                                                                        Major
                                                                 </th>
                                                                 <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">
                                                                         Management
@@ -126,28 +66,17 @@
                                                                                 </div>
                                                                         </td>
                                                                         <td class="px-8 py-6 whitespace-nowrap">
-                                                                                <div class="flex items-center">
-                                            <span class="inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-purple-100 to-purple-200 text-purple-800 shadow-sm">
-                                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                                                </svg>
-                                                    @faculty.MajorName
-                                            </span>
+                                                                                <div class="flex items-center"><span class="inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold bg-gradient-to-r from-purple-100 to-purple-200 text-purple-800 shadow-sm"><svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                                                                                                @faculty.MajorName</span>
                                                                                 </div>
                                                                         </td>
                                                                         <td class="px-8 py-6 whitespace-nowrap">
-                                                                                <div class="flex items-center">
-                                                                                        <div class="text-2xl font-bold text-slate-900">@faculty.ClassesCount</div>
-                                                                                        <div class="ml-2 text-sm text-slate-500">rooms</div>
-                                                                                </div>
-                                                                        </td>
-                                                                        <td class="px-8 py-6 whitespace-nowrap">
-                                                                                <a asp-controller="Admin" asp-action="ManageFacultyClassrooms" asp-route-facultyId="@faculty.Id" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 group">
+                                                                                <a asp-controller="Admin" asp-action="CourseManagement" asp-route-facultyId="@faculty.Id" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 group">
                                                                                         <svg class="w-5 h-5 mr-3 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
                                                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                                                                         </svg>
-                                                                                        Manage Classrooms
+                                                                                        Manage Sections
                                                                                         <svg class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                                                                         </svg>
@@ -167,7 +96,7 @@
                                                 </svg>
                                         </div>
                                         <h3 class="text-xl font-semibold text-slate-900 mb-2">No Faculties Found</h3>
-                                        <p class="text-slate-600 mb-8 max-w-md mx-auto">Get started by adding your first faculty department to begin managing classrooms and academic programs.</p>
+                                        <p class="text-slate-600 mb-8 max-w-md mx-auto">Get started by adding your first faculty department to begin managing sections and academic programs.</p>
                                         <a asp-controller="Faculties" asp-action="AddFaculty" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                                                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>

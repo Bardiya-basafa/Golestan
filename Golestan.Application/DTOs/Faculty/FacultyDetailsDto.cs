@@ -1,6 +1,6 @@
 ﻿namespace Golestan.Application.DTOs.Faculty;
 
-public class DetailsFacultyDto {
+public class FacultyDetailsDto {
 
     public int Id { get; set; }
 

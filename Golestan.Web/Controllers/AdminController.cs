@@ -16,15 +16,18 @@ public class AdminController : Controller {
 
     private readonly IClassroomService _classroomService;
 
-    public AdminController(IFacultyService facultyService, IInstructorService instructorService, IClassroomService classroomService)
+    private readonly ICourseService _courseService;
+
+    public AdminController(IFacultyService facultyService, IInstructorService instructorService, IClassroomService classroomService, ICourseService courseService)
     {
         _facultyService = facultyService;
         _instructorService = instructorService;
         _classroomService = classroomService;
+        _courseService = courseService;
     }
 
-    // GET
-    public async Task<IActionResult> Dashboard()
+    // Admin Dashboard
+    public async Task<IActionResult> AdminDashboard()
     {
         var faculties = await _facultyService.GetFaculties();
 
@@ -32,33 +35,62 @@ public class AdminController : Controller {
         return View(faculties);
     }
 
-    public async Task<IActionResult> InstructorsManagement()
+    // Managing each section
+
+    public async Task<IActionResult> InstructorManagement()
     {
         var instructorsDto = await _instructorService.GetInstructors();
 
         return View(instructorsDto);
     }
 
-    public async Task<IActionResult> CourseManagement()
+    [HttpGet]
+    public async Task<IActionResult> CourseManagement(int facultyId)
     {
-        return View();
-    }
+        var model = await _courseService.GetFacultyCourses(facultyId);
 
-    public async Task<IActionResult> ChooseFaculty()
-    {
-        var faculties = await _facultyService.GetFaculties();
-
-        return View(faculties);
+        return View(model);
     }
 
     [HttpGet]
-    public async Task<IActionResult> ManageFacultyClassrooms(int facultyId)
+    public async Task<IActionResult> ClassroomManagement(int facultyId)
     {
-        var dto = await _classroomService.GetFacultyClassrooms(facultyId);
+        var model = await _classroomService.GetFacultyClassrooms(facultyId);
 
-        return View(dto);
+        return View(model);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> SectionManagement(int facultyId)
+    {
+        
+    }
+
+
+    // Total overview at the system resources
+    public async Task<IActionResult> FacultiesClassrooms()
+    {
+        var model = await _facultyService.GetFaculties();
+
+        return View(model);
+    }
+
+    public async Task<IActionResult> FacultiesCourses()
+    {
+        var model = await _facultyService.GetFaculties();
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> FacultiesSections()
+    {
+        var model = await _facultyService.GetFaculties();
+
+        return View(model);
+    }
+
+    // Actions 
     [HttpGet]
     public async Task<IActionResult> AddSection()
     {
@@ -71,6 +103,8 @@ public class AdminController : Controller {
 
         return View(model);
     }
+
+    // Ajaxs 
 
     [HttpGet]
     public async Task<IActionResult> ClassroomOptions(int facultyId)

@@ -6,6 +6,6 @@ using DTOs.Instructor;
 
 public interface IInstructorService {
 
-    Task<List<InstructorsDto>> GetInstructors();
+    Task<List<InstructorDetailsDto>> GetInstructors();
 
 }

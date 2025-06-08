@@ -18,12 +18,15 @@ public class AdminController : Controller {
 
     private readonly ICourseService _courseService;
 
-    public AdminController(IFacultyService facultyService, IInstructorService instructorService, IClassroomService classroomService, ICourseService courseService)
+    private readonly ISectionService _sectionService;
+
+    public AdminController(IFacultyService facultyService, IInstructorService instructorService, IClassroomService classroomService, ICourseService courseService, ISectionService sectionService)
     {
         _facultyService = facultyService;
         _instructorService = instructorService;
         _classroomService = classroomService;
         _courseService = courseService;
+        _sectionService = sectionService;
     }
 
     // Admin Dashboard
@@ -63,7 +66,9 @@ public class AdminController : Controller {
     [HttpGet]
     public async Task<IActionResult> SectionManagement(int facultyId)
     {
-        
+        var model = await _sectionService.GetFacultySections(facultyId);
+
+        return View(model);
     }
 
 

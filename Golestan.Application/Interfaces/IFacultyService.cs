@@ -8,9 +8,9 @@ using DTOs.Section;
 
 public interface IFacultyService {
 
-    Task<List<DetailsFacultyDto>> GetFaculties();
+    Task<List<FacultyDetailsDto>> GetFaculties();
 
-    Task<DetailsFacultyDto?> GetDetailsFacultyById(int id);
+    Task<FacultyDetailsDto?> GetDetailsFacultyById(int id);
 
     Task<EditFacultyDto?> GetEditFacultyById(int id);
 

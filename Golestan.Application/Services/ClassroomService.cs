@@ -18,7 +18,7 @@ public class ClassroomService : IClassroomService {
         _context = context;
     }
 
-    public async Task<ManageFucultyClassroomDto> GetFacultyClassrooms(int facultyId)
+    public async Task<FacultiesClassroomsDto> GetFacultyClassrooms(int facultyId)
     {
         try{
             var classroomsDetailsDto = await _context.Classrooms
@@ -32,7 +32,7 @@ public class ClassroomService : IClassroomService {
                 .Take(10)
                 .ToListAsync();
 
-            var dto = new ManageFucultyClassroomDto()
+            var dto = new FacultiesClassroomsDto()
             {
                 Classrooms = classroomsDetailsDto,
                 FacultyId = facultyId,
@@ -50,12 +50,12 @@ public class ClassroomService : IClassroomService {
         }
     }
 
-    public async Task<ManageClassroomDto> GetClassroomManagementDto(int classroomId)
+    public async Task<ClassroomManagementDto> GetClassroomManagementDto(int classroomId)
     {
         try{
             var dto = await _context.Classrooms
                 .Where(c => c.Id == classroomId)
-                .Select(classroom => new ManageClassroomDto()
+                .Select(classroom => new ClassroomManagementDto()
                 {
                     FacultyId = classroom.FacultyId,
                     ClassroomId = classroom.Id,

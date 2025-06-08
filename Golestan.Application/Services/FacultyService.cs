@@ -17,11 +17,11 @@ public class FacultyService : IFacultyService {
         _context = context;
     }
 
-    public async Task<List<DetailsFacultyDto>> GetFaculties()
+    public async Task<List<FacultyDetailsDto>> GetFaculties()
     {
         try{
             var faculties = await _context.Faculties
-                .Select(f => new DetailsFacultyDto()
+                .Select(f => new FacultyDetailsDto()
                 {
                     Id = f.Id,
                     MajorName = f.MajorName,
@@ -44,12 +44,12 @@ public class FacultyService : IFacultyService {
     }
 
 
-    public async Task<DetailsFacultyDto?> GetDetailsFacultyById(int id)
+    public async Task<FacultyDetailsDto?> GetDetailsFacultyById(int id)
     {
         try{
             var faculty = await _context.Faculties
                 .Where(f => f.Id == id)
-                .Select(f => new DetailsFacultyDto()
+                .Select(f => new FacultyDetailsDto()
                 {
                     Id = f.Id,
                     MajorName = f.MajorName,

@@ -1,6 +1,6 @@
 ﻿namespace Golestan.Application.DTOs.Course;
 
-public class CoursesDto {
+public class CourseDetailsDto {
 
     public int Id { get; set; }
 

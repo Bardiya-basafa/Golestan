@@ -39,10 +39,11 @@ public class SectionService : ISectionService {
                 .Select(s => new SectionDetailsDto()
                 {
                     Id = s.Id,
-                    Course = s.Course,
+                    CourseName = s.Course.Name,
                     TimeSlot = s.TimeSlot,
                     InstructorAppUser = s.Instructor.AppUser,
                     InstructorId = s.InstructorId,
+                    ClassNumber = s.Classroom.ClassNumber,
                 })
                 .ToListAsync();
 

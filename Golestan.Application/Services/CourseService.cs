@@ -41,12 +41,29 @@ public class CourseService : ICourseService {
 
             var facultyDetails = await _facultyService.GetDetailsFacultyById(facultyId);
 
-           
 
             dto.FacultyId = facultyDetails.Id;
             dto.FacultyName = facultyDetails.MajorName;
 
             return dto;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+
+            throw;
+        }
+    }
+
+    public async Task<Dictionary<int, string>>? GetCourseInstructors(int courseId)
+    {
+        try{
+            var instructorOptions = await _context.Instructors
+                .Where(i => i.Courses.Any(c => c.Id == courseId))
+                .Select(i => new { i.Id, i.FullName })
+                .Distinct()
+                .ToDictionaryAsync(c => c.Id, c => c.FullName);
+
+            return instructorOptions;
         }
         catch (Exception e){
             Console.WriteLine(e);

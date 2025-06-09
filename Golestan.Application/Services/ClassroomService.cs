@@ -76,7 +76,7 @@ public class ClassroomService : IClassroomService {
                     Id = s.Id,
                     InstructorAppUser = s.Instructor.AppUser,
                     InstructorId = s.InstructorId,
-                    Course = s.Course,
+                    CourseName = s.Course.Name,
                     TimeSlot = s.TimeSlot,
                 })
                 .ToListAsync();

@@ -20,6 +20,13 @@ public class AddSectionDto {
     [Required]
     public int TimeSlotId { get; set; }
 
-    public Dictionary<int, string>? FacultyMajorNames { get; set; }
+    [Required]
+    public int DayOfWeekId { get; set; }
+
+    public Dictionary<int, string> Classrooms { get; set; }
+
+    public Dictionary<int, string> Courses { get; set; }
+
+    public string FacultyMajorName { get; set; }
 
 }

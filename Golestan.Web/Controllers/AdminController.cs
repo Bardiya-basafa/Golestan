@@ -95,19 +95,6 @@ public class AdminController : Controller {
         return View(model);
     }
 
-    // Actions 
-    [HttpGet]
-    public async Task<IActionResult> AddSection()
-    {
-        var facultiesMajorNames = await _facultyService.GetFacultiesMajorNames();
-
-        var model = new AddSectionDto()
-        {
-            FacultyMajorNames = facultiesMajorNames
-        };
-
-        return View(model);
-    }
 
     // Ajaxs 
 
@@ -140,9 +127,9 @@ public class AdminController : Controller {
     }
 
     [HttpGet]
-    public async Task<IActionResult> InstructorOptions(int facultyId)
+    public async Task<IActionResult> InstructorOptions(int courseId)
     {
-        Dictionary<int, string>? instructorOptions = await _facultyService.GetFacultyInstructors(facultyId);
+       var instructorOptions = await _courseService.GetCourseInstructors(courseId);
 
         var options = instructorOptions.Select(kvp => new
         {

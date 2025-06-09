@@ -4,6 +4,7 @@ using Golestan.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Golestan.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250609195300_Fix_TimeSolt_Property")]
+    partial class Fix_TimeSolt_Property
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("CourseInstructor", b =>
-                {
-                    b.Property<int>("CoursesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("InstructorsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CoursesId", "InstructorsId");
-
-                    b.HasIndex("InstructorsId");
-
-                    b.ToTable("CourseInstructors", (string)null);
-                });
 
             modelBuilder.Entity("Golestan.Domain.Entities.AppUser", b =>
                 {
@@ -340,19 +328,19 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d3e9e74d-5d7d-4ed5-bfe3-e2310181fe68",
+                            Id = "4c123eae-2aa4-48b4-8d94-1223e8961114",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "773b09da-08f1-425a-a3a1-bae5ea00aad8",
+                            Id = "f3644f19-0b96-4dfc-bc14-f52bb7710260",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         },
                         new
                         {
-                            Id = "14c9dcae-da6a-4833-af53-7dbda657612b",
+                            Id = "f6796af3-8125-4fbf-919a-f0ba1a841f5e",
                             Name = "Instructor",
                             NormalizedName = "INSTRUCTOR"
                         });
@@ -496,21 +484,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasIndex("StudentsId");
 
                     b.ToTable("StudentSections", (string)null);
-                });
-
-            modelBuilder.Entity("CourseInstructor", b =>
-                {
-                    b.HasOne("Golestan.Domain.Entities.Course", null)
-                        .WithMany()
-                        .HasForeignKey("CoursesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Golestan.Domain.Entities.Instructor", null)
-                        .WithMany()
-                        .HasForeignKey("InstructorsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Golestan.Domain.Entities.Classroom", b =>

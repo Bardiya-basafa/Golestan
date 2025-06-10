@@ -57,7 +57,7 @@ public class ClassroomsController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> Manage(int classroomId)
+    public async Task<IActionResult> ClassroomActions(int classroomId)
     {
         var model = await _classroomService.GetClassroomManagementDto(classroomId);
 

@@ -1,4 +1,5 @@
-﻿@model ClassroomManagementDto
+﻿@using Golestan.Domain.Enums
+@model ClassroomDto
 
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
     <div class="container mx-auto px-6 py-12">
@@ -164,9 +165,9 @@
                                                 </svg>
                                             </div>
                                             <div class="ml-4">
-                                                <div class="text-sm font-semibold text-slate-900">@sec.Course.Name
+                                                <div class="text-sm font-semibold text-slate-900">@sec.CourseName
                                                 </div>
-                                                <div class="text-sm text-slate-500">@sec.Course.Id
+                                                <div class="text-sm text-slate-500">
                                                 </div>
                                             </div>
                                         </div>
@@ -194,11 +195,9 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                             </svg>
 
-                                            @sec.TimeSlot.StartTime -
-
-                                            @sec.TimeSlot.EndTime
+                                            @sec.TimeSlot.GetDescription()
                                         </span>
-                                        <div class="text-xs text-slate-500 mt-1">@sec.TimeSlot.DayOfWeek
+                                        <div class="text-xs text-slate-500 mt-1">@sec.DayOfWeek
                                         </div>
                                     </td>
                                     <td class="px-8 py-6 whitespace-nowrap">

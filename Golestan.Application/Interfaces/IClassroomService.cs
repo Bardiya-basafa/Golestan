@@ -6,9 +6,9 @@ using Golestan.Shared.Helpers;
 
 public interface IClassroomService {
 
-    Task<FacultiesClassroomsDto> GetFacultyClassrooms(int facultyId);
+    Task<ClassroomManagement> GetFacultyClassrooms(int facultyId);
 
-    Task<ClassroomManagementDto> GetClassroomManagementDto(int classroomId);
+    Task<ClassroomDto> GetClassroomManagementDto(int classroomId);
 
 
     Task<Result> AddClassroom(AddClassroomDto dto);

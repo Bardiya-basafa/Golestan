@@ -1,5 +1,8 @@
 ﻿namespace Golestan.Domain.Entities;
 
+using Enums;
+
+
 public class Section {
 
     public int Id { get; set; }
@@ -18,6 +21,8 @@ public class Section {
     public Instructor Instructor { get; set; }
 
     public TimeSlot TimeSlot { get; set; }
+
+    public DayOfWeek DayOfWeek { get; set; }
 
     public ICollection<Student> Students { get; set; } = new HashSet<Student>();
 

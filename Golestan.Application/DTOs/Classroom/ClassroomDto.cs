@@ -4,7 +4,7 @@ using Domain.Entities;
 using Section;
 
 
-public class ClassroomManagementDto {
+public class ClassroomDto {
 
     public string ClassroomNumber { get; set; }
 

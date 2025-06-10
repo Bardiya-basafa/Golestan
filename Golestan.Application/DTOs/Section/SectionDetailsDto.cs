@@ -1,6 +1,7 @@
 ﻿namespace Golestan.Application.DTOs.Section;
 
 using Domain.Entities;
+using Domain.Enums;
 
 
 public class SectionDetailsDto {
@@ -13,6 +14,10 @@ public class SectionDetailsDto {
 
     public TimeSlot TimeSlot { get; set; }
 
-    public Course Course { get; set; }
+    public DayOfWeek DayOfWeek { get; set; }
+
+    public string CourseName { get; set; }
+
+    public string ClassNumber { get; set; }
 
 }

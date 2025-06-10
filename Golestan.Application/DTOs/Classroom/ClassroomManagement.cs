@@ -1,6 +1,6 @@
 ﻿namespace Golestan.Application.DTOs.Classroom;
 
-public class FacultiesClassroomsDto {
+public class ClassroomManagement {
 
     public string FacultyName { get; set; }
 

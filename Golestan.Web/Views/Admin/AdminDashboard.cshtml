@@ -88,7 +88,7 @@
         </div>
         <!-- Admin Menu -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <a asp-controller="Admin" asp-action="FacultiesCourses" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+            <a asp-controller="Admin" asp-action="AllCourses" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
                 <div class="text-center">
                     <div class="w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
                         <i class="fas fa-book text-white text-2xl"></i>
@@ -97,7 +97,7 @@
                     <p class="text-gray-600">Add, edit, and manage courses</p>
                 </div>
             </a>
-            <a asp-controller="Admin" asp-action="FacultiesClassrooms" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+            <a asp-controller="Admin" asp-action="AllClassrooms" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
                 <div class="text-center">
                     <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
                         <i class="fas fa-chalkboard text-white text-2xl"></i>
@@ -106,13 +106,13 @@
                     <p class="text-gray-600">Create and manage class schedules</p>
                 </div>
             </a>
-            <a asp-controller="Admin" asp-action="InstructorManagement" onclick="showSection('professorManagement')" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+            <a asp-controller="Admin" asp-action="AllInstructors"  class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
                 <div class="text-center">
                     <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
                         <i class="fas fa-chalkboard-teacher text-white text-2xl"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Professor Management</h3>
-                    <p class="text-gray-600">Add and manage professors</p>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Instructor Management</h3>
+                    <p class="text-gray-600">Add and manage instructors</p>
                 </div>
             </a>
             <div onclick="showSection('studentManagement')" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
@@ -124,7 +124,7 @@
                     <p class="text-gray-600">Add and manage students</p>
                 </div>
             </div>
-            <a asp-controller="Admin" asp-action="FacultiesSections" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+            <a asp-controller="Admin" asp-action="AllSections" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
                 <div class="text-center">
                     <div class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
                         <i class="fas fa-tasks text-white text-2xl"></i>
@@ -133,7 +133,7 @@
                     <p class="text-gray-600">Add and edit or delete sections</p>
                 </div>
             </a>
-            <a asp-controller="Admin" asp-action="FacultiesManagement" onclick="showSection('facultyManagement')" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+            <a asp-controller="Admin" asp-action="AllFaculties" onclick="showSection('facultyManagement')" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
                 <div class="text-center">
                     <div class="w-16 h-16 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
                         <i class="fas fa-university text-white text-2xl"></i>

@@ -32,6 +32,7 @@
       <_ContentIncludedByDefault Remove="Components\Pages\Weather.razor" />
       <_ContentIncludedByDefault Remove="Components\Routes.razor" />
       <_ContentIncludedByDefault Remove="Components\_Imports.razor" />
+      <_ContentIncludedByDefault Remove="Views\Error\Index.cshtml" />
     </ItemGroup>
 
 </Project>

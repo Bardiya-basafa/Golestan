@@ -22,6 +22,21 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CourseInstructor", b =>
+                {
+                    b.Property<int>("CoursesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InstructorsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CoursesId", "InstructorsId");
+
+                    b.HasIndex("InstructorsId");
+
+                    b.ToTable("CourseInstructors", (string)null);
+                });
+
             modelBuilder.Entity("Golestan.Domain.Entities.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -237,7 +252,13 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
 
+                    b.Property<int>("DayOfWeek")
+                        .HasColumnType("int");
+
                     b.Property<int>("InstructorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TimeSlot")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -290,42 +311,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("Golestan.Domain.Entities.TimeSlot", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("ClassroomId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DayOfWeek")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("SectionId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ClassroomId");
-
-                    b.HasIndex("SectionId")
-                        .IsUnique();
-
-                    b.ToTable("TimeSlots");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -355,19 +340,19 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c0c11ac0-41f0-4628-8818-efa9a1dfa286",
+                            Id = "d3e9e74d-5d7d-4ed5-bfe3-e2310181fe68",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "f3ffcd36-1ca0-4ebb-a71e-786f665b9e1e",
+                            Id = "773b09da-08f1-425a-a3a1-bae5ea00aad8",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         },
                         new
                         {
-                            Id = "0c8b7909-9ba4-4333-aa8c-1bc3a1d353bf",
+                            Id = "14c9dcae-da6a-4833-af53-7dbda657612b",
                             Name = "Instructor",
                             NormalizedName = "INSTRUCTOR"
                         });
@@ -513,6 +498,21 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.ToTable("StudentSections", (string)null);
                 });
 
+            modelBuilder.Entity("CourseInstructor", b =>
+                {
+                    b.HasOne("Golestan.Domain.Entities.Course", null)
+                        .WithMany()
+                        .HasForeignKey("CoursesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Golestan.Domain.Entities.Instructor", null)
+                        .WithMany()
+                        .HasForeignKey("InstructorsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Golestan.Domain.Entities.Classroom", b =>
                 {
                     b.HasOne("Golestan.Domain.Entities.Faculty", "Faculty")
@@ -600,21 +600,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Navigation("Faculty");
                 });
 
-            modelBuilder.Entity("Golestan.Domain.Entities.TimeSlot", b =>
-                {
-                    b.HasOne("Golestan.Domain.Entities.Classroom", null)
-                        .WithMany("TimeSlots")
-                        .HasForeignKey("ClassroomId");
-
-                    b.HasOne("Golestan.Domain.Entities.Section", "Section")
-                        .WithOne("TimeSlot")
-                        .HasForeignKey("Golestan.Domain.Entities.TimeSlot", "SectionId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Section");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -693,8 +678,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Golestan.Domain.Entities.Classroom", b =>
                 {
                     b.Navigation("Sections");
-
-                    b.Navigation("TimeSlots");
                 });
 
             modelBuilder.Entity("Golestan.Domain.Entities.Course", b =>
@@ -716,12 +699,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Golestan.Domain.Entities.Instructor", b =>
                 {
                     b.Navigation("Sections");
-                });
-
-            modelBuilder.Entity("Golestan.Domain.Entities.Section", b =>
-                {
-                    b.Navigation("TimeSlot")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

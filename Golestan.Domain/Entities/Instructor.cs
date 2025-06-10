@@ -24,5 +24,6 @@ public class Instructor {
 
 
     public ICollection<Section> Sections { get; set; } = new HashSet<Section>();
+    public ICollection<Course> Courses { get; set; } = new HashSet<Course>();
 
 }

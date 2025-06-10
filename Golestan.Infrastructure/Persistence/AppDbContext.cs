@@ -21,7 +21,6 @@ public class AppDbContext : IdentityDbContext<AppUser> {
 
     public DbSet<Faculty> Faculties { get; set; }
 
-    public DbSet<TimeSlot> TimeSlots { get; set; }
 
     public DbSet<Classroom> Classrooms { get; set; }
 
@@ -96,6 +95,11 @@ public class AppDbContext : IdentityDbContext<AppUser> {
             .HasForeignKey(s => s.InstructorId)
             .OnDelete(DeleteBehavior.NoAction);
 
+        modelBuilder.Entity<Instructor>()
+            .HasMany(i => i.Courses)
+            .WithMany(c => c.Instructors)
+            .UsingEntity(j => j.ToTable("CourseInstructors"));
+
         // Course 
         modelBuilder.Entity<Course>()
             .HasMany(c => c.Sections)
@@ -122,12 +126,6 @@ public class AppDbContext : IdentityDbContext<AppUser> {
             .HasForeignKey(s => s.ClassroomId)
             .OnDelete(DeleteBehavior.NoAction);
 
-        // Time slot 
-        modelBuilder.Entity<TimeSlot>()
-            .HasOne(t => t.Section)
-            .WithOne(s => s.TimeSlot)
-            .HasForeignKey<TimeSlot>(t => t.SectionId)
-            .OnDelete(DeleteBehavior.NoAction);
 
         // Section 
         modelBuilder.Entity<Section>()
@@ -148,10 +146,6 @@ public class AppDbContext : IdentityDbContext<AppUser> {
             .HasForeignKey(s => s.InstructorId)
             .OnDelete(DeleteBehavior.NoAction);
 
-        modelBuilder.Entity<Section>()
-            .HasOne(s => s.TimeSlot)
-            .WithOne(s => s.Section)
-            .OnDelete(DeleteBehavior.NoAction);
 
         // Faculty
         modelBuilder.Entity<Faculty>()

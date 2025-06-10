@@ -18,12 +18,15 @@ public class AdminController : Controller {
 
     private readonly ICourseService _courseService;
 
-    public AdminController(IFacultyService facultyService, IInstructorService instructorService, IClassroomService classroomService, ICourseService courseService)
+    private readonly ISectionService _sectionService;
+
+    public AdminController(IFacultyService facultyService, IInstructorService instructorService, IClassroomService classroomService, ICourseService courseService, ISectionService sectionService)
     {
         _facultyService = facultyService;
         _instructorService = instructorService;
         _classroomService = classroomService;
         _courseService = courseService;
+        _sectionService = sectionService;
     }
 
     // Admin Dashboard
@@ -37,7 +40,7 @@ public class AdminController : Controller {
 
     // Managing each section
 
-    public async Task<IActionResult> InstructorManagement()
+    public async Task<IActionResult> InstructorManagement(int facultyId)
     {
         var instructorsDto = await _instructorService.GetInstructors();
 
@@ -63,19 +66,28 @@ public class AdminController : Controller {
     [HttpGet]
     public async Task<IActionResult> SectionManagement(int facultyId)
     {
-        
+        var model = await _sectionService.GetFacultySections(facultyId);
+
+        return View(model);
     }
 
 
     // Total overview at the system resources
-    public async Task<IActionResult> FacultiesClassrooms()
+    public async Task<IActionResult> AllClassrooms()
     {
         var model = await _facultyService.GetFaculties();
 
         return View(model);
     }
 
-    public async Task<IActionResult> FacultiesCourses()
+    public async Task<IActionResult> AllInstructors()
+    {
+        var model = await _facultyService.GetFaculties();
+
+        return View(model);
+    }
+
+    public async Task<IActionResult> AllCourses()
     {
         var model = await _facultyService.GetFaculties();
 
@@ -83,26 +95,13 @@ public class AdminController : Controller {
     }
 
     [HttpGet]
-    public async Task<IActionResult> FacultiesSections()
+    public async Task<IActionResult> AllSections()
     {
         var model = await _facultyService.GetFaculties();
 
         return View(model);
     }
 
-    // Actions 
-    [HttpGet]
-    public async Task<IActionResult> AddSection()
-    {
-        var facultiesMajorNames = await _facultyService.GetFacultiesMajorNames();
-
-        var model = new AddSectionDto()
-        {
-            FacultyMajorNames = facultiesMajorNames
-        };
-
-        return View(model);
-    }
 
     // Ajaxs 
 
@@ -135,9 +134,9 @@ public class AdminController : Controller {
     }
 
     [HttpGet]
-    public async Task<IActionResult> InstructorOptions(int facultyId)
+    public async Task<IActionResult> InstructorOptions(int courseId)
     {
-        Dictionary<int, string>? instructorOptions = await _facultyService.GetFacultyInstructors(facultyId);
+        var instructorOptions = await _courseService.GetCourseInstructors(courseId);
 
         var options = instructorOptions.Select(kvp => new
         {
@@ -149,7 +148,7 @@ public class AdminController : Controller {
     }
 
 
-    public async Task<IActionResult> FacultiesManagement()
+    public async Task<IActionResult> AllFaculties()
     {
         var faculties = await _facultyService.GetFaculties();
 

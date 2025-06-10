@@ -50,9 +50,17 @@ public class SectionsController : BaseController {
     }
 
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public async Task<IActionResult> AddSection(AddSectionDto dto)
     {
-        return View();
+        var result = await _sectionService.AddNewSection(dto);
+        ShowMessage(result.Message, result.Succeeded);
+
+        if (result.Succeeded){
+            return RedirectToAction("SectionManagement", "Admin", routeValues: new { facultyId = dto.FacultyId });
+        }
+
+        return View(dto);
     }
 
     public async Task<IActionResult> InstructorOptions(int courseId)

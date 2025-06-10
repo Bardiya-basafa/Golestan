@@ -20,7 +20,7 @@ public class FacultiesController : Controller {
     }
 
 
-    public async Task<IActionResult> DetailsFaculty(int id)
+    public async Task<IActionResult> FacultyManagement(int id)
     {
         var faculty = await _facultyService.GetDetailsFacultyById(id);
 

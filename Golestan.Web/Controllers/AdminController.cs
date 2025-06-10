@@ -40,7 +40,7 @@ public class AdminController : Controller {
 
     // Managing each section
 
-    public async Task<IActionResult> InstructorManagement()
+    public async Task<IActionResult> InstructorManagement(int facultyId)
     {
         var instructorsDto = await _instructorService.GetInstructors();
 
@@ -73,14 +73,21 @@ public class AdminController : Controller {
 
 
     // Total overview at the system resources
-    public async Task<IActionResult> FacultiesClassrooms()
+    public async Task<IActionResult> AllClassrooms()
     {
         var model = await _facultyService.GetFaculties();
 
         return View(model);
     }
 
-    public async Task<IActionResult> FacultiesCourses()
+    public async Task<IActionResult> AllInstructors()
+    {
+        var model = await _facultyService.GetFaculties();
+
+        return View(model);
+    }
+
+    public async Task<IActionResult> AllCourses()
     {
         var model = await _facultyService.GetFaculties();
 
@@ -88,7 +95,7 @@ public class AdminController : Controller {
     }
 
     [HttpGet]
-    public async Task<IActionResult> FacultiesSections()
+    public async Task<IActionResult> AllSections()
     {
         var model = await _facultyService.GetFaculties();
 
@@ -129,7 +136,7 @@ public class AdminController : Controller {
     [HttpGet]
     public async Task<IActionResult> InstructorOptions(int courseId)
     {
-       var instructorOptions = await _courseService.GetCourseInstructors(courseId);
+        var instructorOptions = await _courseService.GetCourseInstructors(courseId);
 
         var options = instructorOptions.Select(kvp => new
         {
@@ -141,7 +148,7 @@ public class AdminController : Controller {
     }
 
 
-    public async Task<IActionResult> FacultiesManagement()
+    public async Task<IActionResult> AllFaculties()
     {
         var faculties = await _facultyService.GetFaculties();
 

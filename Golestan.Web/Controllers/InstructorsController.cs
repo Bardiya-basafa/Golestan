@@ -59,22 +59,12 @@ public class InstructorsController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("InstructorManagement", "Admin");
+            return RedirectToAction("ManageInstructors", "Admin");
         }
 
 
         return View(dto);
     }
 
-    public async Task<IActionResult> VerifyEmail(string email)
-    {
-        var user = await _userManager.FindByEmailAsync(email);
-
-        if (user != null){
-            return Json(false);
-        }
-
-        return Json(true);
-    }
 
 }

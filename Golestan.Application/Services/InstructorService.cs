@@ -16,7 +16,7 @@ public class InstructorService : IInstructorService {
         _context = context;
     }
 
-    public async Task<List<InstructorDetailsDto>> GetInstructors()
+    public async Task<List<InstructorDetailsDto>> GetFacultyInstructors()
     {
         try{
             var instructors = await _context.Instructors

@@ -1,11 +1,11 @@
-﻿namespace Golestan.Application.DTOs.Instructor;
+﻿namespace Golestan.Application.DTOs.Student;
 
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 using Validations;
 
 
-public class AddInstructorDto {
+public class AddStudentDto {
 
     [Required(ErrorMessage = "You must provide a first name")]
     [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "The field must contain only letters")]
@@ -35,20 +35,15 @@ public class AddInstructorDto {
 
     public string ConfirmPassword { get; set; }
 
-    [Required(ErrorMessage = "You must provide the hire date")]
+    [Required(ErrorMessage = "You must provide the entered date")]
     [NotInFuture]
 
-    public DateTime HireDate { get; set; }
+    public DateTime EnteredDate { get; set; }
 
-    [Required(ErrorMessage = "You must provide the salary")]
-    [BiggerThanZero]
-
-    public int Salary { get; set; }
 
     [Required(ErrorMessage = "You must provide the a faculty")]
     public int FacultyId { get; set; }
 
-
-    public Dictionary<int, string>? FacultyOptions { get; set; }
+    public string FacultyName { get; set; }
 
 }

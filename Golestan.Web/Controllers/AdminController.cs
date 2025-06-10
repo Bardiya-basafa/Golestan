@@ -6,6 +6,8 @@ namespace Golestan.Web.Controllers;
 using Application.DTOs.Section;
 using Application.Interfaces;
 using Application.Services;
+using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 
 
 public class AdminController : Controller {
@@ -20,13 +22,20 @@ public class AdminController : Controller {
 
     private readonly ISectionService _sectionService;
 
-    public AdminController(IFacultyService facultyService, IInstructorService instructorService, IClassroomService classroomService, ICourseService courseService, ISectionService sectionService)
+    private readonly IStudentService _studentService;
+
+    private readonly UserManager<AppUser> _userManager;
+
+
+    public AdminController(IFacultyService facultyService, IInstructorService instructorService, IClassroomService classroomService, ICourseService courseService, ISectionService sectionService, IStudentService studentService, UserManager<AppUser> userManager)
     {
         _facultyService = facultyService;
         _instructorService = instructorService;
         _classroomService = classroomService;
         _courseService = courseService;
         _sectionService = sectionService;
+        _studentService = studentService;
+        _userManager = userManager;
     }
 
     // Admin Dashboard
@@ -39,16 +48,22 @@ public class AdminController : Controller {
     }
 
     // Managing each section
-
-    public async Task<IActionResult> InstructorManagement(int facultyId)
+    public async Task<IActionResult> ManageStudents(int facultyId)
     {
-        var instructorsDto = await _instructorService.GetInstructors();
+        var model = await _studentService.GetFacultyStudents(facultyId);
+
+        return View(model);
+    }
+
+    public async Task<IActionResult> ManageInstructors(int facultyId)
+    {
+        var instructorsDto = await _instructorService.GetFacultyInstructors();
 
         return View(instructorsDto);
     }
 
     [HttpGet]
-    public async Task<IActionResult> CourseManagement(int facultyId)
+    public async Task<IActionResult> ManageCourses(int facultyId)
     {
         var model = await _courseService.GetFacultyCourses(facultyId);
 
@@ -56,7 +71,7 @@ public class AdminController : Controller {
     }
 
     [HttpGet]
-    public async Task<IActionResult> ClassroomManagement(int facultyId)
+    public async Task<IActionResult> ManageClassrooms(int facultyId)
     {
         var model = await _classroomService.GetFacultyClassrooms(facultyId);
 
@@ -64,7 +79,7 @@ public class AdminController : Controller {
     }
 
     [HttpGet]
-    public async Task<IActionResult> SectionManagement(int facultyId)
+    public async Task<IActionResult> ManageSections(int facultyId)
     {
         var model = await _sectionService.GetFacultySections(facultyId);
 
@@ -101,7 +116,20 @@ public class AdminController : Controller {
 
         return View(model);
     }
+    [HttpGet]
+    public async Task<IActionResult> AllStudents()
+    {
+        var model = await _facultyService.GetFaculties();
 
+        return View(model);
+    }
+    public async Task<IActionResult> AllFaculties()
+    {
+        var faculties = await _facultyService.GetFaculties();
+
+
+        return View(faculties);
+    }
 
     // Ajaxs 
 
@@ -148,12 +176,17 @@ public class AdminController : Controller {
     }
 
 
-    public async Task<IActionResult> AllFaculties()
+   
+
+    public async Task<IActionResult> VerifyEmail(string email)
     {
-        var faculties = await _facultyService.GetFaculties();
+        var user = await _userManager.FindByEmailAsync(email);
 
+        if (user != null){
+            return Json(false);
+        }
 
-        return View(faculties);
+        return Json(true);
     }
 
 }

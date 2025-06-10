@@ -48,7 +48,7 @@ public class CoursesController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("CourseManagement", "Admin", new { facultyId = dto.FacultyId });
+            return RedirectToAction("ManageCourses", "Admin", new { facultyId = dto.FacultyId });
         }
 
 

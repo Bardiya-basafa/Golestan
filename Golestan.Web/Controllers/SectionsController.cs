@@ -33,7 +33,7 @@ public class SectionsController : BaseController {
         if (facultyDetails.CoursesCount == 0 || facultyDetails.InstructorsCount == 0 || facultyDetails.ClassesCount == 0){
             ShowMessage("There are no course or instructor in this faculty.", false);
 
-            return RedirectToAction("SectionManagement", "Admin", routeValues: new { facultyId = facultyId });
+            return RedirectToAction("ManageSections", "Admin", routeValues: new { facultyId = facultyId });
         }
 
         var classrooms = await _facultyService.GetFacultyClassrooms(facultyId);
@@ -57,7 +57,7 @@ public class SectionsController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("SectionManagement", "Admin", routeValues: new { facultyId = dto.FacultyId });
+            return RedirectToAction("ManageSections", "Admin", routeValues: new { facultyId = dto.FacultyId });
         }
 
         return View(dto);

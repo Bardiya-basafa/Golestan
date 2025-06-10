@@ -52,20 +52,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWxsU2VjdGlvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Admin/ClassroomManagement.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2xhc3Nyb29tTWFuYWdlbWVudC5jc2h0bWw=
+[E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Admin/AllStudents.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWxsU3R1ZGVudHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Admin/CourseManagement.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ291cnNlTWFuYWdlbWVudC5jc2h0bWw=
+[E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Admin/ManageClassrooms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlQ2xhc3Nyb29tcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Admin/InstructorManagement.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5zdHJ1Y3Rvck1hbmFnZW1lbnQuY3NodG1s
+[E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Admin/ManageCourses.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlQ291cnNlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Admin/SectionManagement.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cU2VjdGlvbk1hbmFnZW1lbnQuY3NodG1s
+[E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Admin/ManageInstructors.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlSW5zdHJ1Y3RvcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Admin/ManageSections.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlU2VjdGlvbnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Admin/ManageStudents.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTWFuYWdlU3R1ZGVudHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Classrooms/AddClassroom.cshtml]
@@ -114,6 +122,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Students/AddStudent.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcQWRkU3R1ZGVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Students/Index.cshtml]

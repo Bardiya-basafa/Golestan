@@ -50,7 +50,7 @@ public class ClassroomsController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("ClassroomManagement", "Admin", dto.FacultyId);
+            return RedirectToAction("ManageClassrooms", "Admin", dto.FacultyId);
         }
 
         return View(dto);

@@ -1,0 +1,342 @@
+﻿@model List<StudentDetailsDto>
+@{
+        ViewData["Title"] = "Add Students to Section";
+        int sectionId = ViewBag.SectionId;
+        string courseName = ViewBag.CourseName;
+}
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Header Section -->
+    <div class="mb-8 animate-fade-in">
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-200 p-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                <div class="mb-6 lg:mb-0">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-indigo-700 to-indigo-900 rounded-2xl flex items-center justify-center shadow-lg mr-6">
+                            <i class="fas fa-user-plus text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold text-slate-800 mb-2">Add Students to Section</h2>
+                            <p class="text-slate-600 text-lg font-medium">@courseName - Section #@sectionId</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="javascript:history.back()" 
+                       class="flex items-center px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-all duration-200 shadow-lg border border-slate-200 font-medium">
+                        <i class="fas fa-arrow-left mr-2"></i>
+                        Back to Section
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Left Column - Search and Instructions -->
+        <div class="lg:col-span-1">
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 mb-6 animate-fade-in">
+                <h3 class="text-xl font-bold text-slate-800 mb-4">Search Students</h3>
+                
+                <div class="mb-6">
+                    <label for="studentSearch" class="block text-sm font-medium text-slate-700 mb-2">Search by Student Number</label>
+                    <div class="relative">
+                        <input type="text" id="studentSearch" placeholder="Enter student number..." 
+                               class="w-full pl-10 pr-4 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-slate-400"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-indigo-50 rounded-xl p-4 border border-indigo-100">
+                    <h4 class="font-bold text-indigo-800 flex items-center mb-2">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        Instructions
+                    </h4>
+                    <ul class="text-sm text-indigo-700 space-y-2">
+                        <i class="fas fa-check-circle mt-1 mr-2"></i>
+                        
+                        <li class="flex items-start">
+                            <span>Search for students by their student number</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle mt-1 mr-2"></i>
+                            <span>Click on students to select them</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle mt-1 mr-2"></i>
+                            <span>Click "Add Selected Students" when done</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="mt-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-bold text-slate-700">Selected Students</h4>
+                        <span id="selectedCount" class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2 py-1 rounded-full">0</span>
+                    </div>
+                    <div id="selectedStudentsList" class="bg-slate-50 rounded-xl p-4 border border-slate-200 min-h-[100px] max-h-[200px] overflow-y-auto">
+                        <p id="noSelectionMessage" class="text-slate-500 text-sm text-center py-4">No students selected</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6">
+                    <form id="addStudentsForm" method="post" action="/Sections/AddStudents">
+                        <input type="hidden" name="sectionId" value="@sectionId">
+                        <div id="selectedStudentsInputs"></div>
+                        <button type="submit" id="submitButton" disabled
+                                class="w-full py-3 bg-gradient-to-r from-indigo-700 to-indigo-900 text-white rounded-xl hover:from-indigo-800 hover:to-indigo-950 transition-all duration-200 shadow-lg font-medium disabled:opacity-50 disabled:cursor-not-allowed">
+                            <i class="fas fa-user-plus mr-2"></i>
+                            Add Selected Students
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Right Column - Students List -->
+        <div class="lg:col-span-2">
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden animate-fade-in">
+                <div class="bg-gradient-to-r from-indigo-700 to-indigo-900 p-6">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Available Students</h3>
+                            <p class="text-indigo-200">Select students to add to this section</p>
+                        </div>
+                        <div>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/20 backdrop-blur-sm text-white">
+                                @Model.Count Students
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full">
+                            <thead>
+                                <tr class="border-b-2 border-slate-200">
+                                    <th class="text-left py-4 px-6 font-bold text-slate-700 uppercase tracking-wider w-12">
+                                        <input type="checkbox" id="selectAll" class="w-5 h-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
+                                    </th>
+                                    <th class="text-left py-4 px-6 font-bold text-slate-700 uppercase tracking-wider">
+                                        Student
+                                    </th>
+                                    <th class="text-left py-4 px-6 font-bold text-slate-700 uppercase tracking-wider">
+                                        Student Number
+                                    </th>
+                                    <th class="text-left py-4 px-6 font-bold text-slate-700 uppercase tracking-wider">
+                                        Email
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentsTableBody" class="divide-y divide-slate-100">
+                                @foreach (var student in Model)
+                                {
+                                    <tr class="student-row transition-all duration-200" data-student-id="@student.Id" data-student-number="@student.StudentNumber" data-student-name="@student.FullName">
+                                        <td class="py-4 px-6">
+                                            <input type="checkbox" name="selectedStudents" value="@student.Id" class="student-checkbox w-5 h-5 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-12 w-12 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center shadow-md">
+                                                    <i class="fas fa-user-graduate text-white text-xl"></i>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-base font-bold text-slate-800">@student.FullName</div>
+                                                    <div class="text-xs text-slate-500">ID: @student.Id</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="text-base font-medium text-slate-800">@student.StudentNumber</div>
+                                        </td>
+                                        <td class="py-4 px-6">
+                                            <div class="text-sm text-slate-600">@student.Email</div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Empty State -->
+                    <div id="emptyState" class="hidden text-center py-12">
+                        <div class="w-24 h-24 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-search text-slate-400 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-700 mb-2">No Students Found</h3>
+                        <p class="text-slate-500 text-base mb-4">No students match your search criteria.</p>
+                        <button id="clearSearchBtn" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg transition-all duration-200 font-medium">
+                            Clear Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const studentSearch = document.getElementById('studentSearch');
+    const studentsTableBody = document.getElementById('studentsTableBody');
+    const studentRows = document.querySelectorAll('.student-row');
+    const emptyState = document.getElementById('emptyState');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    const selectAll = document.getElementById('selectAll');
+    const selectedStudentsList = document.getElementById('selectedStudentsList');
+    const noSelectionMessage = document.getElementById('noSelectionMessage');
+    const selectedCount = document.getElementById('selectedCount');
+    const submitButton = document.getElementById('submitButton');
+    const selectedStudentsInputs = document.getElementById('selectedStudentsInputs');
+    
+    // Search functionality
+    studentSearch.addEventListener('input', function() {
+        const searchValue = this.value.toLowerCase().trim();
+        let visibleCount = 0;
+        
+        studentRows.forEach(row => {
+            const studentNumber = row.getAttribute('data-student-number').toLowerCase();
+            const studentName = row.getAttribute('data-student-name').toLowerCase();
+            
+            if (studentNumber.includes(searchValue) || studentName.includes(searchValue)) {
+                row.classList.remove('hidden');
+                visibleCount++;
+            } else {
+                row.classList.add('hidden');
+            }
+        });
+        
+        // Show/hide empty state
+        if (visibleCount === 0) {
+            emptyState.classList.remove('hidden');
+        } else {
+            emptyState.classList.add('hidden');
+        }
+    });
+    
+    // Clear search
+    clearSearchBtn.addEventListener('click', function() {
+        studentSearch.value = '';
+        studentRows.forEach(row => row.classList.remove('hidden'));
+        emptyState.classList.add('hidden');
+    });
+    
+    // Select all functionality
+    selectAll.addEventListener('change', function() {
+        const checkboxes = document.querySelectorAll('.student-checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+            const row = checkbox.closest('.student-row');
+            if (this.checked) {
+                row.classList.add('selected');
+            } else {
+                row.classList.remove('selected');
+            }
+        });
+        updateSelectedStudents();
+    });
+    
+    // Individual checkbox functionality
+    document.querySelectorAll('.student-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            const row = this.closest('.student-row');
+            if (this.checked) {
+                row.classList.add('selected');
+            } else {
+                row.classList.remove('selected');
+                selectAll.checked = false;
+            }
+            updateSelectedStudents();
+        });
+    });
+    
+    // Row click to toggle checkbox
+    studentRows.forEach(row => {
+        row.addEventListener('click', function(e) {
+            // Don't toggle if clicking on the checkbox itself
+            if (e.target.type !== 'checkbox') {
+                const checkbox = this.querySelector('.student-checkbox');
+                checkbox.checked = !checkbox.checked;
+                
+                if (checkbox.checked) {
+                    this.classList.add('selected');
+                } else {
+                    this.classList.remove('selected');
+                    selectAll.checked = false;
+                }
+                
+                updateSelectedStudents();
+            }
+        });
+    });
+    
+    // Update selected students list
+    function updateSelectedStudents() {
+        const selectedCheckboxes = document.querySelectorAll('.student-checkbox:checked');
+        selectedCount.textContent = selectedCheckboxes.length;
+        
+        // Clear previous selections
+        selectedStudentsList.innerHTML = '';
+        selectedStudentsInputs.innerHTML = '';
+        
+        if (selectedCheckboxes.length === 0) {
+            selectedStudentsList.appendChild(noSelectionMessage);
+            submitButton.disabled = true;
+        } else {
+            submitButton.disabled = false;
+            
+            selectedCheckboxes.forEach(checkbox => {
+                const row = checkbox.closest('.student-row');
+                const studentId = row.getAttribute('data-student-id');
+                const studentName = row.getAttribute('data-student-name');
+                const studentNumber = row.getAttribute('data-student-number');
+                
+                // Create selected student item
+                const studentItem = document.createElement('div');
+                studentItem.className = 'flex items-center justify-between py-2 border-b border-slate-100 last:border-0';
+                studentItem.innerHTML = `
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center mr-2">
+                            <i class="fas fa-user text-indigo-600 text-sm"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-medium text-slate-800">${studentName}</div>
+                            <div class="text-xs text-slate-500">${studentNumber}</div>
+                        </div>
+                    </div>
+                    <button type="button" class="remove-student text-slate-400 hover:text-red-500 transition-colors" data-student-id="${studentId}">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                
+                selectedStudentsList.appendChild(studentItem);
+                
+                // Create hidden input for form submission
+                const hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = 'studentIds';
+                hiddenInput.value = studentId;
+                selectedStudentsInputs.appendChild(hiddenInput);
+            });
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.remove-student').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const studentId = this.getAttribute('data-student-id');
+                    const checkbox = document.querySelector(`.student-checkbox[value="${studentId}"]`);
+                    if (checkbox) {
+                        checkbox.checked = false;
+                        checkbox.closest('.student-row').classList.remove('selected');
+                    }
+                    updateSelectedStudents();
+                });
+            });
+        }
+    }
+});
+</script>

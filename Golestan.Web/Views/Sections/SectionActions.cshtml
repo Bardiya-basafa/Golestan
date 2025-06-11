@@ -18,9 +18,8 @@
                 </div>
                 <div class="flex space-x-4">
                     <a asp-controller="Admin" asp-action="Index" class="flex items-center px-8 py-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-all duration-200 shadow-lg border border-slate-200 font-semibold"> Back to Admin </a>
-                    <button onclick="openAddStudentModal()" class="flex items-center px-8 py-4 bg-gradient-to-r from-indigo-700 to-indigo-900 text-white rounded-xl hover:from-indigo-800 hover:to-indigo-950 transition-all duration-200 shadow-xl font-semibold">
-                        <i class="fas fa-user-plus mr-3 text-xl"></i> Add Student to Section
-                    </button>
+                    <a asp-controller="Sections" asp-action="AddStudentToSection" asp-route-sectionId="@Model.Id" class="flex items-center px-8 py-4 bg-gradient-to-r from-indigo-700 to-indigo-900 text-white rounded-xl hover:from-indigo-800 hover:to-indigo-950 transition-all duration-200 shadow-xl font-semibold">
+                        <i class="fas fa-user-plus mr-3 text-xl"></i> Add Student to Section </a>
                 </div>
             </div>
         </div>
@@ -32,7 +31,7 @@
                 <div>
                     <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">Course</p>
                     <p class="text-2xl font-bold text-indigo-800">@Model.CourseName</p>
-                    <p class="text-xs text-slate-500 mt-1">@Model.CourseCode</p>
+                    <p class="text-xs text-slate-500 mt-1">@Model.CourseId</p>
                 </div>
                 <div class="w-14 h-14 bg-indigo-100 rounded-2xl flex items-center justify-center">
                     <i class="fas fa-book text-indigo-600 text-2xl"></i>
@@ -56,7 +55,7 @@
                 <div>
                     <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">Schedule</p>
                     <p class="text-2xl font-bold text-purple-800">@Model.DayOfWeek</p>
-                    <p class="text-xs text-slate-500 mt-1">@Model.TimeSlotDescription</p>
+                    <p class="text-xs text-slate-500 mt-1">@Model.TimeSlot.GetDescription()</p>
                 </div>
                 <div class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center">
                     <i class="fas fa-clock text-purple-600 text-2xl"></i>
@@ -67,7 +66,7 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">Classroom</p>
-                    <p class="text-2xl font-bold text-amber-800">@Model.ClassroomName</p>
+                    <p class="text-2xl font-bold text-amber-800">@Model.ClassroomNumber</p>
                     <p class="text-xs text-slate-500 mt-1">@Model.Students.Count/@Model.ClassroomCapacity students</p>
                 </div>
                 <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center">
@@ -179,16 +178,15 @@
                     </div>
                     <h3 class="text-2xl font-bold text-slate-700 mb-4">No Students Enrolled</h3>
                     <p class="text-slate-500 text-lg mb-8 max-w-md mx-auto">This section doesn't have any enrolled students yet. Add students to get started.</p>
-                    <button onclick="openAddStudentModal()" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-700 to-indigo-900 text-white rounded-xl hover:from-indigo-800 hover:to-indigo-950 transition-all duration-200 shadow-xl font-semibold">
-                        <i class="fas fa-user-plus mr-3"></i> Add First Student
-                    </button>
+                    <a asp-controller="Sections" asp-action="AddStudentToSection" asp-route-sectionId="@Model.Id" asp-route-facultyId="@Model.FacultyId" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-700 to-indigo-900 text-white rounded-xl hover:from-indigo-800 hover:to-indigo-950 transition-all duration-200 shadow-xl font-semibold">
+                        <i class="fas fa-user-plus mr-3"></i> Add First Student </a>
                 </div>
             }
         </div>
     </div>
     <!-- Back Navigation -->
     <div class="mt-12 text-center">
-        <a asp-controller="Admin" asp-action="SectionsList" class="inline-flex items-center text-slate-600 hover:text-slate-800 transition-colors group font-semibold text-lg">
+        <a asp-controller="Admin" asp-action="ManageSections" asp-route-facultyId="@Model." class="inline-flex items-center text-slate-600 hover:text-slate-800 transition-colors group font-semibold text-lg">
             <svg class="w-6 h-6 mr-3 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
             </svg>
@@ -196,47 +194,3 @@
     </div>
 </div>
 
-<!-- Add Student Modal -->
-<div id="addStudentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
-    <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
-        <div class="bg-gradient-to-r from-indigo-700 to-indigo-900 p-6 rounded-t-2xl">
-            <div class="flex justify-between items-center">
-                <div>
-                    <h3 class="text-2xl font-bold text-white">Add Student to Section</h3>
-                    <p class="text-indigo-300">Select a student to enroll in this section</p>
-                </div>
-                <button onclick="closeAddStudentModal()" class="text-white hover:text-indigo-200 transition-colors">
-                    <i class="fas fa-times text-2xl"></i>
-                </button>
-            </div>
-        </div>
-        <div class="p-6">
-            <form asp-controller="Sections" asp-action="AddStudent" method="post">
-                <input type="hidden" name="sectionId" value="@Model.Id"/>
-                <div class="mb-6">
-                    <label class="block text-sm font-bold text-slate-700 mb-3">Search and Select Student</label>
-                    <div class="relative">
-                        <input type="text" id="studentSearch" placeholder="Search by name or student number..." class="w-full pl-12 pr-4 py-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-slate-700 font-medium">
-                        <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
-                    </div>
-                </div>
-                <div class="mb-6">
-                    <label class="block text-sm font-bold text-slate-700 mb-3">Available Students</label>
-                    <div class="max-h-64 overflow-y-auto border border-slate-200 rounded-xl">
-                        <div id="studentsList" class="divide-y divide-slate-100">
-                            <!-- Students will be loaded here via AJAX -->
-                        </div>
-                    </div>
-                </div>
-                <div class="flex justify-end space-x-4">
-                    <button type="button" onclick="closeAddStudentModal()" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-all duration-200 font-medium">
-                        Cancel
-                    </button>
-                    <button type="submit" id="addStudentBtn" disabled class="px-6 py-3 bg-gradient-to-r from-indigo-700 to-indigo-900 text-white rounded-xl hover:from-indigo-800 hover:to-indigo-950 transition-all duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed">
-                        <i class="fas fa-user-plus mr-2"></i>Add Student
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>

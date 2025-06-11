@@ -63,6 +63,30 @@ public class SectionsController : BaseController {
         return View(dto);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> SectionActions(int sectionId)
+    {
+        if (!ModelState.IsValid){
+            return RedirectToAction("AllSections", "Admin");
+        }
+
+        var model = await _sectionService.GetSectionActionsDto(sectionId);
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> AddStudentToSection(int sectionId, int facultyId)
+    {
+        var model = await _sectionService.GetAvailableStudents(sectionId, facultyId);
+        ViewBag.sectionId = sectionId;
+        ViewBag.CourseName = "Course name";
+
+
+        return View(model);
+    }
+
+    // Ajaxes
     public async Task<IActionResult> InstructorOptions(int courseId)
     {
         var instructorOptions = await _courseService.GetCourseInstructors(courseId);

@@ -4,6 +4,7 @@ using Domain.Entities;
 using Domain.Enums;
 using DTOs.Course;
 using DTOs.Section;
+using DTOs.Student;
 using Infrastructure.Persistence;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -48,6 +49,81 @@ public class SectionService : ISectionService {
                     InstructorAppUser = s.Instructor.AppUser,
                     InstructorId = s.InstructorId,
                     ClassNumber = s.Classroom.ClassNumber,
+                })
+                .ToListAsync();
+
+            return dto;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+
+            throw;
+        }
+    }
+
+    public async Task<SectionActionsDto> GetSectionActionsDto(int sectionId)
+    {
+        try{
+            var dto = new SectionActionsDto();
+
+            dto = await _context.Sections
+                .Where(s => s.Id == sectionId)
+                .Select(s => new SectionActionsDto()
+                {
+                    Id = s.Id,
+                    CourseName = s.Course.Name,
+                    TimeSlot = s.TimeSlot,
+                    InstructorId = s.InstructorId,
+                    InstructorName = s.Instructor.FullName,
+                    ClassroomNumber = s.Classroom.ClassNumber,
+                    ClassroomCapacity = s.Classroom.Capacity,
+                    DayOfWeek = s.DayOfWeek,
+                    FacultyId = s.Course.FacultyId,
+                })
+                .FirstOrDefaultAsync();
+
+            dto.Students = await _context.Students
+                .Where(s => s.Sections.Any(s => s.Id == sectionId))
+                .Select(s => new StudentDetailsDto()
+                {
+                    Id = s.Id,
+                    AppUserId = s.AppUserId,
+                    Email = s.AppUser.Email,
+                    StudentNumber = s.StudentNumber,
+                    FullName = s.FullName,
+                    FacultyId = s.FacultyId,
+                    FacultyName = s.Faculty.MajorName,
+                })
+                .ToListAsync();
+
+            return dto;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+
+            throw;
+        }
+    }
+
+    public async Task<List<StudentDetailsDto>> GetAvailableStudents(int sectionId, int facultyId)
+    {
+        try{
+            // var courseId = await _context.Courses
+            //     .Where(c => c.Sections.Any(s => s.Id == sectionId))
+            //     .Select(s => s.Id)
+            //     .FirstOrDefaultAsync();
+
+
+            var dto = await _context.Students
+                .Where(s => s.FacultyId == facultyId && s.Sections.All(s => s.Id != sectionId))
+                .Select(s => new StudentDetailsDto()
+                {
+                    Id = s.Id,
+                    AppUserId = s.AppUserId,
+                    Email = s.AppUser.Email,
+                    StudentNumber = s.StudentNumber,
+                    FullName = s.FullName,
+                    FacultyId = s.FacultyId,
                 })
                 .ToListAsync();
 

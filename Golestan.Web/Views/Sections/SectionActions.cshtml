@@ -1,0 +1,242 @@
+﻿@model SectionActionsDto
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Header Section -->
+    <div class="mb-12 animate-fade-in">
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-200 p-8 mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                <div class="mb-6 lg:mb-0">
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-r from-indigo-700 to-indigo-900 rounded-2xl flex items-center justify-center shadow-lg mr-6">
+                            <i class="fas fa-chalkboard-teacher text-white text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-4xl font-bold text-slate-800 mb-2">Section Management</h2>
+                            <p class="text-slate-600 text-lg font-medium">@Model.CourseName - Section @Model.Id</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex space-x-4">
+                    <a asp-controller="Admin" asp-action="Index" class="flex items-center px-8 py-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-all duration-200 shadow-lg border border-slate-200 font-semibold"> Back to Admin </a>
+                    <button onclick="openAddStudentModal()" class="flex items-center px-8 py-4 bg-gradient-to-r from-indigo-700 to-indigo-900 text-white rounded-xl hover:from-indigo-800 hover:to-indigo-950 transition-all duration-200 shadow-xl font-semibold">
+                        <i class="fas fa-user-plus mr-3 text-xl"></i> Add Student to Section
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Section Details Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 animate-slide-up">
+        <div class="bg-white rounded-2xl p-8 shadow-xl border border-slate-200 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">Course</p>
+                    <p class="text-2xl font-bold text-indigo-800">@Model.CourseName</p>
+                    <p class="text-xs text-slate-500 mt-1">@Model.CourseCode</p>
+                </div>
+                <div class="w-14 h-14 bg-indigo-100 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-book text-indigo-600 text-2xl"></i>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-xl border border-slate-200 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">Instructor</p>
+                    <p class="text-2xl font-bold text-emerald-800">@Model.InstructorName</p>
+                    <p class="text-xs text-slate-500 mt-1">Faculty Member</p>
+                </div>
+                <div class="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-user-tie text-emerald-600 text-2xl"></i>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-xl border border-slate-200 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">Schedule</p>
+                    <p class="text-2xl font-bold text-purple-800">@Model.DayOfWeek</p>
+                    <p class="text-xs text-slate-500 mt-1">@Model.TimeSlotDescription</p>
+                </div>
+                <div class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-clock text-purple-600 text-2xl"></i>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white rounded-2xl p-8 shadow-xl border border-slate-200 card-hover">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">Classroom</p>
+                    <p class="text-2xl font-bold text-amber-800">@Model.ClassroomName</p>
+                    <p class="text-xs text-slate-500 mt-1">@Model.Students.Count/@Model.ClassroomCapacity students</p>
+                </div>
+                <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-door-open text-amber-600 text-2xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Students Table -->
+    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden animate-fade-in">
+        <div class="bg-gradient-to-r from-indigo-700 to-indigo-900 p-8">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="text-3xl font-bold text-white mb-3">Enrolled Students</h3>
+                    <p class="text-indigo-300 text-lg">Students registered for this section</p>
+                </div>
+                <div class="text-white/80">
+                    <span class="inline-flex items-center px-4 py-2 rounded-xl text-lg font-bold bg-white/20 backdrop-blur-sm">
+                        @Model.Students.Count Students
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="p-8">
+            @if (Model.Students != null && Model.Students.Count > 0){
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b-2 border-slate-200">
+                                <th class="text-left py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
+                                    Student Information
+                                </th>
+                                <th class="text-left py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
+                                    Student Number
+                                </th>
+                                <th class="text-left py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
+                                    Contact Information
+                                </th>
+                                <th class="text-left py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
+                                    Faculty
+                                </th>
+                                <th class="text-center py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            @foreach (var student in Model.Students){
+                                <tr class="table-row-hover transition-all duration-200">
+                                    <td class="py-8 px-8">
+                                        <div class="flex items-center">
+                                            <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center mr-6 shadow-lg">
+                                                <i class="fas fa-user-graduate text-white text-2xl"></i>
+                                            </div>
+                                            <div>
+                                                <div class="text-lg font-bold text-slate-800 mb-1">@student.FullName</div>
+                                                <div class="text-sm text-slate-500">Student ID: @student.Id</div>
+                                                <div class="text-xs text-slate-400">User ID: @student.AppUserId</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-8 px-8">
+                                        <div class="flex items-center">
+                                            <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mr-4">
+                                                <i class="fas fa-id-card text-amber-600 text-xl"></i>
+                                            </div>
+                                            <div>
+                                                <div class="text-lg font-bold text-slate-800">@student.StudentNumber</div>
+                                                <div class="text-xs text-slate-500">University Number</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-8 px-8">
+                                        <div class="flex items-center">
+                                            <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mr-4">
+                                                <i class="fas fa-envelope text-emerald-600 text-xl"></i>
+                                            </div>
+                                            <div>
+                                                <div class="text-sm font-bold text-slate-800">@student.Email</div>
+                                                <div class="text-xs text-slate-500">Primary Contact</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-8 px-8">
+                                        <span class="inline-flex items-center px-4 py-2 rounded-xl text-sm font-bold bg-gradient-to-r from-purple-100 to-purple-200 text-purple-800 border border-purple-300">
+                                            <i class="fas fa-university mr-2"></i>
+                                            @student.FacultyName
+                                        </span>
+                                    </td>
+                                    <td class="py-8 px-8">
+                                        <div class="flex items-center justify-center space-x-3">
+                                            <a asp-controller="Students" asp-action="Details" asp-route-id="@student.Id" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-200 font-medium">
+                                                <i class="fas fa-eye mr-2"></i>View </a>
+                                            <button onclick="removeStudent(@student.Id, '@student.FullName')" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-200 font-medium">
+                                                <i class="fas fa-user-minus mr-2"></i>Remove
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else{
+                <div class="text-center py-20">
+                    <div class="w-32 h-32 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-8">
+                        <i class="fas fa-users text-slate-400 text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-slate-700 mb-4">No Students Enrolled</h3>
+                    <p class="text-slate-500 text-lg mb-8 max-w-md mx-auto">This section doesn't have any enrolled students yet. Add students to get started.</p>
+                    <button onclick="openAddStudentModal()" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-700 to-indigo-900 text-white rounded-xl hover:from-indigo-800 hover:to-indigo-950 transition-all duration-200 shadow-xl font-semibold">
+                        <i class="fas fa-user-plus mr-3"></i> Add First Student
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+    <!-- Back Navigation -->
+    <div class="mt-12 text-center">
+        <a asp-controller="Admin" asp-action="SectionsList" class="inline-flex items-center text-slate-600 hover:text-slate-800 transition-colors group font-semibold text-lg">
+            <svg class="w-6 h-6 mr-3 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Sections List </a>
+    </div>
+</div>
+
+<!-- Add Student Modal -->
+<div id="addStudentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+        <div class="bg-gradient-to-r from-indigo-700 to-indigo-900 p-6 rounded-t-2xl">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h3 class="text-2xl font-bold text-white">Add Student to Section</h3>
+                    <p class="text-indigo-300">Select a student to enroll in this section</p>
+                </div>
+                <button onclick="closeAddStudentModal()" class="text-white hover:text-indigo-200 transition-colors">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <div class="p-6">
+            <form asp-controller="Sections" asp-action="AddStudent" method="post">
+                <input type="hidden" name="sectionId" value="@Model.Id"/>
+                <div class="mb-6">
+                    <label class="block text-sm font-bold text-slate-700 mb-3">Search and Select Student</label>
+                    <div class="relative">
+                        <input type="text" id="studentSearch" placeholder="Search by name or student number..." class="w-full pl-12 pr-4 py-4 border border-slate-300 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200 text-slate-700 font-medium">
+                        <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400"></i>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-sm font-bold text-slate-700 mb-3">Available Students</label>
+                    <div class="max-h-64 overflow-y-auto border border-slate-200 rounded-xl">
+                        <div id="studentsList" class="divide-y divide-slate-100">
+                            <!-- Students will be loaded here via AJAX -->
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" onclick="closeAddStudentModal()" class="px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-all duration-200 font-medium">
+                        Cancel
+                    </button>
+                    <button type="submit" id="addStudentBtn" disabled class="px-6 py-3 bg-gradient-to-r from-indigo-700 to-indigo-900 text-white rounded-xl hover:from-indigo-800 hover:to-indigo-950 transition-all duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed">
+                        <i class="fas fa-user-plus mr-2"></i>Add Student
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

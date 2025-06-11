@@ -15,11 +15,14 @@ public class StudentsController : BaseController {
 
     private readonly IFacultyService _facultyService;
 
+    private readonly IUserService _userService;
 
-    public StudentsController(IStudentService studentService, IFacultyService facultyService)
+
+    public StudentsController(IStudentService studentService, IFacultyService facultyService, IUserService userService)
     {
         _studentService = studentService;
         _facultyService = facultyService;
+        _userService = userService;
     }
 
     [HttpGet]
@@ -40,6 +43,24 @@ public class StudentsController : BaseController {
         };
 
         return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AddStudent(AddStudentDto dto)
+    {
+        if (!ModelState.IsValid){
+            return View(dto);
+        }
+
+        var result = await _userService.RegisterNewStudent(dto);
+        ShowMessage(result.Message, result.Succeeded);
+
+        if (result.Succeeded){
+            return RedirectToAction("ManageStudents", "Admin", routeValues: new { facultyId = dto.FacultyId });
+        }
+
+        return View(dto);
     }
 
 }

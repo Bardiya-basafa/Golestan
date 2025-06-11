@@ -1,18 +1,25 @@
 ﻿namespace Golestan.Application.Services;
 
+using Domain.Entities;
+using Domain.Enums;
 using DTOs.Student;
 using Infrastructure.Persistence;
 using Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Shared.Helpers;
 
 
 public class StudentService : IStudentService {
 
     private readonly AppDbContext _context;
 
-    public StudentService(AppDbContext context)
+    private readonly UserManager<AppUser> _userManager;
+
+    public StudentService(AppDbContext context, UserManager<AppUser> userManager)
     {
         _context = context;
+        _userManager = userManager;
     }
 
     public async Task<StudentManagementDto> GetFacultyStudents(int facultyId)
@@ -30,6 +37,7 @@ public class StudentService : IStudentService {
                     FacultyId = s.FacultyId,
                     FacultyName = s.Faculty.MajorName,
                     FullName = s.FullName,
+                    StudentNumber = s.StudentNumber,
                 })
                 .ToListAsync();
 

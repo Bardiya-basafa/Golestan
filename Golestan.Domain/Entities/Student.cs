@@ -7,7 +7,7 @@ public class Student {
 
     public int Id { get; set; }
 
-    public string AppUserId { get; set; }// foreign key to AppUser 
+    public string AppUserId { get; set; }
 
     public AppUser AppUser { get; set; }
 

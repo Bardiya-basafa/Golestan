@@ -105,9 +105,6 @@
                                 <th class="text-left py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
                                     Contact Information
                                 </th>
-                                <th class="text-left py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
-                                    Faculty
-                                </th>
                                 <th class="text-center py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
                                     Actions
                                 </th>
@@ -118,13 +115,9 @@
                                 <tr class="table-row-hover transition-all duration-200">
                                     <td class="py-8 px-8">
                                         <div class="flex items-center">
-                                            <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center mr-6 shadow-lg">
-                                                <i class="fas fa-user-graduate text-white text-2xl"></i>
-                                            </div>
                                             <div>
                                                 <div class="text-lg font-bold text-slate-800 mb-1">@student.FullName</div>
                                                 <div class="text-sm text-slate-500">Student ID: @student.Id</div>
-                                                <div class="text-xs text-slate-400">User ID: @student.AppUserId</div>
                                             </div>
                                         </div>
                                     </td>
@@ -146,23 +139,14 @@
                                             </div>
                                             <div>
                                                 <div class="text-sm font-bold text-slate-800">@student.Email</div>
-                                                <div class="text-xs text-slate-500">Primary Contact</div>
+                                                <div class="text-xs text-slate-500">Email</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="py-8 px-8">
-                                        <span class="inline-flex items-center px-4 py-2 rounded-xl text-sm font-bold bg-gradient-to-r from-purple-100 to-purple-200 text-purple-800 border border-purple-300">
-                                            <i class="fas fa-university mr-2"></i>
-                                            @student.FacultyName
-                                        </span>
-                                    </td>
-                                    <td class="py-8 px-8">
                                         <div class="flex items-center justify-center space-x-3">
-                                            <a asp-controller="Students" asp-action="Details" asp-route-id="@student.Id" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-200 font-medium">
-                                                <i class="fas fa-eye mr-2"></i>View </a>
-                                            <button onclick="removeStudent(@student.Id, '@student.FullName')" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-200 font-medium">
-                                                <i class="fas fa-user-minus mr-2"></i>Remove
-                                            </button>
+                                            <a asp-controller="Students" asp-action="Details" asp-route-id="@student.Id" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-200 font-medium">View </a>
+                                            <button data-student-id="@student.Id" data-student-name="@student.FullName" class="remove-student px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-200 font-medium">Remove</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -186,7 +170,7 @@
     </div>
     <!-- Back Navigation -->
     <div class="mt-12 text-center">
-        <a asp-controller="Admin" asp-action="ManageSections" asp-route-facultyId="@Model." class="inline-flex items-center text-slate-600 hover:text-slate-800 transition-colors group font-semibold text-lg">
+        <a asp-controller="Admin" asp-action="ManageSections" asp-route-facultyId="@Model.FacultyId" class="inline-flex items-center text-slate-600 hover:text-slate-800 transition-colors group font-semibold text-lg">
             <svg class="w-6 h-6 mr-3 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
             </svg>
@@ -194,3 +178,106 @@
     </div>
 </div>
 
+<!-- Remove Confirmation Modal -->
+<div id="confirmRemoveModal" class="fixed z-50 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <form id="removeStudentForm" asp-controller="Sections" asp-action="RemoveStudentFromSection">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="studentId" id="studentId" value=""/>
+        <input type="hidden" name="sectionId" value="@Model.Id"/>
+    </form>
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <!-- Background overlay -->
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+        <input type="hidden" name="__RequestVerificationToken" value="@Html.AntiForgeryToken()"/>
+        <!-- Modal panel -->
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                        <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                    </div>
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                            Remove Student </h3>
+                        <div class="mt-2">
+                            <p class="text-sm text-gray-500">
+                                Are you sure you want to remove
+                                <span id="studentRemoveName" class="font-medium"></span> from this section? </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" id="confirmRemoveBtn" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                    Remove
+                </button>
+                <button type="button" id="cancelRemoveBtn" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Modal functionality
+    const confirmRemoveModal = document.getElementById('confirmRemoveModal');
+    const confirmRemoveBtn = document.getElementById('confirmRemoveBtn');
+    const cancelRemoveBtn = document.getElementById('cancelRemoveBtn');
+    const studentRemoveName = document.getElementById('studentRemoveName');
+
+    let currentStudentToRemove = null;
+
+    // Function to open the modal
+    function openRemoveModal(studentId, studentName) {
+        currentStudentToRemove = studentId;
+        studentRemoveName.textContent = studentName;
+        confirmRemoveModal.classList.remove('hidden');
+        document.body.classList.add('overflow-hidden');
+    }
+
+    // Function to close the modal
+    function closeRemoveModal() {
+        confirmRemoveModal.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+        currentStudentToRemove = null;
+    }
+
+    // Event listeners for modal buttons
+    confirmRemoveBtn.addEventListener('click', function () {
+        if (currentStudentToRemove) {
+            removeStudent(currentStudentToRemove);
+        }
+        closeRemoveModal();
+    });
+
+    cancelRemoveBtn.addEventListener('click', closeRemoveModal);
+
+    // Close modal when clicking outside
+    confirmRemoveModal.addEventListener('click', function (e) {
+        if (e.target === confirmRemoveModal) {
+            closeRemoveModal();
+        }
+    });
+
+    // Function to handle student removal
+    async function removeStudent(studentId) {
+        document.getElementById('studentId').value =studentId;
+        document.getElementById('removeStudentForm').submit();
+
+    }
+
+    // Update your existing remove button event listeners
+    document.addEventListener('click', function (e) {
+        if (e.target.closest('.remove-student')) {
+            e.preventDefault();
+            const button = e.target.closest('.remove-student');
+            const studentId = button.getAttribute('data-student-id');
+            const studentName = button.getAttribute('data-student-name');
+            console.log(studentId, studentName)
+            openRemoveModal(studentId, studentName);
+        }
+    });
+</script>

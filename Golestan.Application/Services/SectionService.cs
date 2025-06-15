@@ -82,8 +82,9 @@ public class SectionService : ISectionService {
                 })
                 .FirstOrDefaultAsync();
 
-            dto.Students = await _context.Students
-                .Where(s => s.Sections.Any(s => s.Id == sectionId))
+            dto.Students = await _context.Sections
+                .Where(s => s.Id == sectionId)
+                .SelectMany(s => s.Students)
                 .Select(s => new StudentDetailsDto()
                 {
                     Id = s.Id,
@@ -94,6 +95,11 @@ public class SectionService : ISectionService {
                     FacultyId = s.FacultyId,
                     FacultyName = s.Faculty.MajorName,
                 })
+                .ToListAsync();
+
+            var s = await _context.Sections
+                .Where(s => s.Id == sectionId)
+                .SelectMany(s => s.Students)
                 .ToListAsync();
 
             return dto;
@@ -188,6 +194,48 @@ public class SectionService : ISectionService {
             finalResult.Message = "Students added";
 
             return finalResult;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+            finalResult.Message = e.Message;
+
+            throw;
+        }
+
+        return finalResult;
+    }
+
+    public async Task<Result> RemoveStudentFromSection(int studentId, int sectionId)
+    {
+        var finalResult = new Result();
+
+        try{
+            var section = await _context.Sections
+                .Include(s => s.Students)// Include the students to access the relationship
+                .FirstOrDefaultAsync(s => s.Id == sectionId);
+
+
+            // Find the student by ID
+            var student = await _context.Students
+                .Include(s => s.Sections)// Include the sections to access the relationship
+                .FirstOrDefaultAsync(s => s.Id == studentId);
+
+
+            // Remove the student from the section
+            if (section.Students.Contains(student)){
+                section.Students.Remove(student);
+            }
+
+            // Remove the section from the student
+            if (student.Sections.Contains(section)){
+                student.Sections.Remove(section);
+            }
+
+            // Save changes to the database
+            await _context.SaveChangesAsync();
+
+            finalResult.Succeeded = true;
+            finalResult.Message = "Student removed";
         }
         catch (Exception e){
             Console.WriteLine(e);

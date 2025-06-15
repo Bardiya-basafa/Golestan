@@ -17,6 +17,8 @@ public interface ISectionService {
 
     Task<Result> AddStudentsToSection(List<int> studentIds, int sectionId);
 
+    Task<Result> RemoveStudentFromSection(int studentId, int sectionId);
+
     Task<Result> AddNewSection(AddSectionDto dto);
 
 }

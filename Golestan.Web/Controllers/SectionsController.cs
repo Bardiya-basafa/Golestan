@@ -99,7 +99,16 @@ public class SectionsController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
 
-        return RedirectToAction("SectionActions");
+        return RedirectToAction("SectionActions", routeValues: new { sectionId = model.SectionId });
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RemoveStudentFromSection(int sectionId, int studentId)
+    {
+        var result = await _sectionService.RemoveStudentFromSection(studentId, sectionId);
+        ShowMessage(result.Message, result.Succeeded);
+
+        return RedirectToAction("SectionActions", routeValues: new { sectionId, studentId });
     }
 
     // Ajaxes

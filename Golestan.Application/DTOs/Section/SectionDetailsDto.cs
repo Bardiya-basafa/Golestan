@@ -20,4 +20,8 @@ public class SectionDetailsDto {
 
     public string ClassNumber { get; set; }
 
+    public int ClassCapacity { get; set; }
+
+    public int RemainCapacity { get; set; }
+
 }

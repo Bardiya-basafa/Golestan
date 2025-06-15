@@ -13,6 +13,10 @@ public interface ISectionService {
 
     Task<List<StudentDetailsDto>> GetAvailableStudents(int sectionId, int facultyId);
 
+    Task<SectionDetailsDto> GetSectionDetailsById(int sectionId);
+
+    Task<Result> AddStudentsToSection(List<int> studentIds, int sectionId);
+
     Task<Result> AddNewSection(AddSectionDto dto);
 
 }

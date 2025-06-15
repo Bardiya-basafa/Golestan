@@ -78,12 +78,28 @@ public class SectionsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> AddStudentToSection(int sectionId, int facultyId)
     {
-        var model = await _sectionService.GetAvailableStudents(sectionId, facultyId);
+        var model = new AddStudentToSectionDto();
+        model.Students = await _sectionService.GetAvailableStudents(sectionId, facultyId);
+        var sectionDetails = await _sectionService.GetSectionDetailsById(sectionId);
         ViewBag.sectionId = sectionId;
-        ViewBag.CourseName = "Course name";
+        ViewBag.CourseName = sectionDetails.CourseName;
+
+        ViewBag.RemainCapacity = sectionDetails.RemainCapacity;
+        ViewBag.ClassCapacity = sectionDetails.ClassCapacity;
 
 
         return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AddStudentToSection(AddStudentToSectionDto model)
+    {
+        var result = await _sectionService.AddStudentsToSection(model.StudentIds, model.SectionId);
+        ShowMessage(result.Message, result.Succeeded);
+
+
+        return RedirectToAction("SectionActions");
     }
 
     // Ajaxes

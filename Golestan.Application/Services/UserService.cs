@@ -152,7 +152,7 @@ public class UserService : IUserService {
         var finalResult = "";
 
         if (userType == UserType.Student){
-            var studentCount = await _context.Students.Where(f => f.Id == facultyId).CountAsync();
+            var studentCount = await _context.Faculties.Where(f => f.Id == facultyId).SelectMany(f => f.Students).CountAsync();
             string formattedCount = (studentCount + 1).ToString("D5");// Increment count for new student
 
             finalResult = $"s{year}{term}t{facultyId}f{formattedCount}";

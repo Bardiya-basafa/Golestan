@@ -136,6 +136,69 @@ public class SectionService : ISectionService {
         }
     }
 
+    public async Task<SectionDetailsDto> GetSectionDetailsById(int sectionId)
+    {
+        try{
+            var dto = await _context.Sections
+                .Where(s => s.Id == sectionId)
+                .Select(s => new SectionDetailsDto()
+                {
+                    Id = s.Id,
+                    CourseName = s.Course.Name,
+                    TimeSlot = s.TimeSlot,
+                    InstructorAppUser = s.Instructor.AppUser,
+                    ClassNumber = s.Classroom.ClassNumber,
+                    DayOfWeek = s.DayOfWeek,
+                    InstructorId = s.InstructorId,
+                    ClassCapacity = s.Classroom.Capacity,
+                    RemainCapacity = s.Classroom.Capacity - s.Students.Count
+                })
+                .FirstOrDefaultAsync();
+
+            return dto;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+
+            throw;
+        }
+    }
+
+    public async Task<Result> AddStudentsToSection(List<int> studentIds, int sectionId)
+    {
+        var finalResult = new Result();
+
+        try{
+            if (studentIds.Count == 0){
+                finalResult.Message = "No students found";
+
+                return finalResult;
+            }
+
+            var sectionStudents = await _context.Sections.Where(s => s.Id == sectionId).SelectMany(s => s.Students).ToListAsync();
+            var section = await _context.Sections.Where(s => s.Id == sectionId).Include(s => s.Students).Include(s => s.Classroom).FirstOrDefaultAsync();
+            var capacity = section.Classroom.Capacity;
+            var currentStudentCount = section.Students.Count;
+            var students = await _context.Students.Where(s => studentIds.Contains(s.Id) && s.Sections.All(section1 => section1.Id != sectionId)).Take(capacity - currentStudentCount).ToListAsync();
+            sectionStudents.AddRange(students);
+            section.Students = sectionStudents;
+            _context.Sections.Update(section);
+            await _context.SaveChangesAsync();
+            finalResult.Succeeded = true;
+            finalResult.Message = "Students added";
+
+            return finalResult;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+            finalResult.Message = e.Message;
+
+            throw;
+        }
+
+        return finalResult;
+    }
+
     public async Task<Result> AddNewSection(AddSectionDto dto)
     {
         var finalResult = new Result();

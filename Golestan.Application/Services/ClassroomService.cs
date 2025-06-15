@@ -119,6 +119,38 @@ public class ClassroomService : IClassroomService {
         }
     }
 
+    public async Task<Result> RemoveClassroom(int classroomId)
+    {
+        var finalResult = new Result();
+
+        try{
+            var classroom = await _context.Classrooms
+                .Where(c => c.Id == classroomId)
+                .Include(s => s.Sections)
+                .FirstOrDefaultAsync();
+
+            if (classroom == null){
+                finalResult.Message = "Class room not found";
+
+                return finalResult;
+            }
+
+            _context.Sections.RemoveRange(classroom.Sections);
+            _context.Classrooms.Remove(classroom);
+            await _context.SaveChangesAsync();
+            finalResult.Succeeded = true;
+            finalResult.Message = "Class room removed";
+
+            return finalResult;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+            finalResult.Message = e.Message;
+        }
+
+        return finalResult;
+    }
+
     public async Task<bool> VerifyClassroomNumber(string classNumber, int facultyId)
     {
         var classroom = await _context.Classrooms

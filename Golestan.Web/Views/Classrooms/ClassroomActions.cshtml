@@ -19,7 +19,7 @@
                             </span>
                         </div>
                     </div>
-                    <a asp-controller="Admin" asp-action="AddSection" asp-route-classroomId="@Model.ClassroomId" class="group">
+                    <a asp-controller="Sections" asp-action="AddSection" asp-route-facultyId="@Model.FacultyId" asp-route-isFromClassroom="true" asp-route-classroomId="@Model.ClassroomId" asp-route-classNumber="@Model.ClassroomNumber" class="group">
                         <div class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                             <svg class="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -110,7 +110,7 @@
                     </div>
                     <h3 class="text-xl font-semibold text-slate-900 mb-2">No Sections Found</h3>
                     <p class="text-slate-600 mb-8 max-w-md mx-auto">Start scheduling courses by adding your first section to this classroom.</p>
-                    <a asp-controller="Sections" asp-action="AddSection" asp-route-classroomId="@Model.ClassroomId" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                    <a asp-controller="Sections" asp-action="AddSection" asp-route-facultyId="@Model.FacultyId" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                         </svg>

@@ -194,4 +194,36 @@ public class CourseService : ICourseService {
         return finalResult;
     }
 
+    public async Task<Result> RemoveCourse(int courseId)
+    {
+        var result = new Result();
+
+        try{
+            var course = await _context.Courses
+                .Where(c => c.Id == courseId)
+                .Include(c => c.Sections)
+                .FirstOrDefaultAsync();
+
+            if (course == null){
+                result.Message = $"Course with id {courseId} not found";
+
+                return result;
+            }
+
+            _context.Courses.Remove(course);
+            await _context.SaveChangesAsync();
+            result.Succeeded = true;
+            result.Message = "Course removed";
+
+            return result;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+
+            result.Message = e.Message;
+        }
+
+        return result;
+    }
+
 }

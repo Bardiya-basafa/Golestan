@@ -18,11 +18,14 @@ public class InstructorsController : BaseController {
 
     private readonly IUserService _userService;
 
-    public InstructorsController(IFacultyService facultyService, UserManager<AppUser> userManager, IUserService userService)
+    private readonly IInstructorService _instructorService;
+
+    public InstructorsController(IFacultyService facultyService, UserManager<AppUser> userManager, IUserService userService, IInstructorService instructorService)
     {
         _facultyService = facultyService;
         _userManager = userManager;
         _userService = userService;
+        _instructorService = instructorService;
     }
 
     // GET
@@ -66,5 +69,14 @@ public class InstructorsController : BaseController {
         return View(dto);
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RemoveCourseInstructor(int instructorId, int courseId)
+    {
+        var result = await _instructorService.RemoveCourseInstructor(instructorId, courseId);
+        ShowMessage(result.Message, result.Succeeded);
+
+        return RedirectToAction("CourseActions", "Courses", routeValues: new { courseId = courseId });
+    }
 
 }

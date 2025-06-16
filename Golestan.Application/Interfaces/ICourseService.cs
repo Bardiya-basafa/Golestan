@@ -18,5 +18,6 @@ public interface ICourseService {
     Task<Result> ApplyNewInstructorToCourse(ApplyNewInstructorDto dto);
 
     Task<Result> AddCourse(AddCourseDto dto);
+    Task<Result> RemoveCourse(int courseId);
 
 }

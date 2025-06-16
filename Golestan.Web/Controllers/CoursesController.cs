@@ -55,6 +55,15 @@ public class CoursesController : BaseController {
         return View(dto);
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RemoveCourse(int courseId, int facultyId)
+    {
+        var result = await _courseService.RemoveCourse(courseId);
+        ShowMessage(result.Message,result.Succeeded);
+        return RedirectToAction("ManageCourses", "Admin", new { facultyId = facultyId });
+    }
+
     [HttpGet]
     public async Task<IActionResult> CourseActions(int courseId)
     {

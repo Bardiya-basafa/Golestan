@@ -24,9 +24,7 @@ public class SectionsController : BaseController {
     }
 
     [HttpGet]
-
-    // GET
-    public async Task<IActionResult> AddSection(int facultyId)
+    public async Task<IActionResult> AddSection(int facultyId, int classroomId, string classNumber = "", bool isFromClassroom = false)
     {
         var facultyDetails = await _facultyService.GetDetailsFacultyById(facultyId);
 
@@ -36,15 +34,26 @@ public class SectionsController : BaseController {
             return RedirectToAction("ManageSections", "Admin", routeValues: new { facultyId = facultyId });
         }
 
-        var classrooms = await _facultyService.GetFacultyClassrooms(facultyId);
         var courses = await _facultyService.GetFacultyCourses(facultyId);
 
         var model = new AddSectionDto()
         {
             FacultyId = facultyId,
-            Classrooms = classrooms,
-            Courses = courses
+            Courses = courses,
+            FacultyMajorName = facultyDetails.MajorName,
         };
+
+        if (isFromClassroom){
+            ViewBag.IsFromClassroom = true;
+            ViewBag.ClassroomId = classroomId;
+            ViewBag.ClassNumber = classNumber;
+        }
+        else{
+            ViewBag.IsFromClassroom = false;
+            var classrooms = await _facultyService.GetFacultyClassrooms(facultyId);
+            model.Classrooms = classrooms;
+        }
+
 
         return View(model);
     }

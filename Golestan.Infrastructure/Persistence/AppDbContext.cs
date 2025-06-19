@@ -29,7 +29,9 @@ public class AppDbContext : IdentityDbContext<AppUser> {
     public DbSet<Exam> Exams { get; set; }
 
     public DbSet<ExamResult> ExamResults { get; set; }
-    public  
+
+    public DbSet<Term> Terms { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -165,7 +167,7 @@ public class AppDbContext : IdentityDbContext<AppUser> {
             .HasForeignKey(s => s.InstructorId)
             .OnDelete(DeleteBehavior.NoAction);
 
-        
+
         // Exam Result 
         modelBuilder.Entity<ExamResult>()
             .HasOne(e => e.Instructor)

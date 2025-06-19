@@ -14,7 +14,6 @@ public interface IInstructorService {
     Task<List<SectionDetailsDto>> GetInstructorSections(int instructorId);
 
     Task<List<StudentDetailsDto>> GetInstructorStudentsForSection(int sectionId);
-    Task<List<StudentDetailsDto>> GetInstructorStudents(int instructorId);
 
     Task<Result> RemoveCourseInstructor(int instructorId, int courseId);
 

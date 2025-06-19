@@ -4,6 +4,7 @@
 namespace Golestan.Web.Controllers;
 
 using Application.DTOs.Section;
+using Application.DTOs.Term;
 using Application.Interfaces;
 using Application.Services;
 using Base;
@@ -11,9 +12,10 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Shared.Constants;
+using Shared.Helpers;
 
 
-public class AdminController : Controller {
+public class AdminController : BaseController {
 
     private readonly IFacultyService _facultyService;
 
@@ -29,8 +31,10 @@ public class AdminController : Controller {
 
     private readonly UserManager<AppUser> _userManager;
 
+    private readonly ITermService _termService;
 
-    public AdminController(IFacultyService facultyService, IInstructorService instructorService, IClassroomService classroomService, ICourseService courseService, ISectionService sectionService, IStudentService studentService, UserManager<AppUser> userManager)
+
+    public AdminController(IFacultyService facultyService, IInstructorService instructorService, IClassroomService classroomService, ICourseService courseService, ISectionService sectionService, IStudentService studentService, UserManager<AppUser> userManager, ITermService termService)
     {
         _facultyService = facultyService;
         _instructorService = instructorService;
@@ -39,6 +43,7 @@ public class AdminController : Controller {
         _sectionService = sectionService;
         _studentService = studentService;
         _userManager = userManager;
+        _termService = termService;
     }
 
     public IActionResult Index()
@@ -70,6 +75,26 @@ public class AdminController : Controller {
 
 
         return View(faculties);
+    }
+
+    // Term Management
+    [HttpGet]
+    public async Task<IActionResult> OpenNewTerm()
+    {
+        var model = TermHelper.CurrentTerm();
+
+        return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> OpenNewTerm(OpenNewTermDto dto)
+    {
+        var result = await _termService.OpenNewNormalTerm(dto);
+
+        ShowMessage(result.Message, result.Succeeded);
+
+        return RedirectToAction("AdminDashboard", "Admin");
     }
 
     // Managing each section

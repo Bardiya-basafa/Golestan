@@ -53,9 +53,6 @@ public class InstructorsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> AdmitStudentsScores(int instructorId, int sectionId)
     {
-        if (){
-            
-        }
         var model = await _instructorService.GetInstructorStudentsForSection(sectionId);
 
         return View(model);

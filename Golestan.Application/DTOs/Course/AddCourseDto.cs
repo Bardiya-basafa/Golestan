@@ -34,5 +34,4 @@ public class AddCourseDto {
 
     public string? FacultyMajorName { get; set; }
 
-
 }

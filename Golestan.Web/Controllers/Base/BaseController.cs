@@ -14,6 +14,4 @@ public abstract class BaseController : Controller {
         TempData["Success"] = result;
     }
 
-  
-
 }

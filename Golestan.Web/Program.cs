@@ -58,6 +58,7 @@ builder.Services.ConfigureApplicationCookie(options => {
     options.LoginPath = "/Authentication/Login";
     options.AccessDeniedPath = "/Authentication/AccessDenied";
 });
+
 builder.Services.AddAuthorization();
 
 
@@ -74,8 +75,6 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 // ========== MIDDLEWARE PIPELINE ========== //
-
-
 
 
 // 1. Exception Handling

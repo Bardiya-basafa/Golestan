@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Golestan.Domain\Golestan.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

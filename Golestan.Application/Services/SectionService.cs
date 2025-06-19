@@ -114,14 +114,26 @@ public class SectionService : ISectionService {
     public async Task<List<StudentDetailsDto>> GetAvailableStudents(int sectionId, int facultyId)
     {
         try{
-            // var courseId = await _context.Courses
-            //     .Where(c => c.Sections.Any(s => s.Id == sectionId))
-            //     .Select(s => s.Id)
-            //     .FirstOrDefaultAsync();
+            var section = await _context.Sections.FindAsync(sectionId);
 
+            if (section == null){
+                throw new ArgumentException($"Section {sectionId} not found");
+            }
+
+            var course = await _context.Courses
+                .Include(c => c.PrerequisiteCourses)
+                .FirstOrDefaultAsync(c => c.Id == section.CourseId);
+
+            if (course == null){
+                throw new ArgumentException($"Course {section.CourseId} not found");
+            }
+
+            var prerequisiteCourses = course.PrerequisiteCourses;
 
             var dto = await _context.Students
                 .Where(s => s.FacultyId == facultyId && s.Sections.All(s => s.Id != sectionId))
+                .Where(s => s.Sections.All(section1 => section1.DayOfWeek != section.DayOfWeek && section1.TimeSlot != section.TimeSlot))
+                .Where(s => s.PassedCourses.Select(p => p.Id).All(i => prerequisiteCourses.Contains(i)))
                 .Select(s => new StudentDetailsDto()
                 {
                     Id = s.Id,
@@ -181,11 +193,28 @@ public class SectionService : ISectionService {
                 return finalResult;
             }
 
+            var course = await _context.Sections
+                .Where(s => s.Id == sectionId)
+                .Select(s => s.Course)
+                .Include(c => c.PrerequisiteCourses)
+                .FirstOrDefaultAsync();
+
+            if (course == null){
+                throw new ArgumentException($"Course {course.Name} not found");
+            }
+
+            var prerequisiteCourses = course.PrerequisiteCourses;
+
             var sectionStudents = await _context.Sections.Where(s => s.Id == sectionId).SelectMany(s => s.Students).ToListAsync();
             var section = await _context.Sections.Where(s => s.Id == sectionId).Include(s => s.Students).Include(s => s.Classroom).FirstOrDefaultAsync();
             var capacity = section.Classroom.Capacity;
             var currentStudentCount = section.Students.Count;
-            var students = await _context.Students.Where(s => studentIds.Contains(s.Id) && s.Sections.All(section1 => section1.Id != sectionId)).Take(capacity - currentStudentCount).ToListAsync();
+
+            var students = await _context.Students
+                .Where(s => studentIds.Contains(s.Id) && s.Sections.All(section1 => section1.Id != sectionId))
+                .Where(s => s.PassedCourses.Select(p => p.Id).All(i => prerequisiteCourses.Contains(i)))
+                .Take(capacity - currentStudentCount).ToListAsync();
+
             sectionStudents.AddRange(students);
             section.Students = sectionStudents;
             _context.Sections.Update(section);
@@ -258,10 +287,18 @@ public class SectionService : ISectionService {
                 return finalResult;
             }
 
-            var sectionExist = await IsValidSection(dto);
+            var isClassEmptyAtTime = await IsClassEmptyAtTime(dto);
 
-            if (sectionExist){
+            if (isClassEmptyAtTime){
                 finalResult.Message = "The classroom in that time is taken";
+
+                return finalResult;
+            }
+
+            var isInstructorTimeTaken = await IsInstructorTimeTaken(dto);
+
+            if (!isInstructorTimeTaken){
+                finalResult.Message = "The instructor time is taken";
 
                 return finalResult;
             }
@@ -331,7 +368,7 @@ public class SectionService : ISectionService {
         }
     }
 
-    private async Task<bool> IsValidSection(AddSectionDto dto)
+    private async Task<bool> IsClassEmptyAtTime(AddSectionDto dto)
     {
         var sectionExist = await _context.Sections
             .AnyAsync(s => s.ClassroomId == dto.ClassroomId && s.DayOfWeek == GetDayOfWeek(dto.DayOfWeekId) && s.TimeSlot == GetTimeSlot(dto.TimeSlotId));
@@ -341,6 +378,22 @@ public class SectionService : ISectionService {
         }
 
         return false;
+    }
+
+    private async Task<bool> IsInstructorTimeTaken(AddSectionDto dto)
+    {
+        var timeSlot = GetTimeSlot(dto.TimeSlotId);
+        var dayOfWeek = GetDayOfWeek(dto.DayOfWeekId);
+
+        var instructor = await _context.Instructors
+            .Where(i => i.Id == dto.InstructorId)
+            .Include(i => i.Sections)
+            .FirstOrDefaultAsync();
+
+        var isTimeSlotEmpty = instructor.Sections
+            .Any(s => s.TimeSlot == timeSlot && s.DayOfWeek == dayOfWeek);
+
+        return !isTimeSlotEmpty;
     }
 
 }

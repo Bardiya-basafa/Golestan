@@ -2,6 +2,7 @@
 
 using Domain.Entities;
 using Domain.Enums;
+using DTOs.Section;
 using DTOs.Student;
 using Infrastructure.Persistence;
 using Interfaces;
@@ -56,6 +57,42 @@ public class StudentService : IStudentService {
             Console.WriteLine(e);
 
             throw;
+        }
+    }
+
+    public async Task<StudentSectionsDto> GetStudentSections(int studentId)
+    {
+        try{
+            var dto = await _context.Students
+                .Where(s => s.Id == studentId)
+                .Select(s => new StudentSectionsDto()
+                {
+                    StudentId = s.Id,
+                    StudentFullName = s.FullName,
+                    StudentNumber = s.StudentNumber,
+                })
+                .FirstOrDefaultAsync();
+
+            dto.Sections = await _context.Students
+                .Where(s => s.Id == studentId)
+                .SelectMany(s => s.Sections)
+                .Select(s => new SectionDetailsDto()
+                {
+                    ClassCapacity = s.Classroom.Capacity,
+                    ClassNumber = s.Classroom.ClassNumber,
+                    CourseName = s.Course.Name,
+                    DayOfWeek = s.DayOfWeek,
+                    TimeSlot = s.TimeSlot,
+                    InstructorFullName = s.Instructor.FullName,
+                })
+                .ToListAsync();
+
+            return dto;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+
+            throw new ArgumentException();
         }
     }
 

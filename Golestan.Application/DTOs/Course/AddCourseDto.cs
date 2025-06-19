@@ -22,10 +22,17 @@ public class AddCourseDto {
 
     [Required(ErrorMessage = "Course exam time is required")]
     [NotInPast]
-    public DateTime ExamTime { get; set; }
+    public DateTime ExamDateTime { get; set; }
+
+    [Required(ErrorMessage = "Course exam time is required")]
+    public int ExamTimeSlotId { get; set; }
+
+    public int ExamClassroomId { get; set; }
 
     [Required]
     public int FacultyId { get; set; }
+
     public string? FacultyMajorName { get; set; }
+
 
 }

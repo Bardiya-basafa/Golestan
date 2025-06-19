@@ -3,6 +3,9 @@
 
 namespace Golestan.Web.Controllers.Base;
 
+using Shared.Constants;
+
+
 public abstract class BaseController : Controller {
 
     public void ShowMessage(string? message, bool result)
@@ -10,5 +13,7 @@ public abstract class BaseController : Controller {
         TempData["NotificationMessage"] = message;
         TempData["Success"] = result;
     }
+
+  
 
 }

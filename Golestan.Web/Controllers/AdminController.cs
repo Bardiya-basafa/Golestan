@@ -6,8 +6,11 @@ namespace Golestan.Web.Controllers;
 using Application.DTOs.Section;
 using Application.Interfaces;
 using Application.Services;
+using Base;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Shared.Constants;
 
 
 public class AdminController : Controller {
@@ -38,6 +41,28 @@ public class AdminController : Controller {
         _userManager = userManager;
     }
 
+    public IActionResult Index()
+    {
+        if (User.Identity.IsAuthenticated){
+            if (User.IsInRole(AppRoles.Admin)){
+                return RedirectToAction("AdminDashboard", "Admin");
+            }
+
+            if (User.IsInRole(AppRoles.Instructor)){
+                return RedirectToAction("InstructorDashboard", "Instructors");
+            }
+
+            if (User.IsInRole(AppRoles.Student)){
+                return RedirectToAction("StudentDashboard", "Students");
+            }
+
+            return RedirectToAction("AccessDenied", "Account");
+        }
+
+        return RedirectToAction("Login", "Account");
+    }
+
+
     // Admin Dashboard
     public async Task<IActionResult> AdminDashboard()
     {
@@ -58,6 +83,7 @@ public class AdminController : Controller {
     public async Task<IActionResult> ManageInstructors(int facultyId)
     {
         var instructorsDto = await _instructorService.GetFacultyInstructors();
+        ViewBag.FacultyId = facultyId;
 
         return View(instructorsDto);
     }
@@ -116,6 +142,7 @@ public class AdminController : Controller {
 
         return View(model);
     }
+
     [HttpGet]
     public async Task<IActionResult> AllStudents()
     {
@@ -123,6 +150,7 @@ public class AdminController : Controller {
 
         return View(model);
     }
+
     public async Task<IActionResult> AllFaculties()
     {
         var faculties = await _facultyService.GetFaculties();
@@ -175,8 +203,6 @@ public class AdminController : Controller {
         return Json(options);
     }
 
-
-   
 
     public async Task<IActionResult> VerifyEmail(string email)
     {

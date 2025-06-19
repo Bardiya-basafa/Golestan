@@ -35,6 +35,33 @@ public class InstructorsController : BaseController {
     }
 
     [HttpGet]
+    public async Task<IActionResult> GetInstructorSections(int instructorId)
+    {
+        var model = await _instructorService.GetInstructorSections(instructorId);
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetInstructorStudentsFoSection(int sectionId)
+    {
+        var model = await _instructorService.GetInstructorStudentsForSection(sectionId);
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> AdmitStudentsScores(int instructorId, int sectionId)
+    {
+        if (){
+            
+        }
+        var model = await _instructorService.GetInstructorStudentsForSection(sectionId);
+
+        return View(model);
+    }
+
+    [HttpGet]
     public async Task<IActionResult> AddInstructor(int id)
     {
         var facultyOptions = await _facultyService.GetFacultiesMajorNames();
@@ -77,6 +104,16 @@ public class InstructorsController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         return RedirectToAction("CourseActions", "Courses", routeValues: new { courseId = courseId });
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RemoveInstructor(int instructorId, int facultyId)
+    {
+        var result = await _instructorService.RemoveInstructor(instructorId);
+        ShowMessage(result.Message, result.Succeeded);
+
+        return RedirectToAction("ManageInstructors", "Admin", routeValues: new { facultyId = facultyId });
     }
 
 }

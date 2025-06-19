@@ -8,5 +8,6 @@ public interface IStudentService {
 
     Task<StudentManagementDto> GetFacultyStudents(int facultyId);
 
+    Task<StudentSectionsDto> GetStudentSections(int studentId);
 
 }

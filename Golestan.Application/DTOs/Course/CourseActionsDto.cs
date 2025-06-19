@@ -1,5 +1,6 @@
 ﻿namespace Golestan.Application.DTOs.Course;
 
+using Domain.Enums;
 using Instructor;
 
 
@@ -13,7 +14,9 @@ public class CourseActionsDto {
 
     public int Unit { get; set; }
 
-    public DateTime ExamTime { get; set; }
+    public DateTime ExamDateTime { get; set; }
+
+    public TimeSlot ExamTimeSlot { get; set; }
 
     public string FacultyName { get; set; }
 

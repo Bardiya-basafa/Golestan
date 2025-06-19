@@ -15,9 +15,14 @@ public interface ICourseService {
 
     Task<Dictionary<int, string>>? GetCourseInstructors(int courseId);
 
+    Task<List<CourseDetailsDto>> GetAvailableCoursesForPrerequisite(int courseId);
+
     Task<Result> ApplyNewInstructorToCourse(ApplyNewInstructorDto dto);
 
     Task<Result> AddCourse(AddCourseDto dto);
+
     Task<Result> RemoveCourse(int courseId);
+
+    Task<Result> AddPrerequisiteToCourse(int courseId, int prerequisiteCourseId);
 
 }

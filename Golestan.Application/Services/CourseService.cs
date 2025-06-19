@@ -1,6 +1,7 @@
 ﻿namespace Golestan.Application.Services;
 
 using Domain.Entities;
+using Domain.Enums;
 using DTOs.Course;
 using DTOs.Instructor;
 using Infrastructure.Persistence;
@@ -15,10 +16,13 @@ public class CourseService : ICourseService {
 
     private readonly IFacultyService _facultyService;
 
-    public CourseService(AppDbContext context, IFacultyService facultyService)
+    private readonly ISectionService _sectionService;
+
+    public CourseService(AppDbContext context, IFacultyService facultyService, ISectionService sectionService)
     {
         _context = context;
         _facultyService = facultyService;
+        _sectionService = sectionService;
     }
 
     public async Task<CourseManagementDto> GetFacultyCourses(int facultyId)
@@ -31,7 +35,8 @@ public class CourseService : ICourseService {
                     Id = c.Id,
                     Name = c.Name,
                     Description = c.Description,
-                    ExamTime = c.ExamTime,
+
+                    // ExamTime = c.ExamTime,
                     FacultyId = c.FacultyId,
                     Unit = c.Unit,
                     FacultyName = c.Faculty.MajorName,
@@ -64,6 +69,7 @@ public class CourseService : ICourseService {
                 .Where(c => c.Id == courseId)
                 .Include(c => c.Faculty)
                 .Include(c => c.Instructors)
+                .Include(c => c.Exam)
                 .FirstOrDefaultAsync();
 
             if (course == null){
@@ -73,7 +79,8 @@ public class CourseService : ICourseService {
             dto.CourseId = course.Id;
             dto.CourseName = course.Name;
             dto.Unit = course.Unit;
-            dto.ExamTime = course.ExamTime;
+            dto.ExamDateTime = course.Exam.ExamDateTime;
+            dto.ExamTimeSlot = course.Exam.TimeSlot;
             dto.FacultyName = course.Faculty.MajorName;
             dto.FacultyId = course.FacultyId;
 
@@ -136,6 +143,11 @@ public class CourseService : ICourseService {
         }
     }
 
+    public async Task<List<CourseDetailsDto>> GetAvailableCoursesForPrerequisite(int courseId)
+    {
+        return new List<CourseDetailsDto>();
+    }
+
     public async Task<Result> ApplyNewInstructorToCourse(ApplyNewInstructorDto dto)
     {
         var finalResult = new Result();
@@ -178,11 +190,26 @@ public class CourseService : ICourseService {
                 Description = dto.Description,
                 FacultyId = dto.FacultyId,
                 Unit = dto.Unit,
-                ExamTime = dto.ExamTime,
             };
+
+            if (await IsExamExistInClass(dto)){
+                finalResult.Message = "There is already an exam in that time";
+
+                return finalResult;
+            }
+
+            var exam = new Exam()
+            {
+                ClassroomId = dto.ExamClassroomId,
+                ExamDateTime = dto.ExamDateTime,
+                TimeSlot = GetTimeSlot(dto.ExamTimeSlotId),
+            };
+
+            course.Exam = exam;
 
             _context.Courses.Add(course);
             await _context.SaveChangesAsync();
+
             finalResult.Succeeded = true;
             finalResult.Message = "Course added";
         }
@@ -224,6 +251,68 @@ public class CourseService : ICourseService {
         }
 
         return result;
+    }
+
+    public async Task<Result> AddPrerequisiteToCourse(int courseId, int prerequisiteCourseId)
+    {
+        var result = new Result();
+
+        try{
+            var course = await _context.Courses
+                .Where(c => c.Id == courseId)
+                .Include(c => c.PrerequisiteCourses)
+                .FirstOrDefaultAsync();
+
+            if (course.PrerequisiteCourses.Contains(prerequisiteCourseId)){
+                result.Message = $"Course with id {courseId} already prerequisite";
+
+                return result;
+            }
+
+            course.PrerequisiteCourses.Add(prerequisiteCourseId);
+            _context.Courses.Update(course);
+            await _context.SaveChangesAsync();
+            result.Succeeded = true;
+            result.Message = "Prerequisite course added";
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+            result.Message = e.Message;
+        }
+
+        return result;
+    }
+
+    private async Task<bool> IsExamExistInClass(AddCourseDto dto)
+    {
+        var timeSlot = GetTimeSlot(dto.ExamTimeSlotId);
+        var examDateTime = dto.ExamDateTime;
+
+        var isExamExistInClass = await _context.Exams
+            .Where(e => e.TimeSlot == timeSlot && e.ExamDateTime == examDateTime)
+            .Where(e => e.ClassroomId == dto.ExamClassroomId)
+            .AnyAsync();
+
+        return isExamExistInClass;
+    }
+
+    private TimeSlot GetTimeSlot(int timeSlotId)
+    {
+        switch (timeSlotId){
+            case 1: return TimeSlot.First; break;
+
+            case 2: return TimeSlot.Second; break;
+
+            case 3: return TimeSlot.Third; break;
+
+            case 4: return TimeSlot.Fourth; break;
+
+            case 5: return TimeSlot.Fifth; break;
+
+            case 6: return TimeSlot.Sixth; break;
+
+            default: return TimeSlot.First;
+        }
     }
 
 }

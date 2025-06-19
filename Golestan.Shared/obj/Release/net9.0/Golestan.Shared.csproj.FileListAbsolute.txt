@@ -1,0 +1,12 @@
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\bin\Release\net9.0\Golestan.Shared.deps.json
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\bin\Release\net9.0\Golestan.Shared.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\bin\Release\net9.0\Golestan.Shared.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\obj\Release\net9.0\Golestan.Shared.GeneratedMSBuildEditorConfig.editorconfig
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\obj\Release\net9.0\Golestan.Shared.AssemblyInfoInputs.cache
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\obj\Release\net9.0\Golestan.Shared.AssemblyInfo.cs
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\obj\Release\net9.0\Golestan.Shared.csproj.CoreCompileInputs.cache
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\obj\Release\net9.0\Golestan.Shared.sourcelink.json
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\obj\Release\net9.0\Golestan.Shared.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\obj\Release\net9.0\refint\Golestan.Shared.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\obj\Release\net9.0\Golestan.Shared.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\obj\Release\net9.0\ref\Golestan.Shared.dll

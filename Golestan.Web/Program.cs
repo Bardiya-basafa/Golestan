@@ -54,6 +54,12 @@ builder.Services.AddAuthentication(options => {
     })
     .AddCookie();
 
+builder.Services.ConfigureApplicationCookie(options => {
+    options.LoginPath = "/Authentication/Login";
+    options.AccessDeniedPath = "/Authentication/AccessDenied";
+});
+builder.Services.AddAuthorization();
+
 
 // 10. Localization (Persian support)
 // builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
@@ -69,10 +75,7 @@ var app = builder.Build();
 
 // ========== MIDDLEWARE PIPELINE ========== //
 
-// using (var scope = app.Services.CreateAsyncScope()){
-//     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-//     await dbContext.Database.MigrateAsync();
-// }
+
 
 
 // 1. Exception Handling
@@ -103,7 +106,7 @@ app.UseAuthorization();
 // 9. Endpoints
 app.MapControllerRoute(
 "default",
-"{controller=Admin}/{action=AdminDashboard}/{id?}");
+"{controller=Students}/{action=StudentDashboard}/{id?}");
 
 
 app.Run();

@@ -2,6 +2,8 @@
 
 using Domain.Entities;
 using DTOs.Instructor;
+using DTOs.Section;
+using DTOs.Student;
 using Infrastructure.Persistence;
 using Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -43,6 +45,41 @@ public class InstructorService : IInstructorService {
 
             return new List<InstructorDetailsDto>();
         }
+    }
+
+    public async Task<List<SectionDetailsDto>> GetInstructorSections(int instructorId)
+    {
+        var model = await _context.Instructors
+            .Where(i => i.Id == instructorId)
+            .SelectMany(i => i.Sections)
+            .Select(s => new SectionDetailsDto()
+            {
+                Id = s.Id,
+                ClassCapacity = s.Classroom.Capacity,
+                ClassNumber = s.Classroom.ClassNumber,
+                DayOfWeek = s.DayOfWeek,
+                TimeSlot = s.TimeSlot,
+                CurrentStudents = s.Students.Count,
+            })
+            .ToListAsync();
+
+        return model;
+    }
+
+    public Task<List<StudentDetailsDto>> GetInstructorStudentsForSection(int sectionId)
+    {
+        var model = _context.Sections
+            .Where(s => s.Id == sectionId)
+            .SelectMany(s => s.Students)
+            .Select(s => new StudentDetailsDto()
+            {
+                Id = s.Id,
+                FullName = s.FullName,
+                StudentNumber = s.StudentNumber,
+            })
+            .ToListAsync();
+
+        return model;
     }
 
     public async Task<Result> RemoveCourseInstructor(int instructorId, int courseId)
@@ -88,6 +125,35 @@ public class InstructorService : IInstructorService {
 
             return result;
         }
+    }
+
+    public async Task<Result> RemoveInstructor(int instructorId)
+    {
+        var result = new Result();
+
+        try{
+            var instructor = await _context.Instructors.Where(i => i.Id == instructorId)
+                .Include(i => i.Sections)
+                .FirstOrDefaultAsync();
+
+            if (instructor == null){
+                result.Message = "Instructor not found";
+
+                return result;
+            }
+
+            _context.Instructors.Remove(instructor);
+            await _context.SaveChangesAsync();
+            result.Message = "Instructor removed";
+            result.Succeeded = true;
+        }
+        catch (Exception e){
+            Console.WriteLine(e);
+
+            result.Message = e.Message;
+        }
+
+        return result;
     }
 
 }

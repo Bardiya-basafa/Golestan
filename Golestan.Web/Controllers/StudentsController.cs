@@ -25,6 +25,11 @@ public class StudentsController : BaseController {
         _userService = userService;
     }
 
+    public IActionResult StudentDashboard()
+    {
+        return View();
+    }
+
     [HttpGet]
     public async Task<IActionResult> AddStudent(int facultyId)
     {
@@ -61,6 +66,14 @@ public class StudentsController : BaseController {
         }
 
         return View(dto);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> StudentSections(int studentId)
+    {
+        var model = await _studentService.GetStudentSections(studentId);
+
+        return View(model);
     }
 
 }

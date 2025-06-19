@@ -4,6 +4,7 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Shared.Constants;
 
 
@@ -21,11 +22,14 @@ public class AppDbContext : IdentityDbContext<AppUser> {
 
     public DbSet<Faculty> Faculties { get; set; }
 
-
     public DbSet<Classroom> Classrooms { get; set; }
 
     public DbSet<Section> Sections { get; set; }
 
+    public DbSet<Exam> Exams { get; set; }
+
+    public DbSet<ExamResult> ExamResults { get; set; }
+    public  
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -73,6 +77,9 @@ public class AppDbContext : IdentityDbContext<AppUser> {
             .UsingEntity(j => j.ToTable("StudentSections"));
 
         modelBuilder.Entity<Student>()
+            .HasMany<Course>(s => s.PassedCourses);
+
+        modelBuilder.Entity<Student>()
             .HasIndex(s => s.StudentNumber)
             .IsUnique();
 
@@ -113,6 +120,13 @@ public class AppDbContext : IdentityDbContext<AppUser> {
             .HasForeignKey(s => s.FacultyId)
             .OnDelete(DeleteBehavior.NoAction);
 
+        modelBuilder.Entity<Course>()
+            .HasOne(c => c.Exam)
+            .WithOne(s => s.Course)
+            .HasForeignKey<Course>(c => c.ExamId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+
         // Classroom
         modelBuilder.Entity<Classroom>()
             .HasOne(c => c.Faculty)
@@ -126,6 +140,11 @@ public class AppDbContext : IdentityDbContext<AppUser> {
             .HasForeignKey(s => s.ClassroomId)
             .OnDelete(DeleteBehavior.NoAction);
 
+        modelBuilder.Entity<Classroom>()
+            .HasMany<Exam>(c => c.Exams)
+            .WithOne(s => s.Classroom)
+            .HasForeignKey(s => s.ClassroomId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         // Section 
         modelBuilder.Entity<Section>()
@@ -144,6 +163,20 @@ public class AppDbContext : IdentityDbContext<AppUser> {
             .HasOne(s => s.Instructor)
             .WithMany(i => i.Sections)
             .HasForeignKey(s => s.InstructorId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        
+        // Exam Result 
+        modelBuilder.Entity<ExamResult>()
+            .HasOne(e => e.Instructor)
+            .WithMany(i => i.ExamResults)
+            .HasForeignKey(e => e.InstructorId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        modelBuilder.Entity<ExamResult>()
+            .HasOne(e => e.Student)
+            .WithMany(s => s.ExamResults)
+            .HasForeignKey(e => e.StudentId)
             .OnDelete(DeleteBehavior.NoAction);
 
 

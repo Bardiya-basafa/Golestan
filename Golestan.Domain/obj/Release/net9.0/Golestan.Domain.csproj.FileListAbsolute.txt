@@ -1,0 +1,13 @@
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\bin\Release\net9.0\Golestan.Domain.deps.json
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\bin\Release\net9.0\Golestan.Domain.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\bin\Release\net9.0\Golestan.Domain.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Release\net9.0\Golestan.Domain.csproj.AssemblyReference.cache
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Release\net9.0\Golestan.Domain.GeneratedMSBuildEditorConfig.editorconfig
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Release\net9.0\Golestan.Domain.AssemblyInfoInputs.cache
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Release\net9.0\Golestan.Domain.AssemblyInfo.cs
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Release\net9.0\Golestan.Domain.csproj.CoreCompileInputs.cache
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Release\net9.0\Golestan.Domain.sourcelink.json
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Release\net9.0\Golestan.Domain.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Release\net9.0\refint\Golestan.Domain.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Release\net9.0\Golestan.Domain.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Domain\obj\Release\net9.0\ref\Golestan.Domain.dll

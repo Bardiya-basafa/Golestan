@@ -12,6 +12,8 @@ public class SectionDetailsDto {
 
     public int InstructorId { get; set; }
 
+    public string InstructorFullName { get; set; }
+
     public TimeSlot TimeSlot { get; set; }
 
     public DayOfWeek DayOfWeek { get; set; }
@@ -23,5 +25,6 @@ public class SectionDetailsDto {
     public int ClassCapacity { get; set; }
 
     public int RemainCapacity { get; set; }
+    public int CurrentStudents { get; set; }
 
 }

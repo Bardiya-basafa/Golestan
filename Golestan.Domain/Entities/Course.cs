@@ -14,13 +14,11 @@ public class Course {
 
     public int FacultyId { get; set; }
 
-    public int TermId { get; set; }
 
     public Exam Exam { get; set; }
 
     public Faculty Faculty { get; set; }
 
-    public Term Term { get; set; }
 
     public ICollection<Section> Sections { get; set; } = new HashSet<Section>();
 

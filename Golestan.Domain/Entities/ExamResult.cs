@@ -6,19 +6,24 @@ public class ExamResult {
 
     public decimal Score { get; set; }
 
-    public string? Description { get; set; }
+    public string Description { get; set; } = String.Empty;
 
-    public string Term { get; set; }
+    public int TermId { get; set; }
 
     public int StudentId { get; set; }
 
+    public int InstructorId { get; set; }
+
+    public int CourseId { get; set; }
+
+
+    public Term Term { get; set; }
+
     public Student Student { get; set; }
 
-    public int InstructorId { get; set; }
 
     public Instructor Instructor { get; set; }
 
-    public int CourseId { get; set; }
 
     public Course Course { get; set; }
 

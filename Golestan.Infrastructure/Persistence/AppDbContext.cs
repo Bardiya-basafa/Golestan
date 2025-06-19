@@ -181,6 +181,11 @@ public class AppDbContext : IdentityDbContext<AppUser> {
             .HasForeignKey(e => e.StudentId)
             .OnDelete(DeleteBehavior.NoAction);
 
+        modelBuilder.Entity<ExamResult>()
+            .HasOne(e => e.Term)
+            .WithOne()
+            .HasForeignKey<ExamResult>(e => e.TermId)
+            .OnDelete(DeleteBehavior.NoAction);
 
         // Faculty
         modelBuilder.Entity<Faculty>()

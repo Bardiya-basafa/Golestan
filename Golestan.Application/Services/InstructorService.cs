@@ -82,6 +82,52 @@ public class InstructorService : IInstructorService {
         return model;
     }
 
+    public Task<List<StudentScoreDto>> GetStudentsForCourseExam(int instructorId, int sectionId)
+    {
+        var model = _context.Sections
+            .Where(s => s.Id == sectionId)
+            .SelectMany(s => s.ExamResults)
+            .Select(e => new StudentScoreDto()
+            {
+                Score = e.Score,
+                StudentNumber = e.Student.StudentNumber,
+                StudentFullName = e.Student.FullName,
+                Term = e.Term.TermText,
+                Description = e.Description,
+            })
+            .ToListAsync();
+
+        return model;
+    }
+
+    public async Task<Result> SubmitStudentScore(SubmitScoreDto dto)
+    {
+        var result = new Result();
+
+        if (dto.Score < 0 || dto.Score > 20){
+            result.Message = "Score must be between 0 and 20";
+
+            return result;
+        }
+
+
+        var examResult = await _context.ExamResults
+            .Where(e => e.StudentId == dto.StudentId && e.SectionId == dto.SectionId)
+            .FirstOrDefaultAsync();
+
+        if (examResult == null){
+            result.Message = "Something went wrong";
+
+            return result;
+        }
+
+        examResult.Score = dto.Score;
+        examResult.Description = dto.Description;
+        result.Succeeded = true;
+
+        return result;
+    }
+
     public async Task<Result> RemoveCourseInstructor(int instructorId, int courseId)
     {
         var result = new Result();

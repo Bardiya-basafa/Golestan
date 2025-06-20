@@ -2,8 +2,10 @@
 
 using Domain.Entities;
 using Domain.Enums;
+using DTOs.ExamResult;
 using DTOs.Section;
 using DTOs.Student;
+using DTOs.Term;
 using Infrastructure.Persistence;
 using Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -94,6 +96,38 @@ public class StudentService : IStudentService {
 
             throw new ArgumentException();
         }
+    }
+
+    public async Task<List<TermDetailsDto>> GetAllStudentTerms(int studentId)
+    {
+        var model = await _context.Students
+            .Where(s => s.Id == studentId)
+            .SelectMany(s => s.Terms)
+            .Select(t => new TermDetailsDto()
+            {
+                Id = t.Id,
+                Year = t.Year,
+                TermNumber = t.TermNumber,
+            })
+            .ToListAsync();
+
+        return model;
+    }
+
+    public async Task<List<ExamResultDetailsDto>> GetTermExamResults(int termId, int studentId)
+    {
+        var model = await _context.Students
+            .Where(s => s.Id == studentId)
+            .SelectMany(s => s.ExamResults)
+            .Where(e => e.TermId == termId)
+            .Select(e => new ExamResultDetailsDto()
+            {
+                Score = e.Score,
+                Description = e.Description,
+            })
+            .ToListAsync();
+
+        return model;
     }
 
 }

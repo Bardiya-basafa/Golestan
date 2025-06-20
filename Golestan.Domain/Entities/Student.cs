@@ -29,4 +29,6 @@ public class Student {
 
     public ICollection<ExamResult> ExamResults { get; set; } = new HashSet<ExamResult>();
 
+    public ICollection<Term> Terms { get; set; } = new HashSet<Term>();
+
 }

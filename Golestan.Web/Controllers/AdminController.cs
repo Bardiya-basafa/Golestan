@@ -81,7 +81,7 @@ public class AdminController : BaseController {
     [HttpGet]
     public async Task<IActionResult> OpenNewTerm()
     {
-        var model = TermHelper.CurrentTerm();
+        var model = TermHelper.CurrentNormalTerm();
 
         return View(model);
     }
@@ -90,7 +90,7 @@ public class AdminController : BaseController {
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> OpenNewTerm(OpenNewTermDto dto)
     {
-        var result = await _termService.OpenNewNormalTerm(dto);
+        var result = await _termService.OpenNormalTerm(dto);
 
         ShowMessage(result.Message, result.Succeeded);
 

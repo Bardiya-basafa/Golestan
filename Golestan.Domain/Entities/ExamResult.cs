@@ -4,9 +4,11 @@ public class ExamResult {
 
     public int Id { get; set; }
 
-    public decimal Score { get; set; }
+    public decimal Score { get; set; } = -1;
 
     public string Description { get; set; } = String.Empty;
+
+    public DateTime ExamDate { get; set; } 
 
     public int TermId { get; set; }
 
@@ -15,6 +17,8 @@ public class ExamResult {
     public int InstructorId { get; set; }
 
     public int CourseId { get; set; }
+
+    public int SectionId { get; set; }
 
 
     public Term Term { get; set; }
@@ -26,5 +30,7 @@ public class ExamResult {
 
 
     public Course Course { get; set; }
+
+    public Section Section { get; set; }
 
 }

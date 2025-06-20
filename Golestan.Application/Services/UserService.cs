@@ -20,10 +20,14 @@ public class UserService : IUserService {
 
     private readonly AppDbContext _context;
 
-    public UserService(UserManager<AppUser> userManager, AppDbContext context, RoleManager<IdentityRole> roleManager)
+    private readonly ITermService _termService;
+
+    public UserService(UserManager<AppUser> userManager, AppDbContext context, RoleManager<IdentityRole> roleManager, ITermService termService)
     {
         _userManager = userManager;
         _context = context;
+        _roleManager = roleManager;
+        _termService = termService;
     }
 
     public async Task<Result> RegisterNewInstructor(AddInstructorDto dto)
@@ -120,6 +124,13 @@ public class UserService : IUserService {
 
         appUser.StudentProfile = studentProfile;
         _context.Students.Add(studentProfile);
+        var term = await _termService.GetCurrentTermEntity();
+
+        if (term != null){
+            studentProfile.Terms.Add(term);
+            _context.Students.Update(studentProfile);
+        }
+
         await _context.SaveChangesAsync();
 
         finalResult.Succeeded = true;

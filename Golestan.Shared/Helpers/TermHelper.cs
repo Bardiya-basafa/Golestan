@@ -5,7 +5,7 @@ using HelperModels;
 
 public static class TermHelper {
 
-    public static TermResult? CurrentTerm()
+    public static TermResult? CurrentNormalTerm()
     {
         var term = new TermResult();
         DateTime currentDate = DateTime.UtcNow;

@@ -76,4 +76,20 @@ public class StudentsController : BaseController {
         return View(model);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> SeeAllStudentTerms(int studentId)
+    {
+        var model = await _studentService.GetAllStudentTerms(studentId);
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> SeeTermExamResults(int termId, int studentId)
+    {
+        var model = await _studentService.GetTermExamResults(termId, studentId);
+
+        return View(model);
+    }
+
 }

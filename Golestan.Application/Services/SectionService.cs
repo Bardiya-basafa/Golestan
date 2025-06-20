@@ -17,10 +17,13 @@ public class SectionService : ISectionService {
 
     private readonly IFacultyService _facultyService;
 
-    public SectionService(AppDbContext context, IFacultyService facultyService)
+    private readonly ITermService _termService;
+
+    public SectionService(AppDbContext context, IFacultyService facultyService, ITermService termService)
     {
         _context = context;
         _facultyService = facultyService;
+        _termService = termService;
     }
 
     public async Task<SectionManagementDto> GetFacultySections(int facultyId)
@@ -197,6 +200,7 @@ public class SectionService : ISectionService {
                 .Where(s => s.Id == sectionId)
                 .Select(s => s.Course)
                 .Include(c => c.PrerequisiteCourses)
+                .Include(c => c.Exam)
                 .FirstOrDefaultAsync();
 
             if (course == null){
@@ -213,6 +217,7 @@ public class SectionService : ISectionService {
             var students = await _context.Students
                 .Where(s => studentIds.Contains(s.Id) && s.Sections.All(section1 => section1.Id != sectionId))
                 .Where(s => s.PassedCourses.Select(p => p.Id).All(i => prerequisiteCourses.Contains(i)))
+                .Include(s => s.ExamResults)
                 .Take(capacity - currentStudentCount).ToListAsync();
 
             sectionStudents.AddRange(students);
@@ -221,6 +226,23 @@ public class SectionService : ISectionService {
             await _context.SaveChangesAsync();
             finalResult.Succeeded = true;
             finalResult.Message = "Students added";
+
+            var term = await _termService.GetCurrentTerm();
+
+            var newExamResult = new ExamResult()
+            {
+                CourseId = course.Id,
+                SectionId = section.Id,
+                ExamDate = course.Exam.ExamDateTime,
+                InstructorId = section.InstructorId,
+                TermId = term.Id,
+            };
+
+            foreach (var student in students){
+                student.ExamResults.Add(newExamResult);
+            }
+
+            await _context.SaveChangesAsync();
 
             return finalResult;
         }
@@ -261,6 +283,13 @@ public class SectionService : ISectionService {
             }
 
             // Save changes to the database
+            await _context.SaveChangesAsync();
+
+            var examResult = await _context.ExamResults
+                .Where(e => e.StudentId == studentId && e.SectionId == sectionId)
+                .FirstOrDefaultAsync();
+
+            _context.ExamResults.Remove(examResult);
             await _context.SaveChangesAsync();
 
             finalResult.Succeeded = true;

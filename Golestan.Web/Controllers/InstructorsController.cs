@@ -28,8 +28,7 @@ public class InstructorsController : BaseController {
         _instructorService = instructorService;
     }
 
-    // GET
-    public IActionResult Index()
+    public IActionResult InstructorDashboard()
     {
         return View();
     }
@@ -53,9 +52,24 @@ public class InstructorsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> AdmitStudentsScores(int instructorId, int sectionId)
     {
-        var model = await _instructorService.GetInstructorStudentsForSection(sectionId);
+        var model = await _instructorService.GetStudentsForCourseExam(instructorId, sectionId);
+
+        // invoke the view component async 
 
         return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> SubmitStudentsScores(SubmitScoreDto dto)
+    {
+        var result = await _instructorService.SubmitStudentScore(dto);
+
+        if (!result.Succeeded){
+            ShowMessage(result.Message, result.Succeeded);
+        }
+
+        return RedirectToAction("AdmitStudentsScores", new { instructorId = dto.InstructorId, sectionId = dto.SectionId });
     }
 
     [HttpGet]

@@ -1,6 +1,6 @@
-﻿namespace Golestan.Domain.Entities;
+﻿namespace Golestan.Application.DTOs.Term;
 
-public class Term {
+public class TermDetailsDto {
 
     public int Id { get; set; }
 
@@ -17,22 +17,6 @@ public class Term {
     public string TermNumber { get; set; }
 
     public bool IsFirstTerm { get; set; }
-
-    public bool IsActive
-    {
-        get
-        {
-            if (EndTime <= DateTime.UtcNow){
-                return false;
-            }
-
-            return IsActive;
-        }
-
-        set => IsActive = value;
-    }
-
-    public bool ExamSuspended { get; set; } = false;
 
     public string TermText => Year.ToString() + "/" + TermNumber;
 

@@ -3,6 +3,7 @@
 using DTOs.ExamResult;
 using DTOs.Student;
 using DTOs.Term;
+using Shared.Helpers;
 
 
 public interface IStudentService {
@@ -14,5 +15,9 @@ public interface IStudentService {
     Task<List<TermDetailsDto>> GetAllStudentTerms(int studentId);
 
     Task<List<ExamResultDetailsDto>> GetTermExamResults(int termId, int studentId);
+
+    Task<List<ExamResultDetailsDto>?> GetActiveExamResults(int studentId);
+
+    Task<Result> SubmitObjection(SubmitObjectionDto dto);
 
 }

@@ -8,7 +8,9 @@ public class ExamResult {
 
     public string Description { get; set; } = String.Empty;
 
-    public DateTime ExamDate { get; set; } 
+    public string Objection { get; set; } = String.Empty;
+
+    public DateTime ExamDate { get; set; }
 
     public int TermId { get; set; }
 

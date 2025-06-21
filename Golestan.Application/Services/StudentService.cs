@@ -19,10 +19,13 @@ public class StudentService : IStudentService {
 
     private readonly UserManager<AppUser> _userManager;
 
-    public StudentService(AppDbContext context, UserManager<AppUser> userManager)
+    private readonly ITermService _termService;
+
+    public StudentService(AppDbContext context, UserManager<AppUser> userManager, ITermService termService)
     {
         _context = context;
         _userManager = userManager;
+        _termService = termService;
     }
 
     public async Task<StudentManagementDto> GetFacultyStudents(int facultyId)
@@ -38,7 +41,7 @@ public class StudentService : IStudentService {
                     AppUserId = s.AppUserId,
                     Email = s.AppUser.Email,
                     FacultyId = s.FacultyId,
-                    FacultyName = s.Faculty.MajorName,
+                    FacultyName = s.Faculty.Major,
                     FullName = s.FullName,
                     StudentNumber = s.StudentNumber,
                 })
@@ -51,7 +54,7 @@ public class StudentService : IStudentService {
             }
 
             dto.FacultyId = faculty.Id;
-            dto.FacultyName = faculty.MajorName;
+            dto.FacultyName = faculty.Major;
 
             return dto;
         }
@@ -128,6 +131,67 @@ public class StudentService : IStudentService {
             .ToListAsync();
 
         return model;
+    }
+
+    public async Task<List<ExamResultDetailsDto>?> GetActiveExamResults(int studentId)
+    {
+        var currentTerm = await _termService.GetCurrentTermEntity();
+
+        if (currentTerm == null){
+            return null;
+        }
+
+
+        var model = await _context.Students
+            .Where(s => s.Id == studentId)
+            .SelectMany(s => s.ExamResults)
+            .Where(e => e.TermId == currentTerm.Id)
+            .Select(e => new ExamResultDetailsDto()
+            {
+                Score = e.Score,
+                Description = e.Description,
+                Objection = e.Objection,
+            })
+            .ToListAsync();
+
+        return model;
+    }
+
+    public async Task<Result> SubmitObjection(SubmitObjectionDto dto)
+    {
+        var result = new Result();
+        var isInsideTerm = await _termService.IsInsideAnyTermCurrently();
+
+        if (!isInsideTerm){
+            result.Message = "You cant submit an objection right now";
+
+            return result;
+        }
+
+        if (dto.Objection == string.Empty){
+            result.Message = "You must provide an objection";
+
+            return result;
+        }
+
+        var examResult = await _context.Students
+            .Where(s => s.Id == dto.StudentId)
+            .SelectMany(s => s.ExamResults)
+            .Where(e => e.Id == dto.ExamResultId)
+            .FirstOrDefaultAsync();
+
+        if (examResult == null){
+            result.Message = "Somthing went wrong";
+
+            return result;
+        }
+
+        examResult.Objection = dto.Objection;
+        _context.Update(examResult);
+        await _context.SaveChangesAsync();
+        result.Message = "Objection submitted";
+        result.Succeeded = true;
+        return result;
     }
 
 }

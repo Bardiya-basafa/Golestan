@@ -29,7 +29,7 @@ public class InstructorService : IInstructorService {
                     AppUserId = i.AppUserId,
                     Email = i.AppUser.Email,
                     FacultyId = i.FacultyId,
-                    FacultyName = i.Faculty.MajorName,
+                    FacultyName = i.Faculty.Major,
                     FullName = $"{i.AppUser.FirstName} {i.AppUser.LastName}",
                     HireDate = i.HireDate,
                     Salary = i.Salary,

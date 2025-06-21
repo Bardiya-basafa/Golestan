@@ -96,7 +96,7 @@ public class SectionService : ISectionService {
                     StudentNumber = s.StudentNumber,
                     FullName = s.FullName,
                     FacultyId = s.FacultyId,
-                    FacultyName = s.Faculty.MajorName,
+                    FacultyName = s.Faculty.Major,
                 })
                 .ToListAsync();
 

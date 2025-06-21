@@ -39,7 +39,7 @@ public class CourseService : ICourseService {
                     // ExamTime = c.ExamTime,
                     FacultyId = c.FacultyId,
                     Unit = c.Unit,
-                    FacultyName = c.Faculty.MajorName,
+                    FacultyName = c.Faculty.Major,
                     SectionsCount = c.Sections.Count,
                 })
                 .Take(10)
@@ -81,7 +81,7 @@ public class CourseService : ICourseService {
             dto.Unit = course.Unit;
             dto.ExamDateTime = course.Exam.ExamDateTime;
             dto.ExamTimeSlot = course.Exam.TimeSlot;
-            dto.FacultyName = course.Faculty.MajorName;
+            dto.FacultyName = course.Faculty.Major;
             dto.FacultyId = course.FacultyId;
 
             dto.Instructors = course.Instructors.Select(i => new InstructorDetailsDto()

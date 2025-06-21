@@ -5,7 +5,6 @@ namespace Golestan.Web.Controllers;
 
 using Application.DTOs.Student;
 using Application.Interfaces;
-using Application.Services;
 using Base;
 
 
@@ -88,6 +87,23 @@ public class StudentsController : BaseController {
     public async Task<IActionResult> SeeTermExamResults(int termId, int studentId)
     {
         var model = await _studentService.GetTermExamResults(termId, studentId);
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ActiveExamResults(int studentId)
+    {
+        var model = await _studentService.GetActiveExamResults(studentId);
+
+        return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> SubmitAnObjection(SubmitObjectionDto dto)
+    {
+        var model = await _studentService.SubmitObjection(dto);
 
         return View(model);
     }

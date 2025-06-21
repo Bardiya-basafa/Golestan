@@ -21,4 +21,6 @@ public interface ITermService {
 
     Task<Result> CloseTerm(string confirmation, string currentTerm);
 
+    Task<bool> IsInsideAnyTermCurrently();
+
 }

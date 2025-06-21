@@ -6,4 +6,6 @@ public class ExamResultDetailsDto {
 
     public string Description { get; set; }
 
+    public string Objection { get; set; }
+
 }

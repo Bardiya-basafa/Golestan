@@ -38,7 +38,7 @@ public class ClassroomService : IClassroomService {
                 FacultyId = facultyId,
             };
 
-            dto.FacultyName = await _context.Faculties.Where(f => f.Id == facultyId).Select(f => f.MajorName).FirstOrDefaultAsync();
+            dto.FacultyName = await _context.Faculties.Where(f => f.Id == facultyId).Select(f => f.Major).FirstOrDefaultAsync();
 
 
             return dto;
@@ -61,7 +61,7 @@ public class ClassroomService : IClassroomService {
                     ClassroomId = classroom.Id,
                     ClassroomNumber = classroom.ClassNumber,
                     Capacity = classroom.Capacity,
-                    FacultyName = classroom.Faculty.MajorName,
+                    FacultyName = classroom.Faculty.Major,
                 })
                 .FirstOrDefaultAsync();
 

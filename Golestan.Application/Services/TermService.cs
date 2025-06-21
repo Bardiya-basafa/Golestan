@@ -270,4 +270,12 @@ public class TermService : ITermService {
         return result;
     }
 
+    public async Task<bool> IsInsideAnyTermCurrently()
+    {
+        var currentDate = DateTime.UtcNow;
+        var isInsideTerm = await _context.Terms.AnyAsync(t => t.StartTime <= currentDate && t.EndTime >= currentDate && t.IsActive);
+
+        return isInsideTerm;
+    }
+
 }

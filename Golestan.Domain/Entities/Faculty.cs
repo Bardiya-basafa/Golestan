@@ -9,7 +9,7 @@ public class Faculty {
 
     public string BuildingName { get; set; }
 
-    public string MajorName { get; set; }
+    public string Major { get; set; }
 
     public int Budget { get; set; }
 

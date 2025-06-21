@@ -1,5 +1,6 @@
 ﻿namespace Golestan.Application.Interfaces;
 
+using Domain.Entities;
 using DTOs.Course;
 using DTOs.Instructor;
 using Shared.Helpers;
@@ -16,6 +17,8 @@ public interface ICourseService {
     Task<Dictionary<int, string>>? GetCourseInstructors(int courseId);
 
     Task<List<CourseDetailsDto>> GetAvailableCoursesForPrerequisite(int courseId);
+
+    Task<List<Course>> GetAvailableCoursesForStudent(int studentId);
 
     Task<Result> ApplyNewInstructorToCourse(ApplyNewInstructorDto dto);
 

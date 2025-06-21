@@ -52,7 +52,7 @@ public class InstructorsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> AdmitStudentsScores(int instructorId, int sectionId)
     {
-        var model = await _instructorService.GetStudentsForCourseExam(instructorId, sectionId);
+        var model = await _instructorService.GetExamResultsForSection(instructorId, sectionId);
 
         // invoke the view component async 
 

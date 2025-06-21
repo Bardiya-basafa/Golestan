@@ -125,6 +125,14 @@ public class TermService : ITermService {
             return result;
         }
 
+        var isSelectionTimesValid = TermHelper.IsTermSelectionTimeValid(dto.SectionSelectionStartTime, dto.SectionSelectionEndTime, dto.ExamsStartTime, dto.ExamsEndTime);
+
+        if (!isSelectionTimesValid.Succeeded){
+            result.Message = isSelectionTimesValid.Message;
+
+            return result;
+        }
+
         var term = new Term()
         {
             StartTime = termHelper.StartDate,
@@ -134,6 +142,8 @@ public class TermService : ITermService {
             IsFirstTerm = termHelper.IsFirstTerm,
             TermNumber = termHelper.TermNumber,
             Year = termHelper.Year,
+            SectionSelectionStartTime = dto.SectionSelectionStartTime,
+            SectionSelectionEndTime = dto.SectionSelectionEndTime,
         };
 
 
@@ -204,6 +214,14 @@ public class TermService : ITermService {
             return result;
         }
 
+        var isSelectionTimesValid = TermHelper.IsTermSelectionTimeValid(dto.SectionSelectionStartTime, dto.SectionSelectionEndTime, dto.ExamsStartTime, dto.ExamsEndTime);
+
+        if (!isSelectionTimesValid.Succeeded){
+            result.Message = isSelectionTimesValid.Message;
+
+            return result;
+        }
+
         var costumeTermProperties = TermHelper.GetCostumeTermProperties(dto.StartDate.Value, dto.EndDate.Value);
 
         var term = new Term()
@@ -215,6 +233,8 @@ public class TermService : ITermService {
             Year = costumeTermProperties.Year,
             TermNumber = costumeTermProperties.TermNumber,
             IsFirstTerm = costumeTermProperties.IsFirstTerm,
+            SectionSelectionStartTime = dto.SectionSelectionStartTime,
+            SectionSelectionEndTime = dto.SectionSelectionEndTime,
         };
 
         _context.Terms.Add(term);

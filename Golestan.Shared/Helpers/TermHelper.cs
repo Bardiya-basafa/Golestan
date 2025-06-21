@@ -141,4 +141,37 @@ public static class TermHelper {
         return termResult;
     }
 
+    public static Result IsTermSelectionTimeValid(DateTime startDate, DateTime endDate, DateTime TermStartDate, DateTime TermEndDate)
+    {
+        var result = new Result();
+
+        if (endDate <= startDate){
+            result.Message = "Start date must be before end date";
+
+            return result;
+        }
+
+        if (endDate - startDate >= TimeSpan.FromDays(10)){
+            result.Message = "Selection time span must be under 10 days";
+
+            return result;
+        }
+
+        if (endDate - startDate <= TimeSpan.FromDays(2)){
+            result.Message = "Selection time span must be more than 2 days";
+
+            return result;
+        }
+
+        if (!(endDate <= TermEndDate && startDate <= TermEndDate && startDate >= TermStartDate && endDate >= TermEndDate)){
+            result.Message = "Selection time span must be between start and end term";
+
+            return result;
+        }
+
+        result.Succeeded = true;
+
+        return result;
+    }
+
 }

@@ -14,6 +14,10 @@ public class Term {
 
     public DateTime ExamsEndTime { get; set; }
 
+    public DateTime SectionSelectionStartTime { get; set; }
+
+    public DateTime SectionSelectionEndTime { get; set; }
+
     public string TermNumber { get; set; }
 
     public bool IsFirstTerm { get; set; }

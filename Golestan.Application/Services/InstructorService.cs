@@ -82,10 +82,11 @@ public class InstructorService : IInstructorService {
         return model;
     }
 
-    public Task<List<StudentScoreDto>> GetStudentsForCourseExam(int instructorId, int sectionId)
+    public Task<List<StudentScoreDto>> GetExamResultsForSection(int instructorId, int sectionId)
     {
         var model = _context.Sections
             .Where(s => s.Id == sectionId)
+            .SelectMany(s => s.Students)
             .SelectMany(s => s.ExamResults)
             .Select(e => new StudentScoreDto()
             {
@@ -94,6 +95,7 @@ public class InstructorService : IInstructorService {
                 StudentFullName = e.Student.FullName,
                 Term = e.Term.TermText,
                 Description = e.Description,
+                Objection = e.Objection,
             })
             .ToListAsync();
 

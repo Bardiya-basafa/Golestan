@@ -17,4 +17,10 @@ public class OpenNewTermDto {
 
     public DateTime ExamsEndTime { get; set; }
 
+    [Required]
+    public DateTime SectionSelectionStartTime { get; set; }
+
+    [Required]
+    public DateTime SectionSelectionEndTime { get; set; }
+
 }

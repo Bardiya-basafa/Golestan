@@ -30,6 +30,5 @@ public class Section {
 
     public ICollection<Student> Students { get; set; } = new HashSet<Student>();
 
-    public ICollection<ExamResult> ExamResults { get; set; } = new HashSet<ExamResult>();
 
 }

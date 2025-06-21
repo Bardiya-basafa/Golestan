@@ -145,7 +145,46 @@ public class CourseService : ICourseService {
 
     public async Task<List<CourseDetailsDto>> GetAvailableCoursesForPrerequisite(int courseId)
     {
-        return new List<CourseDetailsDto>();
+        var course = await _context.Courses
+            .Include(c => c.PrerequisiteCourses)
+            .FirstOrDefaultAsync(c => c.Id == courseId);
+
+        if (course == null){
+            throw new ArgumentException("Course not found");
+        }
+
+        var model = await _context.Courses
+            .Where(c => c.Id != courseId && course.PrerequisiteCourses.All(id => id != c.Id))
+            .Select(c => new CourseDetailsDto()
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Description = c.Description,
+                FacultyId = c.FacultyId,
+                Unit = c.Unit,
+                FacultyName = c.Faculty.Major,
+                SectionsCount = c.Sections.Count,
+                ExamTime = c.Exam.ExamDateTime,
+            })
+            .ToListAsync();
+
+        return model;
+    }
+
+
+    public async Task<List<Course>> GetAvailableCoursesForStudent(int studentId)
+    {
+        var studentPassedCourses = await _context.Students
+            .Where(s => s.Id == studentId)
+            .SelectMany(s => s.PassedCourses)
+            .ToListAsync();
+
+        var availableCourses = await _context.Courses
+            .Where(c => !studentPassedCourses.Contains(c))
+            .Where(c => c.PrerequisiteCourses.All(pc => studentPassedCourses.Select(passed => passed.Id).Contains(pc)))
+            .ToListAsync();
+
+        return availableCourses;
     }
 
     public async Task<Result> ApplyNewInstructorToCourse(ApplyNewInstructorDto dto)

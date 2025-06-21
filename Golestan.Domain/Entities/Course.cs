@@ -26,6 +26,5 @@ public class Course {
 
     public List<int> PrerequisiteCourses { get; set; } = new List<int>();
 
-    public List<int> SiblingCourses { get; set; } = new List<int>();
 
 }

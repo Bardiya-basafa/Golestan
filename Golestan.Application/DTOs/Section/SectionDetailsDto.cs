@@ -18,6 +18,10 @@ public class SectionDetailsDto {
 
     public DayOfWeek DayOfWeek { get; set; }
 
+    public DateTime ExamDate { get; set; }
+
+    public TimeSlot ExamTimeSlot { get; set; }
+
     public string CourseName { get; set; }
 
     public string ClassNumber { get; set; }
@@ -25,6 +29,7 @@ public class SectionDetailsDto {
     public int ClassCapacity { get; set; }
 
     public int RemainCapacity { get; set; }
+
     public int CurrentStudents { get; set; }
 
 }

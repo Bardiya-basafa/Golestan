@@ -1,13 +1,10 @@
-using System.Globalization;
 using Golestan.Application.Interfaces;
 using Golestan.Application.Services;
 using Golestan.Domain.Entities;
 using Golestan.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +34,8 @@ builder.Services.AddScoped<IClassroomService, ClassroomService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<ISectionService, SectionService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<ITermService, TermService>();
+builder.Services.AddScoped<ISelectionService, SelectionService>();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options => {
         options.Password.RequireDigit = true;

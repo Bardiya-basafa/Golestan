@@ -14,8 +14,7 @@ public class Section {
     public int InstructorId { get; set; }
 
     public int TermId { get; set; }
-
-
+    
     public Course Course { get; set; }
 
     public Classroom Classroom { get; set; }

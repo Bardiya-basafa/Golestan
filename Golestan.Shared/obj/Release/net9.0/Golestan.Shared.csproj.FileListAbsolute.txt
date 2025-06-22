@@ -10,3 +10,7 @@ E:\AspNetCore-Projects\Golestan\Golestan.Shared\obj\Release\net9.0\Golestan.Shar
 E:\AspNetCore-Projects\Golestan\Golestan.Shared\obj\Release\net9.0\refint\Golestan.Shared.dll
 E:\AspNetCore-Projects\Golestan\Golestan.Shared\obj\Release\net9.0\Golestan.Shared.pdb
 E:\AspNetCore-Projects\Golestan\Golestan.Shared\obj\Release\net9.0\ref\Golestan.Shared.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\bin\Release\net9.0\Golestan.Domain.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\bin\Release\net9.0\Golestan.Domain.pdb
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\obj\Release\net9.0\Golestan.Shared.csproj.AssemblyReference.cache
+E:\AspNetCore-Projects\Golestan\Golestan.Shared\obj\Release\net9.0\Golestan.811B4311.Up2Date

@@ -3,7 +3,7 @@
 using Shared.Helpers;
 
 
-public class SelectionDetailsDto {
+public class SectionSelectionDetailsDto {
 
     public string Term { get; set; }
 

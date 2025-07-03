@@ -7,7 +7,7 @@ public class Student {
 
     public int Id { get; set; }
 
-    public string AppUserId { get; set; }// foreign key to AppUser 
+    public string AppUserId { get; set; }
 
     public AppUser AppUser { get; set; }
 
@@ -19,10 +19,14 @@ public class Student {
 
     public int FacultyId { get; set; }
 
-
     public Faculty Faculty { get; set; }
 
-
     public ICollection<Section> Sections { get; set; } = new HashSet<Section>();
+
+    public ICollection<Course> PassedCourses { get; set; } = new HashSet<Course>();
+
+    public ICollection<ExamResult> ExamResults { get; set; } = new HashSet<ExamResult>();
+
+    public ICollection<Term> Terms { get; set; } = new HashSet<Term>();
 
 }

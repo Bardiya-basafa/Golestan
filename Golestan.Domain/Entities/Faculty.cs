@@ -1,5 +1,6 @@
 ﻿namespace Golestan.Domain.Entities;
 
+using System.ComponentModel.DataAnnotations;
 using Enums;
 
 
@@ -9,8 +10,9 @@ public class Faculty {
 
     public string BuildingName { get; set; }
 
-    public string MajorName { get; set; }
-
+    [StringLength(maximumLength: 25)]
+    public  string Major { get; set; }
+    
     public int Budget { get; set; }
 
     public DateTime StartDate { get; set; }

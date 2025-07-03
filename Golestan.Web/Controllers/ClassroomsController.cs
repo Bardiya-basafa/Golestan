@@ -50,10 +50,20 @@ public class ClassroomsController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("ClassroomManagement", "Admin", dto.FacultyId);
+            return RedirectToAction("ManageClassrooms", "Admin", dto.FacultyId);
         }
 
         return View(dto);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RemoveClassroom(int classroomId)
+    {
+        var result = await _classroomService.RemoveClassroom(classroomId);
+        ShowMessage(result.Message, result.Succeeded);
+
+        return RedirectToAction("ManageClassrooms", "Admin", routeValues: new { facultyId = 1 });
     }
 
     [HttpGet]

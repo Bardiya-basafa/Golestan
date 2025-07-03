@@ -139,7 +139,7 @@
             </div>
         </div>
 
-        <a asp-controller="Admin" asp-action="InstructorManagement"  class="stat-card rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+        <a asp-controller="Admin" asp-action="ManageInstructors"  class="stat-card rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm font-medium text-gray-600">Instructors</p>
@@ -152,7 +152,7 @@
             </div>
         </a>
 
-        <a asp-controller="Admin" asp-action="CourseManagement" asp-route-facultyId="@Model.Id" class="stat-card rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+        <a asp-controller="Admin" asp-action="ManageCourses" asp-route-facultyId="@Model.Id" class="stat-card rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm font-medium text-gray-600">Courses</p>
@@ -165,7 +165,7 @@
             </div>
         </a>
 
-        <a asp-controller="Admin" asp-action="ClassroomManagement" asp-route-facultyId="@Model.Id" class="stat-card rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+        <a asp-controller="Admin" asp-action="ManageClassrooms" asp-route-facultyId="@Model.Id" class="stat-card rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-sm font-medium text-gray-600">Classrooms</p>

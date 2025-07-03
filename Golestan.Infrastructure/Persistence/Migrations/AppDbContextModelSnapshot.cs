@@ -156,8 +156,8 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ExamTime")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("ExamId")
+                        .HasColumnType("int");
 
                     b.Property<int>("FacultyId")
                         .HasColumnType("int");
@@ -166,6 +166,13 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.PrimitiveCollection<string>("PrerequisiteCourses")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Unit")
                         .HasColumnType("int");
 
@@ -173,7 +180,101 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("FacultyId");
 
+                    b.HasIndex("StudentId");
+
                     b.ToTable("Courses");
+                });
+
+            modelBuilder.Entity("Golestan.Domain.Entities.Exam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClassroomId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ExamDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TermId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TimeSlot")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassroomId")
+                        .IsUnique();
+
+                    b.HasIndex("CourseId")
+                        .IsUnique();
+
+                    b.HasIndex("TermId")
+                        .IsUnique();
+
+                    b.ToTable("Exams");
+                });
+
+            modelBuilder.Entity("Golestan.Domain.Entities.ExamResult", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ExamDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("InstructorId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Objection")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Score")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("SectionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TermId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId")
+                        .IsUnique();
+
+                    b.HasIndex("InstructorId");
+
+                    b.HasIndex("SectionId")
+                        .IsUnique();
+
+                    b.HasIndex("StudentId");
+
+                    b.HasIndex("TermId")
+                        .IsUnique();
+
+                    b.ToTable("ExamResults");
                 });
 
             modelBuilder.Entity("Golestan.Domain.Entities.Faculty", b =>
@@ -191,7 +292,7 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MajorName")
+                    b.Property<string>("Major")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -258,6 +359,9 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Property<int>("InstructorId")
                         .HasColumnType("int");
 
+                    b.Property<int>("TermId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TimeSlot")
                         .HasColumnType("int");
 
@@ -268,6 +372,8 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasIndex("CourseId");
 
                     b.HasIndex("InstructorId");
+
+                    b.HasIndex("TermId");
 
                     b.ToTable("Sections");
                 });
@@ -311,6 +417,58 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.ToTable("Students");
                 });
 
+            modelBuilder.Entity("Golestan.Domain.Entities.Term", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("ExamSuspended")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("ExamsEndTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExamsStartTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsFirstTerm")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("SectionSelectionEndTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("SectionSelectionStartTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("StudentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TermNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Terms");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -340,19 +498,19 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d3e9e74d-5d7d-4ed5-bfe3-e2310181fe68",
+                            Id = "91f455b1-0956-4c1b-a43b-774596aa309f",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "773b09da-08f1-425a-a3a1-bae5ea00aad8",
+                            Id = "27a8a935-288c-4aa1-a42e-93a0212ecbda",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         },
                         new
                         {
-                            Id = "14c9dcae-da6a-4833-af53-7dbda657612b",
+                            Id = "be781783-ee49-407f-86fd-d42c4afc2b38",
                             Name = "Instructor",
                             NormalizedName = "INSTRUCTOR"
                         });
@@ -532,7 +690,82 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Golestan.Domain.Entities.Student", null)
+                        .WithMany("PassedCourses")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.Navigation("Faculty");
+                });
+
+            modelBuilder.Entity("Golestan.Domain.Entities.Exam", b =>
+                {
+                    b.HasOne("Golestan.Domain.Entities.Classroom", "Classroom")
+                        .WithOne()
+                        .HasForeignKey("Golestan.Domain.Entities.Exam", "ClassroomId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Golestan.Domain.Entities.Course", "Course")
+                        .WithOne("Exam")
+                        .HasForeignKey("Golestan.Domain.Entities.Exam", "CourseId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Golestan.Domain.Entities.Term", "Term")
+                        .WithOne()
+                        .HasForeignKey("Golestan.Domain.Entities.Exam", "TermId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Classroom");
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Term");
+                });
+
+            modelBuilder.Entity("Golestan.Domain.Entities.ExamResult", b =>
+                {
+                    b.HasOne("Golestan.Domain.Entities.Course", "Course")
+                        .WithOne()
+                        .HasForeignKey("Golestan.Domain.Entities.ExamResult", "CourseId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Golestan.Domain.Entities.Instructor", "Instructor")
+                        .WithMany("ExamResults")
+                        .HasForeignKey("InstructorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Golestan.Domain.Entities.Section", "Section")
+                        .WithOne()
+                        .HasForeignKey("Golestan.Domain.Entities.ExamResult", "SectionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Golestan.Domain.Entities.Student", "Student")
+                        .WithMany("ExamResults")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Golestan.Domain.Entities.Term", "Term")
+                        .WithOne()
+                        .HasForeignKey("Golestan.Domain.Entities.ExamResult", "TermId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Instructor");
+
+                    b.Navigation("Section");
+
+                    b.Navigation("Student");
+
+                    b.Navigation("Term");
                 });
 
             modelBuilder.Entity("Golestan.Domain.Entities.Instructor", b =>
@@ -574,11 +807,19 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("Golestan.Domain.Entities.Term", "Term")
+                        .WithMany()
+                        .HasForeignKey("TermId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Classroom");
 
                     b.Navigation("Course");
 
                     b.Navigation("Instructor");
+
+                    b.Navigation("Term");
                 });
 
             modelBuilder.Entity("Golestan.Domain.Entities.Student", b =>
@@ -598,6 +839,14 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Navigation("AppUser");
 
                     b.Navigation("Faculty");
+                });
+
+            modelBuilder.Entity("Golestan.Domain.Entities.Term", b =>
+                {
+                    b.HasOne("Golestan.Domain.Entities.Student", null)
+                        .WithMany("Terms")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.NoAction);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -682,6 +931,9 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Golestan.Domain.Entities.Course", b =>
                 {
+                    b.Navigation("Exam")
+                        .IsRequired();
+
                     b.Navigation("Sections");
                 });
 
@@ -698,7 +950,18 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Golestan.Domain.Entities.Instructor", b =>
                 {
+                    b.Navigation("ExamResults");
+
                     b.Navigation("Sections");
+                });
+
+            modelBuilder.Entity("Golestan.Domain.Entities.Student", b =>
+                {
+                    b.Navigation("ExamResults");
+
+                    b.Navigation("PassedCourses");
+
+                    b.Navigation("Terms");
                 });
 #pragma warning restore 612, 618
         }

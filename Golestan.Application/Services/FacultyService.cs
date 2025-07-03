@@ -24,7 +24,7 @@ public class FacultyService : IFacultyService {
                 .Select(f => new FacultyDetailsDto()
                 {
                     Id = f.Id,
-                    MajorName = f.MajorName,
+                    MajorName = f.Major,
                     BuildingName = f.BuildingName,
                     Budget = f.Budget,
                     StartDate = f.StartDate,
@@ -52,7 +52,7 @@ public class FacultyService : IFacultyService {
                 .Select(f => new FacultyDetailsDto()
                 {
                     Id = f.Id,
-                    MajorName = f.MajorName,
+                    MajorName = f.Major,
                     BuildingName = f.BuildingName,
                     Budget = f.Budget,
                     StartDate = f.StartDate,
@@ -80,7 +80,7 @@ public class FacultyService : IFacultyService {
                 .Select(f => new EditFacultyDto()
                 {
                     Id = f.Id,
-                    MajorName = f.MajorName,
+                    MajorName = f.Major,
                     BuildingName = f.BuildingName,
                     Budget = f.Budget,
                 })
@@ -97,7 +97,7 @@ public class FacultyService : IFacultyService {
 
     public async Task<Dictionary<int, string>?> GetFacultiesMajorNames()
     {
-        var facultyOptions = await _context.Faculties.Select(f => new { f.Id, f.MajorName }).Distinct().ToDictionaryAsync(f => f.Id, f => f.MajorName);
+        var facultyOptions = await _context.Faculties.Select(f => new { f.Id, MajorName = f.Major }).Distinct().ToDictionaryAsync(f => f.Id, f => f.MajorName);
 
         return facultyOptions;
     }
@@ -174,7 +174,7 @@ public class FacultyService : IFacultyService {
                 return false;
             }
 
-            faculty.MajorName = dto.MajorName;
+            faculty.Major = dto.MajorName;
             faculty.BuildingName = dto.BuildingName;
             faculty.StartDate = dto.StartDate;
             faculty.Budget = dto.Budget;
@@ -197,7 +197,7 @@ public class FacultyService : IFacultyService {
             {
                 Budget = addFacultyDto.Budget,
                 BuildingName = addFacultyDto.BuildingName,
-                MajorName = addFacultyDto.MajorName,
+                Major = addFacultyDto.MajorName,
                 StartDate = addFacultyDto.StartDate,
             };
 
@@ -215,7 +215,7 @@ public class FacultyService : IFacultyService {
 
     public async Task<bool> VerifyMajor(string major)
     {
-        var exist = await _context.Faculties.AnyAsync(f => f.MajorName == major);
+        var exist = await _context.Faculties.AnyAsync(f => f.Major == major);
 
         return exist;
     }

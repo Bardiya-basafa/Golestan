@@ -4,11 +4,18 @@
 namespace Golestan.Web.Controllers;
 
 using Application.DTOs.Section;
+using Application.DTOs.Term;
 using Application.Interfaces;
 using Application.Services;
+using Base;
+using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Shared.Constants;
+using Shared.Helpers;
 
 
-public class AdminController : Controller {
+public class AdminController : BaseController {
 
     private readonly IFacultyService _facultyService;
 
@@ -20,14 +27,46 @@ public class AdminController : Controller {
 
     private readonly ISectionService _sectionService;
 
-    public AdminController(IFacultyService facultyService, IInstructorService instructorService, IClassroomService classroomService, ICourseService courseService, ISectionService sectionService)
+    private readonly IStudentService _studentService;
+
+    private readonly UserManager<AppUser> _userManager;
+
+    private readonly ITermService _termService;
+
+
+    public AdminController(IFacultyService facultyService, IInstructorService instructorService, IClassroomService classroomService, ICourseService courseService, ISectionService sectionService, IStudentService studentService, UserManager<AppUser> userManager, ITermService termService)
     {
         _facultyService = facultyService;
         _instructorService = instructorService;
         _classroomService = classroomService;
         _courseService = courseService;
         _sectionService = sectionService;
+        _studentService = studentService;
+        _userManager = userManager;
+        _termService = termService;
     }
+
+    public IActionResult Index()
+    {
+        if (User.Identity.IsAuthenticated){
+            if (User.IsInRole(AppRoles.Admin)){
+                return RedirectToAction("AdminDashboard", "Admin");
+            }
+
+            if (User.IsInRole(AppRoles.Instructor)){
+                return RedirectToAction("InstructorDashboard", "Instructors");
+            }
+
+            if (User.IsInRole(AppRoles.Student)){
+                return RedirectToAction("StudentDashboard", "Students");
+            }
+
+            return RedirectToAction("AccessDenied", "Account");
+        }
+
+        return RedirectToAction("Login", "Account");
+    }
+
 
     // Admin Dashboard
     public async Task<IActionResult> AdminDashboard()
@@ -38,17 +77,28 @@ public class AdminController : Controller {
         return View(faculties);
     }
 
-    // Managing each section
+   
 
-    public async Task<IActionResult> InstructorManagement(int facultyId)
+   
+
+    // Managing each section
+    public async Task<IActionResult> ManageStudents(int facultyId)
     {
-        var instructorsDto = await _instructorService.GetInstructors();
+        var model = await _studentService.GetFacultyStudents(facultyId);
+
+        return View(model);
+    }
+
+    public async Task<IActionResult> ManageInstructors(int facultyId)
+    {
+        var instructorsDto = await _instructorService.GetFacultyInstructors();
+        ViewBag.FacultyId = facultyId;
 
         return View(instructorsDto);
     }
 
     [HttpGet]
-    public async Task<IActionResult> CourseManagement(int facultyId)
+    public async Task<IActionResult> ManageCourses(int facultyId)
     {
         var model = await _courseService.GetFacultyCourses(facultyId);
 
@@ -56,7 +106,7 @@ public class AdminController : Controller {
     }
 
     [HttpGet]
-    public async Task<IActionResult> ClassroomManagement(int facultyId)
+    public async Task<IActionResult> ManageClassrooms(int facultyId)
     {
         var model = await _classroomService.GetFacultyClassrooms(facultyId);
 
@@ -64,7 +114,7 @@ public class AdminController : Controller {
     }
 
     [HttpGet]
-    public async Task<IActionResult> SectionManagement(int facultyId)
+    public async Task<IActionResult> ManageSections(int facultyId)
     {
         var model = await _sectionService.GetFacultySections(facultyId);
 
@@ -102,6 +152,21 @@ public class AdminController : Controller {
         return View(model);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> AllStudents()
+    {
+        var model = await _facultyService.GetFaculties();
+
+        return View(model);
+    }
+
+    public async Task<IActionResult> AllFaculties()
+    {
+        var faculties = await _facultyService.GetFaculties();
+
+
+        return View(faculties);
+    }
 
     // Ajaxs 
 
@@ -148,12 +213,15 @@ public class AdminController : Controller {
     }
 
 
-    public async Task<IActionResult> AllFaculties()
+    public async Task<IActionResult> VerifyEmail(string email)
     {
-        var faculties = await _facultyService.GetFaculties();
+        var user = await _userManager.FindByEmailAsync(email);
 
+        if (user != null){
+            return Json(false);
+        }
 
-        return View(faculties);
+        return Json(true);
     }
 
 }

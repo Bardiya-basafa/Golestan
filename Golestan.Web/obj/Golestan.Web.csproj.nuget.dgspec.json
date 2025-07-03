@@ -273,7 +273,11 @@
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj": {
+                "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

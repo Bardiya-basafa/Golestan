@@ -18,17 +18,58 @@ public class InstructorsController : BaseController {
 
     private readonly IUserService _userService;
 
-    public InstructorsController(IFacultyService facultyService, UserManager<AppUser> userManager, IUserService userService)
+    private readonly IInstructorService _instructorService;
+
+    public InstructorsController(IFacultyService facultyService, UserManager<AppUser> userManager, IUserService userService, IInstructorService instructorService)
     {
         _facultyService = facultyService;
         _userManager = userManager;
         _userService = userService;
+        _instructorService = instructorService;
     }
 
-    // GET
-    public IActionResult Index()
+    public IActionResult InstructorDashboard()
     {
         return View();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetInstructorSections(int instructorId)
+    {
+        var model = await _instructorService.GetInstructorSections(instructorId);
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetInstructorStudentsFoSection(int sectionId)
+    {
+        var model = await _instructorService.GetInstructorStudentsForSection(sectionId);
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> AdmitStudentsScores(int instructorId, int sectionId)
+    {
+        var model = await _instructorService.GetExamResultsForSection(instructorId, sectionId);
+
+        // invoke the view component async 
+
+        return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> SubmitStudentsScores(SubmitScoreDto dto)
+    {
+        var result = await _instructorService.SubmitStudentScore(dto);
+
+        if (!result.Succeeded){
+            ShowMessage(result.Message, result.Succeeded);
+        }
+
+        return RedirectToAction("AdmitStudentsScores", new { instructorId = dto.InstructorId, sectionId = dto.SectionId });
     }
 
     [HttpGet]
@@ -59,22 +100,31 @@ public class InstructorsController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("InstructorManagement", "Admin");
+            return RedirectToAction("ManageInstructors", "Admin");
         }
 
 
         return View(dto);
     }
 
-    public async Task<IActionResult> VerifyEmail(string email)
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RemoveCourseInstructor(int instructorId, int courseId)
     {
-        var user = await _userManager.FindByEmailAsync(email);
+        var result = await _instructorService.RemoveCourseInstructor(instructorId, courseId);
+        ShowMessage(result.Message, result.Succeeded);
 
-        if (user != null){
-            return Json(false);
-        }
+        return RedirectToAction("CourseActions", "Courses", routeValues: new { courseId = courseId });
+    }
 
-        return Json(true);
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RemoveInstructor(int instructorId, int facultyId)
+    {
+        var result = await _instructorService.RemoveInstructor(instructorId);
+        ShowMessage(result.Message, result.Succeeded);
+
+        return RedirectToAction("ManageInstructors", "Admin", routeValues: new { facultyId = facultyId });
     }
 
 }

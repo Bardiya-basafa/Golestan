@@ -30,7 +30,7 @@ public class CoursesController : BaseController {
         var model = new AddCourseDto()
         {
             FacultyMajorName = faculty.MajorName,
-            FacultyId = facultyId
+            FacultyId = facultyId,
         };
 
         return View(model);
@@ -48,11 +48,21 @@ public class CoursesController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("CourseManagement", "Admin", new { facultyId = dto.FacultyId });
+            return RedirectToAction("ManageCourses", "Admin", new { facultyId = dto.FacultyId });
         }
 
 
         return View(dto);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> RemoveCourse(int courseId, int facultyId)
+    {
+        var result = await _courseService.RemoveCourse(courseId);
+        ShowMessage(result.Message, result.Succeeded);
+
+        return RedirectToAction("ManageCourses", "Admin", new { facultyId = facultyId });
     }
 
     [HttpGet]
@@ -90,6 +100,24 @@ public class CoursesController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         return RedirectToAction("CourseActions", routeValues: new { courseId = dto.CourseId });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> AddPrerequisiteToCourse(int courseId)
+    {
+        var model = await _courseService.GetAvailableCoursesForPrerequisite(courseId);
+
+        return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AddPrerequisiteToCourse(int courseId, int prerequisiteCourseId)
+    {
+        var result = await _courseService.AddPrerequisiteToCourse(courseId, prerequisiteCourseId);
+        ShowMessage(result.Message, result.Succeeded);
+
+        return RedirectToAction("CourseActions", routeValues: new { courseId = courseId });
     }
 
 }

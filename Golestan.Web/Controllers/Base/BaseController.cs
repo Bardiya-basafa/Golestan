@@ -3,6 +3,9 @@
 
 namespace Golestan.Web.Controllers.Base;
 
+using Shared.Constants;
+
+
 public abstract class BaseController : Controller {
 
     public void ShowMessage(string? message, bool result)

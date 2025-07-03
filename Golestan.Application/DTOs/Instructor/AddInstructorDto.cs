@@ -17,7 +17,7 @@ public class AddInstructorDto {
 
     public string LastName { get; set; }
 
-    [Remote("VerifyEmail", "Instructors", ErrorMessage = "Email address already exists")]
+    [Remote("VerifyEmail", "Admin", ErrorMessage = "Email address already exists")]
     [Required(ErrorMessage = "You must provide a email address")]
     [EmailAddress(ErrorMessage = "You must provide a valid email address")]
     [UniqueEmail]

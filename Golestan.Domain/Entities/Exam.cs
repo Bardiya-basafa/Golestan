@@ -1,6 +1,8 @@
 ﻿namespace Golestan.Domain.Entities;
 
+using System.ComponentModel.DataAnnotations.Schema;
 using Enums;
+using Microsoft.EntityFrameworkCore;
 
 
 public class Exam {
@@ -10,6 +12,7 @@ public class Exam {
     public TimeSlot TimeSlot { get; set; }
 
     public DateTime ExamDateTime { get; set; }
+
 
     public int CourseId { get; set; }
 

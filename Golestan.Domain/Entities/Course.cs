@@ -1,5 +1,8 @@
 ﻿namespace Golestan.Domain.Entities;
 
+using System.ComponentModel.DataAnnotations.Schema;
+
+
 public class Course {
 
     public int Id { get; set; }
@@ -10,6 +13,7 @@ public class Course {
 
     public string Description { get; set; }
 
+    [ForeignKey("Exam")]
     public int ExamId { get; set; }
 
     public int FacultyId { get; set; }
@@ -25,6 +29,5 @@ public class Course {
     public ICollection<Instructor> Instructors { get; set; } = new HashSet<Instructor>();
 
     public List<int> PrerequisiteCourses { get; set; } = new List<int>();
-
 
 }

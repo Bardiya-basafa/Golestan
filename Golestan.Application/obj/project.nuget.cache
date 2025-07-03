@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "NNeavqiTDtg=",
+  "dgSpecHash": "8N4dkZflEkA=",
   "success": true,
   "projectFilePath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Application\\Golestan.Application.csproj",
   "expectedPackageFiles": [
@@ -136,12 +136,5 @@
     "C:\\Users\\Notebook\\.nuget\\packages\\system.threading.tasks.extensions\\4.6.0\\system.threading.tasks.extensions.4.6.0.nupkg.sha512",
     "C:\\Users\\Notebook\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://api.nuget.org/v3/index.json."
-    }
-  ]
+  "logs": []
 }

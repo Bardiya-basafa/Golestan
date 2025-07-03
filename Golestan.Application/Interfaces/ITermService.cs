@@ -13,11 +13,10 @@ public interface ITermService {
 
     Task<List<TermDetailsDto>> GetAllTerms();
 
-    Task<TermOpeningOptionsDto> TermOpeningOptions();
+    Task<bool> TermOpeningOption();
 
-    Task<Result> OpenNormalTerm(OpenNewTermDto dto);
 
-    Task<Result> OpenCostumeTerm(OpenNewTermDto dto);
+    Task<Result> OpnenNewTerm(OpenNewTermDto dto);
 
     Task<Result> CloseTerm(string confirmation, string currentTerm);
 

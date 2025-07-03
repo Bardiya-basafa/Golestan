@@ -77,25 +77,9 @@ public class AdminController : BaseController {
         return View(faculties);
     }
 
-    // Term Management
-    [HttpGet]
-    public async Task<IActionResult> OpenNewTerm()
-    {
-        var model = TermHelper.CurrentNormalTerm();
+   
 
-        return View(model);
-    }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> OpenNewTerm(OpenNewTermDto dto)
-    {
-        var result = await _termService.OpenNormalTerm(dto);
-
-        ShowMessage(result.Message, result.Succeeded);
-
-        return RedirectToAction("AdminDashboard", "Admin");
-    }
+   
 
     // Managing each section
     public async Task<IActionResult> ManageStudents(int facultyId)

@@ -60,30 +60,25 @@ public static class TermHelper {
         return false;
     }
 
-    public static Result IsExamDatesValid(DateTime? termStartDate, DateTime? termEndDate, DateTime examStartDate, DateTime examEndDate)
+    public static Result IsExamDatesValid(DateTime termStartDate, DateTime termEndDate, DateTime examStartDate, DateTime examEndDate)
     {
         var result = new Result();
         var examTime = examEndDate - examStartDate;
 
-        if (examTime <= TimeSpan.FromDays(25)){
+        if (examTime <= TimeSpan.FromDays(20)){
             result.Message = "Time between exam start and exam end dates are too small";
 
             return result;
         }
 
-        if (examTime >= TimeSpan.FromDays(30)){
-            result.Message = "Time between exam start and exam end dates are too large";
 
-            return result;
-        }
-
-        if (examStartDate >= termEndDate || examStartDate <= termStartDate || examEndDate - examStartDate >= TimeSpan.FromDays(100) || examEndDate - examStartDate <= TimeSpan.FromDays(85)){
+        if (examStartDate >= termEndDate || examStartDate <= termStartDate){
             result.Message = "Exam start date is not valid";
 
             return result;
         }
 
-        if (examEndDate <= termEndDate || examEndDate >= examStartDate || termEndDate - examEndDate >= TimeSpan.FromDays(10) || termEndDate - examEndDate <= TimeSpan.FromDays(20)){
+        if (examEndDate >= termEndDate || examEndDate <= examStartDate){
             result.Message = "Exam end date is not valid";
 
             return result;
@@ -104,11 +99,6 @@ public static class TermHelper {
             return result;
         }
 
-        if (termEndDate - termStartDate >= TimeSpan.FromDays(135)){
-            result.Message = "Term time span too large";
-
-            return result;
-        }
 
         if (termEndDate - termStartDate <= TimeSpan.FromDays(120)){
             result.Message = "Term time span too small";
@@ -121,7 +111,7 @@ public static class TermHelper {
         return result;
     }
 
-    public static TermResult GetCostumeTermProperties(DateTime startDate, DateTime endDate)
+    public static TermResult GetTermProperties(DateTime startDate, DateTime endDate)
     {
         var termResult = new TermResult();
         var currentDate = DateTime.UtcNow;
@@ -141,7 +131,7 @@ public static class TermHelper {
         return termResult;
     }
 
-    public static Result IsTermSelectionTimeValid(DateTime startDate, DateTime endDate, DateTime TermStartDate, DateTime TermEndDate)
+    public static Result IsTermSelectionTimeValid(DateTime startDate, DateTime endDate, DateTime termStartDate, DateTime termEndDate, DateTime examStartDate)
     {
         var result = new Result();
 
@@ -163,7 +153,7 @@ public static class TermHelper {
             return result;
         }
 
-        if (!(endDate <= TermEndDate && startDate <= TermEndDate && startDate >= TermStartDate && endDate >= TermEndDate)){
+        if (endDate >= termEndDate || startDate >= termEndDate || startDate <= termStartDate || startDate >= termEndDate || endDate >= examStartDate || startDate >= examStartDate){
             result.Message = "Selection time span must be between start and end term";
 
             return result;

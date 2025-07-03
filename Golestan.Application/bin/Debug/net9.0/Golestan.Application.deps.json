@@ -1071,14 +1071,7 @@
           "System.Threading": "4.0.11"
         }
       },
-      "System.Formats.Asn1/9.0.5": {
-        "runtime": {
-          "lib/net9.0/System.Formats.Asn1.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.525.21509"
-          }
-        }
-      },
+      "System.Formats.Asn1/9.0.5": {},
       "System.Globalization/4.0.11": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -1376,14 +1369,7 @@
         }
       },
       "System.Text.Encodings.Web/8.0.0": {},
-      "System.Text.Json/9.0.5": {
-        "runtime": {
-          "lib/net9.0/System.Text.Json.dll": {
-            "assemblyVersion": "9.0.0.0",
-            "fileVersion": "9.0.525.21509"
-          }
-        }
-      },
+      "System.Text.Json/9.0.5": {},
       "System.Threading/4.0.11": {
         "dependencies": {
           "System.Runtime": "4.3.0",
@@ -1424,7 +1410,7 @@
         },
         "runtime": {
           "Golestan.Domain.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -1441,15 +1427,18 @@
         },
         "runtime": {
           "Golestan.Infrastructure.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
       },
       "Golestan.Shared/1.0.0": {
+        "dependencies": {
+          "Golestan.Domain": "1.0.0"
+        },
         "runtime": {
           "Golestan.Shared.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }

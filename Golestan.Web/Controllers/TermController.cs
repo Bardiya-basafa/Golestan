@@ -42,9 +42,9 @@ public class TermController : BaseController {
     {
         // Make it view component 
         // var model = await _termService.GetLastPreviousTerm();
-        var model = await _termService.TermOpeningOptions();
+        var model = await _termService.TermOpeningOption();
 
-        if (!model.CanOpenAnyTermNow){
+        if (!model){
             ShowMessage("Currently a term already open", false);
 
             return RedirectToAction("CurrentTerm");
@@ -53,47 +53,26 @@ public class TermController : BaseController {
         return View(model);
     }
 
-    // open normal term
-    [HttpGet]
-    public IActionResult OpenNormalTerm()
-    {
-        return View();
-    }
-
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> OpenNormalTerm(OpenNewTermDto dto)
+    public async Task<IActionResult> OpenNewTerm(OpenNewTermDto dto)
     {
-        var result = await _termService.OpenNormalTerm(dto);
+        if (ModelState.IsValid){
+            return RedirectToAction("OpenNewTerm");
+        }
+
+        var result = await _termService.OpnenNewTerm(dto);
+
+
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
             return RedirectToAction("CurrentTerm");
         }
 
-        return View(result);
+        return RedirectToAction("OpenNewTerm", "Term");
     }
 
-    // open costume term 
-    [HttpGet]
-    public IActionResult OpenCostumeTerm()
-    {
-        return View();
-    }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> OpenCostumeTerm(OpenNewTermDto dto)
-    {
-        var result = await _termService.OpenCostumeTerm(dto);
-        ShowMessage(result.Message, result.Succeeded);
-
-        if (result.Succeeded){
-            return RedirectToAction("CurrentTerm");
-        }
-
-        return View(result);
-    }
 
     // Edit current term
     // [HttpGet]

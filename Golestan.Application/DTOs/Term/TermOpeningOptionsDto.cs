@@ -1,6 +1,6 @@
 ﻿namespace Golestan.Application.DTOs.Term;
 
-public class TermOpeningOptionsDto {
+public class boll {
 
     public bool CanOpenAnyTermNow { get; set; } = false;
 

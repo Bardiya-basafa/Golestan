@@ -4,336 +4,186 @@ using Domain.Entities;
 using Domain.Enums;
 using DTOs.Course;
 using DTOs.Instructor;
-using Infrastructure.Persistence;
 using Interfaces;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
+using RepositoryInterfaces;
 using Shared.Helpers;
 
 
-public class CourseService : ICourseService {
+public class CourseService(ICourseRepository courseRepository) : ICourseService {
 
-    private readonly AppDbContext _context;
-
-    private readonly IFacultyService _facultyService;
-
-    private readonly ISectionService _sectionService;
-
-    public CourseService(AppDbContext context, IFacultyService facultyService, ISectionService sectionService)
-    {
-        _context = context;
-        _facultyService = facultyService;
-        _sectionService = sectionService;
-    }
-
-    public async Task<CourseManagementDto> GetFacultyCourses(int facultyId)
+    public async Task<List<CourseDto>> GetFacultyCourses(int facultyId)
     {
         try{
-            var dto = new CourseManagementDto();
-
-            dto.Courses = await _context.Courses.Select(c => new CourseDetailsDto()
-                {
-                    Id = c.Id,
-                    Name = c.Name,
-                    Description = c.Description,
-
-                    // ExamTime = c.ExamTime,
-                    FacultyId = c.FacultyId,
-                    Unit = c.Unit,
-                    FacultyName = c.Faculty.Major,
-                    SectionsCount = c.Sections.Count,
-                })
-                .Take(10)
-                .ToListAsync();
-
-            var facultyDetails = await _facultyService.GetDetailsFacultyById(facultyId);
-
-
-            dto.FacultyId = facultyDetails.Id;
-            dto.FacultyName = facultyDetails.MajorName;
-
-            return dto;
+            return await courseRepository.GetFacultyCourses(facultyId);
         }
         catch (Exception e){
-            Console.WriteLine(e);
-
-            throw;
+            throw new Exception(e.Message);
         }
     }
 
-    public async Task<CourseActionsDto> GetCourseActionsDto(int courseId)
+    public async Task<CourseDto> GetCourseById(int courseId)
     {
         try{
-            var dto = new CourseActionsDto();
-
-            var course = await _context.Courses
-                .Where(c => c.Id == courseId)
-                .Include(c => c.Faculty)
-                .Include(c => c.Instructors)
-                .Include(c => c.Exam)
-                .FirstOrDefaultAsync();
-
-            if (course == null){
-                throw new Exception($"Course with id {courseId} not found");
-            }
-
-            dto.CourseId = course.Id;
-            dto.CourseName = course.Name;
-            dto.Unit = course.Unit;
-            dto.ExamDateTime = course.Exam.ExamDateTime;
-            dto.ExamTimeSlot = course.Exam.TimeSlot;
-            dto.FacultyName = course.Faculty.Major;
-            dto.FacultyId = course.FacultyId;
-
-            dto.Instructors = course.Instructors.Select(i => new InstructorDetailsDto()
-            {
-                Id = i.Id,
-                FullName = i.FullName,
-            }).ToList();
-
-            return dto;
+            return await courseRepository.GetCourseById(courseId);
         }
         catch (Exception e){
-            Console.WriteLine(e);
-
-            throw;
+            throw new Exception(e.Message);
         }
     }
 
-    public async Task<ApplyNewInstructorDto> GetAllFacultyInstructors(int facultyId, int courseId)
+    public async Task<CourseInstructorDto> GetAvailableInsturctorsForCourse(int facultyId, int courseId)
     {
         try{
-            var dto = new ApplyNewInstructorDto();
-
-            dto.Instructors = await _context.Instructors
-                .Where(i => i.FacultyId == facultyId && i.Courses.All(c => c.Id != courseId))
-                .Select(i => new InstructorDetailsDto()
-                {
-                    Id = i.Id,
-                    FullName = i.FullName,
-                })
-                .ToListAsync();
-
-            dto.CourseId = courseId;
-            dto.CourseName = _context.Courses.FindAsync(courseId).Result.Name;
-
-            return dto;
+            return await courseRepository.GetAvailableInstructorsForCourse(facultyId, courseId);
         }
         catch (Exception e){
-            Console.WriteLine(e);
-
-            throw;
+            throw new Exception(e.Message);
         }
     }
 
-    public async Task<Dictionary<int, string>>? GetCourseInstructors(int courseId)
+    public async Task<Dictionary<int, string>?> GetCourseInstructors(int courseId)
     {
         try{
-            var instructorOptions = await _context.Instructors
-                .Where(i => i.Courses.Any(c => c.Id == courseId))
-                .Select(i => new { i.Id, i.FullName })
-                .Distinct()
-                .ToDictionaryAsync(c => c.Id, c => c.FullName);
-
-            return instructorOptions;
+            return await courseRepository.GetCourseInstructors(courseId);
         }
         catch (Exception e){
-            Console.WriteLine(e);
-
-            throw;
+            throw new Exception(e.Message);
         }
     }
 
-    public async Task<List<CourseDetailsDto>> GetAvailableCoursesForPrerequisite(int courseId)
+    public async Task<List<CourseDto>> GetAvailableCoursesForPrerequisite(int courseId)
     {
-        var course = await _context.Courses
-            .Include(c => c.PrerequisiteCourses)
-            .FirstOrDefaultAsync(c => c.Id == courseId);
-
-        if (course == null){
-            throw new ArgumentException("Course not found");
-        }
-
-        var model = await _context.Courses
-            .Where(c => c.Id != courseId && course.PrerequisiteCourses.All(id => id != c.Id))
-            .Select(c => new CourseDetailsDto()
-            {
-                Id = c.Id,
-                Name = c.Name,
-                Description = c.Description,
-                FacultyId = c.FacultyId,
-                Unit = c.Unit,
-                FacultyName = c.Faculty.Major,
-                SectionsCount = c.Sections.Count,
-                ExamTime = c.Exam.ExamDateTime,
-            })
-            .ToListAsync();
-
-        return model;
+        return await courseRepository.GetAvailableCoursesForPrerequisite(courseId);
     }
 
 
     public async Task<List<Course>> GetAvailableCoursesForStudent(int studentId)
     {
-        var studentPassedCourses = await _context.Students
-            .Where(s => s.Id == studentId)
-            .SelectMany(s => s.PassedCourses)
-            .ToListAsync();
-
-        var availableCourses = await _context.Courses
-            .Where(c => !studentPassedCourses.Contains(c))
-            .Where(c => c.PrerequisiteCourses.All(pc => studentPassedCourses.Select(passed => passed.Id).Contains(pc)))
-            .ToListAsync();
-
-        return availableCourses;
+        return await courseRepository.GetAvailableCoursesForStudent(studentId);
     }
 
-    public async Task<Result> ApplyNewInstructorToCourse(ApplyNewInstructorDto dto)
+    public async Task<Result> ApplyInstructorToCourse(CourseInstructorDto dto)
     {
-        var finalResult = new Result();
-
         try{
-            var course = await _context.Courses.FirstOrDefaultAsync(c => c.Id == dto.CourseId);
-            var instructor = await _context.Instructors.FirstOrDefaultAsync(i => i.Id == dto.InstructorId);
-
-            if (course == null || instructor == null){
-                finalResult.Message = $"Course with id {dto.CourseId} not found";
-
-                return finalResult;
-            }
-
-            course.Instructors.Add(instructor);
-            _context.Courses.Update(course);
-            await _context.SaveChangesAsync();
-            finalResult.Succeeded = true;
-            finalResult.Message = "Instructor applied";
-
-            return finalResult;
+            return await courseRepository.ApplyInstructorToCourse(dto.CourseId, dto.InstructorId);
         }
         catch (Exception e){
-            Console.WriteLine(e);
-
-            finalResult.Message = e.Message;
-
-            throw;
+            throw new Exception(e.Message);
         }
     }
 
     public async Task<Result> AddCourse(AddCourseDto dto)
     {
-        var finalResult = new Result();
-
         try{
             var course = new Course()
             {
-                Name = dto.Name,
+                CourseName = dto.Name,
                 Description = dto.Description,
                 FacultyId = dto.FacultyId,
                 Unit = dto.Unit,
             };
 
-            if (await IsExamExistInClass(dto)){
-                finalResult.Message = "There is already an exam in that time";
 
-                return finalResult;
+            if (await courseRepository.CourseNameExist(course.CourseName, course.FacultyId)){
+                return new Result() { Message = $"Course {dto.Name}  already exist" };
             }
 
-            var exam = new Exam()
-            {
-                ClassroomId = dto.ExamClassroomId,
-                ExamDateTime = dto.ExamDateTime,
-                TimeSlot = GetTimeSlot(dto.ExamTimeSlotId),
-            };
+            var validationResult = ValidateCourse(course);
 
-            course.Exam = exam;
+            if (!validationResult.Succeeded){
+                return validationResult;
+            }
 
-            _context.Courses.Add(course);
-            await _context.SaveChangesAsync();
-
-            finalResult.Succeeded = true;
-            finalResult.Message = "Course added";
+            return await courseRepository.AddCourse(course);
         }
         catch (Exception e){
-            Console.WriteLine(e);
-            finalResult.Message = "Failed to create course";
+            throw new Exception(e.Message);
+        }
+    }
+
+    public async Task<Result> SetExam(SetExamForCourseDto dto)
+    {
+        // var currentTerm = await _termService.GetCurrentTerm();
+        //
+        // if (currentTerm == null){
+        //     return new Result() { Message = "Term not found" };
+        // }
+        //
+        // if (currentTerm.ExamsEndTime <= dto.ExamDateTime || dto.ExamDateTime <= currentTerm.ExamsStartTime){
+        //     return new Result()
+        //     {
+        //         Message = $"Exam date must be between {currentTerm.ExamsStartTime.ToString("yyyy-M-d dddd")} - {dto.ExamDateTime.ToString("yyyy-M-d dddd")}",
+        //     };
+        // }
+
+        if (await courseRepository.IsExamExistInClass(dto.ExamDateTime, GetTimeSlot(dto.ExamTimeSlotId), dto.ExamClassroomId)){
+            return new Result() { Message = "Course already taken for exam" };
         }
 
-        return finalResult;
+
+        var exam = new Exam()
+        {
+            ClassroomId = dto.ExamClassroomId,
+            CourseId = dto.CourseId,
+            // TermId = currentTerm.Id,
+            TimeSlot = GetTimeSlot(dto.ExamTimeSlotId),
+            ExamDateTime = dto.ExamDateTime,
+        };
+
+
+        return await courseRepository.SetExam(exam);
     }
 
     public async Task<Result> RemoveCourse(int courseId)
     {
-        var result = new Result();
-
         try{
-            var course = await _context.Courses
-                .Where(c => c.Id == courseId)
-                .Include(c => c.Sections)
-                .FirstOrDefaultAsync();
-
-            if (course == null){
-                result.Message = $"Course with id {courseId} not found";
-
-                return result;
-            }
-
-            _context.Courses.Remove(course);
-            await _context.SaveChangesAsync();
-            result.Succeeded = true;
-            result.Message = "Course removed";
-
-            return result;
+            return await courseRepository.RemoveCourse(courseId);
         }
         catch (Exception e){
-            Console.WriteLine(e);
-
-            result.Message = e.Message;
+            throw new Exception(e.Message);
         }
-
-        return result;
     }
 
     public async Task<Result> AddPrerequisiteToCourse(int courseId, int prerequisiteCourseId)
     {
-        var result = new Result();
-
         try{
-            var course = await _context.Courses
-                .Where(c => c.Id == courseId)
-                .Include(c => c.PrerequisiteCourses)
-                .FirstOrDefaultAsync();
-
-            if (course.PrerequisiteCourses.Contains(prerequisiteCourseId)){
-                result.Message = $"Course with id {courseId} already prerequisite";
-
-                return result;
-            }
-
-            course.PrerequisiteCourses.Add(prerequisiteCourseId);
-            _context.Courses.Update(course);
-            await _context.SaveChangesAsync();
-            result.Succeeded = true;
-            result.Message = "Prerequisite course added";
+            return await courseRepository.AddPrerequisiteToCourse(courseId, prerequisiteCourseId);
         }
         catch (Exception e){
-            Console.WriteLine(e);
-            result.Message = e.Message;
+            throw new Exception(e.Message);
         }
+    }
+
+
+    private static Result ValidateCourse(Course course)
+    {
+        var result = new Result();
+
+        if (course.Unit > 3 || course.Unit < 1){
+            result.Message = $"Course unit must be between 3 and 1 ";
+
+            return result;
+        }
+
+        if (string.IsNullOrWhiteSpace(course.CourseName) || course.CourseName.Length < 3 || course.CourseName.Length > 40){
+            result.Message = $"Course name must be between 3 and 40 characters ";
+
+            return result;
+        }
+
+        if (string.IsNullOrWhiteSpace(course.Description) || course.Description.Length < 3 || course.Description.Length > 250){
+            result.Message = $"Course description must be between 3 and 250 characters ";
+
+            return result;
+        }
+
+        result.Succeeded = true;
 
         return result;
     }
 
-    private async Task<bool> IsExamExistInClass(AddCourseDto dto)
-    {
-        var timeSlot = GetTimeSlot(dto.ExamTimeSlotId);
-        var examDateTime = dto.ExamDateTime;
-
-        var isExamExistInClass = await _context.Exams
-            .Where(e => e.TimeSlot == timeSlot && e.ExamDateTime == examDateTime)
-            .Where(e => e.ClassroomId == dto.ExamClassroomId)
-            .AnyAsync();
-
-        return isExamExistInClass;
-    }
 
     private TimeSlot GetTimeSlot(int timeSlotId)
     {

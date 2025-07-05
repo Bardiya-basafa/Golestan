@@ -4,6 +4,7 @@
 namespace Golestan.Web.Controllers;
 
 using Application.DTOs.Instructor;
+using Application.DTOs.Score;
 using Application.Interfaces;
 using Base;
 using Domain.Entities;
@@ -44,7 +45,7 @@ public class InstructorsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> GetInstructorStudentsFoSection(int sectionId)
     {
-        var model = await _instructorService.GetInstructorStudentsForSection(sectionId);
+        var model = await _instructorService.GetInstructorStudentsOfSection(sectionId);
 
         return View(model);
     }
@@ -52,7 +53,7 @@ public class InstructorsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> AdmitStudentsScores(int instructorId, int sectionId)
     {
-        var model = await _instructorService.GetExamResultsForSection(instructorId, sectionId);
+        var model = await _instructorService.GetExamResultsOfSection(instructorId, sectionId);
 
         // invoke the view component async 
 
@@ -61,21 +62,21 @@ public class InstructorsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> SubmitStudentsScores(SubmitScoreDto dto)
+    public async Task<IActionResult> SubmitStudentsScores(ScoreDto model)
     {
-        var result = await _instructorService.SubmitStudentScore(dto);
+        var result = await _instructorService.SubmitStudentScore(model);
 
         if (!result.Succeeded){
             ShowMessage(result.Message, result.Succeeded);
         }
 
-        return RedirectToAction("AdmitStudentsScores", new { instructorId = dto.InstructorId, sectionId = dto.SectionId });
+        return RedirectToAction("AdmitStudentsScores", new { instructorId = model.InstructorId, sectionId = model.SectionId });
     }
 
     [HttpGet]
     public async Task<IActionResult> AddInstructor(int id)
     {
-        var facultyOptions = await _facultyService.GetFacultiesMajorNames();
+        var facultyOptions = await _facultyService.GetFacultiesMajorNamesOptions();
 
         AddInstructorDto dto = new AddInstructorDto()
         {
@@ -90,7 +91,7 @@ public class InstructorsController : BaseController {
     public async Task<IActionResult> AddInstructor(AddInstructorDto dto)
     {
         if (!ModelState.IsValid){
-            var facultyOptions = await _facultyService.GetFacultiesMajorNames();
+            var facultyOptions = await _facultyService.GetFacultiesMajorNamesOptions();
             dto.FacultyOptions = facultyOptions;
 
             return View(dto);

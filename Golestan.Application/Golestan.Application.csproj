@@ -6,15 +6,17 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    
     <ItemGroup>
-      <ProjectReference Include="..\Golestan.Domain\Golestan.Domain.csproj" />
-      <ProjectReference Include="..\Golestan.Infrastructure\Golestan.Infrastructure.csproj" />
-      <ProjectReference Include="..\Golestan.Shared\Golestan.Shared.csproj" />
+        <PackageReference Include="Mapster" Version="7.4.2-pre02" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.3.0"/>
     </ItemGroup>
 
+    
     <ItemGroup>
-      <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
-      <PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.3.0" />
+      <ProjectReference Include="..\Golestan.Domain\Golestan.Domain.csproj" />
+      <ProjectReference Include="..\Golestan.Shared\Golestan.Shared.csproj" />
     </ItemGroup>
 
 </Project>

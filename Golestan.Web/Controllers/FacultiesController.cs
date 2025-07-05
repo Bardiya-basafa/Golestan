@@ -3,14 +3,13 @@
 
 namespace Golestan.Web.Controllers;
 
-using Application.DTOs;
 using Application.DTOs.Faculty;
 using Application.Interfaces;
-using Domain.Enums;
-using Newtonsoft.Json;
+using Base;
+using Mapster;
 
 
-public class FacultiesController : Controller {
+public class FacultiesController : BaseController {
 
     private readonly IFacultyService _facultyService;
 
@@ -20,63 +19,40 @@ public class FacultiesController : Controller {
     }
 
 
-    public async Task<IActionResult> FacultyManagement(int id)
+    public async Task<IActionResult> FacultyManagement(int facultyId)
     {
-        var faculty = await _facultyService.GetDetailsFacultyById(id);
+        var faculty = await _facultyService.GetFacultyById(facultyId);
 
-        if (faculty == null){
-            RedirectToAction("Index", "Faculties");
-        }
 
         return View(faculty);
     }
 
     [HttpGet]
-    public async Task<IActionResult> EditFaculty(int id)
+    public async Task<IActionResult> EditFaculty(int facultyId)
     {
-        var faculty = await _facultyService.GetEditFacultyById(id);
+        var faculty = await _facultyService.GetFacultyById(facultyId);
 
-        if (faculty == null){
-            RedirectToAction("Index", "Faculties");
-        }
 
-        return View(faculty);
+        return View(faculty.Adapt<UpdateFacultyDto>());
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> EditFaculty(EditFacultyDto dto)
+    public async Task<IActionResult> EditFaculty(UpdateFacultyDto model)
     {
         if (!ModelState.IsValid){
-            return View(dto);
+            return View(model);
         }
 
-        var result = await _facultyService.EditFaculty(dto);
+        var result = await _facultyService.UpdateFacutly(model.Adapt<FacultyDto>());
+        ShowMessage(result.Message, result.Succeeded);
 
-        if (!result){
-            return RedirectToAction("Index", "Error", new { message = "Faculty could not be updated" });
+        if (!result.Succeeded){
+            return View(model);
         }
 
-        TempData["NotificationMessage"] = "Faculty edited successfully.";
-        TempData["Success"] = true;
 
-        return RedirectToAction("Index");
-    }
-
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> AddFaculty(AddFacultyDto faculty)
-    {
-        var result = await _facultyService.AddFaculty(faculty);
-
-        if (result){
-            TempData["NotificationMessage"] = "Faculty added successfully.";
-            TempData["Success"] = true;
-
-            return RedirectToAction("Index", "Faculties");
-        }
-
-        return RedirectToAction("Index", "Error", new { message = "Faculty could not be added." });
+        return RedirectToAction("FacultyManagement");
     }
 
     [HttpGet]
@@ -85,16 +61,32 @@ public class FacultiesController : Controller {
         return View();
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> AddFaculty(AddFacultyDto model)
+    {
+        var result = await _facultyService.AddFaculty(model.Adapt<FacultyDto>());
+
+        ShowMessage(result.Message, result.Succeeded);
+
+        if (!result.Succeeded){
+            return View(model);
+        }
+
+        return RedirectToAction("FacultyManagement");
+    }
+
+
     public async Task<IActionResult> VerifyMajor(string majorName)
     {
-        var exist = await _facultyService.VerifyMajor(majorName);
+        var exist = await _facultyService.VerifyMajorName(majorName);
 
         return Json(!exist);
     }
 
     public async Task<IActionResult> VerifyBuildingName(string buildingName)
     {
-        var exist = await _facultyService.VerifyBuilding(buildingName);
+        var exist = await _facultyService.VerifyBuildingName(buildingName);
 
         return Json(!exist);
     }

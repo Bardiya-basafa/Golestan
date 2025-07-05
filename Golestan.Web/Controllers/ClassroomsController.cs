@@ -31,7 +31,7 @@ public class ClassroomsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> AddClassroom(int facultyId)
     {
-        var detailsFacultyDto = await _facultyService.GetDetailsFacultyById(facultyId);
+        var detailsFacultyDto = await _facultyService.GetFacultyById(facultyId);
 
         var model = new AddClassroomDto()
         {
@@ -69,7 +69,7 @@ public class ClassroomsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> ClassroomActions(int classroomId)
     {
-        var model = await _classroomService.GetClassroomManagementDto(classroomId);
+        var model = await _classroomService.GetClassroomById(classroomId);
 
         return View(model);
     }

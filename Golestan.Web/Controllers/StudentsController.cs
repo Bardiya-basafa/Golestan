@@ -32,7 +32,7 @@ public class StudentsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> AddStudent(int facultyId)
     {
-        var faculty = await _facultyService.GetDetailsFacultyById(facultyId);
+        var faculty = await _facultyService.GetFacultyById(facultyId);
 
         if (faculty == null){
             ShowMessage("Faculty not found", false);

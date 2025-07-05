@@ -34,7 +34,7 @@ public class SectionService : ISectionService {
                 FacultyId = facultyId,
             };
 
-            var faculty = await _facultyService.GetDetailsFacultyById(facultyId);
+            var faculty = await _facultyService.GetFacultyById(facultyId);
 
             if (faculty == null){
                 throw new ApplicationException($"Faculty {facultyId} not found");
@@ -44,7 +44,7 @@ public class SectionService : ISectionService {
 
             dto.Sections = await _context.Sections
                 .Where(s => s.Id == facultyId)
-                .Select(s => new SectionDetailsDto()
+                .Select(s => new SectionDto()
                 {
                     Id = s.Id,
                     CourseName = s.Course.Name,
@@ -88,7 +88,7 @@ public class SectionService : ISectionService {
             dto.Students = await _context.Sections
                 .Where(s => s.Id == sectionId)
                 .SelectMany(s => s.Students)
-                .Select(s => new StudentDetailsDto()
+                .Select(s => new StudentDto()
                 {
                     Id = s.Id,
                     AppUserId = s.AppUserId,
@@ -114,7 +114,7 @@ public class SectionService : ISectionService {
         }
     }
 
-    public async Task<List<StudentDetailsDto>> GetAvailableStudents(int sectionId, int facultyId)
+    public async Task<List<StudentDto>> GetAvailableStudents(int sectionId, int facultyId)
     {
         try{
             var section = await _context.Sections.FindAsync(sectionId);
@@ -137,7 +137,7 @@ public class SectionService : ISectionService {
                 .Where(s => s.FacultyId == facultyId && s.Sections.All(s => s.Id != sectionId))
                 .Where(s => s.Sections.All(section1 => section1.DayOfWeek != section.DayOfWeek && section1.TimeSlot != section.TimeSlot))
                 .Where(s => s.PassedCourses.Select(p => p.Id).All(i => prerequisiteCourses.Contains(i)))
-                .Select(s => new StudentDetailsDto()
+                .Select(s => new StudentDto()
                 {
                     Id = s.Id,
                     AppUserId = s.AppUserId,
@@ -157,12 +157,12 @@ public class SectionService : ISectionService {
         }
     }
 
-    public async Task<SectionDetailsDto> GetSectionDetailsById(int sectionId)
+    public async Task<SectionDto> GetSectionDetailsById(int sectionId)
     {
         try{
             var dto = await _context.Sections
                 .Where(s => s.Id == sectionId)
-                .Select(s => new SectionDetailsDto()
+                .Select(s => new SectionDto()
                 {
                     Id = s.Id,
                     CourseName = s.Course.Name,

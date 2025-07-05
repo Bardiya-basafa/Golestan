@@ -1,4 +1,4 @@
-﻿@model CourseActionsDto
+﻿@model CourseDto
 
 
 <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="ml-4">
                                                 <p class="text-sm font-medium text-slate-600">Exam Date</p>
-                                                <p class="text-lg font-bold text-slate-900">@Model.ExamDateTime.ToString("F")</p>
+                                                <p class="text-lg font-bold text-slate-900">@Model.ExamDateTime.Value.ToString("F")</p>
                                         </div>
                                 </div>
                         </div>

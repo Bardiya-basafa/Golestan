@@ -1,0 +1,68 @@
+﻿@model TermDto?
+@{
+        ViewData["Title"] = "Term Management";
+}
+
+
+<body class="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50">
+        <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto">
+                        <!-- Header -->
+                        <div class="text-center mb-10 animate-fade-in">
+                                <h1 class="text-3xl font-bold text-gray-800 mb-2">Academic Term Management</h1>
+                                <p class="text-gray-600">Oversee and configure academic terms</p>
+                        </div>
+
+                        @if (Model != null){
+                                <!-- Current Term Details -->
+                                <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-8 mb-8 animate-fade-in">
+                                        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-4">Current Active Term</h2>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
+                                                <div>
+                                                        <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">Term Identifier</p>
+                                                        <p class="text-xl font-bold text-blue-700">@Model.TermText</p>
+                                                        <p class="text-sm text-gray-500 mt-1">Year: @Model.Year</p>
+                                                </div>
+                                                <div>
+                                                        <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">Term Period</p>
+                                                        <p class="text-lg font-medium">@Model.StartTime.ToString("MMM dd, yyyy") - @Model.EndTime.ToString("MMM dd, yyyy")</p>
+                                                        <p class="text-sm text-gray-500 mt-1">Duration: @((Model.EndTime - Model.StartTime).Days) days</p>
+                                                </div>
+                                                <div>
+                                                        <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">Exams Period</p>
+                                                        <p class="text-lg font-medium">@Model.ExamsStartTime.ToString("MMM dd, yyyy") - @Model.ExamsEndTime.ToString("MMM dd, yyyy")</p>
+                                                </div>
+                                                <div>
+                                                        <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">Section Selection</p>
+                                                        <p class="text-lg font-medium">@Model.SelectionStartTime.ToString("MMM dd, yyyy") - @Model.SelectionEndTime.ToString("MMM dd, yyyy")</p>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <!-- Actions for Existing Term -->
+                                <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-8 mb-8 animate-fade-in">
+                                        <h2 class="text-2xl font-bold text-gray-800 mb-6 border-b pb-4">Term Actions</h2>
+                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                                <a asp-controller="Terms" asp-action="CloseTerm" asp-route-id="@Model.Id" class="block w-full py-4 px-6 bg-red-600 hover:bg-red-700 text-white font-bold text-center rounded-lg transition-colors duration-200"> Close Term </a>
+                                                <a asp-controller="Terms" asp-action="EditTerm" asp-route-id="@Model.Id" class="block w-full py-4 px-6 bg-blue-600 hover:bg-blue-700 text-white font-bold text-center rounded-lg transition-colors duration-200"> Edit This Term </a>
+                                                <a asp-controller="Terms" asp-action="AddTerm" class="block w-full py-4 px-6 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold text-center rounded-lg transition-colors duration-200"> Open New Term </a>
+                                        </div>
+                                </div>
+                        }
+                        else{
+                                <!-- No Term Found State -->
+                                <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-12 text-center mb-8 animate-fade-in">
+                                        <h2 class="text-2xl font-bold text-gray-800 mb-4">No Active Term Found</h2>
+                                        <p class="text-gray-600 text-lg mb-8 max-w-md mx-auto">
+                                                There is currently no academic term configured. Please create a new term to begin. </p>
+                                        <a asp-controller="Term" asp-action="OpenNewTerm" class="inline-block py-4 px-8 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-colors duration-200"> Open New Term </a>
+                                </div>
+                        }
+
+                        <!-- Back Link -->
+                        <div class="text-center mt-8">
+                                <a asp-controller="Admin" asp-action="AdminDashboard" class="inline-block text-gray-600 hover:text-blue-600 font-medium"> Back to Admin Dashboard </a>
+                        </div>
+                </div>
+        </div>
+</body>

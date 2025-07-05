@@ -4,8 +4,7 @@ public class ExamResult {
 
     public int Id { get; set; }
 
-
-    public decimal Score { get; set; } = -1;
+    public decimal Score { get; set; } = decimal.Zero;
 
     public string Description { get; set; } = String.Empty;
 

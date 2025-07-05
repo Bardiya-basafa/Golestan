@@ -35,7 +35,7 @@ public class StudentService : IStudentService {
 
             dto.Students = await _context.Students
                 .Where(s => s.FacultyId == facultyId)
-                .Select(s => new StudentDetailsDto()
+                .Select(s => new StudentDto()
                 {
                     Id = s.Id,
                     AppUserId = s.AppUserId,
@@ -81,7 +81,7 @@ public class StudentService : IStudentService {
             dto.Sections = await _context.Students
                 .Where(s => s.Id == studentId)
                 .SelectMany(s => s.Sections)
-                .Select(s => new SectionDetailsDto()
+                .Select(s => new SectionDto()
                 {
                     ClassCapacity = s.Classroom.Capacity,
                     ClassNumber = s.Classroom.ClassNumber,
@@ -101,12 +101,12 @@ public class StudentService : IStudentService {
         }
     }
 
-    public async Task<List<TermDetailsDto>> GetAllStudentTerms(int studentId)
+    public async Task<List<TermDto>> GetAllStudentTerms(int studentId)
     {
         var model = await _context.Students
             .Where(s => s.Id == studentId)
             .SelectMany(s => s.Terms)
-            .Select(t => new TermDetailsDto()
+            .Select(t => new TermDto()
             {
                 Id = t.Id,
                 Year = t.Year,
@@ -117,13 +117,13 @@ public class StudentService : IStudentService {
         return model;
     }
 
-    public async Task<List<ExamResultDetailsDto>> GetTermExamResults(int termId, int studentId)
+    public async Task<List<ExamResultDto>> GetTermExamResults(int termId, int studentId)
     {
         var model = await _context.Students
             .Where(s => s.Id == studentId)
             .SelectMany(s => s.ExamResults)
             .Where(e => e.TermId == termId)
-            .Select(e => new ExamResultDetailsDto()
+            .Select(e => new ExamResultDto()
             {
                 Score = e.Score,
                 Description = e.Description,
@@ -133,7 +133,7 @@ public class StudentService : IStudentService {
         return model;
     }
 
-    public async Task<List<ExamResultDetailsDto>?> GetActiveExamResults(int studentId)
+    public async Task<List<ExamResultDto>?> GetActiveExamResults(int studentId)
     {
         var currentTerm = await _termService.GetCurrentTermEntity();
 
@@ -146,7 +146,7 @@ public class StudentService : IStudentService {
             .Where(s => s.Id == studentId)
             .SelectMany(s => s.ExamResults)
             .Where(e => e.TermId == currentTerm.Id)
-            .Select(e => new ExamResultDetailsDto()
+            .Select(e => new ExamResultDto()
             {
                 Score = e.Score,
                 Description = e.Description,

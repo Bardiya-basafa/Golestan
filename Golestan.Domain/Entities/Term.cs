@@ -22,19 +22,6 @@ public class Term {
 
     public bool IsFirstTerm { get; set; }
 
-    public bool IsActive
-    {
-        get
-        {
-            if (EndTime <= DateTime.UtcNow){
-                return false;
-            }
-
-            return IsActive;
-        }
-
-        set => IsActive = value;
-    }
 
     public bool ExamSuspended { get; set; } = false;
 

@@ -248,6 +248,7 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Score")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("SectionId")
@@ -294,7 +295,8 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("Major")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -437,9 +439,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("ExamsStartTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsFirstTerm")
                         .HasColumnType("bit");
 
@@ -498,19 +497,19 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "91f455b1-0956-4c1b-a43b-774596aa309f",
+                            Id = "a909f6e7-6d87-437d-bac6-ed1d4b19baf3",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "27a8a935-288c-4aa1-a42e-93a0212ecbda",
+                            Id = "9b854781-f642-492e-a80f-90ecaaf5fe89",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         },
                         new
                         {
-                            Id = "be781783-ee49-407f-86fd-d42c4afc2b38",
+                            Id = "602c0d54-2831-4bf0-bec8-d256e4edb882",
                             Name = "Instructor",
                             NormalizedName = "INSTRUCTOR"
                         });

@@ -101,6 +101,7 @@ public class AdminController : BaseController {
     public async Task<IActionResult> ManageCourses(int facultyId)
     {
         var model = await _courseService.GetFacultyCourses(facultyId);
+        v
 
         return View(model);
     }
@@ -173,7 +174,7 @@ public class AdminController : BaseController {
     [HttpGet]
     public async Task<IActionResult> ClassroomOptions(int facultyId)
     {
-        Dictionary<int, string>? classroomOptions = await _facultyService.GetFacultyClassrooms(facultyId);
+        Dictionary<int, string>? classroomOptions = await _facultyService.GetFacultyClassroomsOptions(facultyId);
 
         var options = classroomOptions.Select(kvp => new
         {
@@ -187,7 +188,7 @@ public class AdminController : BaseController {
     [HttpGet]
     public async Task<IActionResult> CourseOptions(int facultyId)
     {
-        Dictionary<int, string>? courseOptions = await _facultyService.GetFacultyCourses(facultyId);
+        Dictionary<int, string>? courseOptions = await _facultyService.GetFacultyCoursesOptions(facultyId);
 
         var options = courseOptions.Select(kvp => new
         {

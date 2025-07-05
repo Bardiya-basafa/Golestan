@@ -94,7 +94,6 @@
                         <i class="fas fa-book text-white text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Course Management</h3>
-                    <p class="text-gray-600">Add, edit, and manage courses</p>
                 </div>
             </a>
             <a asp-controller="Admin" asp-action="AllClassrooms" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
@@ -103,16 +102,14 @@
                         <i class="fas fa-chalkboard text-white text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Class Management</h3>
-                    <p class="text-gray-600">Create and manage class schedules</p>
                 </div>
             </a>
-            <a asp-controller="Admin" asp-action="AllInstructors"  class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+            <a asp-controller="Admin" asp-action="AllInstructors" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
                 <div class="text-center">
                     <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
                         <i class="fas fa-chalkboard-teacher text-white text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Instructor Management</h3>
-                    <p class="text-gray-600">Add and manage instructors</p>
                 </div>
             </a>
             <a asp-controller="Admin" asp-action="AllStudents" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
@@ -121,7 +118,6 @@
                         <i class="fas fa-user-graduate text-white text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Student Management</h3>
-                    <p class="text-gray-600">Add and manage students</p>
                 </div>
             </a>
             <a asp-controller="Admin" asp-action="AllSections" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
@@ -130,16 +126,22 @@
                         <i class="fas fa-tasks text-white text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Section Management</h3>
-                    <p class="text-gray-600">Add and edit or delete sections</p>
                 </div>
             </a>
-            <a asp-controller="Admin" asp-action="AllFaculties" onclick="showSection('facultyManagement')" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+            <a asp-controller="Admin" asp-action="AllFaculties" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
                 <div class="text-center">
                     <div class="w-16 h-16 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
                         <i class="fas fa-university text-white text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold text-gray-800 mb-2">Faculty Management</h3>
-                    <p class="text-gray-600">Manage faculties and departments</p>
+                </div>
+            </a>
+            <a asp-controller="Term" asp-action="TermManagement"  class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
+                        <i class="fas fa-university text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Term Management</h3>
                 </div>
             </a>
         </div>

@@ -94,7 +94,7 @@ public static class TermHelper {
         var result = new Result();
 
         if (termEndDate <= termStartDate){
-            result.Message = "Start date is not valid";
+            result.Message = "Start date should be after end date";
 
             return result;
         }
@@ -153,8 +153,20 @@ public static class TermHelper {
             return result;
         }
 
-        if (endDate >= termEndDate || startDate >= termEndDate || startDate <= termStartDate || startDate >= termEndDate || endDate >= examStartDate || startDate >= examStartDate){
-            result.Message = "Selection time span must be between start and end term";
+        if (endDate >= termEndDate || endDate <= termStartDate){
+            result.Message = "Selection end date must be between start and end date";
+
+            return result;
+        }
+
+        if (startDate >= termEndDate || startDate <= termStartDate){
+            result.Message = "Selection start date must be before end date";
+
+            return result;
+        }
+
+        if (endDate >= examStartDate){
+            result.Message = "Selection must start before exams";
 
             return result;
         }

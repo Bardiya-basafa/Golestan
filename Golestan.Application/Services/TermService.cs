@@ -17,18 +17,28 @@ public class TermService : ITermService {
         _context = context;
     }
 
-    public async Task<TermDetailsDto?> GetCurrentTerm()
+    public Task<bool> IsInsideAnyTerm()
+    {
+        var result = _context.Terms
+            .Where(t => t.EndTime > DateTime.Now)
+            .AnyAsync();
+        return result;
+    }
+
+    public async Task<TermDto?> GetCurrentTerm()
     {
         var currentDate = DateTime.UtcNow;
 
         var term = await _context.Terms
-            .Where(t => t.StartTime <= currentDate && t.EndTime >= currentDate && t.IsActive)
-            .Select(t => new TermDetailsDto()
+            .Where(t => t.EndTime > currentDate)
+            .Select(t => new TermDto()
             {
                 EndTime = t.EndTime,
                 StartTime = t.StartTime,
                 ExamsStartTime = t.ExamsStartTime,
                 ExamsEndTime = t.ExamsEndTime,
+                SelectionStartTime = t.SectionSelectionStartTime,
+                SelectionEndTime = t.SectionSelectionEndTime,
                 Year = t.Year,
                 TermNumber = t.TermNumber,
                 Id = t.Id
@@ -43,16 +53,15 @@ public class TermService : ITermService {
         var currentDate = DateTime.UtcNow;
 
         var term = await _context.Terms
-            .Where(t => t.StartTime <= currentDate && t.EndTime >= currentDate && t.IsActive)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(t => t.EndTime > currentDate);
 
         return term;
     }
 
-    public Task<List<TermDetailsDto>> GetAllTerms()
+    public Task<List<TermDto>> GetAllTerms()
     {
         var terms = _context.Terms
-            .Select(t => new TermDetailsDto()
+            .Select(t => new TermDto()
             {
                 EndTime = t.EndTime,
                 StartTime = t.StartTime,
@@ -69,7 +78,7 @@ public class TermService : ITermService {
     public async Task<bool> TermOpeningOption()
     {
         var currentDate = DateTime.UtcNow;
-        var currentlyTermExists = await _context.Terms.AnyAsync(t => (t.StartTime <= currentDate && t.EndTime >= currentDate) || t.IsActive);
+        var currentlyTermExists = await _context.Terms.AnyAsync(t => t.EndTime > currentDate);
 
         if (currentlyTermExists){
             return false;
@@ -79,7 +88,7 @@ public class TermService : ITermService {
     }
 
 
-    public async Task<Result> OpnenNewTerm(OpenNewTermDto dto)
+    public async Task<Result> OpenNewTerm(OpenNewTermDto dto)
     {
         var result = new Result();
 
@@ -87,7 +96,7 @@ public class TermService : ITermService {
 
 
         var termExist = await _context.Terms
-            .FirstOrDefaultAsync(t => (t.StartTime <= currentDate && t.EndTime >= currentDate) || t.IsActive);
+            .FirstOrDefaultAsync(t => t.EndTime > currentDate);
 
 
         if (termExist != null){
@@ -113,7 +122,7 @@ public class TermService : ITermService {
             return result;
         }
 
-        var isSelectionTimesValid = TermHelper.IsTermSelectionTimeValid(dto.SectionSelectionStartTime, dto.SectionSelectionEndTime, dto.ExamsStartTime, dto.ExamsEndTime, dto.ExamsStartTime);
+        var isSelectionTimesValid = TermHelper.IsTermSelectionTimeValid(dto.SectionSelectionStartTime, dto.SectionSelectionEndTime, dto.StartDate, dto.EndDate, dto.ExamsStartTime);
 
         if (!isSelectionTimesValid.Succeeded){
             result.Message = isSelectionTimesValid.Message;
@@ -180,7 +189,6 @@ public class TermService : ITermService {
             term.EndTime = currentDate;
         }
 
-        term.IsActive = false;
         _context.Terms.Update(term);
         await _context.SaveChangesAsync();
         result.Message = "Term closed.";
@@ -192,7 +200,7 @@ public class TermService : ITermService {
     public async Task<bool> IsInsideAnyTermCurrently()
     {
         var currentDate = DateTime.UtcNow;
-        var isInsideTerm = await _context.Terms.AnyAsync(t => t.StartTime <= currentDate && t.EndTime >= currentDate && t.IsActive);
+        var isInsideTerm = await _context.Terms.AnyAsync(t => t.EndTime > currentDate);
 
         return isInsideTerm;
     }

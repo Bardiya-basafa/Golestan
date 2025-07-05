@@ -9,7 +9,7 @@ public class AddStudentToSectionDto {
     [Required(ErrorMessage = "Must provide at least one student")]
     public List<int> StudentIds { get; set; }
 
-    public List<StudentDetailsDto> Students { get; set; }
+    public List<StudentDto> Students { get; set; }
 
     public int SectionId { get; set; }
 

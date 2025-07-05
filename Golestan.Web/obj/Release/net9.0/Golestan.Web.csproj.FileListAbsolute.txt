@@ -237,8 +237,7 @@ E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\rpswa.dswa.cache
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\rjimswa.dswa.cache.json
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\rjsmrazor.dswa.cache.json
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\rjsmcshtml.dswa.cache.json
-E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\compressed\vfgl4y0ek2-580y3y7v4i.gz
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\compressed\a8ngr4024z-mh4zefqudq.gz
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\staticwebassets.build.json.cache
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\compressed\q31cya5ajk-mmrvsm7jhn.gz
-E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\compressed\zg88im5zgv-j3erkw2158.gz
+E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\compressed\vfgl4y0ek2-it79h6owlo.gz

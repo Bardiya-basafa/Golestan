@@ -1,4 +1,4 @@
-﻿@model ClassroomManagement
+﻿@model List<ClassroomDto>
 
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
         <div class="container mx-auto px-6 py-12">
@@ -7,10 +7,10 @@
                         <div class="bg-gradient-to-r from-slate-800 to-slate-900 px-8 py-6">
                                 <div class="flex justify-between items-center">
                                         <div>
-                                                <p class="text-3xl font-bold text-white mb-2">@Model.FacultyName</p>
+                                                <p class="text-3xl font-bold text-white mb-2">@FacultyName</p>
                                                 <p class="text-slate-300 text-lg">Classroom Management & Administration</p>
                                         </div>
-                                        <a asp-controller="Classrooms" asp-action="AddClassroom" asp-route-facultyId="@Model.FacultyId" class="group">
+                                        <a asp-controller="Classrooms" asp-action="AddClassroom" asp-route-facultyId="@FacultyId" class="group">
                                                 <div class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                                                         <svg class="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -32,7 +32,7 @@
                                                         </svg>
                                                 </div>
                                                 <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-1">Total Classrooms</p>
-                                                <p class="text-3xl font-bold text-slate-900">@Model.Classrooms.Count</p>
+                                                <p class="text-3xl font-bold text-slate-900">@Model.Count</p>
                                         </div>
                                 </div>
                         </div>
@@ -45,7 +45,7 @@
                                                         </svg>
                                                 </div>
                                                 <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-1">Total Capacity</p>
-                                                <p class="text-3xl font-bold text-slate-900">@Model.Classrooms.Sum(c => c.Capacity)</p>
+                                                <p class="text-3xl font-bold text-slate-900">@Model.Sum(c => c.Capacity)</p>
                                         </div>
                                 </div>
                         </div>
@@ -58,7 +58,7 @@
                                                         </svg>
                                                 </div>
                                                 <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-1">Average Capacity</p>
-                                                <p class="text-3xl font-bold text-slate-900">@(Model.Classrooms.Count > 0 ? Math.Round((double)Model.Classrooms.Sum(c => c.Capacity) / Model.Classrooms.Count, 0) : 0)</p>
+                                                <p class="text-3xl font-bold text-slate-900">@(Model.Count > 0 ? Math.Round((double)Model.Sum(c => c.Capacity) / Model.Count, 0) : 0)</p>
                                         </div>
                                 </div>
                         </div>
@@ -71,7 +71,7 @@
                                                         </svg>
                                                 </div>
                                                 <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-1">Largest Room</p>
-                                                <p class="text-3xl font-bold text-slate-900">@(Model.Classrooms.Count > 0 ? Model.Classrooms.Max(c => c.Capacity) : 0)</p>
+                                                <p class="text-3xl font-bold text-slate-900">@(Model.Count > 0 ? Model.Max(c => c.Capacity) : 0)</p>
                                         </div>
                                 </div>
                         </div>
@@ -86,13 +86,13 @@
                                         </div>
                                         <div class="flex items-center space-x-2">
                                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                                                        @Model.Classrooms.Count Rooms
+                                                        @Model.Count Rooms
                                                 </span>
                                         </div>
                                 </div>
                         </div>
 
-                        @if (Model.Classrooms.Count == 0){
+                        @if (Model.Count == 0){
                                 <div class="text-center py-20">
                                         <div class="mx-auto h-24 w-24 bg-slate-100 rounded-full flex items-center justify-center mb-6">
                                                 <svg class="h-12 w-12 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -101,7 +101,7 @@
                                         </div>
                                         <h3 class="text-xl font-semibold text-slate-900 mb-2">No Classrooms Found</h3>
                                         <p class="text-slate-600 mb-8 max-w-md mx-auto">Start building your academic infrastructure by adding your first classroom to this faculty.</p>
-                                        <a asp-controller="Classrooms" asp-action="AddClassroom" asp-route-facultyId="@Model.FacultyId" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                                        <a asp-controller="Classrooms" asp-action="AddClassroom" asp-route-facultyId="@" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                                                 <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                                 </svg>
@@ -128,7 +128,7 @@
                                                         </tr>
                                                 </thead>
                                                 <tbody class="bg-white divide-y divide-slate-100">
-                                                        @foreach (var classroom in Model.Classrooms){
+                                                        @foreach (var classroom in Model){
                                                                 <tr class="hover:bg-slate-50 transition-all duration-200 group">
                                                                         <td class="px-8 py-6 whitespace-nowrap">
                                                                                 <div class="flex items-center">
@@ -147,7 +147,7 @@
                                                                                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                                                                                                 </svg>
-                                                                                                Room @classroom.ClassNumber
+                                                                                                Room @classroom.ClassroomNumber
                                                                                         </span>
                                                                                 </div>
                                                                         </td>
@@ -171,7 +171,7 @@
                                                                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                                                                                 </svg>
                                                                                                 Manage </a>
-                                                                                        <button data-classroom-id="@classroom.Id" data-classroom-number="@classroom.ClassNumber" class="remove-classroom px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-200 font-medium">Remove</button>
+                                                                                        <button data-classroom-id="@classroom.Id" data-classroom-number="@classroom.ClassroomNumber" class="remove-classroom px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-200 font-medium">Remove</button>
                                                                                         
                                                                                 </div>
                                                                         </td>
@@ -193,8 +193,8 @@
                                         <div>
                                                 <p class="text-sm font-medium text-slate-700">
                                                         Showing <span class="font-bold text-slate-900">1</span> to
-                                                        <span class="font-bold text-slate-900">@Model.Classrooms.Count</span> of
-                                                        <span class="font-bold text-slate-900">@Model.Classrooms.Count</span> results
+                                                        <span class="font-bold text-slate-900">@Model.Count</span> of
+                                                        <span class="font-bold text-slate-900">@Model.Count</span> results
                                                 </p>
                                         </div>
                                         <div>

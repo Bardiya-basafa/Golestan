@@ -18,6 +18,14 @@ public class TermController : BaseController {
         _termService = termService;
     }
 
+    [HttpGet]
+    public async Task<IActionResult> TermManagement()
+    {
+        var model = await _termService.GetCurrentTerm();
+
+        return View(model);
+    }
+
     // display current term
     [HttpGet]
     public async Task<IActionResult> CurrentTerm()
@@ -50,18 +58,18 @@ public class TermController : BaseController {
             return RedirectToAction("CurrentTerm");
         }
 
-        return View(model);
+        return View();
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> OpenNewTerm(OpenNewTermDto dto)
     {
-        if (ModelState.IsValid){
-            return RedirectToAction("OpenNewTerm");
+        if (!ModelState.IsValid){
+            return View(dto);
         }
 
-        var result = await _termService.OpnenNewTerm(dto);
+        var result = await _termService.OpenNewTerm(dto);
 
 
         ShowMessage(result.Message, result.Succeeded);
@@ -70,7 +78,7 @@ public class TermController : BaseController {
             return RedirectToAction("CurrentTerm");
         }
 
-        return RedirectToAction("OpenNewTerm", "Term");
+        return View(dto);
     }
 
 

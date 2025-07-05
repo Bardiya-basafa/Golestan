@@ -1,6 +1,6 @@
 ﻿namespace Golestan.Application.DTOs.Term;
 
-public class TermDetailsDto {
+public class TermDto {
 
     public int Id { get; set; }
 
@@ -13,6 +13,10 @@ public class TermDetailsDto {
     public DateTime ExamsStartTime { get; set; }
 
     public DateTime ExamsEndTime { get; set; }
+
+    public DateTime SelectionStartTime { get; set; }
+
+    public DateTime SelectionEndTime { get; set; }
 
     public string TermNumber { get; set; }
 

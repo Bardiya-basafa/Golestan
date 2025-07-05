@@ -7,13 +7,12 @@ using Shared.Helpers;
 
 public interface ISectionService {
 
-    Task<SectionManagementDto> GetFacultySections(int facultyId);
+    Task<List<SectionDto>> GetFacultySections(int facultyId);
 
-    Task<SectionActionsDto> GetSectionActionsDto(int sectionId);
+    Task<SectionDto> GetSectionById(int sectionId);
 
-    Task<List<StudentDetailsDto>> GetAvailableStudents(int sectionId, int facultyId);
+    Task<List<StudentDto>> GetAvailableStudents(int sectionId, int facultyId);
 
-    Task<SectionDetailsDto> GetSectionDetailsById(int sectionId);
 
     Task<Result> AddStudentsToSection(List<int> studentIds, int sectionId);
 

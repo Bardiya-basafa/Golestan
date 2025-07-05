@@ -15,16 +15,19 @@ public class CoursesController : BaseController {
 
     private readonly IFacultyService _facultyService;
 
-    public CoursesController(ICourseService courseService, IFacultyService facultyService)
+    private readonly ITermService _termService;
+
+    public CoursesController(ICourseService courseService, IFacultyService facultyService, ITermService termService)
     {
         _courseService = courseService;
         _facultyService = facultyService;
+        _termService = termService;
     }
 
     [HttpGet]
     public async Task<IActionResult> AddCourse(int facultyId)
     {
-        var faculty = await _facultyService.GetDetailsFacultyById(facultyId);
+        var faculty = await _facultyService.GetFacultyById(facultyId);
 
 
         var model = new AddCourseDto()
@@ -55,6 +58,42 @@ public class CoursesController : BaseController {
         return View(dto);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> SetExamTime(int courseId)
+    {
+        var currentTerm = await _termService.GetCurrentTerm();
+
+        if (currentTerm == null){
+            ShowMessage("Currently you have not any open term", false);
+
+            return RedirectToAction("ManageCourses", "Admin");
+        }
+
+        var model = new SetExamForCourseDto()
+        {
+            CourseId = courseId,
+            CourseName = _courseService.GetCourseById(courseId).GetAwaiter().GetResult().CourseName,
+            ExamStartDate = currentTerm.ExamsStartTime,
+            ExamEndDate = currentTerm.ExamsEndTime,
+        };
+
+        return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> SetExamTime(SetExamForCourseDto dto)
+    {
+        var result = await _courseService.SetExam(dto);
+        ShowMessage(result.Message, result.Succeeded);
+
+        if (result.Succeeded){
+            return RedirectToAction("CourseActions", routeValues: new { courseId = dto.CourseId });
+        }
+
+        return View(dto);
+    }
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> RemoveCourse(int courseId, int facultyId)
@@ -68,7 +107,7 @@ public class CoursesController : BaseController {
     [HttpGet]
     public async Task<IActionResult> CourseActions(int courseId)
     {
-        var model = await _courseService.GetCourseActionsDto(courseId);
+        var model = await _courseService.GetCourseById(courseId);
 
         return View(model);
     }
@@ -76,7 +115,7 @@ public class CoursesController : BaseController {
     [HttpGet]
     public async Task<IActionResult> ApplyNewInstructorToCourse(int facultyId, int courseId)
     {
-        var model = await _courseService.GetAllFacultyInstructors(facultyId, courseId);
+        var model = await _courseService.GetAvailableInsturctorsForCourse(facultyId, courseId);
 
         if (model.Instructors.Count == 0){
             ShowMessage("No instructor available for this course", false);
@@ -90,13 +129,13 @@ public class CoursesController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> ApplyNewInstructorToCourse(ApplyNewInstructorDto dto)
+    public async Task<IActionResult> ApplyNewInstructorToCourse(CourseInstructorDto dto)
     {
         if (!ModelState.ContainsKey("InstructorId") && !ModelState.ContainsKey("CourseId")){
             return View(dto);
         }
 
-        var result = await _courseService.ApplyNewInstructorToCourse(dto);
+        var result = await _courseService.ApplyInstructorToCourse(dto);
         ShowMessage(result.Message, result.Succeeded);
 
         return RedirectToAction("CourseActions", routeValues: new { courseId = dto.CourseId });

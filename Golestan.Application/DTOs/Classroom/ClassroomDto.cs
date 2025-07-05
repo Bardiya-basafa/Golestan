@@ -6,6 +6,8 @@ using Section;
 
 public class ClassroomDto {
 
+    public int Id { get; set; }
+
     public string ClassroomNumber { get; set; }
 
     public int ClassroomId { get; set; }
@@ -16,6 +18,8 @@ public class ClassroomDto {
 
     public int Capacity { get; set; }
 
-    public List<SectionDetailsDto> Sections { get; set; }
+    public List<SectionDto> Sections { get; set; }
+
+
 
 }

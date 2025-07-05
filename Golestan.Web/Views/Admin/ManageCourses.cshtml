@@ -1,4 +1,5 @@
-﻿@model CourseManagementDto
+﻿@model List<CourseDto>
+
 
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
     <div class="container mx-auto px-6 py-12">
@@ -33,7 +34,7 @@
                             </svg>
                         </div>
                         <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-1">Total Courses</p>
-                        <p class="text-3xl font-bold text-slate-900">@Model.Courses.Count</p>
+                        <p class="text-3xl font-bold text-slate-900">@Model.Count</p>
                     </div>
                 </div>
             </div>
@@ -46,7 +47,7 @@
                             </svg>
                         </div>
                         <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-1">Total Units</p>
-                        <p class="text-3xl font-bold text-slate-900">@Model.Courses.Sum(c => c.Unit)</p>
+                        <p class="text-3xl font-bold text-slate-900">@Model.Sum(c => c.Unit)</p>
                     </div>
                 </div>
             </div>

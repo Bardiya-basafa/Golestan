@@ -1,0 +1,101 @@
+﻿@model SetExamForCourseDto
+
+@{
+        ViewData["Title"] = "Add New Course";
+}
+
+<body class="bg-gray-50 min-h-screen py-8">
+        <div class="max-w-2xl mx-auto px-4">
+                <!-- Header -->
+                <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                        <h1 class="text-2xl font-semibold text-gray-900 mb-2">Set Exam Time</h1>
+                        <div class="text-sm text-gray-600">
+                                <p><span class="font-medium">Course:</span> Advanced Mathematics</p>
+                                <p><span class="font-medium">Exam Period:</span> Dec 15, 2024 - Dec 22, 2024</p>
+                        </div>
+                </div>
+
+                <!-- Form -->
+                <div class="bg-white rounded-lg shadow-sm p-6">
+                        <form method="post" action="/Exam/SetExamTime" class="space-y-6">
+                                <!-- Hidden Course ID -->
+                                <input type="hidden" name="CourseId" value="1" />
+
+                                <!-- Exam Date and Time -->
+                                <div>
+                                        <label for="ExamDateTime" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Exam Date & Time <span class="text-red-500">*</span>
+                                        </label>
+                                        <input
+                                                        type="datetime-local"
+                                                        id="ExamDateTime"
+                                                        name="ExamDateTime"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                                        required
+                                        />
+                                        <span class="text-red-500 text-sm hidden" data-valmsg-for="ExamDateTime">Course exam time is required</span>
+                                </div>
+
+                                <!-- Time Slot -->
+                                <div>
+                                        <label for="ExamTimeSlotId" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Time Slot <span class="text-red-500">*</span>
+                                        </label>
+                                        <select
+                                                        id="ExamTimeSlotId"
+                                                        name="ExamTimeSlotId"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                                        required
+                                        >
+                                                <option value="">Select time slot</option>
+                                                <option value="1">Morning (9:00 AM - 12:00 PM)</option>
+                                                <option value="2">Afternoon (1:00 PM - 4:00 PM)</option>
+                                                <option value="3">Evening (5:00 PM - 8:00 PM)</option>
+                                        </select>
+                                        <span class="text-red-500 text-sm hidden" data-valmsg-for="ExamTimeSlotId">Course exam time is required</span>
+                                </div>
+
+                                <!-- Classroom -->
+                                <div>
+                                        <label for="ExamClassroomId" class="block text-sm font-medium text-gray-700 mb-2">
+                                                Classroom <span class="text-red-500">*</span>
+                                        </label>
+                                        <select
+                                                        id="ExamClassroomId"
+                                                        name="ExamClassroomId"
+                                                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                                        required
+                                        >
+                                                <option value="">Select classroom</option>
+                                                <option value="1">Room A101 (Capacity: 50)</option>
+                                                <option value="2">Room B205 (Capacity: 30)</option>
+                                                <option value="3">Room C301 (Capacity: 40)</option>
+                                                <option value="4">Auditorium (Capacity: 100)</option>
+                                        </select>
+                                        <span class="text-red-500 text-sm hidden" data-valmsg-for="ExamClassroomId">Classroom is required</span>
+                                </div>
+
+                                <!-- Action Buttons -->
+                                <div class="flex gap-3 pt-4">
+                                        <button
+                                                        type="submit"
+                                                        class="px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
+                                        >
+                                                Set Exam Time
+                                        </button>
+                                        <a
+                                                        href="/Course/Details/1"
+                                                        class="px-6 py-2 bg-gray-100 text-gray-700 font-medium rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+                                        >
+                                                Cancel
+                                        </a>
+                                </div>
+                        </form>
+                </div>
+
+                <!-- Additional Info -->
+                <div class="mt-4 text-xs text-gray-500 text-center">
+                        <p>* Required fields must be completed</p>
+                </div>
+        </div>
+</body>

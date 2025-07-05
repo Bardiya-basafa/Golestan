@@ -4,5 +4,24 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.10"
-  }
+  },
+  "name": "golestan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tailwindcss -i .\\Golestan.Web\\wwwroot\\tailwind.css -o .\\Golestan.Web\\wwwroot\\style\\tailwind.min.css --minify --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bardiya-basafa/Golestan.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Bardiya-basafa/Golestan/issues"
+  },
+  "homepage": "https://github.com/Bardiya-basafa/Golestan#readme"
 }

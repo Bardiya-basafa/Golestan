@@ -10,11 +10,11 @@ using Shared.Helpers;
 
 public class SelectionService(AppDbContext context, ITermService termService, ICourseService courseService) : ISelectionService {
 
-    public async Task<SectionSelectionDetailsDto> SelectionTermDetails()
+    public async Task<SelectionDto> SelectionTermDetails()
     {
         var currentTerm = await termService.GetCurrentTermEntity();
 
-        var model = new SectionSelectionDetailsDto();
+        var model = new SelectionDto();
 
         if (currentTerm == null){
             model.Result.Message = "There is no current term right now";
@@ -79,12 +79,12 @@ public class SelectionService(AppDbContext context, ITermService termService, IC
         return sections;
     }
 
-    public async Task<List<SectionDetailsDto>> GetSelectedSections(int studentId)
+    public async Task<List<SectionDto>> GetSelectedSections(int studentId)
     {
         var sections = await context.Students
             .Where(s => s.Id == studentId)
             .SelectMany(s => s.Sections)
-            .Select(sec => new SectionDetailsDto()
+            .Select(sec => new SectionDto()
             {
                 Id = sec.Id,
                 TimeSlot = sec.TimeSlot,
@@ -105,7 +105,7 @@ public class SelectionService(AppDbContext context, ITermService termService, IC
 
         var sectionDetails = await context.Sections
             .Where(s => s.Id == sectionId)
-            .Select(s => new DTOs.Section.SectionDetailsDto()
+            .Select(s => new DTOs.Section.SectionDto()
             {
                 RemainCapacity = s.Classroom.Capacity - s.Students.Count,
                 TimeSlot = s.TimeSlot,

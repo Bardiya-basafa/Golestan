@@ -20,13 +20,8 @@
                                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-700">
                                                 <div>
                                                         <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">Term Identifier</p>
-                                                        <p class="text-xl font-bold text-blue-700">@Model.TermText</p>
+                                                        <p class="text-xl font-bold text-blue-700">@Model.TermIdentifier</p>
                                                         <p class="text-sm text-gray-500 mt-1">Year: @Model.Year</p>
-                                                </div>
-                                                <div>
-                                                        <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">Term Period</p>
-                                                        <p class="text-lg font-medium">@Model.StartTime.ToString("MMM dd, yyyy") - @Model.EndTime.ToString("MMM dd, yyyy")</p>
-                                                        <p class="text-sm text-gray-500 mt-1">Duration: @((Model.EndTime - Model.StartTime).Days) days</p>
                                                 </div>
                                                 <div>
                                                         <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">Exams Period</p>

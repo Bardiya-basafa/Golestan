@@ -13,7 +13,7 @@ public class FacultiesController : BaseController {
 
     private readonly IFacultyService _facultyService;
 
-    public FacultiesController(IFacultyService facultyService)
+    public FacultiesController(IFacultyService facultyService) : base(facultyService)
     {
         _facultyService = facultyService;
     }
@@ -21,7 +21,7 @@ public class FacultiesController : BaseController {
 
     public async Task<IActionResult> FacultyManagement(int facultyId)
     {
-        var faculty = await _facultyService.GetFacultyById(facultyId);
+        var faculty = await _facultyService.GetFacultyDtoById(facultyId);
 
 
         return View(faculty);
@@ -30,7 +30,7 @@ public class FacultiesController : BaseController {
     [HttpGet]
     public async Task<IActionResult> EditFaculty(int facultyId)
     {
-        var faculty = await _facultyService.GetFacultyById(facultyId);
+        var faculty = await _facultyService.GetFacultyDtoById(facultyId);
 
 
         return View(faculty.Adapt<UpdateFacultyDto>());

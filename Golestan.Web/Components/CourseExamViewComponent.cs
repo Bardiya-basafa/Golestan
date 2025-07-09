@@ -4,11 +4,11 @@ using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 
-public class CourseExamComponent : ViewComponent {
+public class CourseExamViewComponent : ViewComponent {
 
     private readonly ICourseService _courseService;
 
-    public CourseExamComponent(ICourseService courseService)
+    public CourseExamViewComponent(ICourseService courseService)
     {
         _courseService = courseService;
     }

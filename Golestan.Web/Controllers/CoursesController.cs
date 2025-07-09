@@ -17,7 +17,7 @@ public class CoursesController : BaseController {
 
     private readonly ITermService _termService;
 
-    public CoursesController(ICourseService courseService, IFacultyService facultyService, ITermService termService)
+    public CoursesController(ICourseService courseService, IFacultyService facultyService, ITermService termService) : base(facultyService)
     {
         _courseService = courseService;
         _facultyService = facultyService;
@@ -27,7 +27,7 @@ public class CoursesController : BaseController {
     [HttpGet]
     public async Task<IActionResult> AddCourse(int facultyId)
     {
-        var faculty = await _facultyService.GetFacultyById(facultyId);
+        var faculty = await _facultyService.GetFacultyDtoById(facultyId);
 
 
         var model = new AddCourseDto()

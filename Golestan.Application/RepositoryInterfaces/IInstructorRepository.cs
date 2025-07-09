@@ -10,6 +10,8 @@ using Shared.Helpers;
 
 public interface IInstructorRepository {
 
+    Task<InstructorDto> GetInstructorDtoById(int instructorId);
+
     Task<List<InstructorDto>> GetFacultyInstructors();
 
     Task<List<StudentDto>> GetInstructorStudentsOfSection(int sectionId);
@@ -19,6 +21,7 @@ public interface IInstructorRepository {
     Task<Result> SubmitExamResult(ExamResult examResult);
 
     Task<Result> RemoveCourseInstructor(int instructorId, int courseId);
+
     Task<Result> RemoveInstructor(int instructorId);
 
 }

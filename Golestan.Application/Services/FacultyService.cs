@@ -20,7 +20,7 @@ public class FacultyService(IFacultyRepository facultyRepository) : IFacultyServ
         }
     }
 
-    public async Task<FacultyDto> GetFacultyById(int id)
+    public async Task<FacultyDto> GetFacultyDtoById(int id)
     {
         try{
             return await facultyRepository.GetFacultyById(id);

@@ -13,7 +13,7 @@ public class TermController : BaseController {
 
     private readonly ITermService _termService;
 
-    public TermController(ITermService termService)
+    public TermController(ITermService termService,IFacultyService facultyService) : base(facultyService)
     {
         _termService = termService;
     }

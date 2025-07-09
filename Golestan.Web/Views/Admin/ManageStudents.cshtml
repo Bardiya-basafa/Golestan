@@ -1,5 +1,8 @@
-﻿@model StudentManagementDto
-
+﻿@model List<StudentDto>
+@{
+        var facultyId = ViewBag.FacultyId;
+        var facultyName = ViewBag.FacultyName;
+}
 <div class="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
         <div class="container mx-auto px-6 py-12">
                 <!-- Enhanced Header Section -->
@@ -8,9 +11,9 @@
                                 <div class="flex justify-between items-center">
                                         <div>
                                                 <p class="text-3xl font-bold text-white mb-2">
-                                                        <strong>@Model.FacultyName</strong> Students</p>
+                                                        <strong>@facultyName</strong> Students</p>
                                         </div>
-                                        <a asp-controller="Students" asp-action="AddStudent" asp-route-facultyId="@Model.FacultyId" class="group">
+                                        <a asp-controller="Students" asp-action="AddStudent" asp-route-facultyId="@facultyId" class="group">
                                                 <div class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                                                         <svg class="w-8 h-8 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -27,7 +30,7 @@
                                 <div class="flex items-center justify-between">
                                         <div>
                                                 <p class="text-sm font-medium text-gray-600">Total students</p>
-                                                <p class="text-3xl font-bold text-indigo-600">@Model.Students.Count</p>
+                                                <p class="text-3xl font-bold text-indigo-600">@Model.Count</p>
                                                 <p class="text-xs text-gray-500 mt-1">Faculty members</p>
                                         </div>
                                         <div class="w-16 h-16 bg-indigo-100 rounded-xl flex items-center justify-center">
@@ -82,13 +85,13 @@
                                         </div>
                                         <div class="flex items-center space-x-2">
                         <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
-                            @Model.Students.Count Students
+                            @Model.Count Students
                         </span>
                                         </div>
                                 </div>
                         </div>
 
-                     @if (Model.Students.Count > 0){
+                     @if (Model.Count > 0){
     <div class="overflow-x-auto">
         <table class="min-w-full divide-y divide-slate-200">
             <thead class="bg-slate-50">
@@ -108,7 +111,7 @@
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-slate-100">
-                @foreach (var student in Model.Students){
+                @foreach (var student in Model){
                     <tr class="hover:bg-slate-50 transition-all duration-200 group">
                         <td class="px-8 py-6 whitespace-nowrap">
                             <div class="flex items-center">
@@ -120,7 +123,7 @@
                                 <div class="ml-4">
                                     <div class="text-lg font-bold text-slate-900">@student.FullName</div>
                                     <div class="text-sm text-slate-500">ID: @student.Id</div>
-                                    <div class="text-xs text-slate-400">User ID: @student.AppUserId</div>
+                                    <div class="text-xs text-slate-400">User ID: @student.AppUser.Id</div>
                                 </div>
                             </div>
                         </td>
@@ -182,7 +185,7 @@
                                         </div>
                                         <h3 class="text-xl font-semibold text-slate-900 mb-2">No Students Found</h3>
                                         <p class="text-slate-600 mb-8 max-w-md mx-auto">Start building your faculty team by adding your first student to the system.</p>
-                                        <a asp-controller="Students" asp-action="AddStudent" asp-route-facultyId="@Model.FacultyId" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                                        <a asp-controller="Students" asp-action="AddStudent" asp-route-facultyId="@facultyId" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
                                                 <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                                 </svg>
@@ -201,8 +204,8 @@
                                         <div>
                                                 <p class="text-sm font-medium text-slate-700">
                                                         Showing <span class="font-bold text-slate-900">1</span> to
-                                                        <span class="font-bold text-slate-900">@Model.Students.Count</span> of
-                                                        <span class="font-bold text-slate-900">@Model.Students.Count</span> results
+                                                        <span class="font-bold text-slate-900">@Model.Count</span> of
+                                                        <span class="font-bold text-slate-900">@Model.Count</span> results
                                                 </p>
                                         </div>
                                         <div>

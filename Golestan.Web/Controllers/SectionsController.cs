@@ -16,7 +16,7 @@ public class SectionsController : BaseController {
 
     private readonly IFacultyService _facultyService;
 
-    public SectionsController(ISectionService sectionService, ICourseService courseService, IFacultyService facultyService)
+    public SectionsController(ISectionService sectionService, ICourseService courseService, IFacultyService facultyService) : base(facultyService)
     {
         _sectionService = sectionService;
         _courseService = courseService;
@@ -26,7 +26,7 @@ public class SectionsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> AddSection(int facultyId, int classroomId, string classNumber = "", bool isFromClassroom = false)
     {
-        var facultyDetails = await _facultyService.GetFacultyById(facultyId);
+        var facultyDetails = await _facultyService.GetFacultyDtoById(facultyId);
 
         if (facultyDetails.CoursesCount == 0 || facultyDetails.InstructorsCount == 0 || facultyDetails.ClassesCount == 0){
             ShowMessage("There are no course or instructor in this faculty.", false);
@@ -93,8 +93,8 @@ public class SectionsController : BaseController {
         ViewBag.sectionId = sectionId;
         ViewBag.CourseName = sectionDetails.Course.CourseName;
 
-        ViewBag.RemainCapacity = sectionDetails.RemainCapacity;
-        ViewBag.ClassCapacity = sectionDetails.ClassCapacity;
+        ViewBag.RemainCapacity = sectionDetails.Classroom.Capacity - sectionDetails.Students.Count;
+        ViewBag.ClassCapacity = sectionDetails.Classroom.Capacity;
 
 
         return View(model);

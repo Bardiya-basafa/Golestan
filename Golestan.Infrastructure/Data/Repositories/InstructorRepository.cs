@@ -1,9 +1,11 @@
 ﻿namespace Golestan.Infrastructure.Data.Repositories;
 
+using Application.DTOs.Classroom;
 using Application.DTOs.ExamResult;
 using Application.DTOs.Faculty;
 using Application.DTOs.Instructor;
 using Application.DTOs.Score;
+using Application.DTOs.Section;
 using Application.DTOs.Student;
 using Application.RepositoryInterfaces;
 using Domain.Entities;
@@ -13,6 +15,34 @@ using Shared.Helpers;
 
 
 public class InstructorRepository(AppDbContext context) : IInstructorRepository {
+
+    public async Task<InstructorDto> GetInstructorDtoById(int instructorId)
+    {
+        return await context.Instructors
+            .Where(i => i.Id == instructorId)
+            .Select(i => new InstructorDto()
+            {
+                Id = i.Id,
+                FullName = i.FullName,
+                AppUser = i.AppUser,
+                Faculty = new FacultyDto()
+                {
+                    Id = i.FacultyId,
+                    MajorName = i.Faculty.MajorName,
+                },
+                Sections = i.Sections.Select(s => new SectionDto()
+                {
+                    Id = s.Id,
+                    DayOfWeek = s.DayOfWeek,
+                    TimeSlot = s.TimeSlot,
+                    Classroom = new ClassroomDto()
+                    {
+                        ClassroomNumber = s.Classroom.ClassNumber
+                    }
+                }).ToList()
+            })
+            .FirstOrDefaultAsync() ?? throw new NullReferenceException($"Instructor not found with id: {instructorId}");
+    }
 
     public async Task<List<InstructorDto>> GetFacultyInstructors()
     {

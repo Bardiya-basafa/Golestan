@@ -12,7 +12,7 @@ public interface IInstructorService {
 
     Task<List<InstructorDto>> GetFacultyInstructors();
 
-    // Task<List<SectionDto>> GetInstructorSections(int instructorId);
+    Task<InstructorDto> GetInstructorDtoById(int instructorId);
 
     Task<List<StudentDto>> GetInstructorStudentsOfSection(int sectionId);
 

@@ -51,7 +51,7 @@
                                 <div class="flex items-center justify-between">
                                         <div>
                                                 <p class="text-sm font-medium text-gray-600">Faculties</p>
-                                                <p class="text-3xl font-bold text-purple-600">@Model.Select(i => i.FacultyName).Distinct().Count()</p>
+                                                <p class="text-3xl font-bold text-purple-600">@Model.Select(i => i.Faculty.MajorName).Distinct().Count()</p>
                                                 <p class="text-xs text-gray-500 mt-1">Departments</p>
                                         </div>
                                         <div class="w-16 h-16 bg-purple-100 rounded-xl flex items-center justify-center">
@@ -126,14 +126,14 @@
                                                                                         <div class="ml-4">
                                                                                                 <div class="text-lg font-bold text-slate-900">@instructor.FullName</div>
                                                                                                 <div class="text-sm text-slate-500">ID: #@instructor.Id</div>
-                                                                                                <div class="text-xs text-slate-400">User ID: @instructor.AppUserId</div>
+                                                                                                <div class="text-xs text-slate-400">User ID: @instructor.AppUser.Id</div>
                                                                                         </div>
                                                                                 </div>
                                                                         </td>
                                                                         <td class="px-8 py-6 whitespace-nowrap">
                                                                                 <div class="flex items-center">
                                                                                         <div class="ml-3">
-                                                                                                <div class="text-sm font-semibold text-slate-900">@instructor.Email</div>
+                                                                                                <div class="text-sm font-semibold text-slate-900">@instructor.AppUser.Email</div>
                                                                                         </div>
                                                                                 </div>
                                                                         </td>
@@ -142,7 +142,7 @@
                                                                                         <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                                                                                         </svg>
-                                                                                        @instructor.FacultyName
+                                                                                        @instructor.Faculty.MajorName
                                                                                 </span>
                                                                         </td>
                                                                         <td class="px-8 py-6 whitespace-nowrap">

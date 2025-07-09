@@ -23,24 +23,16 @@ public class InstructorService(IInstructorRepository instructorRepository) : IIn
         }
     }
 
-    // public async Task<List<SectionDto>> GetInstructorSections(int instructorId)
-    // {
-    //     var model = await _context.Instructors
-    //         .Where(i => i.Id == instructorId)
-    //         .SelectMany(i => i.Sections)
-    //         .Select(s => new SectionDto()
-    //         {
-    //             Id = s.Id,
-    //             ClassCapacity = s.Classroom.Capacity,
-    //             ClassNumber = s.Classroom.ClassNumber,
-    //             DayOfWeek = s.DayOfWeek,
-    //             TimeSlot = s.TimeSlot,
-    //             CurrentStudents = s.Students.Count,
-    //         })
-    //         .ToListAsync();
-    //
-    //     return model;
-    // }
+    public async Task<InstructorDto> GetInstructorDtoById(int instructorId)
+    {
+        try{
+            return await instructorRepository.GetInstructorDtoById(instructorId);
+        }
+        catch (Exception e){
+            throw new Exception(e.Message);
+        }
+    }
+
 
     public async Task<List<StudentDto>> GetInstructorStudentsOfSection(int sectionId)
     {

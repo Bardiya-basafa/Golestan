@@ -21,7 +21,7 @@ public class InstructorsController : BaseController {
 
     private readonly IInstructorService _instructorService;
 
-    public InstructorsController(IFacultyService facultyService, UserManager<AppUser> userManager, IUserService userService, IInstructorService instructorService)
+    public InstructorsController(IFacultyService facultyService, UserManager<AppUser> userManager, IUserService userService, IInstructorService instructorService) : base(facultyService)
     {
         _facultyService = facultyService;
         _userManager = userManager;
@@ -37,7 +37,7 @@ public class InstructorsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> GetInstructorSections(int instructorId)
     {
-        var model = await _instructorService.GetInstructorSections(instructorId);
+        var model = await _instructorService.GetInstructorDtoById(instructorId);
 
         return View(model);
     }
@@ -51,9 +51,9 @@ public class InstructorsController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> AdmitStudentsScores(int instructorId, int sectionId)
+    public async Task<IActionResult> AdmitStudentsScores(int sectionId)
     {
-        var model = await _instructorService.GetExamResultsOfSection(instructorId, sectionId);
+        var model = await _instructorService.GetExamResultsOfSection(sectionId);
 
         // invoke the view component async 
 

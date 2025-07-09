@@ -18,3 +18,5 @@ E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Release\net9.0\refin
 E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Release\net9.0\Golestan.Infrastructure.pdb
 E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Release\net9.0\Golestan.Infrastructure.genruntimeconfig.cache
 E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\obj\Release\net9.0\ref\Golestan.Infrastructure.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\bin\Release\net9.0\Golestan.Application.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Infrastructure\bin\Release\net9.0\Golestan.Application.pdb

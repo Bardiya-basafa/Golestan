@@ -11,7 +11,7 @@ public interface IFacultyService {
 
     Task<List<FacultyDto>> GetFaculties();
 
-    Task<FacultyDto> GetFacultyById(int facultyId);
+    Task<FacultyDto> GetFacultyDtoById(int facultyId);
 
 
     Task<Dictionary<int, string>?> GetFacultiesMajorNamesOptions();

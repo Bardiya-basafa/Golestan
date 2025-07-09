@@ -1,7 +1,22 @@
 ﻿namespace Golestan.Application.RepositoryInterfaces;
 
+using Domain.Entities;
+using DTOs.Term;
+using Shared.Helpers;
+
+
 public interface ITermRepository {
 
-    
+    Task<TermDto?> GetCurrentTerm();
+
+    Task<Term?> GetCurrentTermEntity();
+
+    Task<List<TermDto>> GetAllTerms();
+
+    Task<Result> AddTerm(Term term);
+
+    Task<Result> CloseTerm(Term term);
+
+    Task<bool> IsInsideAnyTermCurrently();
 
 }

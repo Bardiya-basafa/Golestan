@@ -2,89 +2,42 @@
 
 using Domain.Entities;
 using DTOs.Term;
-using Infrastructure.Persistence;
 using Interfaces;
-using Microsoft.EntityFrameworkCore;
+using RepositoryInterfaces;
 using Shared.Helpers;
 
 
-public class TermService : ITermService {
-
-    private readonly AppDbContext _context;
-
-    public TermService(AppDbContext context)
-    {
-        _context = context;
-    }
-
-    public Task<bool> IsInsideAnyTerm()
-    {
-        var result = _context.Terms
-            .Where(t => t.EndTime > DateTime.Now)
-            .AnyAsync();
-        return result;
-    }
+public class TermService(ITermRepository termRepository) : ITermService {
 
     public async Task<TermDto?> GetCurrentTerm()
     {
-        var currentDate = DateTime.UtcNow;
-
-        var term = await _context.Terms
-            .Where(t => t.EndTime > currentDate)
-            .Select(t => new TermDto()
-            {
-                EndTime = t.EndTime,
-                StartTime = t.StartTime,
-                ExamsStartTime = t.ExamsStartTime,
-                ExamsEndTime = t.ExamsEndTime,
-                SelectionStartTime = t.SectionSelectionStartTime,
-                SelectionEndTime = t.SectionSelectionEndTime,
-                Year = t.Year,
-                TermNumber = t.TermNumber,
-                Id = t.Id
-            })
-            .FirstOrDefaultAsync();
-
-        return term;
+        try{
+            return await termRepository.GetCurrentTerm();
+        }
+        catch (Exception e){
+            throw new Exception(e.Message);
+        }
     }
 
     public async Task<Term?> GetCurrentTermEntity()
     {
-        var currentDate = DateTime.UtcNow;
-
-        var term = await _context.Terms
-            .FirstOrDefaultAsync(t => t.EndTime > currentDate);
-
-        return term;
-    }
-
-    public Task<List<TermDto>> GetAllTerms()
-    {
-        var terms = _context.Terms
-            .Select(t => new TermDto()
-            {
-                EndTime = t.EndTime,
-                StartTime = t.StartTime,
-                ExamsStartTime = t.ExamsStartTime,
-                ExamsEndTime = t.ExamsEndTime,
-                Year = t.Year,
-                TermNumber = t.TermNumber,
-            })
-            .ToListAsync();
-
-        return terms;
-    }
-
-    public async Task<bool> TermOpeningOption()
-    {
-        var currentDate = DateTime.UtcNow;
-        var currentlyTermExists = await _context.Terms.AnyAsync(t => t.EndTime > currentDate);
-
-        if (currentlyTermExists){
-            return false;
+        try{
+            return await termRepository.GetCurrentTermEntity();
         }
 
-        return true;
+        catch (Exception e){
+            throw new Exception(e.Message);
+        }
+    }
+
+    public async Task<List<TermDto>> GetAllTerms()
+    {
+        try{
+            return await termRepository.GetAllTerms();
+        }
+        catch (Exception e){
+            throw new Exception(e.Message);
+        }
     }
 
 
@@ -92,29 +45,23 @@ public class TermService : ITermService {
     {
         var result = new Result();
 
-        var currentDate = DateTime.UtcNow;
 
-
-        var termExist = await _context.Terms
-            .FirstOrDefaultAsync(t => t.EndTime > currentDate);
-
-
-        if (termExist != null){
+        if (await termRepository.IsInsideAnyTermCurrently()){
             result.Message = "Term already opened.";
 
             return result;
         }
 
 
-        var isTermDatesValid = TermHelper.IsTermDatesValid(dto.StartDate, dto.EndDate);
+        // var isTermDatesValid = TermHelper.IsTermDatesValid(dto.StartDate, dto.EndDate);
+        //
+        // if (!isTermDatesValid.Succeeded){
+        //     result.Message = isTermDatesValid.Message;
+        //
+        //     return result;
+        // }
 
-        if (!isTermDatesValid.Succeeded){
-            result.Message = isTermDatesValid.Message;
-
-            return result;
-        }
-
-        var isExamDatesValid = TermHelper.IsExamDatesValid(dto.StartDate, dto.EndDate, dto.ExamsStartTime, dto.ExamsEndTime);
+        var isExamDatesValid = TermHelper.IsExamDatesValid(dto.ExamsStartTime, dto.ExamsEndTime);
 
         if (!isExamDatesValid.Succeeded){
             result.Message = isExamDatesValid.Message;
@@ -122,7 +69,7 @@ public class TermService : ITermService {
             return result;
         }
 
-        var isSelectionTimesValid = TermHelper.IsTermSelectionTimeValid(dto.SectionSelectionStartTime, dto.SectionSelectionEndTime, dto.StartDate, dto.EndDate, dto.ExamsStartTime);
+        var isSelectionTimesValid = TermHelper.IsTermSelectionTimeValid(dto.SectionSelectionStartTime, dto.SectionSelectionEndTime, dto.ExamsStartTime);
 
         if (!isSelectionTimesValid.Succeeded){
             result.Message = isSelectionTimesValid.Message;
@@ -130,34 +77,22 @@ public class TermService : ITermService {
             return result;
         }
 
-        var costumeTermProperties = TermHelper.GetTermProperties(dto.StartDate, dto.EndDate);
+        if (!dto.TermIdentifier.Contains("/")){
+            result.Message = "Term identifier must be in format (year)/(termnumber)";
+
+            return result;
+        }
 
         var term = new Term()
         {
-            EndTime = dto.EndDate,
-            StartTime = dto.StartDate,
             ExamsEndTime = dto.ExamsEndTime,
             ExamsStartTime = dto.ExamsStartTime,
-            Year = costumeTermProperties.Year,
-            TermNumber = costumeTermProperties.TermNumber,
-            IsFirstTerm = costumeTermProperties.IsFirstTerm,
+            Year = DateTime.UtcNow.Year,
             SectionSelectionStartTime = dto.SectionSelectionStartTime,
             SectionSelectionEndTime = dto.SectionSelectionEndTime,
         };
 
-        _context.Terms.Add(term);
-        var students = await _context.Students.Include(s => s.Terms).ToListAsync();
-
-        students.ForEach(student => {
-            student.Terms.Add(term);
-            _context.Students.Update(student);
-        });
-
-        await _context.SaveChangesAsync();
-        result.Message = "Term opened.";
-        result.Succeeded = true;
-
-        return result;
+        return await termRepository.AddTerm(term);
     }
 
     public async Task<Result> CloseTerm(string confirmation, string currentTerm)
@@ -170,39 +105,29 @@ public class TermService : ITermService {
             return result;
         }
 
-        var currentDate = DateTime.UtcNow;
 
-        var term = await _context.Terms
-            .FirstOrDefaultAsync(t => t.StartTime <= currentDate && t.EndTime >= currentDate);
+        var term = await termRepository.GetCurrentTermEntity();
 
         if (term == null){
-            result.Message = "Term could not be found.";
+            result.Message = "We are inside a term you have to close it first";
 
             return result;
         }
+
+        var currentDate = DateTime.UtcNow;
 
         if (currentDate <= term.ExamsEndTime){
             term.ExamSuspended = true;
         }
 
-        if (currentDate < term.EndTime){
-            term.EndTime = currentDate;
-        }
+        term.IsClosed = true;
 
-        _context.Terms.Update(term);
-        await _context.SaveChangesAsync();
-        result.Message = "Term closed.";
-        result.Succeeded = true;
-
-        return result;
+        return await termRepository.CloseTerm(term);
     }
 
     public async Task<bool> IsInsideAnyTermCurrently()
     {
-        var currentDate = DateTime.UtcNow;
-        var isInsideTerm = await _context.Terms.AnyAsync(t => t.EndTime > currentDate);
-
-        return isInsideTerm;
+        return await termRepository.IsInsideAnyTermCurrently();
     }
 
 }

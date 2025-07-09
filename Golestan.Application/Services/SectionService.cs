@@ -2,181 +2,61 @@
 
 using Domain.Entities;
 using Domain.Enums;
-using DTOs.Course;
 using DTOs.Section;
 using DTOs.Student;
-using Infrastructure.Persistence;
 using Interfaces;
-using Microsoft.EntityFrameworkCore;
+using RepositoryInterfaces;
 using Shared.Helpers;
 
 
-public class SectionService : ISectionService {
+public class SectionService(ISectionRepository sectionRepository, ICourseRepository courseRepository, IStudentRepository studentRepository, ITermService termService) : ISectionService {
 
-    private readonly AppDbContext _context;
-
-    private readonly IFacultyService _facultyService;
-
-    private readonly ITermService _termService;
-
-    public SectionService(AppDbContext context, IFacultyService facultyService, ITermService termService)
-    {
-        _context = context;
-        _facultyService = facultyService;
-        _termService = termService;
-    }
-
-    public async Task<SectionManagementDto> GetFacultySections(int facultyId)
+    public async Task<List<SectionDto>> GetFacultySections(int facultyId)
     {
         try{
-            var dto = new SectionManagementDto()
-            {
-                FacultyId = facultyId,
-            };
-
-            var faculty = await _facultyService.GetFacultyById(facultyId);
-
-            if (faculty == null){
-                throw new ApplicationException($"Faculty {facultyId} not found");
-            }
-
-            dto.FacultyMajorName = faculty.MajorName;
-
-            dto.Sections = await _context.Sections
-                .Where(s => s.Id == facultyId)
-                .Select(s => new SectionDto()
-                {
-                    Id = s.Id,
-                    CourseName = s.Course.Name,
-                    TimeSlot = s.TimeSlot,
-                    InstructorAppUser = s.Instructor.AppUser,
-                    InstructorId = s.InstructorId,
-                    ClassNumber = s.Classroom.ClassNumber,
-                })
-                .ToListAsync();
-
-            return dto;
+            return await sectionRepository.GetFacultySections(facultyId);
         }
         catch (Exception e){
-            Console.WriteLine(e);
-
-            throw;
+            throw new Exception(e.Message);
         }
     }
 
-    public async Task<SectionActionsDto> GetSectionActionsDto(int sectionId)
+    public async Task<SectionDto> GetSectionActionsDto(int sectionId)
     {
         try{
-            var dto = new SectionActionsDto();
+            var model = await sectionRepository.GetSectionById(sectionId);
 
-            dto = await _context.Sections
-                .Where(s => s.Id == sectionId)
-                .Select(s => new SectionActionsDto()
-                {
-                    Id = s.Id,
-                    CourseName = s.Course.Name,
-                    TimeSlot = s.TimeSlot,
-                    InstructorId = s.InstructorId,
-                    InstructorName = s.Instructor.FullName,
-                    ClassroomNumber = s.Classroom.ClassNumber,
-                    ClassroomCapacity = s.Classroom.Capacity,
-                    DayOfWeek = s.DayOfWeek,
-                    FacultyId = s.Course.FacultyId,
-                })
-                .FirstOrDefaultAsync();
+            model.Students = await sectionRepository.GetSectionStudents(sectionId);
 
-            dto.Students = await _context.Sections
-                .Where(s => s.Id == sectionId)
-                .SelectMany(s => s.Students)
-                .Select(s => new StudentDto()
-                {
-                    Id = s.Id,
-                    AppUserId = s.AppUserId,
-                    Email = s.AppUser.Email,
-                    StudentNumber = s.StudentNumber,
-                    FullName = s.FullName,
-                    FacultyId = s.FacultyId,
-                    FacultyName = s.Faculty.Major,
-                })
-                .ToListAsync();
-
-            var s = await _context.Sections
-                .Where(s => s.Id == sectionId)
-                .SelectMany(s => s.Students)
-                .ToListAsync();
-
-            return dto;
+            return model;
         }
         catch (Exception e){
-            Console.WriteLine(e);
-
-            throw;
+            throw new Exception(e.Message);
         }
     }
 
     public async Task<List<StudentDto>> GetAvailableStudents(int sectionId, int facultyId)
     {
         try{
-            var section = await _context.Sections.FindAsync(sectionId);
+            var section = await sectionRepository.GetSectionById(sectionId);
 
-            if (section == null){
-                throw new ArgumentException($"Section {sectionId} not found");
-            }
 
-            var course = await _context.Courses
-                .Include(c => c.PrerequisiteCourses)
-                .FirstOrDefaultAsync(c => c.Id == section.CourseId);
+            var course = await courseRepository.GetCourseById(section.Course.Id);
 
-            if (course == null){
-                throw new ArgumentException($"Course {section.CourseId} not found");
-            }
 
             var prerequisiteCourses = course.PrerequisiteCourses;
 
-            var dto = await _context.Students
-                .Where(s => s.FacultyId == facultyId && s.Sections.All(s => s.Id != sectionId))
-                .Where(s => s.Sections.All(section1 => section1.DayOfWeek != section.DayOfWeek && section1.TimeSlot != section.TimeSlot))
-                .Where(s => s.PassedCourses.Select(p => p.Id).All(i => prerequisiteCourses.Contains(i)))
-                .Select(s => new StudentDto()
-                {
-                    Id = s.Id,
-                    AppUserId = s.AppUserId,
-                    Email = s.AppUser.Email,
-                    StudentNumber = s.StudentNumber,
-                    FullName = s.FullName,
-                    FacultyId = s.FacultyId,
-                })
-                .ToListAsync();
-
-            return dto;
+            return await sectionRepository.GetAvailableStudentsForSection(section, course, facultyId, prerequisiteCourses);
         }
         catch (Exception e){
-            Console.WriteLine(e);
-
-            throw;
+            throw new Exception(e.Message);
         }
     }
 
-    public async Task<SectionDto> GetSectionDetailsById(int sectionId)
+    public async Task<SectionDto> GetSectionById(int sectionId)
     {
         try{
-            var dto = await _context.Sections
-                .Where(s => s.Id == sectionId)
-                .Select(s => new SectionDto()
-                {
-                    Id = s.Id,
-                    CourseName = s.Course.Name,
-                    TimeSlot = s.TimeSlot,
-                    InstructorAppUser = s.Instructor.AppUser,
-                    ClassNumber = s.Classroom.ClassNumber,
-                    DayOfWeek = s.DayOfWeek,
-                    InstructorId = s.InstructorId,
-                    ClassCapacity = s.Classroom.Capacity,
-                    RemainCapacity = s.Classroom.Capacity - s.Students.Count
-                })
-                .FirstOrDefaultAsync();
-
-            return dto;
+            return await sectionRepository.GetSectionById(sectionId);
         }
         catch (Exception e){
             Console.WriteLine(e);
@@ -187,149 +67,82 @@ public class SectionService : ISectionService {
 
     public async Task<Result> AddStudentsToSection(List<int> studentIds, int sectionId)
     {
-        var finalResult = new Result();
+        var result = new Result();
 
         try{
             if (studentIds.Count == 0){
-                finalResult.Message = "No students found";
+                result.Message = "No students found";
 
-                return finalResult;
+                return result;
             }
 
-            var course = await _context.Sections
-                .Where(s => s.Id == sectionId)
-                .Select(s => s.Course)
-                .Include(c => c.PrerequisiteCourses)
-                .Include(c => c.Exam)
-                .FirstOrDefaultAsync();
+            var course = await sectionRepository.GetCourseBySectionId(sectionId);
 
-            if (course == null){
-                throw new ArgumentException($"Course {course.Name} not found");
-            }
 
             var prerequisiteCourses = course.PrerequisiteCourses;
+            var term = await termService.GetCurrentTerm();
 
-            var sectionStudents = await _context.Sections.Where(s => s.Id == sectionId).SelectMany(s => s.Students).ToListAsync();
-            var section = await _context.Sections.Where(s => s.Id == sectionId).Include(s => s.Students).Include(s => s.Classroom).FirstOrDefaultAsync();
-            var capacity = section.Classroom.Capacity;
-            var currentStudentCount = section.Students.Count;
+            if (term == null){
+                result.Message = "No term available";
 
-            var students = await _context.Students
-                .Where(s => studentIds.Contains(s.Id) && s.Sections.All(section1 => section1.Id != sectionId))
-                .Where(s => s.PassedCourses.Select(p => p.Id).All(i => prerequisiteCourses.Contains(i)))
-                .Include(s => s.ExamResults)
-                .Take(capacity - currentStudentCount).ToListAsync();
-
-            sectionStudents.AddRange(students);
-            section.Students = sectionStudents;
-            _context.Sections.Update(section);
-            await _context.SaveChangesAsync();
-            finalResult.Succeeded = true;
-            finalResult.Message = "Students added";
-
-            var term = await _termService.GetCurrentTerm();
-
-            var newExamResult = new ExamResult()
-            {
-                CourseId = course.Id,
-                SectionId = section.Id,
-                ExamDate = course.Exam.ExamDateTime,
-                InstructorId = section.InstructorId,
-                TermId = term.Id,
-            };
-
-            foreach (var student in students){
-                student.ExamResults.Add(newExamResult);
+                return result;
             }
 
-            await _context.SaveChangesAsync();
 
-            return finalResult;
+            return await sectionRepository.AddStudentsToSection(studentIds, sectionId, prerequisiteCourses, term, course);
         }
         catch (Exception e){
-            Console.WriteLine(e);
-            finalResult.Message = e.Message;
-
-            throw;
+            throw new Exception(e.Message);
         }
-
-        return finalResult;
     }
 
     public async Task<Result> RemoveStudentFromSection(int studentId, int sectionId)
     {
-        var finalResult = new Result();
-
         try{
-            var section = await _context.Sections
-                .Include(s => s.Students)// Include the students to access the relationship
-                .FirstOrDefaultAsync(s => s.Id == sectionId);
+            var section = await sectionRepository.GetSectionEntityById(sectionId);
+
+            var student = await studentRepository.GetStudentEntityById(studentId);
 
 
-            // Find the student by ID
-            var student = await _context.Students
-                .Include(s => s.Sections)// Include the sections to access the relationship
-                .FirstOrDefaultAsync(s => s.Id == studentId);
-
-
-            // Remove the student from the section
             if (section.Students.Contains(student)){
                 section.Students.Remove(student);
             }
 
-            // Remove the section from the student
             if (student.Sections.Contains(section)){
                 student.Sections.Remove(section);
             }
 
-            // Save changes to the database
-            await _context.SaveChangesAsync();
 
-            var examResult = await _context.ExamResults
-                .Where(e => e.StudentId == studentId && e.SectionId == sectionId)
-                .FirstOrDefaultAsync();
-
-            _context.ExamResults.Remove(examResult);
-            await _context.SaveChangesAsync();
-
-            finalResult.Succeeded = true;
-            finalResult.Message = "Student removed";
+            return await sectionRepository.RemoveExamResult(sectionId, studentId);
         }
         catch (Exception e){
-            Console.WriteLine(e);
-            finalResult.Message = e.Message;
-
-            throw;
+            throw new Exception(e.Message);
         }
-
-        return finalResult;
     }
 
-    public async Task<Result> AddNewSection(AddSectionDto dto)
+    public async Task<Result> AddSection(AddSectionDto dto)
     {
-        var finalResult = new Result();
+        var result = new Result();
 
         try{
             if (0 < dto.TimeSlotId && dto.TimeSlotId <= 6 && 0 < dto.DayOfWeekId && dto.DayOfWeekId <= 7){
-                finalResult.Message = "time ranges must valid";
+                result.Message = "time ranges must valid";
 
-                return finalResult;
+                return result;
             }
 
-            var isClassEmptyAtTime = await IsClassEmptyAtTime(dto);
 
-            if (isClassEmptyAtTime){
-                finalResult.Message = "The classroom in that time is taken";
+            if (await sectionRepository.IsClassroomTakenAtTime(dto.ClassroomId, GetTimeSlot(dto.TimeSlotId), GetDayOfWeek(dto.DayOfWeekId))){
+                result.Message = "The classroom in that time is taken";
 
-                return finalResult;
+                return result;
             }
 
-            var isInstructorTimeTaken = await IsInstructorTimeTaken(dto);
 
-            if (!isInstructorTimeTaken){
-                finalResult.Message = "The instructor time is taken";
+            if (await sectionRepository.IsInstructorTakenAtTime(dto.InstructorId, GetTimeSlot(dto.TimeSlotId), GetDayOfWeek(dto.DayOfWeekId))){
+                result.Message = "The instructor time is taken";
 
-                return finalResult;
+                return result;
             }
 
             var section = new Section()
@@ -341,19 +154,10 @@ public class SectionService : ISectionService {
                 DayOfWeek = GetDayOfWeek(dto.DayOfWeekId),
             };
 
-            await _context.Sections.AddAsync(section);
-            await _context.SaveChangesAsync();
-            finalResult.Succeeded = true;
-            finalResult.Message = "Section added successfully";
-
-            return finalResult;
+            return await sectionRepository.AddSection(section);
         }
         catch (Exception e){
-            Console.WriteLine(e);
-
-            finalResult.Message = e.Message;
-
-            throw;
+            throw new Exception(e.Message);
         }
     }
 
@@ -395,34 +199,6 @@ public class SectionService : ISectionService {
 
             default: return DayOfWeek.Saturday;
         }
-    }
-
-    private async Task<bool> IsClassEmptyAtTime(AddSectionDto dto)
-    {
-        var sectionExist = await _context.Sections
-            .AnyAsync(s => s.ClassroomId == dto.ClassroomId && s.DayOfWeek == GetDayOfWeek(dto.DayOfWeekId) && s.TimeSlot == GetTimeSlot(dto.TimeSlotId));
-
-        if (sectionExist){
-            return true;
-        }
-
-        return false;
-    }
-
-    private async Task<bool> IsInstructorTimeTaken(AddSectionDto dto)
-    {
-        var timeSlot = GetTimeSlot(dto.TimeSlotId);
-        var dayOfWeek = GetDayOfWeek(dto.DayOfWeekId);
-
-        var instructor = await _context.Instructors
-            .Where(i => i.Id == dto.InstructorId)
-            .Include(i => i.Sections)
-            .FirstOrDefaultAsync();
-
-        var isTimeSlotEmpty = instructor.Sections
-            .Any(s => s.TimeSlot == timeSlot && s.DayOfWeek == dayOfWeek);
-
-        return !isTimeSlotEmpty;
     }
 
 }

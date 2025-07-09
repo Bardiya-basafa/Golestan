@@ -62,7 +62,7 @@ public class SectionsController : BaseController {
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> AddSection(AddSectionDto dto)
     {
-        var result = await _sectionService.AddNewSection(dto);
+        var result = await _sectionService.AddSection(dto);
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){

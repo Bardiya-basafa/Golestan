@@ -86,7 +86,7 @@ public class StudentsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> SeeTermExamResults(int termId, int studentId)
     {
-        var model = await _studentService.GetTermExamResults(termId, studentId);
+        var model = await _studentService.GetAllTermExamResults(termId, studentId);
 
         return View(model);
     }

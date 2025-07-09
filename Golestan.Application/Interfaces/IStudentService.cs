@@ -15,10 +15,10 @@ public interface IStudentService {
 
     Task<List<TermDto>> GetAllStudentTerms(int studentId);
 
-    Task<List<ExamResultDto>> GetTermExamResults(int termId, int studentId);
+    Task<List<ExamResultDto>> GetAllTermExamResults(int termId, int studentId);
 
     Task<List<ExamResultDto>?> GetActiveExamResults(int studentId);
 
-    Task<Result> SubmitObjection(ObjectionDto dto);
+    Task<Result> SubmitObjection(ObjectionDto model);
 
 }

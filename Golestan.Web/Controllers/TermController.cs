@@ -50,9 +50,9 @@ public class TermController : BaseController {
     {
         // Make it view component 
         // var model = await _termService.GetLastPreviousTerm();
-        var model = await _termService.TermOpeningOption();
+        var model = await _termService.IsInsideAnyTermCurrently();
 
-        if (!model){
+        if (model){
             ShowMessage("Currently a term already open", false);
 
             return RedirectToAction("CurrentTerm");

@@ -13,9 +13,8 @@ public class CourseExamComponent : ViewComponent {
         _courseService = courseService;
     }
 
-    public async Task<IViewComponentResult> InvokeAsync()
-    {
-        var model = await 
-    }
+    // public async Task<IViewComponentResult> InvokeAsync()
+    // {
+    // }
 
 }

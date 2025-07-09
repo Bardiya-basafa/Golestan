@@ -9,7 +9,7 @@ public interface ISelectionService {
 
     Task<SelectionDto> SelectionTermDetails();
 
-    Task<List<SectionDto>> GetAvailableSectionsForSelection(int studentId);
+    Task<List<SectionDto>?> GetAvailableSectionsForSelection(int studentId);
 
     Task<List<SectionDto>> GetSelectedSections(int studentId);
 

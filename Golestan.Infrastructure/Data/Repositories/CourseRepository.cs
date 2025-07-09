@@ -40,6 +40,7 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
         return await context.Courses
             .AsNoTracking()
             .Where(c => c.Id == courseId)
+            .Include(c => c.PrerequisiteCourses)
             .Select(c => new CourseDto()
             {
                 Id = c.Id,

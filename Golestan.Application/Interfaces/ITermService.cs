@@ -7,14 +7,12 @@ using Shared.Helpers;
 
 public interface ITermService {
 
-    Task<bool> IsInsideAnyTerm();
     Task<TermDto?> GetCurrentTerm();
 
     Task<Term?> GetCurrentTermEntity();
 
     Task<List<TermDto>> GetAllTerms();
 
-    Task<bool> TermOpeningOption();
 
     Task<Result> OpenNewTerm(OpenNewTermDto dto);
 

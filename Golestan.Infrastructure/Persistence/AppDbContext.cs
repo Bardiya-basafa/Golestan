@@ -238,6 +238,10 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
             .HasForeignKey<ExamResult>(e => e.SectionId)
             .OnDelete(DeleteBehavior.NoAction);
 
+        modelBuilder.Entity<ExamResult>()
+            .Property(e => e.Score)
+            .HasPrecision(18, 2);
+
 
         modelBuilder.Entity<Section>()
             .HasOne(s => s.Course)

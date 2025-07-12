@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Golestan.Web")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b77c583ec9863bbb8178e80930b2442eadf0aca4")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd856f687dc4221a290742d794ae91fc63273c37")]
 [assembly: System.Reflection.AssemblyProductAttribute("Golestan.Web")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Golestan.Web")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

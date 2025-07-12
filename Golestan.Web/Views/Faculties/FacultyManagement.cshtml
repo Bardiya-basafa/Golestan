@@ -1,183 +1,172 @@
-﻿@model Golestan.Application.DTOs.Faculty.FacultyDetailsDto
+﻿@model FacultyDto
 
 @{
     ViewData["Title"] = "Faculty Details";
 }
-<!-- Navigation -->
-<nav class="glass-effect sticky top-0 z-50 border-b border-white/20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-            <div class="flex items-center space-x-4">
-                <div class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center shadow-lg">
-                    <i class="fas fa-university text-white text-lg"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                        UniManage Pro
-                    </h1>
-                    <p class="text-xs text-gray-500">Faculty Details</p>
-                </div>
-            </div>
-
-            <div class="flex items-center space-x-4">
-                <a asp-controller="Faculties" asp-action="Index"
-                   class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors">
-                    <i class="fas fa-arrow-left mr-2"></i>Back to Faculty List
-                </a>
-            </div>
-        </div>
-    </div>
-</nav>
 
 <!-- Main Content -->
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- Faculty Header -->
-    <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 mb-8 animate-fade-in">
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-            <div class="flex items-center mb-6 lg:mb-0">
-                <div class="w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mr-6 shadow-lg">
-                    <i class="fas fa-university text-white text-3xl"></i>
-                </div>
-                <div>
-                    <h2 class="text-4xl font-bold text-gray-800 mb-2">@Model.MajorName</h2>
-                    <p class="text-gray-600 text-lg">Description</p>
-                    <div class="flex items-center mt-2 text-sm text-gray-500">
-                        <i class="fas fa-calendar mr-2"></i>
-                        Established: @Model.StartDate.ToShortDateString()
+    <div class="bg-white rounded-lg shadow-sm border border-blue-200 mb-8 overflow-hidden">
+        <div class="bg-blue-700 px-8 py-6">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                <div class="flex items-center mb-6 lg:mb-0">
+                    <div class="w-20 h-20 bg-blue-600 rounded-lg flex items-center justify-center mr-6 shadow-md">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold text-white mb-2">@Model.MajorName</h2>
+                        <p class="text-blue-300 text-lg">Description</p>
+                        <div class="flex items-center mt-2 text-sm text-blue-200">
+                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                            Established: @Model.StartDate.ToShortDateString()
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="flex flex-col sm:flex-row gap-4">
-                <div class="text-center">
-                    <div class="text-2xl font-bold text-indigo-600">@Model.Id</div>
-                    <div class="text-sm text-gray-500">Faculty ID</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-2xl font-bold text-purple-600">@Model.Budget $</div>
-                    <div class="text-sm text-gray-500">Badge Amount</div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-white">@Model.Id</div>
+                        <div class="text-sm text-blue-200">Faculty ID</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-white">@Model.Budget $</div>
+                        <div class="text-sm text-blue-200">Budget Amount</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Faculty Information -->
-    <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 mb-8 animate-scale-in">
-        <div class="flex items-center mb-6">
-            <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-xl flex items-center justify-center mr-4">
-                <i class="fas fa-info-circle text-white text-xl"></i>
-            </div>
-            <div>
-                <h3 class="text-2xl font-bold text-gray-800">Faculty Information</h3>
-                <p class="text-gray-600">Basic details and specifications</p>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="bg-gradient-to-r from-indigo-100 to-purple-100 rounded-xl p-6 card-hover">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-medium text-gray-600">Faculty ID</p>
-                        <p class="text-2xl font-bold text-indigo-600">@Model.Id</p>
-                    </div>
-                    <div class="w-12 h-12 bg-indigo-500 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-hashtag text-white"></i>
-                    </div>
+    <div class="bg-white rounded-lg shadow-sm border border-blue-200 mb-8 overflow-hidden">
+        <div class="px-8 py-6 border-b border-blue-200">
+            <div class="flex items-center mb-6">
+                <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-slate-900">Faculty Information</h3>
+                    <p class="text-slate-600">Basic details and specifications</p>
                 </div>
             </div>
-
-            <div class="bg-gradient-to-r from-green-100 to-teal-100 rounded-xl p-6 card-hover">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-medium text-gray-600">Building</p>
-                        <p class="text-xl font-bold text-green-600">@Model.BuildingName</p>
-                    </div>
-                    <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-building text-white"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl p-6 card-hover">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-medium text-gray-600">Major</p>
-                        <p class="text-xl font-bold text-purple-600">@Model.MajorName</p>
-                    </div>
-                    <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-graduation-cap text-white"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-blue-50 rounded-lg p-6 border border-blue-100">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-600">Faculty ID</p>
+                            <p class="text-2xl font-bold text-blue-700">@Model.Id</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
+                            </svg>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="bg-gradient-to-r from-orange-100 to-red-100 rounded-xl p-6 card-hover">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-medium text-gray-600">Budget</p>
-                        <p class="text-xl font-bold text-orange-600">@Model.Budget $</p>
+                <div class="bg-blue-50 rounded-lg p-6 border border-blue-100">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-600">Building</p>
+                            <p class="text-xl font-bold text-blue-700">@Model.BuildingName</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
+                            </svg>
+                        </div>
                     </div>
-                    <div class="w-12 h-12 bg-orange-500 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-id-badge text-white"></i>
+                </div>
+                <div class="bg-blue-50 rounded-lg p-6 border border-blue-100">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-600">Major</p>
+                            <p class="text-xl font-bold text-blue-700">@Model.MajorName</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-blue-50 rounded-lg p-6 border border-blue-100">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-slate-600">Budget</p>
+                            <p class="text-xl font-bold text-blue-700">@Model.Budget $</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- Statistics Overview -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 animate-slide-up">
-        <div class="stat-card rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600">Total Students</p>
-                    <p class="text-3xl font-bold text-blue-600">@Model.StudentsCount</p>
-                    <p class="text-xs text-gray-500 mt-1">Active enrollments</p>
+                    <p class="text-sm font-medium text-slate-600">Total Students</p>
+                    <p class="text-3xl font-bold text-blue-700">@Model.StudentsCount</p>
+                    <p class="text-xs text-slate-500 mt-1">Active enrollments</p>
                 </div>
-                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                    <i class="fas fa-user-graduate text-blue-600 text-xl"></i>
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 18.72a9.094 9.094 0 003-5.72c0-5.523-4.477-10-10-10S2 7.477 2 13c0 1.723.447 3.35 1.23 4.785M12 12v9"></path>
+                    </svg>
                 </div>
             </div>
         </div>
-
-        <a asp-controller="Admin" asp-action="ManageInstructors"  class="stat-card rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+        <a asp-controller="Admin" asp-action="ManageInstructors" class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600">Instructors</p>
-                    <p class="text-3xl font-bold text-green-600">@Model.InstructorsCount</p>
-                    <p class="text-xs text-gray-500 mt-1">Faculty Instructors</p>
+                    <p class="text-sm font-medium text-slate-600">Instructors</p>
+                    <p class="text-3xl font-bold text-blue-700">@Model.InstructorsCount</p>
+                    <p class="text-xs text-slate-500 mt-1">Faculty Instructors</p>
                 </div>
-                <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                    <i class="fas fa-chalkboard-teacher text-green-600 text-xl"></i>
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                    </svg>
                 </div>
             </div>
         </a>
-
-        <a asp-controller="Admin" asp-action="ManageCourses" asp-route-facultyId="@Model.Id" class="stat-card rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+        <a asp-controller="Admin" asp-action="ManageCourses" asp-route-facultyId="@Model.Id" class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600">Courses</p>
-                    <p class="text-3xl font-bold text-purple-600">@Model.CoursesCount</p>
-                    <p class="text-xs text-gray-500 mt-1">Available programs</p>
+                    <p class="text-sm font-medium text-slate-600">Courses</p>
+                    <p class="text-3xl font-bold text-blue-700">@Model.CoursesCount</p>
+                    <p class="text-xs text-slate-500 mt-1">Available programs</p>
                 </div>
-                <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                    <i class="fas fa-book text-purple-600 text-xl"></i>
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
                 </div>
             </div>
         </a>
-
-        <a asp-controller="Admin" asp-action="ManageClassrooms" asp-route-facultyId="@Model.Id" class="stat-card rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
+        <a asp-controller="Admin" asp-action="ManageClassrooms" asp-route-facultyId="@Model.Id" class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-sm font-medium text-gray-600">Classrooms</p>
-                    <p class="text-3xl font-bold text-orange-600">@Model.ClassesCount</p>
-                    <p class="text-xs text-gray-500 mt-1">Learning spaces</p>
+                    <p class="text-sm font-medium text-slate-600">Classrooms</p>
+                    <p class="text-3xl font-bold text-blue-700">@Model.ClassesCount</p>
+                    <p class="text-xs text-slate-500 mt-1">Learning spaces</p>
                 </div>
-                <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                    <i class="fas fa-door-open text-orange-600 text-xl"></i>
+                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z"></path>
+                    </svg>
                 </div>
             </div>
         </a>
     </div>
-
-    
 </div>

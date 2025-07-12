@@ -6,9 +6,9 @@ public class Term {
 
     public int Year { get; set; }
 
-    public DateTime StartTime { get; set; }
-
-    public DateTime EndTime { get; set; }
+    // public DateTime StartTime { get; set; }
+    //
+    // public DateTime EndTime { get; set; }
 
     public DateTime ExamsStartTime { get; set; }
 
@@ -18,26 +18,12 @@ public class Term {
 
     public DateTime SectionSelectionEndTime { get; set; }
 
-    public string TermNumber { get; set; }
 
-    public bool IsFirstTerm { get; set; }
+    public string TermIdentifier { get; set; }
 
-    public bool IsActive
-    {
-        get
-        {
-            if (EndTime <= DateTime.UtcNow){
-                return false;
-            }
+    public bool ExamSuspended { get; set; }
 
-            return IsActive;
-        }
 
-        set => IsActive = value;
-    }
-
-    public bool ExamSuspended { get; set; } = false;
-
-    public string TermText => Year.ToString() + "/" + TermNumber;
+    public bool IsClosed { get; set; } = false;
 
 }

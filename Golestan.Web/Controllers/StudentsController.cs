@@ -3,6 +3,7 @@
 
 namespace Golestan.Web.Controllers;
 
+using Application.DTOs.Objection;
 using Application.DTOs.Student;
 using Application.Interfaces;
 using Base;
@@ -17,7 +18,7 @@ public class StudentsController : BaseController {
     private readonly IUserService _userService;
 
 
-    public StudentsController(IStudentService studentService, IFacultyService facultyService, IUserService userService)
+    public StudentsController(IStudentService studentService, IFacultyService facultyService, IUserService userService) : base(facultyService)
     {
         _studentService = studentService;
         _facultyService = facultyService;
@@ -32,7 +33,7 @@ public class StudentsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> AddStudent(int facultyId)
     {
-        var faculty = await _facultyService.GetDetailsFacultyById(facultyId);
+        var faculty = await _facultyService.GetFacultyDtoById(facultyId);
 
         if (faculty == null){
             ShowMessage("Faculty not found", false);
@@ -86,7 +87,7 @@ public class StudentsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> SeeTermExamResults(int termId, int studentId)
     {
-        var model = await _studentService.GetTermExamResults(termId, studentId);
+        var model = await _studentService.GetAllTermExamResults(termId, studentId);
 
         return View(model);
     }
@@ -101,7 +102,7 @@ public class StudentsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> SubmitAnObjection(SubmitObjectionDto dto)
+    public async Task<IActionResult> SubmitAnObjection(ObjectionDto dto)
     {
         var model = await _studentService.SubmitObjection(dto);
 

@@ -1,0 +1,172 @@
+﻿@model List<TermDto>
+
+<div class="container mx-auto px-6 py-12">
+    <!-- Header Section -->
+    <div class="bg-white rounded-lg shadow-sm border border-blue-200 mb-8 overflow-hidden">
+        <div class="px-8 py-6 border-b border-blue-200">
+            <div class="flex justify-between items-center">
+                <div>
+                    <p class="text-3xl font-bold text-slate-900 mb-2">Academic Term Management</p>
+                    <p class="text-slate-600 text-lg">Oversee and configure academic terms</p>
+                </div>
+                <a asp-controller="Terms" asp-action="AddTerm" class="group">
+                    <div class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center shadow-md">
+                        <i class="fas fa-plus w-4 h-4 mr-3 group-hover:rotate-90 transition-transform duration-300"></i>
+                        Add New Term
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Cards (Minimal and Compact) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white rounded-lg shadow-sm border border-blue-200 p-4">
+            <div class="text-center">
+                <p class="text-xs font-medium text-blue-800 uppercase tracking-wider mb-1">Total Terms</p>
+                <p class="text-2xl font-bold text-slate-900">@Model.Count</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm border border-blue-200 p-4">
+            <div class="text-center">
+                <p class="text-xs font-medium text-blue-800 uppercase tracking-wider mb-1">Active Terms</p>
+                @* <p class="text-2xl font-bold text-slate-900">@Model.Count(t => t.)</p> *@
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm border border-blue-200 p-4">
+            <div class="text-center">
+                <p class="text-xs font-medium text-blue-800 uppercase tracking-wider mb-1">Upcoming Terms</p>
+                @* <p class="text-2xl font-bold text-slate-900">@Model.Count(t => t.StartDate > DateTime.Now)</p> *@
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm border border-blue-200 p-4">
+            <div class="text-center">
+                <p class="text-xs font-medium text-blue-800 uppercase tracking-wider mb-1">Past Terms</p>
+                @* <p class="text-2xl font-bold text-slate-900">@Model.Count(t => t.EndDate < DateTime.Now)</p> *@
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms Table -->
+    <div class="bg-white rounded-lg shadow-sm border border-blue-300 overflow-hidden">
+        <div class="px-8 py-6 border-b border-blue-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Term Directory</h2>
+                    <p class="text-slate-600 mt-1">Manage academic terms and their schedules</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">@Model.Count Total</span>
+                </div>
+            </div>
+        </div>
+        @if (Model.Count > 0)
+        {
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-blue-300">
+                    <thead class="bg-blue-50">
+                        <tr>
+                            <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-blue-900 uppercase tracking-wider border-r border-blue-300">
+                                Term
+                            </th>
+                            <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-blue-900 uppercase tracking-wider border-r border-blue-300">
+                                Year
+                            </th>
+                            <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-blue-900 uppercase tracking-wider border-r border-blue-300">
+                                Selection Period
+                            </th>
+                            <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-blue-900 uppercase tracking-wider border-r border-blue-300">
+                                Exams Period
+                            </th>
+                            <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-blue-300">
+                        @foreach (var term in Model)
+                        {
+                            <tr class="hover:bg-blue-50 transition-all duration-200 group">
+                                <td class="py-6 px-8 whitespace-nowrap border-r border-blue-300">
+                                    <div class="flex items-center">
+                                        <div>
+                                            <div class="text-lg font-bold text-slate-900 mb-1">@term.TermIdentifier</div>
+                                            <div class="text-sm text-blue-700">ID: #@term.Id</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-6 px-8 whitespace-nowrap border-r border-blue-300">
+                                    <div class="text-lg font-bold text-slate-900">@term.Year</div>
+                                </td>
+                                <td class="py-6 px-8 whitespace-nowrap border-r border-blue-300">
+                                    <div class="text-sm font-bold text-slate-900">@term.SelectionStartTime.ToString("MMM dd, yyyy")</div>
+                                    <div class="text-xs text-blue-700">to @term.SelectionEndTime.ToString("MMM dd, yyyy")</div>
+                                </td>
+                                <td class="py-6 px-8 whitespace-nowrap border-r border-blue-300">
+                                    <div class="text-sm font-bold text-slate-900">@term.ExamsStartTime.ToString("MMM dd, yyyy")</div>
+                                    <div class="text-xs text-blue-700">to @term.ExamsEndTime.ToString("MMM dd, yyyy")</div>
+                                </td>
+                                <td class="py-6 px-8 whitespace-nowrap">
+                                    <div class="flex items-center justify-center space-x-3">
+                                        <a href="#" class="px-4 py-2 bg-blue-600 text-white rounded-lg transition-all duration-200 font-medium">
+                                            Edit
+                                        </a>
+                                        <a href="#" class="px-4 py-2 bg-red-600 text-white rounded-lg transition-all duration-200 font-medium">
+                                            Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-16 border-t border-blue-200">
+                <div class="mx-auto h-24 w-24 bg-white border border-blue-200 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-calendar-alt h-12 w-12 text-blue-600"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-slate-900 mb-2">No Terms Found</h3>
+                <p class="text-slate-600 mb-8 max-w-md mx-auto">Get started by adding your first academic term to begin managing courses and sections.</p>
+                <a asp-controller="Terms" asp-action="AddTerm" class="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-200">
+                    <i class="fas fa-plus w-5 h-5 mr-3"></i>
+                    Add First Term
+                </a>
+            </div>
+        }
+    </div>
+
+    <!-- Pagination -->
+    <div class="bg-white rounded-lg shadow-sm border border-blue-200 px-8 py-6 mt-8">
+        <div class="flex items-center justify-between">
+            <div class="flex-1 flex justify-between sm:hidden">
+                <a href="#" class="relative inline-flex items-center px-6 py-3 border border-blue-300 text-sm font-semibold rounded-lg text-slate-700 bg-white hover:bg-blue-50 hover:text-blue-900 transition-all duration-200"> Previous </a>
+                <a href="#" class="ml-3 relative inline-flex items-center px-6 py-3 border border-blue-300 text-sm font-semibold rounded-lg text-slate-700 bg-white hover:bg-blue-50 hover:text-blue-900 transition-all duration-200"> Next </a>
+            </div>
+            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                <div>
+                    <p class="text-sm font-medium text-slate-700">
+                        Showing <span class="font-bold text-slate-900">1</span> to
+                        <span class="font-bold text-slate-900">@Model.Count</span> of
+                        <span class="font-bold text-slate-900">@Model.Count</span> results
+                    </p>
+                </div>
+                <div>
+                    <nav class="relative z-0 inline-flex rounded-lg shadow-sm border border-blue-200 -space-x-px" aria-label="Pagination">
+                        <a href="#" class="relative inline-flex items-center px-4 py-3 rounded-l-lg border-r border-blue-200 bg-white text-sm font-semibold text-blue-900 hover:bg-blue-50 transition-all duration-200">
+                            <span class="sr-only">Previous</span>
+                            <i class="fas fa-chevron-left h-5 w-5"></i>
+                        </a>
+                        <p class="relative inline-flex items-center px-6 py-3 border-r border-blue-200 bg-blue-600 text-sm font-bold text-white"> 1 </p>
+                        <a href="#" class="relative inline-flex items-center px-4 py-3 rounded-r-lg bg-white text-sm font-semibold text-blue-900 hover:bg-blue-50 transition-all duration-200">
+                            <span class="sr-only">Next</span>
+                            <i class="fas fa-chevron-right h-5 w-5"></i>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

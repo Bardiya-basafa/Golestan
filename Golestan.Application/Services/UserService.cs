@@ -4,31 +4,17 @@ using Domain.Entities;
 using Domain.Enums;
 using DTOs.Instructor;
 using DTOs.Student;
-using Infrastructure.Persistence;
 using Interfaces;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+using RepositoryInterfaces;
 using Shared.Constants;
 using Shared.Helpers;
 
 
-public class UserService : IUserService {
+public class UserService(IUserRepository userRepository, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, ITermService termService) : IUserService {
 
-    private readonly UserManager<AppUser> _userManager;
+    private readonly RoleManager<IdentityRole> _roleManager = roleManager;
 
-    private readonly RoleManager<IdentityRole> _roleManager;
-
-    private readonly AppDbContext _context;
-
-    private readonly ITermService _termService;
-
-    public UserService(UserManager<AppUser> userManager, AppDbContext context, RoleManager<IdentityRole> roleManager, ITermService termService)
-    {
-        _userManager = userManager;
-        _context = context;
-        _roleManager = roleManager;
-        _termService = termService;
-    }
 
     public async Task<Result> RegisterNewInstructor(AddInstructorDto dto)
     {
@@ -43,10 +29,10 @@ public class UserService : IUserService {
             UserType = UserType.Instructor
         };
 
-        var result = await _userManager.CreateAsync(appUser, dto.Password);
+        var result = await userManager.CreateAsync(appUser, dto.Password);
 
         if (result.Succeeded){
-            var roleResult = await _userManager.AddToRoleAsync(appUser, AppRoles.Instructor);
+            var roleResult = await userManager.AddToRoleAsync(appUser, AppRoles.Instructor);
 
             if (!roleResult.Succeeded){
                 finalResult.Message = roleResult.Errors.FirstOrDefault().Description;
@@ -64,12 +50,8 @@ public class UserService : IUserService {
             };
 
             appUser.InstructorProfile = instructor;
-            _context.Instructors.Add(instructor);
-            await _context.SaveChangesAsync();
-            finalResult.Succeeded = true;
-            finalResult.Message = "Instructor created";
 
-            return finalResult;
+            return await userRepository.AddInstructor(instructor);
         }
 
         finalResult.Message = result.Errors.FirstOrDefault().Description;
@@ -79,64 +61,58 @@ public class UserService : IUserService {
 
     public async Task<Result> RegisterNewStudent(AddStudentDto dto)
     {
-        var finalResult = new Result();
+        try{
+            var finalResult = new Result();
 
-        if (dto.Password != dto.ConfirmPassword){
-            finalResult.Message = "Passwords don't match";
+            if (dto.Password != dto.ConfirmPassword){
+                finalResult.Message = "Passwords don't match";
 
-            return finalResult;
+                return finalResult;
+            }
+
+            var appUser = new AppUser()
+            {
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Email = dto.Email,
+                UserName = dto.Email,
+                UserType = UserType.Student,
+            };
+
+            var result = await userManager.CreateAsync(appUser, dto.Password);
+
+            if (!result.Succeeded){
+                finalResult.Message = result.Errors.FirstOrDefault().Description;
+
+                return finalResult;
+            }
+
+            var roleResult = await userManager.AddToRoleAsync(appUser, AppRoles.Student);
+
+            if (!roleResult.Succeeded){
+                finalResult.Message = roleResult.Errors.FirstOrDefault().Description;
+
+                return finalResult;
+            }
+
+
+            var studentProfile = new Student()
+            {
+                FullName = appUser.FirstName + " " + appUser.LastName,
+                AppUser = appUser,
+                FacultyId = dto.FacultyId,
+                EnteredDate = DateTime.UtcNow,
+                StudentNumber = await GetUniversalNumber(UserType.Student, dto.FacultyId)
+            };
+
+            appUser.StudentProfile = studentProfile;
+
+            return await userRepository.AddStudent(studentProfile);
         }
 
-        var appUser = new AppUser()
-        {
-            FirstName = dto.FirstName,
-            LastName = dto.LastName,
-            Email = dto.Email,
-            UserName = dto.Email,
-            UserType = UserType.Student,
-        };
-
-        var result = await _userManager.CreateAsync(appUser, dto.Password);
-
-        if (!result.Succeeded){
-            finalResult.Message = result.Errors.FirstOrDefault().Description;
-
-            return finalResult;
+        catch (Exception e){
+            throw new Exception(e.Message);
         }
-
-        var roleResult = await _userManager.AddToRoleAsync(appUser, AppRoles.Student);
-
-        if (!roleResult.Succeeded){
-            finalResult.Message = roleResult.Errors.FirstOrDefault().Description;
-
-            return finalResult;
-        }
-
-
-        var studentProfile = new Student()
-        {
-            FullName = appUser.FirstName + " " + appUser.LastName,
-            AppUser = appUser,
-            FacultyId = dto.FacultyId,
-            EnteredDate = DateTime.UtcNow,
-            StudentNumber = await GetUniversalNumber(UserType.Student, dto.FacultyId)
-        };
-
-        appUser.StudentProfile = studentProfile;
-        _context.Students.Add(studentProfile);
-        var term = await _termService.GetCurrentTermEntity();
-
-        if (term != null){
-            studentProfile.Terms.Add(term);
-            _context.Students.Update(studentProfile);
-        }
-
-        await _context.SaveChangesAsync();
-
-        finalResult.Succeeded = true;
-        finalResult.Message = "Student created";
-
-        return finalResult;
     }
 
     private async Task<string> GetUniversalNumber(UserType userType, int facultyId)
@@ -163,13 +139,13 @@ public class UserService : IUserService {
         var finalResult = "";
 
         if (userType == UserType.Student){
-            var studentCount = await _context.Faculties.Where(f => f.Id == facultyId).SelectMany(f => f.Students).CountAsync();
+            var studentCount = await userRepository.StudentCount(facultyId);
             string formattedCount = (studentCount + 1).ToString("D5");// Increment count for new student
 
             finalResult = $"s{year}{term}t{facultyId}f{formattedCount}";
         }
         else if (userType == UserType.Instructor){
-            var instructorCount = await _context.Instructors.Where(f => f.Id == facultyId).CountAsync();
+            var instructorCount = await userRepository.InstructorCount(facultyId);
             string formattedCount = (instructorCount + 1).ToString("D5");// Increment count for new student
 
             finalResult = $"i{year}{term}t{facultyId}f{formattedCount}";

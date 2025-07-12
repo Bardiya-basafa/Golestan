@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations;
 
 public class OpenNewTermDto {
 
-    public DateTime StartDate { get; set; }
-
-    public DateTime EndDate { get; set; }
+    // public DateTime StartDate { get; set; }
+    //
+    // public DateTime EndDate { get; set; }
 
     [Required]
 
@@ -22,5 +22,8 @@ public class OpenNewTermDto {
 
     [Required]
     public DateTime SectionSelectionEndTime { get; set; }
+
+    [Required]
+    public string TermIdentifier { get; set; }
 
 }

@@ -7,11 +7,11 @@ using Shared.Helpers;
 
 public interface ISelectionService {
 
-    Task<SectionSelectionDetailsDto> SelectionTermDetails();
+    Task<SelectionDto> SelectionTermDetails();
 
-    Task<List<AvailableSectionsDto>?> GetAvailableSectionsForSelection(int studentId);
+    Task<List<SectionDto>?> GetAvailableSectionsForSelection(int studentId);
 
-    Task<List<SectionDetailsDto>> GetSelectedSections(int studentId);
+    Task<List<SectionDto>> GetSelectedSections(int studentId);
 
     Task<Result> SelectSection(int studentId, int sectionId);
     Task<Result> UnselectSection(int studentId, int sectionId);

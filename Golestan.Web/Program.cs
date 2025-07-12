@@ -1,6 +1,8 @@
 using Golestan.Application.Interfaces;
+using Golestan.Application.RepositoryInterfaces;
 using Golestan.Application.Services;
 using Golestan.Domain.Entities;
+using Golestan.Infrastructure.Data.Repositories;
 using Golestan.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
@@ -36,6 +38,18 @@ builder.Services.AddScoped<ISectionService, SectionService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ITermService, TermService>();
 builder.Services.AddScoped<ISelectionService, SelectionService>();
+
+
+// Repositories 
+builder.Services.AddScoped<IFacultyRepository, FacultyRepository>();
+builder.Services.AddScoped<ITermRepository, TermRepository>();
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<ICourseRepository, CourseRepository>();
+builder.Services.AddScoped<ISectionRepository, SectionRepository>();
+builder.Services.AddScoped<IInstructorRepository, InstructorRepository>();
+builder.Services.AddScoped<IClassroomRepository, ClassroomRepository>();
+builder.Services.AddScoped<ISelectionRepository, SelectionRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options => {
         options.Password.RequireDigit = true;
@@ -104,7 +118,7 @@ app.UseAuthorization();
 // 9. Endpoints
 app.MapControllerRoute(
 "default",
-"{controller=Students}/{action=StudentDashboard}/{id?}");
+"{controller=Admin}/{action=AdminDashboard}/{id?}");
 
 
 app.Run();

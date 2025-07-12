@@ -4,31 +4,31 @@ using Domain.Entities;
 using DTOs;
 using DTOs.Faculty;
 using DTOs.Section;
+using Shared.Helpers;
 
 
 public interface IFacultyService {
 
-    Task<List<FacultyDetailsDto>> GetFaculties();
+    Task<List<FacultyDto>> GetFaculties();
 
-    Task<FacultyDetailsDto?> GetDetailsFacultyById(int id);
-
-    Task<EditFacultyDto?> GetEditFacultyById(int id);
-
-    Task<Dictionary<int, string>?> GetFacultiesMajorNames();
-
-    Task<Dictionary<int, string>> GetFacultyClassrooms(int facultyId);
-
-    Task<Dictionary<int, string>?> GetFacultyInstructors(int facultyId);
-
-    Task<Dictionary<int, string>?> GetFacultyCourses(int facultyId);
+    Task<FacultyDto> GetFacultyDtoById(int facultyId);
 
 
-    Task<bool> EditFaculty(EditFacultyDto dto);
+    Task<Dictionary<int, string>?> GetFacultiesMajorNamesOptions();
 
-    Task<bool> AddFaculty(AddFacultyDto addFacultyDto);
+    Task<Dictionary<int, string>?> GetFacultyClassroomsOptions(int facultyId);
 
-    Task<bool> VerifyMajor(string major);
+    Task<Dictionary<int, string>?> GetFacultyInstructorsOptions(int facultyId);
 
-    Task<bool> VerifyBuilding(string buildingName);
+    Task<Dictionary<int, string>?> GetFacultyCoursesOptions(int facultyId);
+
+
+    Task<Result> UpdateFacutly(FacultyDto faculty);
+
+    Task<Result> AddFaculty(FacultyDto faculty);
+
+    Task<bool> VerifyMajorName(string majorName);
+
+    Task<bool> VerifyBuildingName(string buildingName);
 
 }

@@ -4,6 +4,7 @@
 namespace Golestan.Web.Controllers;
 
 using Application.DTOs.Instructor;
+using Application.DTOs.Score;
 using Application.Interfaces;
 using Base;
 using Domain.Entities;
@@ -20,7 +21,7 @@ public class InstructorsController : BaseController {
 
     private readonly IInstructorService _instructorService;
 
-    public InstructorsController(IFacultyService facultyService, UserManager<AppUser> userManager, IUserService userService, IInstructorService instructorService)
+    public InstructorsController(IFacultyService facultyService, UserManager<AppUser> userManager, IUserService userService, IInstructorService instructorService) : base(facultyService)
     {
         _facultyService = facultyService;
         _userManager = userManager;
@@ -36,7 +37,7 @@ public class InstructorsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> GetInstructorSections(int instructorId)
     {
-        var model = await _instructorService.GetInstructorSections(instructorId);
+        var model = await _instructorService.GetInstructorDtoById(instructorId);
 
         return View(model);
     }
@@ -44,15 +45,15 @@ public class InstructorsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> GetInstructorStudentsFoSection(int sectionId)
     {
-        var model = await _instructorService.GetInstructorStudentsForSection(sectionId);
+        var model = await _instructorService.GetInstructorStudentsOfSection(sectionId);
 
         return View(model);
     }
 
     [HttpGet]
-    public async Task<IActionResult> AdmitStudentsScores(int instructorId, int sectionId)
+    public async Task<IActionResult> AdmitStudentsScores(int sectionId)
     {
-        var model = await _instructorService.GetExamResultsForSection(instructorId, sectionId);
+        var model = await _instructorService.GetExamResultsOfSection(sectionId);
 
         // invoke the view component async 
 
@@ -61,21 +62,21 @@ public class InstructorsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> SubmitStudentsScores(SubmitScoreDto dto)
+    public async Task<IActionResult> SubmitStudentsScores(ScoreDto model)
     {
-        var result = await _instructorService.SubmitStudentScore(dto);
+        var result = await _instructorService.SubmitStudentScore(model);
 
         if (!result.Succeeded){
             ShowMessage(result.Message, result.Succeeded);
         }
 
-        return RedirectToAction("AdmitStudentsScores", new { instructorId = dto.InstructorId, sectionId = dto.SectionId });
+        return RedirectToAction("AdmitStudentsScores", new { instructorId = model.InstructorId, sectionId = model.SectionId });
     }
 
     [HttpGet]
     public async Task<IActionResult> AddInstructor(int id)
     {
-        var facultyOptions = await _facultyService.GetFacultiesMajorNames();
+        var facultyOptions = await _facultyService.GetFacultiesMajorNamesOptions();
 
         AddInstructorDto dto = new AddInstructorDto()
         {
@@ -90,7 +91,7 @@ public class InstructorsController : BaseController {
     public async Task<IActionResult> AddInstructor(AddInstructorDto dto)
     {
         if (!ModelState.IsValid){
-            var facultyOptions = await _facultyService.GetFacultiesMajorNames();
+            var facultyOptions = await _facultyService.GetFacultiesMajorNamesOptions();
             dto.FacultyOptions = facultyOptions;
 
             return View(dto);

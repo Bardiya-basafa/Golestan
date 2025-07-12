@@ -2,27 +2,32 @@
 
 using Domain.Entities;
 using DTOs.Course;
+using DTOs.Exam;
 using DTOs.Instructor;
 using Shared.Helpers;
 
 
 public interface ICourseService {
 
-    Task<CourseManagementDto> GetFacultyCourses(int facultyId);
+    Task<List<CourseDto>> GetFacultyCourses(int facultyId);
 
-    Task<CourseActionsDto> GetCourseActionsDto(int courseId);
+    Task<CourseDto> GetCourseById(int courseId);
 
-    Task<ApplyNewInstructorDto> GetAllFacultyInstructors(int facultyId, int courseId);
+    Task<CourseInstructorDto> GetAvailableInsturctorsForCourse(int facultyId, int courseId);
 
-    Task<Dictionary<int, string>>? GetCourseInstructors(int courseId);
+    Task<Dictionary<int, string>?> GetCourseInstructors(int courseId);
 
-    Task<List<CourseDetailsDto>> GetAvailableCoursesForPrerequisite(int courseId);
+    Task<List<CourseDto>> GetAvailableCoursesForPrerequisite(int courseId);
 
     Task<List<Course>> GetAvailableCoursesForStudent(int studentId);
 
-    Task<Result> ApplyNewInstructorToCourse(ApplyNewInstructorDto dto);
+    Task<ExamDto?> GetCourseExam(int courseId);
+
+    Task<Result> ApplyInstructorToCourse(CourseInstructorDto dto);
 
     Task<Result> AddCourse(AddCourseDto dto);
+
+    Task<Result> SetExam(SetExamForCourseDto dto);
 
     Task<Result> RemoveCourse(int courseId);
 

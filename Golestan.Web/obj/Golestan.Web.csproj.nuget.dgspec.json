@@ -29,9 +29,6 @@
               "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj": {
                 "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj"
               },
-              "E:\\AspNetCore-Projects\\Golestan\\Golestan.Infrastructure\\Golestan.Infrastructure.csproj": {
-                "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Infrastructure\\Golestan.Infrastructure.csproj"
-              },
               "E:\\AspNetCore-Projects\\Golestan\\Golestan.Shared\\Golestan.Shared.csproj": {
                 "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Shared\\Golestan.Shared.csproj"
               }
@@ -54,6 +51,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "Mapster": {
+              "target": "Package",
+              "version": "[7.4.2-pre02, )"
+            },
             "Microsoft.AspNetCore.Mvc.Core": {
               "target": "Package",
               "version": "[2.3.0, )"
@@ -174,6 +175,9 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
+              "E:\\AspNetCore-Projects\\Golestan\\Golestan.Application\\Golestan.Application.csproj": {
+                "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Application\\Golestan.Application.csproj"
+              },
               "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj": {
                 "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj"
               },
@@ -273,11 +277,7 @@
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
-            "projectReferences": {
-              "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj": {
-                "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         },
         "warningProperties": {
@@ -339,9 +339,6 @@
             "projectReferences": {
               "E:\\AspNetCore-Projects\\Golestan\\Golestan.Application\\Golestan.Application.csproj": {
                 "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Application\\Golestan.Application.csproj"
-              },
-              "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj": {
-                "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj"
               },
               "E:\\AspNetCore-Projects\\Golestan\\Golestan.Infrastructure\\Golestan.Infrastructure.csproj": {
                 "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Infrastructure\\Golestan.Infrastructure.csproj"

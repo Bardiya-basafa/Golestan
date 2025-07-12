@@ -1,230 +1,120 @@
 ﻿namespace Golestan.Application.Services;
 
 using Domain.Entities;
-using DTOs;
 using DTOs.Faculty;
-using Infrastructure.Persistence;
 using Interfaces;
-using Microsoft.EntityFrameworkCore;
+using Mapster;
+using RepositoryInterfaces;
+using Shared.Helpers;
 
 
-public class FacultyService : IFacultyService {
+public class FacultyService(IFacultyRepository facultyRepository) : IFacultyService {
 
-    private readonly AppDbContext _context;
-
-    public FacultyService(AppDbContext context)
-    {
-        _context = context;
-    }
-
-    public async Task<List<FacultyDetailsDto>> GetFaculties()
+    public async Task<List<FacultyDto>> GetFaculties()
     {
         try{
-            var faculties = await _context.Faculties
-                .Select(f => new FacultyDetailsDto()
-                {
-                    Id = f.Id,
-                    MajorName = f.Major,
-                    BuildingName = f.BuildingName,
-                    Budget = f.Budget,
-                    StartDate = f.StartDate,
-                    StudentsCount = f.Students.Count,
-                    InstructorsCount = f.Instructors.Count,
-                    ClassesCount = f.Classrooms.Count,
-                    CoursesCount = f.Courses.Count,
-                }).ToListAsync();
-
-            return faculties;
+            return await facultyRepository.GetFaculties();
         }
         catch (Exception ex){
-            Console.WriteLine(ex.Message);
+            throw new Exception(ex.Message);
+        }
+    }
 
-            throw;
+    public async Task<FacultyDto> GetFacultyDtoById(int id)
+    {
+        try{
+            return await facultyRepository.GetFacultyById(id);
+        }
+        catch (Exception e){
+            throw new Exception(e.Message);
         }
     }
 
 
-    public async Task<FacultyDetailsDto?> GetDetailsFacultyById(int id)
+    public async Task<Dictionary<int, string>?> GetFacultiesMajorNamesOptions()
     {
         try{
-            var faculty = await _context.Faculties
-                .Where(f => f.Id == id)
-                .Select(f => new FacultyDetailsDto()
+            return await facultyRepository.GetFacultyMajorNamesOptions();
+        }
+        catch (Exception e){
+            throw new Exception(e.Message);
+        }
+    }
+
+    public async Task<Dictionary<int, string>?> GetFacultyClassroomsOptions(int facultyId)
+    {
+        try{
+            return await facultyRepository.GetFacultyClassroomsOptions(facultyId);
+        }
+        catch (Exception e){
+            throw new Exception(e.Message);
+        }
+    }
+
+    public async Task<Dictionary<int, string>?> GetFacultyInstructorsOptions(int facultyId)
+    {
+        try{
+            return await facultyRepository.GetFacultyInstructorsOptions(facultyId);
+        }
+        catch (Exception e){
+            throw new Exception(e.Message);
+        }
+    }
+
+    public async Task<Dictionary<int, string>?> GetFacultyCoursesOptions(int facultyId)
+    {
+        try{
+            return await facultyRepository.GetFacultyCoursesOptions(facultyId);
+        }
+        catch (Exception e){
+            throw new Exception(e.Message);
+        }
+    }
+
+    public async Task<Result> UpdateFacutly(FacultyDto faculty)
+    {
+        try{
+            if (await facultyRepository.BuildingNameExist(faculty.BuildingName)){
+                return new Result()
                 {
-                    Id = f.Id,
-                    MajorName = f.Major,
-                    BuildingName = f.BuildingName,
-                    Budget = f.Budget,
-                    StartDate = f.StartDate,
-                    StudentsCount = f.Students.Count,
-                    InstructorsCount = f.Instructors.Count,
-                    ClassesCount = f.Classrooms.Count,
-                    CoursesCount = f.Courses.Count,
-                })
-                .FirstOrDefaultAsync();
-
-            return faculty;
-        }
-        catch (Exception e){
-            Console.WriteLine(e);
-
-            throw;
-        }
-    }
-
-    public async Task<EditFacultyDto?> GetEditFacultyById(int id)
-    {
-        try{
-            var faculty = await _context.Faculties
-                .Where(f => f.Id == id)
-                .Select(f => new EditFacultyDto()
-                {
-                    Id = f.Id,
-                    MajorName = f.Major,
-                    BuildingName = f.BuildingName,
-                    Budget = f.Budget,
-                })
-                .FirstOrDefaultAsync();
-
-            return faculty;
-        }
-        catch (Exception e){
-            Console.WriteLine(e);
-
-            throw;
-        }
-    }
-
-    public async Task<Dictionary<int, string>?> GetFacultiesMajorNames()
-    {
-        var facultyOptions = await _context.Faculties.Select(f => new { f.Id, MajorName = f.Major }).Distinct().ToDictionaryAsync(f => f.Id, f => f.MajorName);
-
-        return facultyOptions;
-    }
-
-    public async Task<Dictionary<int, string>> GetFacultyClassrooms(int facultyId)
-    {
-        try{
-            var classroomOptions = await _context.Classrooms
-                .Where(c => c.FacultyId == facultyId)
-                .Select(c => new { c.Id, c.ClassNumber })
-                .Distinct()
-                .ToDictionaryAsync(c => c.Id, c => c.ClassNumber);
-
-            return classroomOptions;
-        }
-        catch (Exception e){
-            Console.WriteLine(e);
-
-            throw;
-        }
-    }
-
-    public async Task<Dictionary<int, string>?> GetFacultyInstructors(int facultyId)
-    {
-        try{
-            var instructorsOptions = await _context.Instructors
-                .Where(i => i.FacultyId == facultyId)
-                .Select(i => new { i.Id, i.FullName })
-                .Distinct()
-                .ToDictionaryAsync(c => c.Id, c => c.FullName);
-
-
-            return instructorsOptions;
-        }
-        catch (Exception e){
-            Console.WriteLine(e);
-
-            throw;
-        }
-    }
-
-    public async Task<Dictionary<int, string>?> GetFacultyCourses(int facultyId)
-    {
-        try{
-            var coursesOptions = await _context.Courses
-                .Where(c => c.FacultyId == facultyId)
-                .Select(c => new { c.Id, c.Name })
-                .Distinct()
-                .ToDictionaryAsync(c => c.Id, c => c.Name);
-
-            return coursesOptions;
-        }
-        catch (Exception e){
-            Console.WriteLine(e);
-
-            throw;
-        }
-    }
-
-    public async Task<bool> EditFaculty(EditFacultyDto dto)
-    {
-        try{
-            var buildingExist = await VerifyBuilding(dto.BuildingName);
-            var majorExist = await VerifyMajor(dto.MajorName);
-
-            if (buildingExist || majorExist){
-                return false;
+                    Message = "Building name already exist",
+                };
             }
 
-            var faculty = await _context.Faculties
-                .FirstOrDefaultAsync(f => f.Id == dto.Id);
-
-            if (faculty == null){
-                return false;
+            if (await facultyRepository.MajorNameExist(faculty.MajorName)){
+                return new Result()
+                {
+                    Message = "Major name already exist",
+                };
             }
 
-            faculty.Major = dto.MajorName;
-            faculty.BuildingName = dto.BuildingName;
-            faculty.StartDate = dto.StartDate;
-            faculty.Budget = dto.Budget;
-            _context.Faculties.Update(faculty);
-            await _context.SaveChangesAsync();
 
-            return true;
+            return await facultyRepository.UpdateFaculty(faculty.Adapt<Faculty>());
         }
         catch (Exception e){
-            Console.WriteLine(e);
-
-            return false;
+            throw new Exception(e.Message);
         }
     }
 
-    public async Task<bool> AddFaculty(AddFacultyDto addFacultyDto)
+
+    public async Task<Result> AddFaculty(FacultyDto faculty)
     {
         try{
-            var faculty = new Faculty()
-            {
-                Budget = addFacultyDto.Budget,
-                BuildingName = addFacultyDto.BuildingName,
-                Major = addFacultyDto.MajorName,
-                StartDate = addFacultyDto.StartDate,
-            };
-
-            _context.Faculties.Add(faculty);
-            await _context.SaveChangesAsync();
-
-            return true;
+            return await facultyRepository.AddFaculty(faculty.Adapt<Faculty>());
         }
         catch (Exception e){
-            Console.WriteLine(e);
-
-            return false;
+            throw new Exception(e.Message);
         }
     }
 
-    public async Task<bool> VerifyMajor(string major)
+    public async Task<bool> VerifyMajorName(string majorName)
     {
-        var exist = await _context.Faculties.AnyAsync(f => f.Major == major);
-
-        return exist;
+        return await facultyRepository.MajorNameExist(majorName);
     }
 
-    public Task<bool> VerifyBuilding(string buildingName)
+    public async Task<bool> VerifyBuildingName(string buildingName)
     {
-        var exist = _context.Faculties.AnyAsync(f => f.BuildingName == buildingName);
-
-        return exist;
+        return await facultyRepository.BuildingNameExist(buildingName);
     }
 
 }

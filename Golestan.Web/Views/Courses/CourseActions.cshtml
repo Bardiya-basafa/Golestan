@@ -1,4 +1,4 @@
-﻿@model CourseActionsDto
+﻿@model CourseDto
 
 
 <div class="min-h-screen py-12 px-4 sm:px-6 lg:px-8">
@@ -15,11 +15,11 @@
                                                 </div>
                                                 <div>
                                                         <p class="text-3xl font-bold text-white mb-2">Course Management Actions</p>
-                                                        <p class="text-slate-300 text-lg">@Model.CourseName - ID: @Model.CourseId</p>
-                                                        <p class="text-slate-400 text-sm">Faculty: @Model.FacultyName | Units: @Model.Unit</p>
+                                                        <p class="text-slate-300 text-lg">@Model.CourseName - ID: @Model.Id</p>
+                                                        <p class="text-slate-400 text-sm">Faculty: @Model.Faculty.MajorName | Units: @Model.Unit</p>
                                                 </div>
                                         </div>
-                                        <a asp-controller="Courses" asp-action="ApplyNewInstructorToCourse" asp-route-courseId="@Model.CourseId" asp-route-facultyId="@Model.FacultyId" class="group">
+                                        <a asp-controller="Courses" asp-action="ApplyNewInstructorToCourse" asp-route-courseId="@Model.Id" asp-route-facultyId="@Model.Faculty.Id" class="group">
                                                 <div class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                                                         <svg class="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="ml-4">
                                                 <p class="text-sm font-medium text-slate-600">Exam Date</p>
-                                                <p class="text-lg font-bold text-slate-900">@Model.ExamDateTime.ToString("F")</p>
+                                                @await Component.InvokeAsync("CourseExam", Model.Id)
                                         </div>
                                 </div>
                         </div>
@@ -183,7 +183,7 @@
                 </div>
                 <!-- Back Navigation -->
                 <div class="text-center">
-                        <a asp-controller="Admin" asp-action="ManageCourses" asp-route-facultyId="@Model.FacultyId" class="inline-flex items-center text-slate-600 hover:text-slate-900 transition-colors group font-medium">
+                        <a asp-controller="Admin" asp-action="ManageCourses" asp-route-facultyId="@Model.Faculty.Id" class="inline-flex items-center text-slate-600 hover:text-slate-900 transition-colors group font-medium">
                                 <svg class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                                 </svg>
@@ -197,7 +197,7 @@
         <form id="removeCourseInstructor" asp-controller="Instructors" asp-action="RemoveCourseInstructor">
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="instructorId" id="instructorId" value=""/>
-                <input type="hidden" name="courseId" value="@Model.CourseId"/>
+                <input type="hidden" name="courseId" value="@Model.Id"/>
         </form>
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <!-- Background overlay -->

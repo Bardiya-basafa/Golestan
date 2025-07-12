@@ -34,7 +34,7 @@ public class AdminController : BaseController {
     private readonly ITermService _termService;
 
 
-    public AdminController(IFacultyService facultyService, IInstructorService instructorService, IClassroomService classroomService, ICourseService courseService, ISectionService sectionService, IStudentService studentService, UserManager<AppUser> userManager, ITermService termService)
+    public AdminController(IFacultyService facultyService, IInstructorService instructorService, IClassroomService classroomService, ICourseService courseService, ISectionService sectionService, IStudentService studentService, UserManager<AppUser> userManager, ITermService termService) : base(facultyService)
     {
         _facultyService = facultyService;
         _instructorService = instructorService;
@@ -75,16 +75,19 @@ public class AdminController : BaseController {
 
 
         return View(faculties);
+    }public async Task<IActionResult> NewDashboard()
+    {
+
+
+        return View();
     }
 
-   
-
-   
 
     // Managing each section
     public async Task<IActionResult> ManageStudents(int facultyId)
     {
         var model = await _studentService.GetFacultyStudents(facultyId);
+        await SeedFacultyData(facultyId);
 
         return View(model);
     }
@@ -92,7 +95,7 @@ public class AdminController : BaseController {
     public async Task<IActionResult> ManageInstructors(int facultyId)
     {
         var instructorsDto = await _instructorService.GetFacultyInstructors();
-        ViewBag.FacultyId = facultyId;
+        await SeedFacultyData(facultyId);
 
         return View(instructorsDto);
     }
@@ -101,6 +104,7 @@ public class AdminController : BaseController {
     public async Task<IActionResult> ManageCourses(int facultyId)
     {
         var model = await _courseService.GetFacultyCourses(facultyId);
+        await SeedFacultyData(facultyId);
 
         return View(model);
     }
@@ -109,6 +113,7 @@ public class AdminController : BaseController {
     public async Task<IActionResult> ManageClassrooms(int facultyId)
     {
         var model = await _classroomService.GetFacultyClassrooms(facultyId);
+        await SeedFacultyData(facultyId);
 
         return View(model);
     }
@@ -117,6 +122,7 @@ public class AdminController : BaseController {
     public async Task<IActionResult> ManageSections(int facultyId)
     {
         var model = await _sectionService.GetFacultySections(facultyId);
+        await SeedFacultyData(facultyId);
 
         return View(model);
     }
@@ -173,7 +179,7 @@ public class AdminController : BaseController {
     [HttpGet]
     public async Task<IActionResult> ClassroomOptions(int facultyId)
     {
-        Dictionary<int, string>? classroomOptions = await _facultyService.GetFacultyClassrooms(facultyId);
+        Dictionary<int, string>? classroomOptions = await _facultyService.GetFacultyClassroomsOptions(facultyId);
 
         var options = classroomOptions.Select(kvp => new
         {
@@ -187,7 +193,7 @@ public class AdminController : BaseController {
     [HttpGet]
     public async Task<IActionResult> CourseOptions(int facultyId)
     {
-        Dictionary<int, string>? courseOptions = await _facultyService.GetFacultyCourses(facultyId);
+        Dictionary<int, string>? courseOptions = await _facultyService.GetFacultyCoursesOptions(facultyId);
 
         var options = courseOptions.Select(kvp => new
         {

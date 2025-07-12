@@ -16,7 +16,7 @@ public class SectionsController : BaseController {
 
     private readonly IFacultyService _facultyService;
 
-    public SectionsController(ISectionService sectionService, ICourseService courseService, IFacultyService facultyService)
+    public SectionsController(ISectionService sectionService, ICourseService courseService, IFacultyService facultyService) : base(facultyService)
     {
         _sectionService = sectionService;
         _courseService = courseService;
@@ -26,7 +26,7 @@ public class SectionsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> AddSection(int facultyId, int classroomId, string classNumber = "", bool isFromClassroom = false)
     {
-        var facultyDetails = await _facultyService.GetDetailsFacultyById(facultyId);
+        var facultyDetails = await _facultyService.GetFacultyDtoById(facultyId);
 
         if (facultyDetails.CoursesCount == 0 || facultyDetails.InstructorsCount == 0 || facultyDetails.ClassesCount == 0){
             ShowMessage("There are no course or instructor in this faculty.", false);
@@ -34,7 +34,7 @@ public class SectionsController : BaseController {
             return RedirectToAction("ManageSections", "Admin", routeValues: new { facultyId = facultyId });
         }
 
-        var courses = await _facultyService.GetFacultyCourses(facultyId);
+        var courses = await _facultyService.GetFacultyCoursesOptions(facultyId);
 
         var model = new AddSectionDto()
         {
@@ -50,7 +50,7 @@ public class SectionsController : BaseController {
         }
         else{
             ViewBag.IsFromClassroom = false;
-            var classrooms = await _facultyService.GetFacultyClassrooms(facultyId);
+            var classrooms = await _facultyService.GetFacultyClassroomsOptions(facultyId);
             model.Classrooms = classrooms;
         }
 
@@ -62,7 +62,7 @@ public class SectionsController : BaseController {
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> AddSection(AddSectionDto dto)
     {
-        var result = await _sectionService.AddNewSection(dto);
+        var result = await _sectionService.AddSection(dto);
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
@@ -79,7 +79,7 @@ public class SectionsController : BaseController {
             return RedirectToAction("AllSections", "Admin");
         }
 
-        var model = await _sectionService.GetSectionActionsDto(sectionId);
+        var model = await _sectionService.GetSectionById(sectionId);
 
         return View(model);
     }
@@ -89,12 +89,12 @@ public class SectionsController : BaseController {
     {
         var model = new AddStudentToSectionDto();
         model.Students = await _sectionService.GetAvailableStudents(sectionId, facultyId);
-        var sectionDetails = await _sectionService.GetSectionDetailsById(sectionId);
+        var sectionDetails = await _sectionService.GetSectionById(sectionId);
         ViewBag.sectionId = sectionId;
-        ViewBag.CourseName = sectionDetails.CourseName;
+        ViewBag.CourseName = sectionDetails.Course.CourseName;
 
-        ViewBag.RemainCapacity = sectionDetails.RemainCapacity;
-        ViewBag.ClassCapacity = sectionDetails.ClassCapacity;
+        ViewBag.RemainCapacity = sectionDetails.Classroom.Capacity - sectionDetails.Students.Count;
+        ViewBag.ClassCapacity = sectionDetails.Classroom.Capacity;
 
 
         return View(model);

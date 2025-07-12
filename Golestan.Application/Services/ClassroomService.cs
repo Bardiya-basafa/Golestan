@@ -3,98 +3,50 @@
 using Domain.Entities;
 using DTOs.Classroom;
 using DTOs.Section;
-using Infrastructure.Persistence;
 using Interfaces;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
+using RepositoryInterfaces;
 using Shared.Helpers;
 
 
-public class ClassroomService : IClassroomService {
+public class ClassroomService(IClassroomRepository classroomRepository, ISectionRepository sectionRepository) : IClassroomService {
 
-    private readonly AppDbContext _context;
-
-    public ClassroomService(AppDbContext context)
-    {
-        _context = context;
-    }
-
-    public async Task<ClassroomManagement> GetFacultyClassrooms(int facultyId)
+    public async Task<List<ClassroomDto>> GetFacultyClassrooms(int facultyId)
     {
         try{
-            var classroomsDetailsDto = await _context.Classrooms
-                .Where(c => c.FacultyId == facultyId)
-                .Select(c => new ClassroomDetailsDto()
-                {
-                    Id = c.Id,
-                    ClassNumber = c.ClassNumber,
-                    Capacity = c.Capacity,
-                })
-                .Take(10)
-                .ToListAsync();
-
-            var dto = new ClassroomManagement()
-            {
-                Classrooms = classroomsDetailsDto,
-                FacultyId = facultyId,
-            };
-
-            dto.FacultyName = await _context.Faculties.Where(f => f.Id == facultyId).Select(f => f.Major).FirstOrDefaultAsync();
+            var result = await classroomRepository.GetFacultyClassrooms(facultyId);
+            var model = result.Adapt<List<ClassroomDto>>();
 
 
-            return dto;
+            return model;
         }
         catch (Exception e){
-            Console.WriteLine(e);
-
-            throw;
+            throw new Exception(e.Message);
         }
     }
 
-    public async Task<ClassroomDto> GetClassroomManagementDto(int classroomId)
+    public async Task<ClassroomDto> GetClassroomById(int classroomId)
     {
         try{
-            var dto = await _context.Classrooms
-                .Where(c => c.Id == classroomId)
-                .Select(classroom => new ClassroomDto()
-                {
-                    FacultyId = classroom.FacultyId,
-                    ClassroomId = classroom.Id,
-                    ClassroomNumber = classroom.ClassNumber,
-                    Capacity = classroom.Capacity,
-                    FacultyName = classroom.Faculty.Major,
-                })
-                .FirstOrDefaultAsync();
+            var result = await classroomRepository.GetClassroomById(classroomId);
 
-            if (dto == null){
-                throw new NullReferenceException("Class room not found");
-            }
+            var sections = await sectionRepository.GetClassroomSections(classroomId);
 
-            dto.Sections = await _context.Sections
-                .Where(s => s.ClassroomId == classroomId)
-                .Select(s => new SectionDetailsDto()
-                {
-                    Id = s.Id,
-                    InstructorAppUser = s.Instructor.AppUser,
-                    InstructorId = s.InstructorId,
-                    CourseName = s.Course.Name,
-                    TimeSlot = s.TimeSlot,
-                })
-                .ToListAsync();
+            var model = result.Adapt<ClassroomDto>();
+
+            model.Sections = sections.Adapt<List<SectionDto>>();
 
 
-            return dto;
+            return model;
         }
         catch (Exception e){
-            Console.WriteLine(e);
-
-            throw new ArgumentException();
+            throw new Exception(e.Message);
         }
     }
 
     public async Task<Result> AddClassroom(AddClassroomDto dto)
     {
-        var finalResult = new Result();
-
         try{
             var classroom = new Classroom()
             {
@@ -103,65 +55,27 @@ public class ClassroomService : IClassroomService {
                 FacultyId = dto.FacultyId,
             };
 
-            _context.Classrooms.Add(classroom);
-            await _context.SaveChangesAsync();
-            finalResult.Succeeded = true;
-            finalResult.Message = "Classroom added";
 
-            return finalResult;
+            return await classroomRepository.AddClassroom(classroom);
         }
         catch (Exception e){
-            Console.WriteLine(e);
-
-            finalResult.Message = "Failed to create classroom";
-
-            return finalResult;
+            throw new Exception(e.Message);
         }
     }
 
     public async Task<Result> RemoveClassroom(int classroomId)
     {
-        var finalResult = new Result();
-
         try{
-            var classroom = await _context.Classrooms
-                .Where(c => c.Id == classroomId)
-                .Include(s => s.Sections)
-                .FirstOrDefaultAsync();
-
-            if (classroom == null){
-                finalResult.Message = "Class room not found";
-
-                return finalResult;
-            }
-
-            _context.Sections.RemoveRange(classroom.Sections);
-            _context.Classrooms.Remove(classroom);
-            await _context.SaveChangesAsync();
-            finalResult.Succeeded = true;
-            finalResult.Message = "Class room removed";
-
-            return finalResult;
+            return await classroomRepository.RemoveClassroom(classroomId);
         }
         catch (Exception e){
-            Console.WriteLine(e);
-            finalResult.Message = e.Message;
+            throw new Exception(e.Message);
         }
-
-        return finalResult;
     }
 
     public async Task<bool> VerifyClassroomNumber(string classNumber, int facultyId)
     {
-        var classroom = await _context.Classrooms
-            .Where(c => c.ClassNumber == classNumber && c.FacultyId == facultyId)
-            .FirstOrDefaultAsync();
-
-        if (classroom == null){
-            return false;
-        }
-
-        return true;
+        return await classroomRepository.VerifyClassroomNumber(classNumber, facultyId);
     }
 
 }

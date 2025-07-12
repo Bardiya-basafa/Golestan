@@ -60,6 +60,27 @@
           }
         }
       },
+      "Mapster/7.4.2-pre02": {
+        "type": "package",
+        "dependencies": {
+          "Mapster.Core": "1.2.3-pre02"
+        },
+        "compile": {
+          "lib/net9.0/Mapster.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0/Mapster.dll": {}
+        }
+      },
+      "Mapster.Core/1.2.3-pre02": {
+        "type": "package",
+        "compile": {
+          "lib/net9.0/Mapster.Core.dll": {}
+        },
+        "runtime": {
+          "lib/net9.0/Mapster.Core.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Antiforgery/2.3.0": {
         "type": "package",
         "dependencies": {
@@ -2443,8 +2464,8 @@
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
           "Golestan.Domain": "1.0.0",
-          "Golestan.Infrastructure": "1.0.0",
           "Golestan.Shared": "1.0.0",
+          "Mapster": "7.4.2-pre02",
           "Microsoft.AspNetCore.Mvc.Core": "2.3.0",
           "Microsoft.AspNetCore.Mvc.ViewFeatures": "2.3.0"
         },
@@ -2473,6 +2494,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Golestan.Application": "1.0.0",
           "Golestan.Domain": "1.0.0",
           "Golestan.Shared": "1.0.0",
           "Microsoft.AspNetCore.Identity": "2.3.1",
@@ -2491,9 +2513,6 @@
       "Golestan.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
-        "dependencies": {
-          "Golestan.Domain": "1.0.0"
-        },
         "compile": {
           "bin/placeholder/Golestan.Shared.dll": {}
         },
@@ -2558,6 +2577,34 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "Mapster/7.4.2-pre02": {
+      "sha512": "ry6YPGImX4aL0+Jj0rn46vqYOxzeyKOdlr6LUPvby1NLc68E5T2gRhDVWxvFexgZGOIW/U8NM87kygE4xl7Qvw==",
+      "type": "package",
+      "path": "mapster/7.4.2-pre02",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net8.0/Mapster.dll",
+        "lib/net9.0/Mapster.dll",
+        "mapster.7.4.2-pre02.nupkg.sha512",
+        "mapster.nuspec"
+      ]
+    },
+    "Mapster.Core/1.2.3-pre02": {
+      "sha512": "FDVPfGvCz1RRb1PYeoddiJftxo+ANAifiaqkZbH2kijZT2GcoR1w6byLQ8Czc9YBuNZqHHV4LKeXZA+eoFuCTw==",
+      "type": "package",
+      "path": "mapster.core/1.2.3-pre02",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net8.0/Mapster.Core.dll",
+        "lib/net9.0/Mapster.Core.dll",
+        "mapster.core.1.2.3-pre02.nupkg.sha512",
+        "mapster.core.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Antiforgery/2.3.0": {
@@ -6498,7 +6545,6 @@
   "projectFileDependencyGroups": {
     "net9.0": [
       "Golestan.Application >= 1.0.0",
-      "Golestan.Domain >= 1.0.0",
       "Golestan.Infrastructure >= 1.0.0",
       "Microsoft.AspNetCore.Identity >= 2.3.1",
       "Microsoft.EntityFrameworkCore.Design >= 9.0.5",
@@ -6533,9 +6579,6 @@
           "projectReferences": {
             "E:\\AspNetCore-Projects\\Golestan\\Golestan.Application\\Golestan.Application.csproj": {
               "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Application\\Golestan.Application.csproj"
-            },
-            "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj": {
-              "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Domain\\Golestan.Domain.csproj"
             },
             "E:\\AspNetCore-Projects\\Golestan\\Golestan.Infrastructure\\Golestan.Infrastructure.csproj": {
               "projectPath": "E:\\AspNetCore-Projects\\Golestan\\Golestan.Infrastructure\\Golestan.Infrastructure.csproj"

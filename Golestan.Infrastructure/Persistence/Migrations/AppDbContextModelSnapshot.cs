@@ -152,6 +152,10 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CourseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -161,10 +165,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
                     b.Property<int>("FacultyId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.PrimitiveCollection<string>("PrerequisiteCourses")
                         .IsRequired()
@@ -248,6 +248,7 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Score")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("SectionId")
@@ -292,9 +293,10 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Major")
+                    b.Property<string>("MajorName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -425,9 +427,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<bool>("ExamSuspended")
                         .HasColumnType("bit");
 
@@ -437,10 +436,7 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("ExamsStartTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsFirstTerm")
+                    b.Property<bool>("IsClosed")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("SectionSelectionEndTime")
@@ -449,13 +445,10 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("SectionSelectionStartTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("TermNumber")
+                    b.Property<string>("TermIdentifier")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -498,19 +491,19 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "91f455b1-0956-4c1b-a43b-774596aa309f",
+                            Id = "7a1db28c-9966-41f2-a28e-eac4165c32bd",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "27a8a935-288c-4aa1-a42e-93a0212ecbda",
+                            Id = "a9942bc2-9371-4fb5-86f4-9ec553103261",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         },
                         new
                         {
-                            Id = "be781783-ee49-407f-86fd-d42c4afc2b38",
+                            Id = "1c3fcabb-69f9-41ff-9fec-d99f551e53ab",
                             Name = "Instructor",
                             NormalizedName = "INSTRUCTOR"
                         });

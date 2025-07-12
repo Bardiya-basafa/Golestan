@@ -13,9 +13,17 @@ public class TermController : BaseController {
 
     private readonly ITermService _termService;
 
-    public TermController(ITermService termService)
+    public TermController(ITermService termService, IFacultyService facultyService) : base(facultyService)
     {
         _termService = termService;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> TermManagement()
+    {
+        var model = await _termService.GetCurrentTerm();
+
+        return View(model);
     }
 
     // display current term
@@ -29,11 +37,11 @@ public class TermController : BaseController {
 
     // list all the terms 
     [HttpGet]
-    public async Task<IActionResult> AllTerms()
+    public async Task<IActionResult> Terms()
     {
         var model = await _termService.GetAllTerms();
 
-        return View();
+        return View(model);
     }
 
     // open new term
@@ -42,26 +50,26 @@ public class TermController : BaseController {
     {
         // Make it view component 
         // var model = await _termService.GetLastPreviousTerm();
-        var model = await _termService.TermOpeningOption();
+        var model = await _termService.IsInsideAnyTermCurrently();
 
-        if (!model){
+        if (model){
             ShowMessage("Currently a term already open", false);
 
-            return RedirectToAction("CurrentTerm");
+            return RedirectToAction("TermManagement");
         }
 
-        return View(model);
+        return View();
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> OpenNewTerm(OpenNewTermDto dto)
     {
-        if (ModelState.IsValid){
-            return RedirectToAction("OpenNewTerm");
+        if (!ModelState.IsValid){
+            return View(dto);
         }
 
-        var result = await _termService.OpnenNewTerm(dto);
+        var result = await _termService.OpenNewTerm(dto);
 
 
         ShowMessage(result.Message, result.Succeeded);
@@ -70,7 +78,7 @@ public class TermController : BaseController {
             return RedirectToAction("CurrentTerm");
         }
 
-        return RedirectToAction("OpenNewTerm", "Term");
+        return View(dto);
     }
 
 

@@ -11,7 +11,7 @@ public class Faculty {
     public string BuildingName { get; set; }
 
     [StringLength(maximumLength: 25)]
-    public  string Major { get; set; }
+    public  string MajorName { get; set; }
     
     public int Budget { get; set; }
 

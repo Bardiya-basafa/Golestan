@@ -22,13 +22,18 @@
       </PackageReference>
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Golestan.Domain\Golestan.Domain.csproj" />
-      <ProjectReference Include="..\Golestan.Shared\Golestan.Shared.csproj" />
-    </ItemGroup>
+    
 
     <ItemGroup>
       <Folder Include="Persistence\Migrations\" />
+    </ItemGroup>
+
+    
+
+    <ItemGroup>
+      <ProjectReference Include="..\Golestan.Application\Golestan.Application.csproj" />
+      <ProjectReference Include="..\Golestan.Domain\Golestan.Domain.csproj" />
+      <ProjectReference Include="..\Golestan.Shared\Golestan.Shared.csproj" />
     </ItemGroup>
 
 </Project>

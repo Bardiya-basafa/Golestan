@@ -1,23 +1,24 @@
 ﻿namespace Golestan.Application.Interfaces;
 
 using Domain.Entities;
+using DTOs.ExamResult;
 using DTOs.Instructor;
-using DTOs.Section;
+using DTOs.Score;
 using DTOs.Student;
 using Shared.Helpers;
 
 
 public interface IInstructorService {
 
-    Task<List<InstructorDetailsDto>> GetFacultyInstructors();
+    Task<List<InstructorDto>> GetFacultyInstructors();
 
-    Task<List<SectionDetailsDto>> GetInstructorSections(int instructorId);
+    Task<InstructorDto> GetInstructorDtoById(int instructorId);
 
-    Task<List<StudentDetailsDto>> GetInstructorStudentsForSection(int sectionId);
+    Task<List<StudentDto>> GetInstructorStudentsOfSection(int sectionId);
 
-    Task<List<StudentScoreDto>> GetExamResultsForSection(int instructorId, int sectionId);
+    Task<List<ExamResultDto>> GetExamResultsOfSection(int sectionId);
 
-    Task<Result> SubmitStudentScore(SubmitScoreDto dto);
+    Task<Result> SubmitStudentScore(ScoreDto model);
 
     Task<Result> RemoveCourseInstructor(int instructorId, int courseId);
 

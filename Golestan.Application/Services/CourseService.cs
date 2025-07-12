@@ -3,6 +3,7 @@
 using Domain.Entities;
 using Domain.Enums;
 using DTOs.Course;
+using DTOs.Exam;
 using DTOs.Instructor;
 using Interfaces;
 using Mapster;
@@ -15,42 +16,22 @@ public class CourseService(ICourseRepository courseRepository) : ICourseService 
 
     public async Task<List<CourseDto>> GetFacultyCourses(int facultyId)
     {
-        try{
-            return await courseRepository.GetFacultyCourses(facultyId);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await courseRepository.GetFacultyCourses(facultyId);
     }
 
     public async Task<CourseDto> GetCourseById(int courseId)
     {
-        try{
-            return await courseRepository.GetCourseById(courseId);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await courseRepository.GetCourseById(courseId);
     }
 
     public async Task<CourseInstructorDto> GetAvailableInsturctorsForCourse(int facultyId, int courseId)
     {
-        try{
-            return await courseRepository.GetAvailableInstructorsForCourse(facultyId, courseId);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await courseRepository.GetAvailableInstructorsForCourse(facultyId, courseId);
     }
 
     public async Task<Dictionary<int, string>?> GetCourseInstructors(int courseId)
     {
-        try{
-            return await courseRepository.GetCourseInstructors(courseId);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await courseRepository.GetCourseInstructors(courseId);
     }
 
     public async Task<List<CourseDto>> GetAvailableCoursesForPrerequisite(int courseId)
@@ -64,43 +45,38 @@ public class CourseService(ICourseRepository courseRepository) : ICourseService 
         return await courseRepository.GetAvailableCoursesForStudent(studentId);
     }
 
+    public async Task<ExamDto?> GetCourseExam(int courseId)
+    {
+        return await courseRepository.GetCourseExam(courseId);
+    }
+
     public async Task<Result> ApplyInstructorToCourse(CourseInstructorDto dto)
     {
-        try{
-            return await courseRepository.ApplyInstructorToCourse(dto.CourseId, dto.InstructorId);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await courseRepository.ApplyInstructorToCourse(dto.CourseId, dto.InstructorId);
     }
 
     public async Task<Result> AddCourse(AddCourseDto dto)
     {
-        try{
-            var course = new Course()
-            {
-                CourseName = dto.Name,
-                Description = dto.Description,
-                FacultyId = dto.FacultyId,
-                Unit = dto.Unit,
-            };
+        var course = new Course()
+        {
+            CourseName = dto.Name,
+            Description = dto.Description,
+            FacultyId = dto.FacultyId,
+            Unit = dto.Unit,
+        };
 
 
-            if (await courseRepository.CourseNameExist(course.CourseName, course.FacultyId)){
-                return new Result() { Message = $"Course {dto.Name}  already exist" };
-            }
-
-            var validationResult = ValidateCourse(course);
-
-            if (!validationResult.Succeeded){
-                return validationResult;
-            }
-
-            return await courseRepository.AddCourse(course);
+        if (await courseRepository.CourseNameExist(course.CourseName, course.FacultyId)){
+            return new Result() { Message = $"Course {dto.Name}  already exist" };
         }
-        catch (Exception e){
-            throw new Exception(e.Message);
+
+        var validationResult = ValidateCourse(course);
+
+        if (!validationResult.Succeeded){
+            return validationResult;
         }
+
+        return await courseRepository.AddCourse(course);
     }
 
     public async Task<Result> SetExam(SetExamForCourseDto dto)
@@ -127,6 +103,7 @@ public class CourseService(ICourseRepository courseRepository) : ICourseService 
         {
             ClassroomId = dto.ExamClassroomId,
             CourseId = dto.CourseId,
+
             // TermId = currentTerm.Id,
             TimeSlot = GetTimeSlot(dto.ExamTimeSlotId),
             ExamDateTime = dto.ExamDateTime,
@@ -138,22 +115,12 @@ public class CourseService(ICourseRepository courseRepository) : ICourseService 
 
     public async Task<Result> RemoveCourse(int courseId)
     {
-        try{
-            return await courseRepository.RemoveCourse(courseId);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await courseRepository.RemoveCourse(courseId);
     }
 
     public async Task<Result> AddPrerequisiteToCourse(int courseId, int prerequisiteCourseId)
     {
-        try{
-            return await courseRepository.AddPrerequisiteToCourse(courseId, prerequisiteCourseId);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await courseRepository.AddPrerequisiteToCourse(courseId, prerequisiteCourseId);
     }
 
 

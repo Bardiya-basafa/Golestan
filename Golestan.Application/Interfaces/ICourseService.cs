@@ -2,6 +2,7 @@
 
 using Domain.Entities;
 using DTOs.Course;
+using DTOs.Exam;
 using DTOs.Instructor;
 using Shared.Helpers;
 
@@ -19,6 +20,8 @@ public interface ICourseService {
     Task<List<CourseDto>> GetAvailableCoursesForPrerequisite(int courseId);
 
     Task<List<Course>> GetAvailableCoursesForStudent(int studentId);
+
+    Task<ExamDto?> GetCourseExam(int courseId);
 
     Task<Result> ApplyInstructorToCourse(CourseInstructorDto dto);
 

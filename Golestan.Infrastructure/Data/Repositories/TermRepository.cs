@@ -45,6 +45,8 @@ public class TermRepository(AppDbContext context) : ITermRepository {
             {
                 ExamsStartTime = t.ExamsStartTime,
                 ExamsEndTime = t.ExamsEndTime,
+                SelectionStartTime = t.SectionSelectionStartTime,
+                SelectionEndTime = t.SectionSelectionEndTime,
                 Year = t.Year,
                 TermIdentifier = t.TermIdentifier
             })

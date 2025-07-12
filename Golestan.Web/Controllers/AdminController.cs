@@ -75,6 +75,11 @@ public class AdminController : BaseController {
 
 
         return View(faculties);
+    }public async Task<IActionResult> NewDashboard()
+    {
+
+
+        return View();
     }
 
 

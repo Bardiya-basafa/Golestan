@@ -25,11 +25,6 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
             {
                 Id = c.Id,
                 CourseName = c.CourseName,
-                Exam = new ExamDto()
-                {
-                    ExamDateTime = c.Exam.ExamDateTime,
-                    TimeSlot = c.Exam.TimeSlot,
-                },
             })
             .Take(10)
             .ToListAsync();
@@ -40,22 +35,11 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
         return await context.Courses
             .AsNoTracking()
             .Where(c => c.Id == courseId)
-            .Include(c => c.PrerequisiteCourses)
             .Select(c => new CourseDto()
             {
                 Id = c.Id,
                 Unit = c.Unit,
                 CourseName = c.CourseName,
-                Exam = new ExamDto()
-                {
-                    Id = c.ExamId,
-                    Classroom = new ClassroomDto()
-                    {
-                        ClassroomNumber = c.Exam.Classroom.ClassNumber
-                    },
-                    ExamDateTime = c.Exam.ExamDateTime,
-                    TimeSlot = c.Exam.TimeSlot,
-                },
                 Faculty = new FacultyDto()
                 {
                     Id = c.FacultyId,
@@ -156,6 +140,24 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
         };
     }
 
+    public async Task<ExamDto?> GetCourseExam(int courseId)
+    {
+        return await context.Exams
+            .AsNoTracking()
+            .Where(e => e.CourseId == courseId && !e.Term.IsClosed)
+            .Select(e => new ExamDto()
+            {
+                Id = e.Id,
+                ExamDateTime = e.ExamDateTime,
+                TimeSlot = e.TimeSlot,
+                Classroom = new ClassroomDto()
+                {
+                    ClassroomNumber = e.Classroom.ClassNumber
+                }
+            })
+            .FirstOrDefaultAsync();
+    }
+
     public async Task<Result> ApplyInstructorToCourse(int courseId, int instructorId)
     {
         var course = await context.Courses.FirstOrDefaultAsync(c => c.Id == courseId) ?? throw new Exception("Course not found");
@@ -207,7 +209,6 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
     {
         var course = await context.Courses
             .Where(c => c.Id == courseId)
-            .Include(c => c.PrerequisiteCourses)
             .FirstOrDefaultAsync() ?? throw new Exception("Course not found");
 
         if (course.PrerequisiteCourses.Contains(prerequisiteId)){

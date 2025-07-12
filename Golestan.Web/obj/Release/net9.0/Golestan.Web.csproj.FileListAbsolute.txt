@@ -239,7 +239,7 @@ E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\rjsmrazor.dswa.c
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\rjsmcshtml.dswa.cache.json
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\compressed\a8ngr4024z-mh4zefqudq.gz
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\staticwebassets.build.json.cache
-E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\compressed\q31cya5ajk-mmrvsm7jhn.gz
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\compressed\vfgl4y0ek2-it79h6owlo.gz
 E:\AspNetCore-Projects\Golestan\Golestan.Web\bin\Release\net9.0\Mapster.dll
 E:\AspNetCore-Projects\Golestan\Golestan.Web\bin\Release\net9.0\Mapster.Core.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\compressed\q31cya5ajk-4ld7m6lvos.gz

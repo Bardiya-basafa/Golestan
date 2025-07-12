@@ -54,7 +54,7 @@
                                         </div>
                                         <div class="ml-4">
                                                 <p class="text-sm font-medium text-slate-600">Exam Date</p>
-                                                <p class="text-lg font-bold text-slate-900">@Model.Exam.ExamDateTime.ToString("F")</p>
+                                                @await Component.InvokeAsync("CourseExam", Model.Id)
                                         </div>
                                 </div>
                         </div>

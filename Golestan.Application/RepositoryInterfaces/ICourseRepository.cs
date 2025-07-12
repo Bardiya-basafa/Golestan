@@ -3,6 +3,7 @@
 using Domain.Entities;
 using Domain.Enums;
 using DTOs.Course;
+using DTOs.Exam;
 using Shared.Helpers;
 
 
@@ -19,6 +20,8 @@ public interface ICourseRepository {
     Task<List<Course>> GetAvailableCoursesForStudent(int studentId);
 
     Task<CourseInstructorDto> GetAvailableInstructorsForCourse(int facultyId, int courseId);
+
+    Task<ExamDto?> GetCourseExam(int courseId);
 
     Task<Result> ApplyInstructorToCourse(int courseId, int instructorId);
 

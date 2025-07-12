@@ -1,0 +1,15 @@
+﻿@model TermDto?
+
+@if (Model == null){
+        <p class="text-gray-600 text-lg">Currently, there is no active term</p>
+}
+else{
+        <h3 class="text-gray-800 font-semibold mb-2">Current Term</h3>
+        <div class="space-y-1 text-sm">
+                <p class="text-gray-600">
+                        <span class="font-medium">Term:</span> @Model.TermIdentifier,
+                        <span class="font-medium">Year:</span> @Model.Year,
+                        <span class="font-medium">Exams Period: </span>@Model.ExamsStartTime.ToString("yyyy-M-d dddd") - @Model.ExamsEndTime.ToString("yyyy-M-d dddd")
+                </p>
+        </div>
+}

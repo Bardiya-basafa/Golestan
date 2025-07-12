@@ -1,0 +1,5 @@
+﻿@model ExamDto?
+
+
+<p class="text-3xl font-bold text-slate-900"></p>
+<div class="text-sm font-semibold text-slate-900">@(Model == null ? "There is no exam set for course right now" : Model.ExamDateTime.ToString("f") )</div>

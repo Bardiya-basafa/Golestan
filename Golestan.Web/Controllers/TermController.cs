@@ -13,7 +13,7 @@ public class TermController : BaseController {
 
     private readonly ITermService _termService;
 
-    public TermController(ITermService termService,IFacultyService facultyService) : base(facultyService)
+    public TermController(ITermService termService, IFacultyService facultyService) : base(facultyService)
     {
         _termService = termService;
     }
@@ -37,11 +37,11 @@ public class TermController : BaseController {
 
     // list all the terms 
     [HttpGet]
-    public async Task<IActionResult> AllTerms()
+    public async Task<IActionResult> Terms()
     {
         var model = await _termService.GetAllTerms();
 
-        return View();
+        return View(model);
     }
 
     // open new term
@@ -55,7 +55,7 @@ public class TermController : BaseController {
         if (model){
             ShowMessage("Currently a term already open", false);
 
-            return RedirectToAction("CurrentTerm");
+            return RedirectToAction("TermManagement");
         }
 
         return View();

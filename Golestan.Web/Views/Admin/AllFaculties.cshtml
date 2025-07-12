@@ -3,227 +3,172 @@
     ViewData["Title"] = "Faculty Management";
 }
 <!-- Main Content -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Header Section -->
-    <div class="mb-12 animate-fade-in">
-        <div class="bg-white rounded-3xl shadow-xl border border-slate-200 p-8 mb-8">
-            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-                <div class="mb-6 lg:mb-0">
-                    <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 bg-gradient-to-r from-slate-700 to-slate-900 rounded-2xl flex items-center justify-center shadow-lg mr-6">
-                            <i class="fas fa-university text-white text-2xl"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-4xl font-bold text-slate-800 mb-2">Faculty Management</h2>
-                            <p class="text-slate-600 text-lg font-medium">Comprehensive university faculty administration</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex space-x-4">
-                    <a asp-controller="Admin" asp-action="Index"
-                       class="flex items-center px-8 py-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-all duration-200 shadow-lg border border-slate-200 font-semibold">
-                        Back to Admin
-                    </a>
-                    <a asp-controller="Faculties" asp-action="AddFaculty"
-                       class="flex items-center px-8 py-4 bg-gradient-to-r from-slate-700 to-slate-900 text-white rounded-xl hover:from-slate-800 hover:to-slate-950 transition-all duration-200 shadow-xl font-semibold">
-                        <i class="fas fa-plus mr-3"></i>
-                        Add New Faculty
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Statistics Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 animate-slide-up">
-        <div class="bg-white rounded-2xl p-8 shadow-xl border border-slate-200 card-hover">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">Total Faculties</p>
-                    <p class="text-3xl font-bold text-slate-800">@Model.Count</p>
-                    <p class="text-xs text-slate-500 mt-1">Academic divisions</p>
-                </div>
-                <div class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center">
-                    <i class="fas fa-university text-slate-600 text-xl"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-8 shadow-xl border border-slate-200 card-hover">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">Total Students</p>
-                    <p class="text-3xl font-bold text-slate-800">@Model.Sum(f => f.StudentsCount)</p>
-                    <p class="text-xs text-slate-500 mt-1">Enrolled students</p>
-                </div>
-                <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center">
-                    <i class="fas fa-user-graduate text-blue-600 text-xl"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-8 shadow-xl border border-slate-200 card-hover">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">Total Budget</p>
-                    <p class="text-3xl font-bold text-slate-800">$@Model.Sum(f => f.Budget).ToString("N0")</p>
-                    <p class="text-xs text-slate-500 mt-1">Annual allocation</p>
-                </div>
-                <div class="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center">
-                    <i class="fas fa-dollar-sign text-emerald-600 text-xl"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-2xl p-8 shadow-xl border border-slate-200 card-hover">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">Avg. Established</p>
-                    <p class="text-3xl font-bold text-slate-800">@(Model.Count > 0 ? Math.Round(Model.Average(f => DateTime.Now.Year - f.StartDate.Year)) : 0)</p>
-                    <p class="text-xs text-slate-500 mt-1">Years ago</p>
-                </div>
-                <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center">
-                    <i class="fas fa-calendar text-amber-600 text-xl"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Faculty Table -->
-    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden animate-fade-in">
-        <div class="bg-gradient-to-r from-slate-700 to-slate-900 p-8">
+<div class="container mx-auto px-6 py-12">
+    <!-- Enhanced Header Section -->
+    <div class="bg-white rounded-lg shadow-sm border border-blue-200 mb-8 overflow-hidden">
+        <div class="bg-blue-700 px-8 py-6">
             <div class="flex justify-between items-center">
                 <div>
-                    <p class="text-3xl font-bold text-white mb-3">Faculty Directory</p>
+                    <p class="text-3xl font-bold text-white mb-2">Faculty Management System</p>
+                    <p class="text-blue-300 text-lg">Comprehensive faculty and classroom administration</p>
+                </div>
+                <a asp-controller="Faculties" asp-action="AddFaculty" class="group">
+                    <div class="bg-white hover:bg-blue-50 text-blue-700 px-6 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center shadow-md hover:shadow-lg">
+                        <svg class="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        Add New Faculty
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- Statistics Cards (Minimal and Compact) -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="bg-white rounded-lg shadow-sm border border-blue-200 p-4">
+            <div class="text-center">
+                <p class="text-xs font-medium text-blue-800 uppercase tracking-wider mb-1">Total Faculties</p>
+                <p class="text-2xl font-bold text-slate-900">@Model.Count</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm border border-blue-200 p-4">
+            <div class="text-center">
+                <p class="text-xs font-medium text-blue-800 uppercase tracking-wider mb-1">Total Courses</p>
+                <p class="text-2xl font-bold text-slate-900">@Model.Sum(f => f.CoursesCount)</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm border border-blue-200 p-4">
+            <div class="text-center">
+                <p class="text-xs font-medium text-blue-800 uppercase tracking-wider mb-1">Active Programs</p>
+                <p class="text-2xl font-bold text-slate-900">@Model.Count(f => f.CoursesCount > 0)</p>
+            </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm border border-blue-200 p-4">
+            <div class="text-center">
+                <p class="text-xs font-medium text-blue-800 uppercase tracking-wider mb-1">Avg Unit</p>
+                <p class="text-2xl font-bold text-slate-900">@(Model.Count > 0 ? Math.Round((double)Model.Sum(f => f.ClassesCount) / Model.Count, 1) : 0)</p>
+            </div>
+        </div>
+    </div>
+    <!-- Faculty Table -->
+    <div class="bg-white rounded-lg shadow-sm border border-blue-300 overflow-hidden">
+        <div class="px-8 py-6 border-b border-blue-300">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900">Faculty Directory</h2>
+                    <p class="text-slate-600 mt-1">Manage faculty departments and classroom assignments</p>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">@Model.Count Total</span>
                 </div>
             </div>
         </div>
-
-        <div class="p-8">
-            @if ( Model.Count > 0)
-            {
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead>
-                            <tr class="border-b-2 border-slate-200">
-                                <th class="text-left py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
-                                    Building
-                                </th>
-                                <th class="text-left py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
-                                    Faculty Name
-                                </th>
-                                <th class="text-left py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
-                                    Establishment Date
-                                </th>
-                                <th class="text-left py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
-                                    Students
-                                </th>
-                                <th class="text-left py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
-                                    Budget Allocation
-                                </th>
-                                <th class="text-center py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
-                                    Actions
-                                </th>
+        @if (Model.Count > 0)
+        {
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-blue-300">
+                    <thead class="bg-blue-50">
+                        <tr>
+                            <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-blue-900 uppercase tracking-wider border-r border-blue-300">
+                                Building
+                            </th>
+                            <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-blue-900 uppercase tracking-wider border-r border-blue-300">
+                                Faculty Name
+                            </th>
+                            <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-blue-900 uppercase tracking-wider border-r border-blue-300">
+                                Establishment Date
+                            </th>
+                            <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-blue-300">
+                        @foreach (var faculty in Model)
+                        {
+                            <tr class="hover:bg-blue-50 transition-all duration-200 group">
+                                <td class="py-6 px-8 whitespace-nowrap border-r border-blue-300">
+                                    <div class="flex items-center">
+                                        <div>
+                                            <div class="text-lg font-bold text-slate-900 mb-1">@faculty.BuildingName</div>
+                                            <div class="text-sm text-blue-700">ID: #@faculty.Id</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="py-6 px-8 whitespace-nowrap border-r border-blue-300">
+                                    <span class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold bg-blue-100 text-blue-800 border border-blue-200">
+                                        <i class="fas fa-graduation-cap w-4 h-4 mr-2"></i>
+                                        @faculty.MajorName
+                                    </span>
+                                </td>
+                                <td class="py-6 px-8 whitespace-nowrap border-r border-blue-300">
+                                    <div>
+                                        <div class="text-sm font-bold text-slate-900">@faculty.StartDate.ToString("MMM dd, yyyy")</div>
+                                        <div class="text-xs text-blue-700">@(DateTime.Now.Year - faculty.StartDate.Year) years ago</div>
+                                    </div>
+                                </td>
+                                <td class="py-6 px-8 whitespace-nowrap">
+                                    <div class="flex items-center justify-center space-x-3">
+                                        <a asp-controller="Faculties" asp-action="FacultyManagement" asp-route-id="@faculty.Id"
+                                           class="px-4 py-2 bg-blue-600 text-white rounded-lg transition-all duration-200 font-medium">
+                                            View
+                                        </a>
+                                        <a asp-controller="Faculties" asp-action="EditFaculty" asp-route-id="@faculty.Id"
+                                           class="px-4 py-2 bg-blue-600 text-white rounded-lg transition-all duration-200 font-medium">
+                                            Edit
+                                        </a>
+                                    </div>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100">
-                            @foreach (var faculty in Model)
-                            {
-                                <tr class="table-row-hover transition-all duration-200">
-                                    <td class="py-8 px-8">
-                                        <div class="flex items-center">
-                                           
-                                            <div>
-                                                <div class="text-lg font-bold text-slate-800 mb-1">@faculty.BuildingName</div>
-                                                <div class="text-sm text-slate-500">ID: #@faculty.Id</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="py-8 px-8">
-                                        <span class="inline-flex items-center px-4 py-2 rounded-xl text-sm font-bold bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 border border-blue-300">
-                                            @faculty.MajorName
-                                        </span>
-                                    </td>
-                                    <td class="py-8 px-8">
-                                        <div>
-                                            <div class="text-sm font-bold text-slate-800">@faculty.StartDate.ToString("MMM dd, yyyy")</div>
-                                            <div class="text-xs text-slate-500">@(DateTime.Now.Year - faculty.StartDate.Year) years ago</div>
-                                        </div>
-                                    </td>
-                                    <td class="py-8 px-8">
-                                        <div>
-                                            <div class="text-lg font-bold text-slate-800">@faculty.StudentsCount.ToString("N0")</div>
-                                            <div class="text-xs text-slate-500">enrolled students</div>
-                                        </div>
-                                    </td>
-                                    <td class="py-8 px-8">
-                                        <div>
-                                            <div class="text-lg font-bold text-slate-800">$@faculty.Budget.ToString("N0")</div>
-                                            <div class="text-xs text-slate-500">annual budget</div>
-                                        </div>
-                                    </td>
-                                    <td class="py-8 px-8">
-                                        <div class="flex items-center justify-center space-x-3">
-                                            <a asp-controller="Faculties" asp-action="FacultyManagement" asp-route-id="@faculty.Id"
-                                               class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-200 font-medium">
-                                                View
-                                            </a>
-                                            <a asp-controller="Faculties" asp-action="EditFaculty" asp-route-id="@faculty.Id"
-                                               class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg transition-all duration-200 font-medium">
-                                                Edit
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-16 border-t border-blue-200">
+                <div class="mx-auto h-24 w-24 bg-white border border-blue-200 rounded-full flex items-center justify-center mb-6">
+                    <i class="fas fa-university h-12 w-12 text-blue-600"></i>
                 </div>
-            }
-            else
-            {
-                <div class="text-center py-20">
-                    <div class="w-32 h-32 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-8">
-                        <i class="fas fa-university text-slate-400 text-4xl"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-slate-700 mb-4">No Faculties Found</h3>
-                    <p class="text-slate-500 text-lg mb-8 max-w-md mx-auto">Start building your academic structure by adding your first faculty to the system.</p>
-                    <a asp-controller="Faculties" asp-action="AddFaculty"
-                       class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-slate-700 to-slate-900 text-white rounded-xl hover:from-slate-800 hover:to-slate-950 transition-all duration-200 shadow-xl font-semibold">
-                        <i class="fas fa-plus mr-3"></i>
-                        Add First Faculty
-                    </a>
-                </div>
-            }
-        </div>
+                <h3 class="text-xl font-semibold text-slate-900 mb-2">No Faculties Found</h3>
+                <p class="text-slate-600 mb-8 max-w-md mx-auto">Get started by adding your first faculty department to begin managing classrooms and academic programs.</p>
+                <a asp-controller="Faculties" asp-action="AddFaculty" class="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-200">
+                    <i class="fas fa-plus w-5 h-5 mr-3"></i>
+                    Add First Faculty
+                </a>
+            </div>
+        }
     </div>
-
     <!-- Pagination -->
-    <div class="flex justify-between items-center mt-12 animate-fade-in">
-        <div class="text-sm font-medium text-slate-600 bg-white px-6 py-3 rounded-xl border border-slate-200">
-            Showing <span class="font-bold text-slate-800">1</span> to <span class="font-bold text-slate-800">@Model.Count</span> of <span class="font-bold text-slate-800">@Model.Count</span> results
+    <div class="bg-white rounded-lg shadow-sm border border-blue-200 px-8 py-6 mt-8">
+        <div class="flex items-center justify-between">
+            <div class="flex-1 flex justify-between sm:hidden">
+                <a href="#" class="relative inline-flex items-center px-6 py-3 border border-blue-300 text-sm font-semibold rounded-lg text-slate-700 bg-white hover:bg-blue-50 hover:text-blue-900 transition-all duration-200"> Previous </a>
+                <a href="#" class="ml-3 relative inline-flex items-center px-6 py-3 border border-blue-300 text-sm font-semibold rounded-lg text-slate-700 bg-white hover:bg-blue-50 hover:text-blue-900 transition-all duration-200"> Next </a>
+            </div>
+            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                <div>
+                    <p class="text-sm font-medium text-slate-700">
+                        Showing <span class="font-bold text-slate-900">1</span> to
+                        <span class="font-bold text-slate-900">@Model.Count</span> of
+                        <span class="font-bold text-slate-900">@Model.Count</span> results
+                    </p>
+                </div>
+                <div>
+                    <nav class="relative z-0 inline-flex rounded-lg shadow-sm border border-blue-200 -space-x-px" aria-label="Pagination">
+                        <a href="#" class="relative inline-flex items-center px-4 py-3 rounded-l-lg border-r border-blue-200 bg-white text-sm font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-900 transition-all duration-200">
+                            <span class="sr-only">Previous</span>
+                            <i class="fas fa-chevron-left h-5 w-5"></i>
+                        </a>
+                        <p class="relative inline-flex items-center px-6 py-3 border-r border-blue-200 bg-blue-600 text-sm font-bold text-white"> 1 </p>
+                        <a href="#" class="relative inline-flex items-center px-4 py-3 rounded-r-lg bg-white text-sm font-semibold text-slate-700 hover:bg-blue-50 hover:text-blue-900 transition-all duration-200">
+                            <span class="sr-only">Next</span>
+                            <i class="fas fa-chevron-right h-5 w-5"></i>
+                        </a>
+                    </nav>
+                </div>
+            </div>
         </div>
-        <div class="flex space-x-2">
-            <button class="px-6 py-3 bg-white border border-slate-300 text-slate-600 rounded-xl hover:bg-slate-50 transition-all duration-200 font-medium">
-                Previous
-            </button>
-            <button class="px-6 py-3 bg-slate-700 text-white rounded-xl hover:bg-slate-800 transition-all duration-200 font-medium">
-                1
-            </button>
-            <button class="px-6 py-3 bg-white border border-slate-300 text-slate-600 rounded-xl hover:bg-slate-50 transition-all duration-200 font-medium">
-                Next
-            </button>
-        </div>
-    </div>
-
-    <!-- Back Navigation -->
-    <div class="mt-12 text-center">
-        <a asp-controller="Admin" asp-action="Index" 
-           class="inline-flex items-center text-slate-600 hover:text-slate-800 transition-colors group font-semibold text-lg">
-            <svg class="w-6 h-6 mr-3 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-            </svg>
-            Return to Administrative Dashboard
-        </a>
     </div>
 </div>

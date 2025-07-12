@@ -152,6 +152,10 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CourseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -161,10 +165,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
                     b.Property<int>("FacultyId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.PrimitiveCollection<string>("PrerequisiteCourses")
                         .IsRequired()
@@ -293,7 +293,7 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Major")
+                    b.Property<string>("MajorName")
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("nvarchar(25)");
@@ -427,9 +427,6 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<bool>("ExamSuspended")
                         .HasColumnType("bit");
 
@@ -439,7 +436,7 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("ExamsStartTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsFirstTerm")
+                    b.Property<bool>("IsClosed")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("SectionSelectionEndTime")
@@ -448,13 +445,10 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("SectionSelectionStartTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
-                    b.Property<string>("TermNumber")
+                    b.Property<string>("TermIdentifier")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -497,19 +491,19 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "a909f6e7-6d87-437d-bac6-ed1d4b19baf3",
+                            Id = "7a1db28c-9966-41f2-a28e-eac4165c32bd",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "9b854781-f642-492e-a80f-90ecaaf5fe89",
+                            Id = "a9942bc2-9371-4fb5-86f4-9ec553103261",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         },
                         new
                         {
-                            Id = "602c0d54-2831-4bf0-bec8-d256e4edb882",
+                            Id = "1c3fcabb-69f9-41ff-9fec-d99f551e53ab",
                             Name = "Instructor",
                             NormalizedName = "INSTRUCTOR"
                         });

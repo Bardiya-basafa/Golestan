@@ -132,6 +132,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VjdGlvbnNcU2VjdGlvbkFjdGlvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Shared/Components/CourseExam/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ291cnNlRXhhbVxEZWZhdWx0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Shared/Components/CurrentTerm/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcQ3VycmVudFRlcm1cRGVmYXVsdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -150,6 +158,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Term/TermManagement.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVybVxUZXJtTWFuYWdlbWVudC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Term/Terms.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVybVxUZXJtcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/_ViewImports.cshtml]

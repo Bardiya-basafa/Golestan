@@ -36,9 +36,4 @@
       <ProjectReference Include="..\Golestan.Infrastructure\Golestan.Infrastructure.csproj" />
     </ItemGroup>
 
-   
-    <ItemGroup>
-      <Folder Include="Views\Shared\Components\" />
-    </ItemGroup>
-
 </Project>

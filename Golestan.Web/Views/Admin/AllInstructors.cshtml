@@ -9,7 +9,7 @@
                                         <p class="text-3xl font-bold text-white mb-2">Faculty Management System</p>
                                         <p class="text-blue-300 text-lg">Comprehensive faculty and classroom administration</p>
                                 </div>
-                                <a asp-controller="Faculties" asp-action="AddFaculty" class="group">
+                                <a asp-controller="Faculties" asp-action="Add" class="group">
                                         <div class="bg-white hover:bg-blue-50 text-blue-700 px-6 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center shadow-md hover:shadow-lg">
                                                 <svg class="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -108,7 +108,7 @@
                                                                         </div>
                                                                 </td>
                                                                 <td class="px-8 py-6 whitespace-nowrap">
-                                                                        <a asp-controller="Admin" asp-action="ManageInstructors" asp-route-facultyId="@faculty.Id" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg transition-all duration-200 shadow-md group">
+                                                                        <a asp-controller="Admin" asp-action="Instructors" asp-route-facultyId="@faculty.Id" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg transition-all duration-200 shadow-md group">
                                                                                 <i class="fas fa-cog w-5 h-5 mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
                                                                                 Manage Instructors
                                                                                 <i class="fas fa-arrow-right w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300"></i>
@@ -127,7 +127,7 @@
                                 </div>
                                 <h3 class="text-xl font-semibold text-slate-900 mb-2">No Faculties Found</h3>
                                 <p class="text-slate-600 mb-8 max-w-md mx-auto">Get started by adding your first faculty department to begin managing classrooms and academic programs.</p>
-                                <a asp-controller="Faculties" asp-action="AddFaculty" class="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-200">
+                                <a asp-controller="Faculties" asp-action="Add" class="inline-flex items-center px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-200">
                                         <i class="fas fa-plus w-5 h-5 mr-3"></i>
                                         Add First Faculty
                                 </a>

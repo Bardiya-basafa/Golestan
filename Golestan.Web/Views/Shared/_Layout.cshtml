@@ -22,9 +22,9 @@
         @if (TempData["NotificationMessage"] != null){
                 <!-- Success Notification -->
                 <div id="notification" class="fixed top-20 left-5 z-50 animate-slide-in-left z-10">
-                        <div class="min-w-80 max-w-md bg-white rounded-xl shadow-2xl overflow-hidden border-l-4 border-green-500 transform transition-all duration-300 hover:scale-105">
-                                @if (TempData["Success"] as bool? == true){
-                                        <!-- Success Content -->
+                        @if (TempData["Success"] as bool? == true){
+                                <!-- Success Content -->
+                                <div class="min-w-80 max-w-md bg-white rounded-xl shadow-2xl overflow-hidden border-l-4 border-green-500 transform transition-all duration-300 hover:scale-105">
                                         <div class="flex items-center p-4 bg-gradient-to-r from-green-50 to-emerald-50">
                                                 <div class="flex-shrink-0">
                                                         <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
@@ -46,9 +46,11 @@
                                         <div class="h-1 bg-green-200">
                                                 <div class="h-full bg-gradient-to-r from-green-500 to-emerald-500 animate-progress"></div>
                                         </div>
-                                }
-                                else if (TempData["Success"] as bool? == false){
-                                        <!-- Error Content -->
+                                </div>
+                        }
+                        else if (TempData["Success"] as bool? == false){
+                                <!-- Error Content -->
+                                <div class="min-w-80 max-w-md bg-white rounded-xl shadow-2xl overflow-hidden border-l-4 from-red-500 transform transition-all duration-300 hover:scale-105">
                                         <div class="flex items-center p-4 bg-gradient-to-r from-red-50 to-rose-50">
                                                 <div class="flex-shrink-0">
                                                         <div class="w-10 h-10 bg-gradient-to-r from-red-500 to-rose-500 rounded-full flex items-center justify-center shadow-lg">
@@ -70,8 +72,8 @@
                                         <div class="h-1 bg-red-200">
                                                 <div class="h-full bg-gradient-to-r from-red-500 to-rose-500 animate-progress"></div>
                                         </div>
-                                }
-                        </div>
+                                </div>
+                        }
                 </div>
                 <script>
                         setTimeout(function () {
@@ -106,27 +108,27 @@
                                                 <h3 class="text-xs font-semibold text-blue-200 uppercase tracking-wider mb-3">Management</h3>
                                         </div>
                                         <!-- Course Management -->
-                                        <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                        <a asp-controller="Admin" asp-action="AllCourses" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
                                                 <i class="fas fa-book w-5 h-5 mr-3 text-blue-300"></i>
                                                 <span>Course Management</span> </a>
                                         <!-- Class Management -->
-                                        <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                        <a asp-controller="Admin" asp-action="AllClassrooms" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
                                                 <i class="fas fa-chalkboard w-5 h-5 mr-3 text-blue-300"></i>
                                                 <span>Class Management</span> </a>
                                         <!-- Instructor Management -->
-                                        <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                        <a asp-controller="Admin" asp-action="Instructors" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
                                                 <i class="fas fa-chalkboard-teacher w-5 h-5 mr-3 text-blue-300"></i>
                                                 <span>Instructor Management</span> </a>
                                         <!-- Student Management -->
-                                        <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                        <a asp-controller="Admin" asp-action="Students" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
                                                 <i class="fas fa-user-graduate w-5 h-5 mr-3 text-blue-300"></i>
                                                 <span>Student Management</span> </a>
                                         <!-- Section Management -->
-                                        <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                        <a asp-controller="Admin" asp-action="Sections" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
                                                 <i class="fas fa-tasks w-5 h-5 mr-3 text-blue-300"></i>
                                                 <span>Section Management</span> </a>
                                         <!-- Faculty Management -->
-                                        <a href="#" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                        <a asp-controller="Admin" asp-action="AllFaculties" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
                                                 <i class="fas fa-university w-5 h-5 mr-3 text-blue-300"></i>
                                                 <span>Faculty Management</span> </a>
                                         <!-- Term Management with Sub-Actions -->
@@ -134,18 +136,18 @@
                                                 <button class="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors" onclick="toggleSubMenu('termSubMenu')">
                                                         <div class="flex items-center">
                                                                 <i class="fas fa-calendar-alt w-5 h-5 mr-3 text-blue-300"></i>
-                                                                <span>Term Management</span>
+                                                                <a asp-controller="Term" asp-action="Index">Term Management</a>
                                                         </div>
                                                         <i class="fas fa-chevron-down text-xs text-blue-300 transition-transform duration-200 transform" id="termSubMenuArrow"></i>
                                                 </button>
                                                 <div class="pl-8 mt-1 space-y-1 hidden" id="termSubMenu">
-                                                        <a href="#" class="flex items-center px-3 py-2 text-sm text-blue-200 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                                        <a asp-controller="Term" asp-action="Add" class="flex items-center px-3 py-2 text-sm text-blue-200 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
                                                                 <i class="fas fa-plus w-4 h-4 mr-3 text-blue-300"></i>
                                                                 <span>Add New Term</span> </a>
-                                                        <a href="#" class="flex items-center px-3 py-2 text-sm text-blue-200 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                                        <a asp-controller="Term" asp-action="Terms" class="flex items-center px-3 py-2 text-sm text-blue-200 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
                                                                 <i class="fas fa-list w-4 h-4 mr-3 text-blue-300"></i>
                                                                 <span>List All Terms</span> </a>
-                                                        <a href="#" class="flex items-center px-3 py-2 text-sm text-blue-200 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                                        <a asp-controller="Term" asp-action="Index" class="flex items-center px-3 py-2 text-sm text-blue-200 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
                                                                 <i class="fas fa-calendar-check w-4 h-4 mr-3 text-blue-300"></i>
                                                                 <span>Current Term</span> </a>
                                                 </div>
@@ -196,7 +198,8 @@
                                                                         <i class="fas fa-user-graduate mr-2 text-blue-700"></i>Student
                                                                 </a>
                                                         </div>
-                                                        <div class="px-4 py-2 bg-white border border-blue-200 rounded-lg"><span class="text-sm font-medium text-blue-800"><i class="fas fa-user-shield mr-2 text-blue-700"></i>Admin Panel</span>
+                                                        <div class="px-4 py-2 bg-white border border-blue-200 rounded-lg">
+                                                                <span class="text-sm font-medium text-blue-800"><i class="fas fa-user-shield mr-2 text-blue-700"></i>Admin Panel</span>
                                                         </div>
                                                 </div>
                                         </div>

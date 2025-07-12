@@ -63,7 +63,7 @@
                     </div>
                 </div>
                 <div>
-                    <form id="addStudentsForm" method="post" asp-controller="Sections" asp-action="AddStudentToSection">
+                    <form id="addStudentsForm" method="post" asp-controller="Sections" asp-action="SetStudents">
                         @Html.AntiForgeryToken()
                         <input type="hidden" name="sectionId" value="@sectionId">
                         <div id="selectedStudentsInputs"></div>

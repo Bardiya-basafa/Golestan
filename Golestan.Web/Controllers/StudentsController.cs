@@ -25,20 +25,20 @@ public class StudentsController : BaseController {
         _userService = userService;
     }
 
-    public IActionResult StudentDashboard()
+    public IActionResult Index()
     {
         return View();
     }
 
     [HttpGet]
-    public async Task<IActionResult> AddStudent(int facultyId)
+    public async Task<IActionResult> Add(int facultyId)
     {
         var faculty = await _facultyService.GetFacultyDtoById(facultyId);
 
         if (faculty == null){
             ShowMessage("Faculty not found", false);
 
-            return RedirectToAction("ManageStudents", "Admin", routeValues: new { facultyId = facultyId });
+            return RedirectToAction("Students", "Admin", routeValues: new { facultyId = facultyId });
         }
 
         var model = new AddStudentDto()
@@ -52,7 +52,7 @@ public class StudentsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> AddStudent(AddStudentDto dto)
+    public async Task<IActionResult> Add(AddStudentDto dto)
     {
         if (!ModelState.IsValid){
             return View(dto);
@@ -62,14 +62,14 @@ public class StudentsController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("ManageStudents", "Admin", routeValues: new { facultyId = dto.FacultyId });
+            return RedirectToAction("Students", "Admin", routeValues: new { facultyId = dto.FacultyId });
         }
 
         return View(dto);
     }
 
     [HttpGet]
-    public async Task<IActionResult> StudentSections(int studentId)
+    public async Task<IActionResult> Sections(int studentId)
     {
         var model = await _studentService.GetStudentSections(studentId);
 
@@ -77,7 +77,7 @@ public class StudentsController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> SeeAllStudentTerms(int studentId)
+    public async Task<IActionResult> Terms(int studentId)
     {
         var model = await _studentService.GetAllStudentTerms(studentId);
 
@@ -85,7 +85,7 @@ public class StudentsController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> SeeTermExamResults(int termId, int studentId)
+    public async Task<IActionResult> ExamResults(int termId, int studentId)
     {
         var model = await _studentService.GetAllTermExamResults(termId, studentId);
 
@@ -102,7 +102,7 @@ public class StudentsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> SubmitAnObjection(ObjectionDto dto)
+    public async Task<IActionResult> Objection(ObjectionDto dto)
     {
         var model = await _studentService.SubmitObjection(dto);
 

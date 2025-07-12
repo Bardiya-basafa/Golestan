@@ -29,7 +29,7 @@ public class InstructorsController : BaseController {
         _instructorService = instructorService;
     }
 
-    public IActionResult InstructorDashboard()
+    public IActionResult Index()
     {
         return View();
     }
@@ -74,7 +74,7 @@ public class InstructorsController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> AddInstructor(int id)
+    public async Task<IActionResult> Add()
     {
         var facultyOptions = await _facultyService.GetFacultiesMajorNamesOptions();
 
@@ -88,7 +88,7 @@ public class InstructorsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> AddInstructor(AddInstructorDto dto)
+    public async Task<IActionResult> Add(AddInstructorDto dto)
     {
         if (!ModelState.IsValid){
             var facultyOptions = await _facultyService.GetFacultiesMajorNamesOptions();
@@ -101,7 +101,7 @@ public class InstructorsController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("ManageInstructors", "Admin");
+            return RedirectToAction("Instructors", "Admin");
         }
 
 
@@ -115,17 +115,17 @@ public class InstructorsController : BaseController {
         var result = await _instructorService.RemoveCourseInstructor(instructorId, courseId);
         ShowMessage(result.Message, result.Succeeded);
 
-        return RedirectToAction("CourseActions", "Courses", routeValues: new { courseId = courseId });
+        return RedirectToAction("Index", "Courses", routeValues: new { courseId = courseId });
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> RemoveInstructor(int instructorId, int facultyId)
+    public async Task<IActionResult> Remove(int instructorId, int facultyId)
     {
         var result = await _instructorService.RemoveInstructor(instructorId);
         ShowMessage(result.Message, result.Succeeded);
 
-        return RedirectToAction("ManageInstructors", "Admin", routeValues: new { facultyId = facultyId });
+        return RedirectToAction("Instructors", "Admin", routeValues: new { facultyId = facultyId });
     }
 
 }

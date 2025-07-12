@@ -19,21 +19,13 @@ public class TermController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> TermManagement()
+    public async Task<IActionResult> Index()
     {
         var model = await _termService.GetCurrentTerm();
 
         return View(model);
     }
 
-    // display current term
-    [HttpGet]
-    public async Task<IActionResult> CurrentTerm()
-    {
-        var model = await _termService.GetCurrentTerm();
-
-        return View(model);
-    }
 
     // list all the terms 
     [HttpGet]
@@ -46,7 +38,7 @@ public class TermController : BaseController {
 
     // open new term
     [HttpGet]
-    public async Task<IActionResult> OpenNewTerm()
+    public async Task<IActionResult> Add()
     {
         // Make it view component 
         // var model = await _termService.GetLastPreviousTerm();
@@ -55,7 +47,7 @@ public class TermController : BaseController {
         if (model){
             ShowMessage("Currently a term already open", false);
 
-            return RedirectToAction("TermManagement");
+            return RedirectToAction("Index");
         }
 
         return View();
@@ -63,7 +55,7 @@ public class TermController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> OpenNewTerm(OpenNewTermDto dto)
+    public async Task<IActionResult> Add(OpenNewTermDto dto)
     {
         if (!ModelState.IsValid){
             return View(dto);
@@ -75,7 +67,7 @@ public class TermController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("CurrentTerm");
+            return RedirectToAction("Index");
         }
 
         return View(dto);
@@ -112,14 +104,14 @@ public class TermController : BaseController {
     // }
 
     [HttpGet]
-    public async Task<IActionResult> CloseTerm()
+    public async Task<IActionResult> Close()
     {
         var model = await _termService.GetCurrentTerm();
 
         if (model == null){
             ShowMessage("There is no term opened right now", false);
 
-            return RedirectToAction("OpenNewTerm");
+            return RedirectToAction("Add");
         }
 
         return View(model);
@@ -127,7 +119,7 @@ public class TermController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CloseTerm(string confirmation, string currentTerm)
+    public async Task<IActionResult> Close(string confirmation, string currentTerm)
     {
         var result = await _termService.CloseTerm(confirmation, currentTerm);
         ShowMessage(result.Message, result.Succeeded);

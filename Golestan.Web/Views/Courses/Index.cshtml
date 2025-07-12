@@ -19,7 +19,7 @@
                                                         <p class="text-slate-400 text-sm">Faculty: @Model.Faculty.MajorName | Units: @Model.Unit</p>
                                                 </div>
                                         </div>
-                                        <a asp-controller="Courses" asp-action="ApplyNewInstructorToCourse" asp-route-courseId="@Model.Id" asp-route-facultyId="@Model.Faculty.Id" class="group">
+                                        <a asp-controller="Courses" asp-action="SetInstructor" asp-route-courseId="@Model.Id" asp-route-facultyId="@Model.Faculty.Id" class="group">
                                                 <div class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 flex items-center shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                                                         <svg class="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -183,7 +183,7 @@
                 </div>
                 <!-- Back Navigation -->
                 <div class="text-center">
-                        <a asp-controller="Admin" asp-action="ManageCourses" asp-route-facultyId="@Model.Faculty.Id" class="inline-flex items-center text-slate-600 hover:text-slate-900 transition-colors group font-medium">
+                        <a asp-controller="Admin" asp-action="Courses" asp-route-facultyId="@Model.Faculty.Id" class="inline-flex items-center text-slate-600 hover:text-slate-900 transition-colors group font-medium">
                                 <svg class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                                 </svg>

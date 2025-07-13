@@ -132,6 +132,13 @@ public class CourseService(ICourseRepository courseRepository, ITermService term
         return await courseRepository.AddPrerequisiteToCourse(courseId, prerequisiteCourseId);
     }
 
+    public async Task<Result> RemovePrerequisiteFromCourse(int courseId, int prerequisiteCourseId)
+    {
+        var course = await courseRepository.GetCourseEntityById(courseId);
+
+        return await courseRepository.RemovePrerequisiteFromCourse(course, prerequisiteCourseId);
+    }
+
 
     private static Result ValidateCourse(Course course)
     {

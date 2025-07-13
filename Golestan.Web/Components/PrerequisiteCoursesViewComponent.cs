@@ -16,6 +16,7 @@ public class PrerequisiteCoursesViewComponent : ViewComponent {
     public async Task<IViewComponentResult> InvokeAsync(int courseId)
     {
         var model = await _courseService.GetPrerequisiteCourses(courseId);
+        ViewBag.CourseId = courseId;
 
         return View(model);
     }

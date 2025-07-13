@@ -16,6 +16,11 @@ using Shared.Helpers;
 
 public class CourseRepository(AppDbContext context) : ICourseRepository {
 
+    public async Task<Course> GetCourseEntityById(int courseId)
+    {
+        return await context.Courses.FindAsync(courseId) ?? throw new KeyNotFoundException($"Course with id {courseId} not found");
+    }
+
     public async Task<List<CourseDto>> GetFacultyCourses(int facultyId)
     {
         return await context.Courses
@@ -27,17 +32,6 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
                 CourseName = c.CourseName,
                 Unit = c.Unit,
                 Description = c.Description,
-
-                // Exam = new ExamDto()
-                // {
-                //     Id = c.ExamId,
-                //     Classroom = new ClassroomDto()
-                //     {
-                //         ClassroomNumber = c.Exam.Classroom.ClassNumber,
-                //     },
-                //     ExamDateTime = c.Exam.ExamDateTime,
-                //     TimeSlot = c.Exam.TimeSlot,
-                // },
             })
             .Take(10)
             .ToListAsync();
@@ -53,6 +47,7 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
                 Id = c.Id,
                 Unit = c.Unit,
                 CourseName = c.CourseName,
+                PrerequisiteCourses = c.PrerequisiteCourses,
                 Faculty = new FacultyDto()
                 {
                     Id = c.FacultyId,
@@ -135,11 +130,11 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
             })
             .FirstOrDefaultAsync() ?? throw new Exception("Course not found");
 
-        var prerequisiteCourseIds = new HashSet<int>(course.PrerequisiteCourseIds);
+        var prerequisiteCourseIds = course.PrerequisiteCourseIds;
 
         return await context.Courses
             .AsNoTracking()
-            .Where(c => c.Id != courseId && !prerequisiteCourseIds.Contains(c.Id))
+            .Where(c => c.Id != courseId && !prerequisiteCourseIds.Contains(c.Id) && !c.PrerequisiteCourses.Contains(courseId))
             .Select(c => new CourseDto()
             {
                 Id = c.Id,
@@ -295,6 +290,27 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
         await context.SaveChangesAsync();
 
         return new Result() { Message = "Exam successfully set", Succeeded = true };
+    }
+
+    public async Task<Result> RemovePrerequisiteFromCourse(Course course, int prerequisiteId)
+    {
+        var result = new Result();
+
+        if (!course.PrerequisiteCourses.Contains(prerequisiteId)){
+            result.Message = $"Course prerequisite with id {prerequisiteId} doesn't exist";
+
+            return result;
+        }
+
+        course.PrerequisiteCourses.Remove(prerequisiteId);
+        context.Courses.Update(course);
+        await context.SaveChangesAsync();
+
+        return new Result()
+        {
+            Message = "Prerequisite successfully removed",
+            Succeeded = true
+        };
     }
 
     public async Task<bool> IsExamExistInClass(DateTime examDate, TimeSlot timeSlot, int classroomId)

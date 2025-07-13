@@ -161,18 +161,29 @@ public class CoursesController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> AddPrerequisiteToCourse(int courseId)
+    public async Task<IActionResult> SetPrerequisite(int courseId)
     {
         var model = await _courseService.GetAvailableCoursesForPrerequisite(courseId);
+        var course = await _courseService.GetCourseDtoById(courseId);
+        ViewBag.courseid = course.Id;
+        ViewBag.coursename = course.CourseName;
 
         return View(model);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> AddPrerequisiteToCourse(int courseId, int prerequisiteCourseId)
+    public async Task<IActionResult> SetPrerequisite(int courseId, int prerequisiteCourseId)
     {
         var result = await _courseService.AddPrerequisiteToCourse(courseId, prerequisiteCourseId);
+        ShowMessage(result.Message, result.Succeeded);
+
+        return RedirectToAction("Index", routeValues: new { courseId = courseId });
+    }
+
+    public async Task<IActionResult> RemovePrerequisite(int courseId, int prerequisiteCourseId)
+    {
+        var result = await _courseService.RemovePrerequisiteFromCourse(courseId, prerequisiteCourseId);
         ShowMessage(result.Message, result.Succeeded);
 
         return RedirectToAction("Index", routeValues: new { courseId = courseId });

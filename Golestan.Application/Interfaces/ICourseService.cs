@@ -14,6 +14,7 @@ public interface ICourseService {
     Task<CourseDto> GetCourseDtoById(int courseId);
 
     Task<CourseInstructorDto> GetAvailableInsturctorsForCourse(int facultyId, int courseId);
+
     Task<List<CourseDto>> GetPrerequisiteCourses(int courseId);
 
     Task<Dictionary<int, string>?> GetCourseInstructors(int courseId);
@@ -35,5 +36,7 @@ public interface ICourseService {
     Task<Result> RemoveCourse(int courseId);
 
     Task<Result> AddPrerequisiteToCourse(int courseId, int prerequisiteCourseId);
+
+    Task<Result> RemovePrerequisiteFromCourse(int courseId, int prerequisiteCourseId);
 
 }

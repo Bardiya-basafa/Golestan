@@ -1,7 +1,8 @@
 a {
     text-decoration: none !important;
-    
+
 }
+
 a:hover {
     text-decoration: none !important;
     color: currentColor !important;
@@ -195,4 +196,27 @@ a:hover {
 button:focus, a:focus {
     outline: none;
     box-shadow: none;
+}
+
+.disabled-row {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.disabled-row .student-checkbox {
+    cursor: not-allowed;
+}
+
+.capacity-feedback {
+    animation: bounce 0.5s infinite alternate;
+}
+
+
+@keyframes bounce {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-5px);
+    }
 }

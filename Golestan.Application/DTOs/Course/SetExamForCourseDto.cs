@@ -3,17 +3,16 @@
 using System.ComponentModel.DataAnnotations;
 
 
-
 public class SetExamForCourseDto {
 
     [Required(ErrorMessage = "Course exam time is required")]
-    public DateTime ExamDateTime { get; set; }
+    public DateTime ExamDate { get; set; }
 
     [Required(ErrorMessage = "Course exam time is required")]
-    public int ExamTimeSlotId { get; set; }
+    public int TimeSlotId { get; set; }
 
     [Required]
-    public int ExamClassroomId { get; set; }
+    public int ClassroomId { get; set; }
 
     [Required]
     public int CourseId { get; set; }
@@ -23,5 +22,7 @@ public class SetExamForCourseDto {
     public DateTime ExamEndDate { get; set; }
 
     public string CourseName { get; set; }
+
+    public Dictionary<int, string>? Classrooms { get; set; }
 
 }

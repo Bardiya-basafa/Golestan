@@ -27,6 +27,7 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
                 CourseName = c.CourseName,
                 Unit = c.Unit,
                 Description = c.Description,
+
                 // Exam = new ExamDto()
                 // {
                 //     Id = c.ExamId,
@@ -64,6 +65,11 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
                         {
                             ClassroomNumber = s.Classroom.ClassNumber
                         },
+                        Instructor = new InstructorDto()
+                        {
+                            Id = s.InstructorId,
+                            FullName = s.Instructor.FullName,
+                        },
                         TimeSlot = s.TimeSlot,
                         DayOfWeek = s.DayOfWeek,
                     })
@@ -78,6 +84,20 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
             .FirstOrDefaultAsync() ?? throw new Exception("Course not found");
     }
 
+    public async Task<List<CourseDto>> GetPrerequisiteCourses(List<int> prerequisiteCourseIds)
+    {
+        return await context.Courses
+            .AsNoTracking()
+            .Where(c => prerequisiteCourseIds.Contains(c.Id))
+            .Select(c => new CourseDto()
+            {
+                Id = c.Id,
+                CourseName = c.CourseName,
+                Unit = c.Unit,
+            })
+            .ToListAsync();
+    }
+
     public async Task<Dictionary<int, string>?> GetCourseInstructors(int courseId)
     {
         return await context.Instructors
@@ -86,6 +106,22 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
             .Select(i => new { i.Id, i.FullName })
             .Distinct()
             .ToDictionaryAsync(c => c.Id, c => c.FullName);
+    }
+
+    public async Task<Dictionary<int, string>?> GetExamClassrooms(int courseId)
+    {
+        var facultyId = await context.Courses
+            .AsNoTracking()
+            .Where(c => c.Id == courseId)
+            .Select(c => c.FacultyId)
+            .FirstOrDefaultAsync();
+
+        return await context.Classrooms
+            .AsNoTracking()
+            .Where(c => c.FacultyId == facultyId)
+            .Select(c => new { c.Id, c.ClassNumber })
+            .Distinct()
+            .ToDictionaryAsync(c => c.Id, c => c.ClassNumber);
     }
 
     public async Task<List<CourseDto>> GetAvailableCoursesForPrerequisite(int courseId)

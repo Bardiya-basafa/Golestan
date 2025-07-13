@@ -74,8 +74,9 @@ public class CoursesController : BaseController {
         if (currentTerm == null){
             ShowMessage("Currently you have not any open term", false);
 
-            return RedirectToAction("Courses", "Admin");
+            return RedirectToAction("Index", "Courses", new { courseId = courseId });
         }
+
 
         var model = new SetExamForCourseDto()
         {
@@ -85,21 +86,38 @@ public class CoursesController : BaseController {
             ExamEndDate = currentTerm.ExamsEndTime,
         };
 
+        var classrooms = await _courseService.GetExamClassrooms(courseId);
+
+        if (classrooms == null){
+            ShowMessage("No class available for exam", false);
+
+            return RedirectToAction("Index", "Courses", new { courseId = courseId });
+        }
+
+        model.Classrooms = classrooms;
+
         return View(model);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> SetExamTime(SetExamForCourseDto dto)
+    public async Task<IActionResult> SetExamTime(SetExamForCourseDto model)
     {
-        var result = await _courseService.SetExam(dto);
+        var result = await _courseService.SetExam(model);
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("Index", routeValues: new { courseId = dto.CourseId });
+            return RedirectToAction("Index", routeValues: new { courseId = model.CourseId });
         }
 
-        return View(dto);
+
+        model.CourseName = _courseService.GetCourseDtoById(model.CourseId).GetAwaiter().GetResult().CourseName;
+        model.Classrooms = await _courseService.GetExamClassrooms(model.CourseId);
+        var currentTerm = await _termService.GetCurrentTerm();
+        model.ExamStartDate = currentTerm.ExamsStartTime;
+        model.ExamEndDate = currentTerm.ExamsEndTime;
+
+        return View(model);
     }
 
     [HttpPost]

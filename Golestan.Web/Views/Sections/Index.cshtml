@@ -1,182 +1,226 @@
 ﻿@model SectionDto
-@{
-    var facultyId = ViewBag.FacultyId;
-}
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <!-- Header Section -->
-    <div class="mb-12 animate-fade-in">
-        <div class="bg-white rounded-3xl shadow-xl border border-slate-200 p-8 mb-8">
-            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
-                <div class="mb-6 lg:mb-0">
-                    <div class="flex items-center mb-4">
-                        <div class="w-16 h-16 bg-gradient-to-r from-indigo-700 to-indigo-900 rounded-2xl flex items-center justify-center shadow-lg mr-6">
-                            <i class="fas fa-chalkboard-teacher text-white text-2xl"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-4xl font-bold text-slate-800 mb-2">Section Management</h2>
-                            <p class="text-slate-600 text-lg font-medium">@Model.Course.CourseName - Section @Model.Id</p>
+
+<div class="bg-gradient-to-br from-white via-blue-50 to-blue-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto space-y-8">
+        <!-- Header Section -->
+        <div class="mb-12 animate-fade-in">
+            <div class="bg-blue-600 rounded-lg shadow-sm border border-blue-700 p-8 mb-8 overflow-hidden">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                    <div class="mb-6 lg:mb-0">
+                        <div class="flex items-center mb-4">
+                            <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center shadow-md mr-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chalkboard-text text-white text-2xl">
+                                    <path d="M12 17h.01"/>
+                                    <path d="M17 17h.01"/>
+                                    <path d="M17 13h.01"/>
+                                    <path d="M17 9h.01"/>
+                                    <path d="M7 7h4"/>
+                                    <path d="M7 11h4"/>
+                                    <path d="M7 15h4"/>
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/>
+                                    <path d="M14 2v6h6"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="text-4xl font-bold text-white mb-2">Section Management</h2>
+                                <p class="text-blue-100 text-lg font-medium">@Model.Course.CourseName - Section @Model.Id</p>
+                                <p class="text-blue-200 text-sm">Faculty: @Model.Course.Faculty.MajorName | Units: @Model.Course.Unit</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="flex space-x-4">
-                    <a asp-controller="Admin" asp-action="Index" class="flex items-center px-8 py-4 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-all duration-200 shadow-lg border border-slate-200 font-semibold"> Back to Admin </a>
-                    <a asp-controller="Sections" asp-action="SetStudents" asp-route-sectionId="@Model.Id"  class="flex items-center px-8 py-4 bg-gradient-to-r from-indigo-700 to-indigo-900 text-white rounded-xl hover:from-indigo-800 hover:to-indigo-950 transition-all duration-200 shadow-xl font-semibold">
-                        <i class="fas fa-user-plus mr-3 text-xl"></i> Add Student to Section </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Section Details Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 animate-slide-up">
-        <div class="bg-white rounded-2xl p-8 shadow-xl border border-slate-200 card-hover">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">Course</p>
-                    <p class="text-2xl font-bold text-indigo-800">@Model.Course.CourseName</p>
-                    <p class="text-xs text-slate-500 mt-1">@Model.Course.Id</p>
-                </div>
-                <div class="w-14 h-14 bg-indigo-100 rounded-2xl flex items-center justify-center">
-                    <i class="fas fa-book text-indigo-600 text-2xl"></i>
+                    <div class="flex space-x-4">
+                        <a asp-controller="Sections" asp-action="SetStudents" asp-route-sectionId="@Model.Id" class="flex items-center px-8 py-4 bg-white hover:bg-blue-50 text-blue-700 rounded-xl transition-all duration-200 shadow-lg border border-blue-200 font-semibold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus mr-3 text-xl">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <line x1="19" x2="19" y1="8" y2="14"/>
+                                <line x1="22" x2="16" y1="11" y2="11"/>
+                            </svg>
+                            Add Student to Section
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-2xl p-8 shadow-xl border border-slate-200 card-hover">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">Instructor</p>
-                    <p class="text-2xl font-bold text-emerald-800">@Model.Instructor.FullName</p>
-                    <p class="text-xs text-slate-500 mt-1">Faculty Member</p>
+        <!-- Section Details Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 animate-slide-up">
+            <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-semibold text-blue-800 uppercase tracking-wider mb-2">Course</p>
+                        <p class="text-2xl font-bold text-slate-900">@Model.Course.CourseName</p>
+                        <p class="text-xs text-blue-600 mt-1">@Model.Course.Id</p>
+                    </div>
+                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book text-blue-600 text-2xl">
+                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+                        </svg>
+                    </div>
                 </div>
-                <div class="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center">
-                    <i class="fas fa-user-tie text-emerald-600 text-2xl"></i>
+            </div>
+            <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-semibold text-blue-800 uppercase tracking-wider mb-2">Instructor</p>
+                        <p class="text-2xl font-bold text-slate-900">@Model.Instructor.FullName</p>
+                        <p class="text-xs text-blue-600 mt-1">Faculty Member</p>
+                    </div>
+                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-tie text-blue-600 text-2xl">
+                            <path d="M12 2a5 5 0 1 0 5 5A5 5 0 0 0 12 2Zm0 10a7 7 0 0 0-7 7v2h14v-2a7 7 0 0 0-7-7Zm-2 3h4"/>
+                            <path d="M12 7v.01"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-semibold text-blue-800 uppercase tracking-wider mb-2">Schedule</p>
+                        <p class="text-2xl font-bold text-slate-900">@Model.DayOfWeek</p>
+                        <p class="text-xs text-blue-600 mt-1">@Model.TimeSlot.GetDescription()</p>
+                    </div>
+                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock text-blue-600 text-2xl">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-semibold text-blue-800 uppercase tracking-wider mb-2">Classroom</p>
+                        <p class="text-2xl font-bold text-slate-900">@Model.Classroom.ClassroomNumber</p>
+                        <p class="text-xs text-blue-600 mt-1">@Model.Students.Count/@Model.Classroom.Capacity students</p>
+                    </div>
+                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-door-open text-blue-600 text-2xl">
+                            <path d="M13 4h3a2 2 0 0 1 2 2v14"/>
+                            <path d="M2 20v-2a2 2 0 0 1 2-2h14"/>
+                            <path d="M18 20v-6a2 2 0 0 0-2-2H4V4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14Z"/>
+                            <path d="M14 12h.01"/>
+                        </svg>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-2xl p-8 shadow-xl border border-slate-200 card-hover">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">Schedule</p>
-                    <p class="text-2xl font-bold text-purple-800">@Model.DayOfWeek</p>
-                    <p class="text-xs text-slate-500 mt-1">@Model.TimeSlot.GetDescription()</p>
-                </div>
-                <div class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center">
-                    <i class="fas fa-clock text-purple-600 text-2xl"></i>
-                </div>
-            </div>
-        </div>
-        <div class="bg-white rounded-2xl p-8 shadow-xl border border-slate-200 card-hover">
-            <div class="flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-semibold text-slate-600 uppercase tracking-wider mb-2">Classroom</p>
-                    <p class="text-2xl font-bold text-amber-800">@Model.Classroom.ClassroomNumber</p>
-                    <p class="text-xs text-slate-500 mt-1">@Model.Students.Count/@Model.Classroom.Capacity students</p>
-                </div>
-                <div class="w-14 h-14 bg-amber-100 rounded-2xl flex items-center justify-center">
-                    <i class="fas fa-door-open text-amber-600 text-2xl"></i>
+        <!-- Students Table -->
+        <div class="bg-white rounded-lg shadow-sm border border-blue-200 overflow-hidden animate-fade-in">
+            <div class="bg-blue-600 p-8">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="text-3xl font-bold text-white mb-3">Enrolled Students</h3>
+                        <p class="text-blue-100 text-lg">Students registered for this section</p>
+                    </div>
+                    <div class="text-white/80">
+                        <span class="inline-flex items-center px-4 py-2 rounded-xl text-lg font-bold bg-white/20 backdrop-blur-sm">
+                            @Model.Students.Count Students
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Students Table -->
-    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden animate-fade-in">
-        <div class="bg-gradient-to-r from-indigo-700 to-indigo-900 p-8">
-            <div class="flex justify-between items-center">
-                <div>
-                    <h3 class="text-3xl font-bold text-white mb-3">Enrolled Students</h3>
-                    <p class="text-indigo-300 text-lg">Students registered for this section</p>
-                </div>
-                <div class="text-white/80">
-                    <span class="inline-flex items-center px-4 py-2 rounded-xl text-lg font-bold bg-white/20 backdrop-blur-sm">
-                        @Model.Students.Count Students
-                    </span>
-                </div>
-            </div>
-        </div>
-        <div class="p-8">
-            @if (Model.Students != null && Model.Students.Count > 0){
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead>
-                            <tr class="border-b-2 border-slate-200">
-                                <th class="text-left py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
-                                    Student Information
-                                </th>
-                                <th class="text-left py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
-                                    Student Number
-                                </th>
-                                <th class="text-left py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
-                                    Contact Information
-                                </th>
-                                <th class="text-center py-6 px-8 font-bold text-slate-700 uppercase tracking-wider">
-                                    Actions
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100">
-                            @foreach (var student in Model.Students){
-                                <tr class="table-row-hover transition-all duration-200">
-                                    <td class="py-8 px-8">
-                                        <div class="flex items-center">
-                                            <div>
-                                                <div class="text-lg font-bold text-slate-800 mb-1">@student.FullName</div>
-                                                <div class="text-sm text-slate-500">Student ID: @student.Id</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="py-8 px-8">
-                                        <div class="flex items-center">
-                                            <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mr-4">
-                                                <i class="fas fa-id-card text-amber-600 text-xl"></i>
-                                            </div>
-                                            <div>
-                                                <div class="text-lg font-bold text-slate-800">@student.StudentNumber</div>
-                                                <div class="text-xs text-slate-500">University Number</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="py-8 px-8">
-                                        <div class="flex items-center">
-                                            <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mr-4">
-                                                <i class="fas fa-envelope text-emerald-600 text-xl"></i>
-                                            </div>
-                                            <div>
-                                                <div class="text-sm font-bold text-slate-800">@student.Email</div>
-                                                <div class="text-xs text-slate-500">Email</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="py-8 px-8">
-                                        <div class="flex items-center justify-center space-x-3">
-                                            <a asp-controller="Students" asp-action="Details" asp-route-id="@student.Id" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-200 font-medium">View </a>
-                                            <button data-student-id="@student.Id" data-student-name="@student.FullName" class="remove-student px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-200 font-medium">Remove</button>
-                                        </div>
-                                    </td>
+            <div class="p-8">
+                @if (Model.Students != null && Model.Students.Count > 0){
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b-2 border-blue-200">
+                                    <th class="text-left py-6 px-8 font-bold text-blue-800 uppercase tracking-wider">
+                                        Student Information
+                                    </th>
+                                    <th class="text-left py-6 px-8 font-bold text-blue-800 uppercase tracking-wider">
+                                        Student Number
+                                    </th>
+                                    <th class="text-left py-6 px-8 font-bold text-blue-800 uppercase tracking-wider">
+                                        Contact Information
+                                    </th>
+                                    <th class="text-center py-6 px-8 font-bold text-blue-800 uppercase tracking-wider">
+                                        Actions
+                                    </th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            }
-            else{
-                <div class="text-center py-20">
-                    <div class="w-32 h-32 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-8">
-                        <i class="fas fa-users text-slate-400 text-4xl"></i>
+                            </thead>
+                            <tbody class="divide-y divide-blue-100">
+                                @foreach (var student in Model.Students){
+                                    <tr class="table-row-hover transition-all duration-200 hover:bg-blue-50">
+                                        <td class="py-8 px-8">
+                                            <div class="flex items-center">
+                                                <div>
+                                                    <div class="text-lg font-bold text-slate-900 mb-1">@student.FullName</div>
+                                                    <div class="text-sm text-blue-600">Student ID: @student.Id</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-8 px-8">
+                                            <div class="flex items-center">
+                                                <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-credit-card text-blue-600 text-xl">
+                                                        <rect width="20" height="14" x="2" y="5" rx="2"/>
+                                                        <line x1="2" x2="22" y1="10" y2="10"/>
+                                                    </svg>
+                                                </div>
+                                                <div>
+                                                    <div class="text-lg font-bold text-slate-900">@student.StudentNumber</div>
+                                                    <div class="text-xs text-blue-600">University Number</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-8 px-8">
+                                            <div class="flex items-center">
+                                                <div>
+                                                    <div class="text-sm font-bold text-slate-900">@student.Email</div>
+                                                    <div class="text-xs text-blue-600">Email</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-8 px-8">
+                                            <div class="flex items-center justify-center space-x-3">
+                                                <a asp-controller="Students" asp-action="Details" asp-route-id="@student.Id" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-200 font-medium">View </a>
+                                                <button data-student-id="@student.Id" data-student-name="@student.FullName" class="remove-student px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-200 font-medium">Remove</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
                     </div>
-                    <h3 class="text-2xl font-bold text-slate-700 mb-4">No Students Enrolled</h3>
-                    <p class="text-slate-500 text-lg mb-8 max-w-md mx-auto">This section doesn't have any enrolled students yet. Add students to get started.</p>
-                    <a asp-controller="Sections" asp-action="SetStudents" asp-route-sectionId="@Model.Id" asp-route-facultyId="@facultyId" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-700 to-indigo-900 text-white rounded-xl hover:from-indigo-800 hover:to-indigo-950 transition-all duration-200 shadow-xl font-semibold">
-                        <i class="fas fa-user-plus mr-3"></i> Add First Student </a>
-                </div>
-            }
+                }
+                else{
+                    <div class="text-center py-20">
+                        <div class="w-32 h-32 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users text-blue-600 text-4xl">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-blue-800 mb-4">No Students Enrolled</h3>
+                        <p class="text-blue-600 text-lg mb-8 max-w-md mx-auto">This section doesn't have any enrolled students yet. Add students to get started.</p>
+                        <a asp-controller="Sections" asp-action="SetStudents" asp-route-sectionId="@Model.Id" asp-route-facultyId="@Model.Course.Faculty.Id" class="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-all duration-200 shadow-xl font-semibold">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus mr-3">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <line x1="19" x2="19" y1="8" y2="14"/>
+                                <line x1="22" x2="16" y1="11" y2="11"/>
+                            </svg>
+                            Add First Student
+                        </a>
+                    </div>
+                }
+            </div>
         </div>
-    </div>
-    <!-- Back Navigation -->
-    <div class="mt-12 text-center">
-        <a asp-controller="Admin" asp-action="Sections" asp-route-facultyId="@facultyId" class="inline-flex items-center text-slate-600 hover:text-slate-800 transition-colors group font-semibold text-lg">
-            <svg class="w-6 h-6 mr-3 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-            </svg>
-            Back to Sections List </a>
+        <!-- Back Navigation -->
+        <div class="mt-12 text-center">
+            <a asp-controller="Admin" asp-action="Sections" asp-route-facultyId="@Model.Course.Faculty.Id" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors group font-semibold text-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left mr-3 group-hover:-translate-x-1 transition-transform">
+                    <path d="m12 19-7-7 7-7"/>
+                    <path d="M19 12H5"/>
+                </svg>
+                Back to Sections List
+            </a>
+        </div>
     </div>
 </div>
 
@@ -266,7 +310,7 @@
 
     // Function to handle student removal
     async function removeStudent(studentId) {
-        document.getElementById('studentId').value =studentId;
+        document.getElementById('studentId').value = studentId;
         document.getElementById('removeStudentForm').submit();
 
     }

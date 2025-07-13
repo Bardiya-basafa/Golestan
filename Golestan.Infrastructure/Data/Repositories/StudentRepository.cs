@@ -2,6 +2,7 @@
 
 using Application.DTOs.Classroom;
 using Application.DTOs.Course;
+using Application.DTOs.Exam;
 using Application.DTOs.ExamResult;
 using Application.DTOs.Instructor;
 using Application.DTOs.Objection;
@@ -52,6 +53,7 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
                 StudentNumber = s.StudentNumber,
                 Sections = s.Sections.Select(sec => new SectionDto()
                 {
+                    Id = sec.Id,
                     Classroom = new ClassroomDto()
                     {
                         ClassroomNumber = sec.Classroom.ClassNumber,
@@ -61,6 +63,11 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
                     Course = new CourseDto()
                     {
                         CourseName = sec.Course.CourseName,
+                        Unit = sec.Course.Unit,
+                        Exam = new ExamDto()
+                        {
+                            ExamDateTime = sec.Course.Exam.ExamDateTime
+                        }
                     },
                     Instructor = new InstructorDto()
                     {

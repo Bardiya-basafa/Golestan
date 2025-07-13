@@ -16,16 +16,39 @@ public class SectionsController : BaseController {
 
     private readonly IFacultyService _facultyService;
 
-    public SectionsController(ISectionService sectionService, ICourseService courseService, IFacultyService facultyService) : base(facultyService)
+    private readonly ITermService _termService;
+
+    public SectionsController(ISectionService sectionService, ICourseService courseService, IFacultyService facultyService, ITermService termService) : base(facultyService)
     {
         _sectionService = sectionService;
         _courseService = courseService;
         _facultyService = facultyService;
+        _termService = termService;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Index(int sectionId)
+    {
+        if (!ModelState.IsValid){
+            return RedirectToAction("AllSections", "Admin");
+        }
+
+        var model = await _sectionService.GetSectionById(sectionId);
+
+        return View(model);
     }
 
     [HttpGet]
     public async Task<IActionResult> Add(int facultyId, int classroomId, string classNumber = "", bool isFromClassroom = false)
     {
+        var currentTerm = await _termService.IsInsideAnyTermCurrently();
+
+        if (currentTerm){
+            ShowMessage("No term available right now add one first", false);
+
+            return RedirectToAction("Sections", "Admin", routeValues: new { facultyId = facultyId });
+        }
+
         var facultyDetails = await _facultyService.GetFacultyDtoById(facultyId);
 
         if (facultyDetails.CoursesCount == 0 || facultyDetails.InstructorsCount == 0 || facultyDetails.ClassesCount == 0){
@@ -72,17 +95,6 @@ public class SectionsController : BaseController {
         return View(dto);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> Index(int sectionId)
-    {
-        if (!ModelState.IsValid){
-            return RedirectToAction("AllSections", "Admin");
-        }
-
-        var model = await _sectionService.GetSectionById(sectionId);
-
-        return View(model);
-    }
 
     [HttpGet]
     public async Task<IActionResult> SetStudents(int sectionId)
@@ -106,7 +118,6 @@ public class SectionsController : BaseController {
     {
         var result = await _sectionService.AddStudentsToSection(model.StudentIds, model.SectionId);
         ShowMessage(result.Message, result.Succeeded);
-        
 
 
         return RedirectToAction("Index", routeValues: new { sectionId = model.SectionId });

@@ -13,7 +13,11 @@ public interface ICourseRepository {
 
     Task<CourseDto> GetCourseDtoById(int courseId);
 
+    Task<List<CourseDto>> GetPrerequisiteCourses(List<int> prerequisiteCourseIds);
+
     Task<Dictionary<int, string>?> GetCourseInstructors(int courseId);
+
+    Task<Dictionary<int, string>?> GetExamClassrooms(int courseId);
 
     Task<List<CourseDto>> GetAvailableCoursesForPrerequisite(int courseId);
 

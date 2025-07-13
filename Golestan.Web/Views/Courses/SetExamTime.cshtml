@@ -1,101 +1,127 @@
 ﻿@model SetExamForCourseDto
 
 @{
-        ViewData["Title"] = "Add New Course";
+  ViewData["Title"] = "Add New Course";
 }
 
-<body class="bg-gray-50 min-h-screen py-8">
-        <div class="max-w-2xl mx-auto px-4">
-                <!-- Header -->
-                <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
-                        <h1 class="text-2xl font-semibold text-gray-900 mb-2">Set Exam Time</h1>
-                        <div class="text-sm text-gray-600">
-                                <p><span class="font-medium">Course:</span> Advanced Mathematics</p>
-                                <p><span class="font-medium">Exam Period:</span> Dec 15, 2024 - Dec 22, 2024</p>
-                        </div>
-                </div>
-
-                <!-- Form -->
-                <div class="bg-white rounded-lg shadow-sm p-6">
-                        <form method="post" action="/Exam/SetExamTime" class="space-y-6">
-                                <!-- Hidden Course ID -->
-                                <input type="hidden" name="CourseId" value="1" />
-
-                                <!-- Exam Date and Time -->
-                                <div>
-                                        <label for="ExamDateTime" class="block text-sm font-medium text-gray-700 mb-2">
-                                                Exam Date & Time <span class="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                                        type="datetime-local"
-                                                        id="ExamDateTime"
-                                                        name="ExamDateTime"
-                                                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                                        required
-                                        />
-                                        <span class="text-red-500 text-sm hidden" data-valmsg-for="ExamDateTime">Course exam time is required</span>
-                                </div>
-
-                                <!-- Time Slot -->
-                                <div>
-                                        <label for="ExamTimeSlotId" class="block text-sm font-medium text-gray-700 mb-2">
-                                                Time Slot <span class="text-red-500">*</span>
-                                        </label>
-                                        <select
-                                                        id="ExamTimeSlotId"
-                                                        name="ExamTimeSlotId"
-                                                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                                        required
-                                        >
-                                                <option value="">Select time slot</option>
-                                                <option value="1">Morning (9:00 AM - 12:00 PM)</option>
-                                                <option value="2">Afternoon (1:00 PM - 4:00 PM)</option>
-                                                <option value="3">Evening (5:00 PM - 8:00 PM)</option>
-                                        </select>
-                                        <span class="text-red-500 text-sm hidden" data-valmsg-for="ExamTimeSlotId">Course exam time is required</span>
-                                </div>
-
-                                <!-- Classroom -->
-                                <div>
-                                        <label for="ExamClassroomId" class="block text-sm font-medium text-gray-700 mb-2">
-                                                Classroom <span class="text-red-500">*</span>
-                                        </label>
-                                        <select
-                                                        id="ExamClassroomId"
-                                                        name="ExamClassroomId"
-                                                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                                                        required
-                                        >
-                                                <option value="">Select classroom</option>
-                                                <option value="1">Room A101 (Capacity: 50)</option>
-                                                <option value="2">Room B205 (Capacity: 30)</option>
-                                                <option value="3">Room C301 (Capacity: 40)</option>
-                                                <option value="4">Auditorium (Capacity: 100)</option>
-                                        </select>
-                                        <span class="text-red-500 text-sm hidden" data-valmsg-for="ExamClassroomId">Classroom is required</span>
-                                </div>
-
-                                <!-- Action Buttons -->
-                                <div class="flex gap-3 pt-4">
-                                        <button
-                                                        type="submit"
-                                                        class="px-6 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors"
-                                        >
-                                                Set Exam Time
-                                        </button>
-                                        <a
-                                                        href="/Course/Details/1"
-                                                        class="px-6 py-2 bg-gray-100 text-gray-700 font-medium rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
-                                        >
-                                                Cancel
-                                        </a>
-                                </div>
-                        </form>
-                </div>
-
-                <!-- Additional Info -->
-                <div class="mt-4 text-xs text-gray-500 text-center">
-                        <p>* Required fields must be completed</p>
-                </div>
+<div class="bg-gradient-to-br from-white via-blue-50 to-blue-100 min-h-screen">
+  <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl w-full space-y-8">
+      <!-- Header -->
+      <div class="bg-blue-600 rounded-lg shadow-sm border border-blue-700 mb-8 overflow-hidden">
+        <div class="px-8 py-6 border-b border-blue-500">
+          <div class="flex justify-between items-center">
+            <div>
+              <p class="text-3xl font-bold text-white mb-2">Set Exam Time for Course</p>
+              <p class="text-blue-100 text-lg">Configure exam details for @Model.CourseName</p>
+            </div>
+            <div class="w-16 h-16 bg-white rounded-lg flex items-center justify-center shadow-md">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-check h-8 w-8 text-blue-600">
+                <path d="M8 2v4"/>
+                <path d="M16 2v4"/>
+                <rect width="18" height="18" x="3" y="4" rx="2"/>
+                <path d="M3 10h18"/>
+                <path d="m9 16 2 2 4-4"/>
+              </svg>
+            </div>
+          </div>
         </div>
-</body>
+      </div>
+      <!-- Form Card -->
+      <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+        <div class="px-8 py-6 bg-blue-600">
+          <h3 class="text-xl font-semibold text-white">Exam Information</h3>
+          <p class="text-blue-100 mt-1">Please fill in all required fields for the exam schedule</p>
+        </div>
+        <form class="px-8 py-8 space-y-6" asp-controller="Courses" asp-action="SetExamTime" method="post">
+          @Html.AntiForgeryToken()
+          <input type="hidden" name="courseId" value="@Model.CourseId">
+         
+          <!-- Exam Details Section -->
+          <div class="space-y-6">
+            <div class="border-l-4 border-blue-500 pl-4">
+              <div class="text-sm text-gray-600">
+                <p class="font-bold text-gray-800">
+                  <span class="font-bold">Exam Period:</span> @Model.ExamStartDate.ToString("MM/dd/yyyy") - @Model.ExamEndDate.ToString("MM/dd/yyyy")
+                </p>
+              </div>
+              <h4 class="text-lg font-semibold text-gray-900 mb-4">Exam Schedule</h4>
+            </div>
+            <!-- Exam Date -->
+            <div class="group">
+              <label asp-for="ExamDate" class="block text-sm font-medium text-gray-700 mb-2"> Exam Date
+                <span class="text-red-500">*</span> </label>
+              <div class="relative">
+                <input type="date" asp-for="ExamDate" value="@DateTime.Now.ToString("yyyy-MM-dd")" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 group-hover:border-gray-400" required>
+                <span asp-validation-for="ExamDate" class="error-message"></span>
+              </div>
+            </div>
+            <!-- Time Slot -->
+            <div class="group">
+              <label asp-for="TimeSlotId" class="block text-sm font-medium text-gray-700 mb-2"> Time Slot
+                <span class="text-red-500">*</span> </label>
+              <div class="relative">
+                <select asp-for="TimeSlotId" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 group-hover:border-gray-400 appearance-none bg-white" required>
+                  <option value="">Select a time slot</option>
+                  <option value="1">7:30 - 9:00</option>
+                  <option value="2">9:00 - 10:30</option>
+                  <option value="3">10:30 - 12:00</option>
+                  <option value="4">13:00 - 14:30</option>
+                  <option value="5">14:30 - 16:00</option>
+                  <option value="6">16:00 - 17:30</option>
+                </select> <span asp-validation-for="TimeSlotId" class="error-message"></span>
+              </div>
+            </div>
+            <!-- Classroom -->
+            <div class="group">
+              <label asp-for="ClassroomId" class="block text-sm font-medium text-gray-700 mb-2"> Classroom
+                <span class="text-red-500">*</span> </label>
+              <div class="relative">
+                <select asp-for="ClassroomId" class="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 group-hover:border-gray-400 appearance-none bg-white" required>
+                  <option value="">Select a classroom</option>
+
+                  @foreach (var classroom in Model.Classrooms){
+                    <option value="@classroom.Key">Class number @classroom.Value (Id: @classroom.Key)</option>
+                  } </select> <span asp-validation-for="ClassroomId" class="error-message"></span>
+              </div>
+            </div>
+          </div>
+          <!-- Action Buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 pt-8 border-t border-gray-200">
+            <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+              <span class="flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-plus w-5 h-5 mr-2">
+                  <path d="M21 12v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                  <line x1="16" x2="16" y1="2" y2="6"/>
+                  <line x1="8" x2="8" y1="2" y2="6"/>
+                  <line x1="3" x2="21" y1="10" y2="10"/>
+                  <line x1="19" x2="19" y1="14" y2="20"/>
+                  <line x1="22" x2="16" y1="17" y2="17"/>
+                </svg>
+                Set Exam Time
+              </span>
+            </button>
+            <button type="reset" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 text-center focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+              <span class="flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw w-5 h-5 mr-2">
+                  <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.76 2.75L3 8"/>
+                  <path d="M3 3v5h5"/>
+                </svg>
+                Reset Form
+              </span>
+            </button>
+          </div>
+          <!-- Back Link -->
+          <div class="text-center pt-4">
+            <a href="javascript:history.back()" class="inline-flex items-center text-sm text-blue-600 hover:text-blue-500 transition-colors group">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left w-4 h-4 mr-1 group-hover:-translate-x-1 transition-transform">
+                <path d="m12 19-7-7 7-7"/>
+                <path d="M19 12H5"/>
+              </svg>
+              Back to Course Details </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

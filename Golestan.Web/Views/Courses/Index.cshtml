@@ -19,6 +19,14 @@
                                                         <p class="text-blue-200 text-sm">Faculty: @Model.Faculty.MajorName | Units: @Model.Unit</p>
                                                 </div>
                                         </div>
+                                        <a asp-controller="Courses" asp-action="SetExamTime" asp-route-courseId="@Model.Id" class="group">
+                                                <div class="bg-white hover:bg-blue-50 text-blue-700 px-6 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center shadow-md hover:shadow-lg">
+                                                        <svg class="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                                        </svg>
+                                                        Set Exam Time
+                                                </div>
+                                        </a>
                                         <a asp-controller="Courses" asp-action="SetInstructor" asp-route-courseId="@Model.Id" asp-route-facultyId="@Model.Faculty.Id" class="group">
                                                 <div class="bg-white hover:bg-blue-50 text-blue-700 px-6 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center shadow-md hover:shadow-lg">
                                                         <svg class="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -85,7 +93,7 @@
                                 </div>
                         </div>
                 </div>
-                <!-- Main Actions Grid -->
+                <!-- Main Actions Grid (Top Row) -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <!-- Instructor Assignment Section -->
                         <div class="bg-white rounded-lg shadow-sm border border-blue-200 overflow-hidden">
@@ -102,6 +110,11 @@
                                         <!-- Current Instructors -->
                                         <div class="space-y-4">
                                                 <h4 class="text-lg font-semibold text-slate-900 border-l-4 border-blue-500 pl-4">Current Instructors</h4>
+                                                <a asp-controller="Courses" asp-action="SetInstructor" asp-route-facultyId="@Model.Faculty.Id" asp-route-courseId="@Model.Id" class="group inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg mb-4">
+                                                        <svg class="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                                        </svg>
+                                                        Add New Instructor </a>
                                                 @if (Model.Instructors.Any()){
                                                         <div class="space-y-3">
                                                                 @foreach (var instructor in Model.Instructors){
@@ -136,7 +149,60 @@
                                         </div>
                                 </div>
                         </div>
-                        <!-- Section Management Section -->
+                        <!-- Prerequisite Courses Section -->
+                        <div class="bg-white rounded-lg shadow-sm border border-blue-200 overflow-hidden">
+                                <div class="bg-blue-600 px-8 py-6">
+                                        <h3 class="text-xl font-semibold text-white flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link mr-3">
+                                                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07L9.5 9.5"/>
+                                                        <path d="M5 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07L14.5 14.5"/>
+                                                </svg>
+                                                Prerequisite Courses
+                                        </h3>
+                                        <p class="text-blue-100 mt-1">Manage required courses for this course</p>
+                                </div>
+                                <div class="p-8 space-y-6">
+                                        <div class="space-y-4">
+                                                <h4 class="text-lg font-semibold text-slate-900 border-l-4 border-blue-500 pl-4">Current Prerequisites</h4>
+                                                <a asp-controller="Courses" asp-action="AddPrerequisiteToCourse" asp-route-courseId="@Model.Id" class="group inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg mb-4">
+                                                        <svg class="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                                                        </svg>
+                                                        Add Prerequisite </a>
+                                                @if (Model.PrerequisiteCourses.Any()){
+                                                        @await Component.InvokeAsync("PrerequisiteCourses", Model.Id)
+                                                }
+                                                else{
+                                                        <div class="text-center py-8">
+                                                                <div class="mx-auto h-16 w-16 bg-blue-50 rounded-full flex items-center justify-center mb-4">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-link-2 text-blue-400">
+                                                                                <path d="M9 17.01V17"/>
+                                                                                <path d="M15 17.01V17"/>
+                                                                                <path d="M12 17.01V17"/>
+                                                                                <path d="M12 13.01V13"/>
+                                                                                <path d="M12 9.01V9"/>
+                                                                                <path d="M12 5.01V5"/>
+                                                                                <path d="M17 17.01V17"/>
+                                                                                <path d="M17 13.01V13"/>
+                                                                                <path d="M17 9.01V9"/>
+                                                                                <path d="M17 5.01V5"/>
+                                                                                <path d="M7 17.01V17"/>
+                                                                                <path d="M7 13.01V13"/>
+                                                                                <path d="M7 9.01V9"/>
+                                                                                <path d="M7 5.01V5"/>
+                                                                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/>
+                                                                                <path d="M14 2v6h6"/>
+                                                                        </svg>
+                                                                </div>
+                                                                <p class="text-blue-500">No prerequisite courses assigned yet</p>
+                                                        </div>
+                                                }
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+                <!-- Section Management Section (Bottom Row) -->
+                <div class="mt-8">
                         <div class="bg-white rounded-lg shadow-sm border border-blue-200 overflow-hidden">
                                 <div class="bg-blue-600 px-8 py-6">
                                         <h3 class="text-xl font-semibold text-white flex items-center">
@@ -150,7 +216,7 @@
                                 <div class="p-8 space-y-6">
                                         <div class="space-y-4">
                                                 <h4 class="text-lg font-semibold text-slate-900 border-l-4 border-blue-500 pl-4">Current Sections</h4>
-                                                <a asp-controller="Sections" asp-action="AddSection" asp-route-courseId="@Model.Id" class="group inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg mb-4">
+                                                <a asp-controller="Sections" asp-action="Add" asp-route-facultyId="@Model.Faculty.Id" class="group inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all duration-200 shadow-md hover:shadow-lg mb-4">
                                                         <svg class="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                                         </svg>

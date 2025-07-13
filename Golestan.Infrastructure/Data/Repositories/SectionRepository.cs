@@ -64,6 +64,10 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
                 {
                     Id = s.CourseId,
                     CourseName = s.Course.CourseName,
+                    Faculty = new FacultyDto()
+                    {
+                        Id = s.Course.FacultyId,
+                    }
                 },
                 TimeSlot = s.TimeSlot,
                 Instructor = new InstructorDto()
@@ -81,6 +85,7 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
                     Id = st.Id,
                     FullName = st.FullName,
                     StudentNumber = st.StudentNumber,
+                    Email = st.AppUser.Email,
                 }).ToList(),
 
                 DayOfWeek = s.DayOfWeek,
@@ -108,7 +113,7 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
             {
                 Id = s.Id,
                 FullName = s.FullName,
-                Email = s.AppUser.Email,
+                Email = s.AppUser.UserName,
                 StudentNumber = s.StudentNumber,
             })
             .ToListAsync();

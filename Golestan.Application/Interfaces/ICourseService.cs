@@ -14,12 +14,15 @@ public interface ICourseService {
     Task<CourseDto> GetCourseDtoById(int courseId);
 
     Task<CourseInstructorDto> GetAvailableInsturctorsForCourse(int facultyId, int courseId);
+    Task<List<CourseDto>> GetPrerequisiteCourses(int courseId);
 
     Task<Dictionary<int, string>?> GetCourseInstructors(int courseId);
 
     Task<List<CourseDto>> GetAvailableCoursesForPrerequisite(int courseId);
 
     Task<List<Course>> GetAvailableCoursesForStudent(int studentId);
+
+    Task<Dictionary<int, string>?> GetExamClassrooms(int courseId);
 
     Task<ExamDto?> GetCourseExam(int courseId);
 

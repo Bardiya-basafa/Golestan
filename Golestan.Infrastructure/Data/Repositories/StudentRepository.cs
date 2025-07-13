@@ -17,6 +17,20 @@ using Shared.Helpers;
 
 public class StudentRepository(AppDbContext context) : IStudentRepository {
 
+    public async Task<StudentDto> GetStudentUserApp(string studentId)
+    {
+        return await context.Users
+            .AsNoTracking()
+            .Where(u => u.Id == studentId)
+            .Select(u => new StudentDto()
+            {
+                Id = u.StudentId,
+                AppUser = u,
+                FullName = u.StudentProfile.FullName,
+            })
+            .FirstOrDefaultAsync() ?? throw new Exception($"student with id {studentId} not found");
+    }
+
     public async Task<Student> GetStudentEntityById(int studentId)
     {
         return await context.Students
@@ -86,6 +100,10 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
                 Id = t.Id,
                 Year = t.Year,
                 TermIdentifier = t.TermIdentifier,
+                SelectionEndTime = t.SectionSelectionEndTime,
+                SelectionStartTime = t.SectionSelectionStartTime,
+                ExamsEndTime = t.ExamsEndTime,
+                ExamsStartTime = t.ExamsStartTime,
             })
             .ToListAsync();
     }

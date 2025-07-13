@@ -19,9 +19,9 @@ public class CourseService(ICourseRepository courseRepository) : ICourseService 
         return await courseRepository.GetFacultyCourses(facultyId);
     }
 
-    public async Task<CourseDto> GetCourseById(int courseId)
+    public async Task<CourseDto> GetCourseDtoById(int courseId)
     {
-        return await courseRepository.GetCourseById(courseId);
+        return await courseRepository.GetCourseDtoById(courseId);
     }
 
     public async Task<CourseInstructorDto> GetAvailableInsturctorsForCourse(int facultyId, int courseId)

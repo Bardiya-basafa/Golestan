@@ -78,7 +78,7 @@
                 <script>
                         setTimeout(function () {
                                 document.getElementById('notification').style.display = 'none';
-                        }, 5000); // Hide after 3 seconds
+                        }, 5000);
                 </script>
         }
 
@@ -116,15 +116,15 @@
                                                 <i class="fas fa-chalkboard w-5 h-5 mr-3 text-blue-300"></i>
                                                 <span>Class Management</span> </a>
                                         <!-- Instructor Management -->
-                                        <a asp-controller="Admin" asp-action="Instructors" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                        <a asp-controller="Admin" asp-action="AllInstructors" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
                                                 <i class="fas fa-chalkboard-teacher w-5 h-5 mr-3 text-blue-300"></i>
                                                 <span>Instructor Management</span> </a>
                                         <!-- Student Management -->
-                                        <a asp-controller="Admin" asp-action="Students" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                        <a asp-controller="Admin" asp-action="AllStudents" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
                                                 <i class="fas fa-user-graduate w-5 h-5 mr-3 text-blue-300"></i>
                                                 <span>Student Management</span> </a>
                                         <!-- Section Management -->
-                                        <a asp-controller="Admin" asp-action="Sections" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                        <a asp-controller="Admin" asp-action="AllSections" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
                                                 <i class="fas fa-tasks w-5 h-5 mr-3 text-blue-300"></i>
                                                 <span>Section Management</span> </a>
                                         <!-- Faculty Management -->
@@ -190,14 +190,15 @@
                                                         </div>
                                                 </div>
                                                 <div class="flex items-center space-x-4">
-                                                        <div class="flex space-x-2">
-                                                                <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-blue-700 hover:text-slate-900 transition-colors">
-                                                                        <i class="fas fa-chalkboard-teacher mr-2 text-blue-700"></i>Professor
-                                                                </a>
-                                                                <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-blue-700 hover:text-slate-900 transition-colors">
-                                                                        <i class="fas fa-user-graduate mr-2 text-blue-700"></i>Student
-                                                                </a>
-                                                        </div>
+                                                        @* add athuentication *@
+                                                        @* <div class="flex space-x-2"> *@
+                                                        @*         <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-blue-700 hover:text-slate-900 transition-colors"> *@
+                                                        @*                 <i class="fas fa-chalkboard-teacher mr-2 text-blue-700"></i>Professor *@
+                                                        @*         </a> *@
+                                                        @*         <a href="#" class="px-4 py-2 rounded-lg text-sm font-medium text-blue-700 hover:text-slate-900 transition-colors"> *@
+                                                        @*                 <i class="fas fa-user-graduate mr-2 text-blue-700"></i>Student *@
+                                                        @*         </a> *@
+                                                        @* </div> *@
                                                         <div class="px-4 py-2 bg-white border border-blue-200 rounded-lg">
                                                                 <span class="text-sm font-medium text-blue-800"><i class="fas fa-user-shield mr-2 text-blue-700"></i>Admin Panel</span>
                                                         </div>

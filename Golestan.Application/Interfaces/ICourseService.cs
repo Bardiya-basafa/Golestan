@@ -11,7 +11,7 @@ public interface ICourseService {
 
     Task<List<CourseDto>> GetFacultyCourses(int facultyId);
 
-    Task<CourseDto> GetCourseById(int courseId);
+    Task<CourseDto> GetCourseDtoById(int courseId);
 
     Task<CourseInstructorDto> GetAvailableInsturctorsForCourse(int facultyId, int courseId);
 

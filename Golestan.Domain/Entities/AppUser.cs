@@ -22,4 +22,6 @@ public class AppUser : IdentityUser {
 
     public Student StudentProfile { get; set; }
 
+    public ICollection<AppMessage> AppMessages { get; set; }
+
 }

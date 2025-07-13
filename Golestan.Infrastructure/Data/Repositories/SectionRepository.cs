@@ -29,7 +29,7 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
     {
         return await context.Sections
             .AsNoTracking()
-            .Where(s => s.Id == facultyId)
+            .Where(s => s.Course.FacultyId == facultyId)
             .Select(s => new SectionDto()
             {
                 Id = s.Id,
@@ -62,6 +62,7 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
                 Id = s.Id,
                 Course = new CourseDto()
                 {
+                    Id = s.CourseId,
                     CourseName = s.Course.CourseName,
                 },
                 TimeSlot = s.TimeSlot,
@@ -75,6 +76,12 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
                     ClassroomNumber = s.Classroom.ClassNumber,
                     Capacity = s.Classroom.Capacity,
                 },
+                Students = s.Students.Select(st => new StudentDto()
+                {
+                    Id = st.Id,
+                    FullName = st.FullName,
+                    StudentNumber = st.StudentNumber,
+                }).ToList(),
 
                 DayOfWeek = s.DayOfWeek,
             })
@@ -111,9 +118,11 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
     {
         return await context.Students
             .AsNoTracking()
-            .Where(s => s.FacultyId == facultyId && s.Sections.All(s => s.Id != section.Id))
-            .Where(s => s.Sections.All(section1 => section1.DayOfWeek != section.DayOfWeek && section1.TimeSlot != section.TimeSlot))
-            .Where(s => s.PassedCourses.Select(p => p.Id).All(prerequisiteCourses.Contains))
+            .Where(s => s.FacultyId == facultyId
+                        && !s.Sections.Any(sec => sec.Id == section.Id)// Changed to Any for clarity
+                        && !s.Sections.Any(section1 => section1.DayOfWeek == section.DayOfWeek && section1.TimeSlot == section.TimeSlot)// Changed to Any for clarity
+                        && s.PassedCourses.All(p => prerequisiteCourses.Contains(p.Id))// Ensure this is structured correctly
+            )
             .Select(s => new StudentDto()
             {
                 Id = s.Id,
@@ -133,10 +142,9 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
     {
         return await context.Sections
             .AsNoTracking()
+            .Include(s => s.Course.Exam)
             .Where(s => s.Id == sectionId)
             .Select(s => s.Course)
-            .Include(c => c.PrerequisiteCourses)
-            .Include(c => c.Exam)
             .FirstOrDefaultAsync() ?? throw new Exception($"course not found with section id: {sectionId}");
     }
 
@@ -158,10 +166,12 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
         var currentStudentCount = section.Students.Count;
 
         var students = await context.Students
-            .Where(s => studentIds.Contains(s.Id) && s.Sections.All(section1 => section1.Id != sectionId))
-            .Where(s => s.PassedCourses.Select(p => p.Id).All(prerequisitesCourses.Contains))
+            .Where(s => studentIds.Contains(s.Id)
+                        && s.Sections.All(section1 => section1.Id != sectionId)
+                        && s.PassedCourses.All(p => prerequisitesCourses.Contains(p.Id)))// Use inline expression
             .Include(s => s.ExamResults)
-            .Take(capacity - currentStudentCount).ToListAsync();
+            .Take(capacity - currentStudentCount)
+            .ToListAsync();
 
         sectionStudents.AddRange(students);
         section.Students = sectionStudents;
@@ -172,7 +182,7 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
         {
             CourseId = course.Id,
             SectionId = sectionId,
-            ExamDate = course.Exam.ExamDateTime,
+            ExamDate = course.Exam == null ? default(DateTime) : course.Exam.ExamDateTime,
             InstructorId = section.InstructorId,
             TermId = term.Id,
         };
@@ -208,7 +218,7 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
 
     public async Task<Result> AddSection(Section section)
     {
-        await context.Sections.AddAsync(section);
+        context.Sections.Add(section);
         await context.SaveChangesAsync();
 
         return new Result()

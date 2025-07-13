@@ -11,7 +11,7 @@ public interface ICourseRepository {
 
     Task<List<CourseDto>> GetFacultyCourses(int facultyId);
 
-    Task<CourseDto> GetCourseById(int courseId);
+    Task<CourseDto> GetCourseDtoById(int courseId);
 
     Task<Dictionary<int, string>?> GetCourseInstructors(int courseId);
 

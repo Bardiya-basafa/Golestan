@@ -15,44 +15,32 @@ public class StudentService(IStudentRepository studentRepository, UserManager<Ap
 
     private readonly UserManager<AppUser> _userManager = userManager;
 
+    public async Task<StudentDto> GetStudentUserApp(string studentId)
+    {
+        return await studentRepository.GetStudentUserApp(studentId);
+    }
+
     public async Task<List<StudentDto>> GetFacultyStudents(int facultyId)
     {
-        try{
-            return await studentRepository.GetFacultyStudents(facultyId);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await studentRepository.GetFacultyStudents(facultyId);
     }
 
     public async Task<StudentDto> GetStudentSections(int studentId)
     {
-        try{
-            return await studentRepository.GetStudentDtoById(studentId);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await studentRepository.GetStudentDtoById(studentId);
     }
 
     public async Task<List<TermDto>> GetAllStudentTerms(int studentId)
     {
-        try{
-            return await studentRepository.GetAllStudentTerms(studentId);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await studentRepository.GetAllStudentTerms(studentId);
     }
 
-    public async Task<List<ExamResultDto>> GetAllTermExamResults(int termId, int studentId)
+    public async Task<StudentDto> GetAllTermExamResults(int termId, int studentId)
     {
-        try{
-            return await studentRepository.GetAllTermExamResults(studentId, termId);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        var student = await studentRepository.GetStudentDtoById(studentId);
+        student.ExamResults = await studentRepository.GetAllTermExamResults(studentId, termId);
+
+        return student;
     }
 
     public async Task<List<ExamResultDto>?> GetActiveExamResults(int studentId)

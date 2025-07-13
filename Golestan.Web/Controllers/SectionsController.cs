@@ -85,10 +85,10 @@ public class SectionsController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> SetStudents(int sectionId, int facultyId)
+    public async Task<IActionResult> SetStudents(int sectionId)
     {
         var model = new AddStudentToSectionDto();
-        model.Students = await _sectionService.GetAvailableStudents(sectionId, facultyId);
+        model.Students = await _sectionService.GetAvailableStudents(sectionId);
         var sectionDetails = await _sectionService.GetSectionById(sectionId);
         ViewBag.sectionId = sectionId;
         ViewBag.CourseName = sectionDetails.Course.CourseName;
@@ -106,6 +106,7 @@ public class SectionsController : BaseController {
     {
         var result = await _sectionService.AddStudentsToSection(model.StudentIds, model.SectionId);
         ShowMessage(result.Message, result.Succeeded);
+        
 
 
         return RedirectToAction("Index", routeValues: new { sectionId = model.SectionId });

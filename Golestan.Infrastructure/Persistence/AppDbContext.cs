@@ -27,6 +27,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
 
     public DbSet<Term> Terms { get; set; }
 
+    // public DbSet<AppMessage> AppMessages { get; set; }
 
     override protected void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -53,6 +54,12 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
             .HasOne(a => a.InstructorProfile)
             .WithOne(i => i.AppUser)
             .HasForeignKey<AppUser>(a => a.InstructorId);
+
+        // modelBuilder.Entity<AppUser>()
+        //     .HasMany<AppMessage>(ap => ap.AppMessages)
+        //     .WithOne(m => m.AppUser)
+        //     .HasForeignKey(m => m.AppUserId)
+        //     .OnDelete(DeleteBehavior.Restrict);
 
         // Students
         modelBuilder.Entity<Student>()

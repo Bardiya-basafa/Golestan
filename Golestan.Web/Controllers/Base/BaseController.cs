@@ -3,10 +3,12 @@
 
 namespace Golestan.Web.Controllers.Base;
 
-using Application.Interfaces;using Shared.Constants;
+using System.Security.Claims;
+using Application.Interfaces;
+using Shared.Constants;
 
 
-public abstract class BaseController (IFacultyService facultyService): Controller {
+public abstract class BaseController(IFacultyService facultyService) : Controller {
 
     public void ShowMessage(string? message, bool result)
     {
@@ -19,6 +21,11 @@ public abstract class BaseController (IFacultyService facultyService): Controlle
         var faculty = await facultyService.GetFacultyDtoById(facultyId);
         ViewBag.FacultyId = facultyId;
         ViewBag.FacultyName = faculty.MajorName;
+    }
+
+    public string? GetUserId()
+    {
+        return HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
     }
 
 }

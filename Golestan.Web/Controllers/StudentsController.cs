@@ -25,9 +25,15 @@ public class StudentsController : BaseController {
         _userService = userService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var userId = GetUserId();
+
+        // var model = await _studentService.GetStudentUserApp(userId);
+        // strongly typed
+        var model = await _studentService.GetStudentUserApp("84f21f1c-cddd-46bc-8744-4a25183ed4de");
+
+        return View(model);
     }
 
     [HttpGet]
@@ -88,6 +94,7 @@ public class StudentsController : BaseController {
     public async Task<IActionResult> ExamResults(int termId, int studentId)
     {
         var model = await _studentService.GetAllTermExamResults(termId, studentId);
+        ViewBag.StudentId = studentId;
 
         return View(model);
     }

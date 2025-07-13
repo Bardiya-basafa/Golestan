@@ -10,6 +10,7 @@ using Shared.Helpers;
 
 public interface IStudentRepository {
 
+    Task<StudentDto> GetStudentUserApp(string studentId);
     Task<Student> GetStudentEntityById(int studentId);
 
     Task<StudentDto> GetStudentDtoById(int studentId);

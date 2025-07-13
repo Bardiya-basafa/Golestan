@@ -25,6 +25,14 @@ public class CoursesController : BaseController {
     }
 
     [HttpGet]
+    public async Task<IActionResult> Index(int courseId)
+    {
+        var model = await _courseService.GetCourseDtoById(courseId);
+
+        return View(model);
+    }
+
+    [HttpGet]
     public async Task<IActionResult> Add(int facultyId)
     {
         var faculty = await _facultyService.GetFacultyDtoById(facultyId);
@@ -72,7 +80,7 @@ public class CoursesController : BaseController {
         var model = new SetExamForCourseDto()
         {
             CourseId = courseId,
-            CourseName = _courseService.GetCourseById(courseId).GetAwaiter().GetResult().CourseName,
+            CourseName = _courseService.GetCourseDtoById(courseId).GetAwaiter().GetResult().CourseName,
             ExamStartDate = currentTerm.ExamsStartTime,
             ExamEndDate = currentTerm.ExamsEndTime,
         };
@@ -104,13 +112,6 @@ public class CoursesController : BaseController {
         return RedirectToAction("Courses", "Admin", new { facultyId = facultyId });
     }
 
-    [HttpGet]
-    public async Task<IActionResult> Index(int courseId)
-    {
-        var model = await _courseService.GetCourseById(courseId);
-
-        return View(model);
-    }
 
     [HttpGet]
     public async Task<IActionResult> SetInstructor(int facultyId, int courseId)

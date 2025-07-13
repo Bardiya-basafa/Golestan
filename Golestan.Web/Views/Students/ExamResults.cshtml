@@ -1,0 +1,149 @@
+﻿@using Microsoft.IdentityModel.Tokens
+@model StudentDto
+
+<div class="bg-gradient-to-br from-white via-blue-50 to-blue-100 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Section -->
+        <div class="bg-blue-600 rounded-lg shadow-sm border border-blue-700 mb-8 overflow-hidden">
+            <div class="px-8 py-6 border-b border-blue-500">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-3xl font-bold text-white mb-2">My Exam Results</p>
+                        <p class="text-blue-100 text-lg">View your detailed exam scores and academic performance</p>
+                    </div>
+                    <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-list h-8 w-8 text-white">
+                            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                            <path d="M12 11h4"/>
+                            <path d="M12 16h4"/>
+                            <path d="M8 11h.01"/>
+                            <path d="M8 16h.01"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Student Properties Section -->
+        <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200 mb-8">
+            <h3 class="text-lg font-semibold text-blue-800 mb-4">Student Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-slate-700">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user text-blue-600 mr-2">
+                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <strong>Name:</strong> @Model.FullName
+                </div>
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-credit-card text-blue-600 mr-2">
+                        <rect width="20" height="14" x="2" y="5" rx="2"/>
+                        <path d="M2 10h20"/>
+                    </svg>
+                    <strong>Student ID:</strong> @Model.StudentNumber
+                </div>
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award text-blue-600 mr-2">
+                        <circle cx="12" cy="8" r="6"/>
+                        <path d="M15.477 12.89L17.18 22l-5.18-3-5.18 3 1.703-9.11Z"/>
+                    </svg>
+                    <strong>Current GPA:</strong> @(Model.ExamResults.Count > 0 ? Model.ExamResults.Where(e => e.Score != -1).Sum(e => e.Score) / Model.ExamResults.Count : "No exam result score submitted")
+                </div>
+            </div>
+        </div>
+        <!-- Exam Results Table -->
+        <div class="bg-white rounded-lg shadow-sm border border-blue-300 overflow-hidden">
+            <div class="px-8 py-6 border-b border-blue-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">Detailed Exam Results</h2>
+                        <p class="text-slate-600 mt-1">Comprehensive breakdown of your performance in each exam</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
+                            Total Exams: @Model.ExamResults.Count
+                        </span>
+                    </div>
+                </div>
+            </div>
+            @if (@Model.ExamResults.Count > 0){
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-blue-300">
+                        <thead class="bg-blue-50">
+                            <tr>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Exam ID
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Course
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Section
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Instructor
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Exam Date
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Score
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Instructor Description
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">
+                                    Objection
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-blue-300">
+                            <!-- Placeholder Data -->
+                            @foreach (var result in @Model.ExamResults){
+                                <tr class="hover:bg-blue-50 transition-all duration-200 group">
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="text-lg font-bold text-slate-900">@result.Id</div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="text-lg font-bold text-slate-900">CS101 - @result.Course.CourseName</div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="text-lg font-bold text-slate-900">@result.Section.TimeSlot.GetDescription() / @result.Section.DayOfWeek</div>
+                                        <div class="text-sm text-slate-600">Room: @result.Section.Classroom.ClassroomNumber</div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="text-lg font-bold text-slate-900">@result.Section.Instructor.FullName</div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="text-lg font-bold text-slate-900">@result.ExamDate.ToString("yyyy-MM-dd")</div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="text-lg font-bold text-slate-900">@(result.Score == -1 ? "Not set yet" : result.Score)</div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="text-lg text-slate-900">@(result.Description.IsNullOrEmpty() ? "-" : result.Description)</div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap">
+                                        <div class="text-lg text-slate-900">@(result.Objection.IsNullOrEmpty() ? "-" : result.Objection)</div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else{
+                <!-- No Exam Results Found Message -->
+                <div class="text-center py-16 border-t border-blue-200">
+                    <div class="mx-auto h-24 w-24 bg-white border border-blue-200 rounded-full flex items-center justify-center mb-6">
+                        <svg class="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-900 mb-2">No Exam Results Found</h3>
+                    <p class="text-slate-600 mb-8 max-w-md mx-auto">There are no exam results to display for this student.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

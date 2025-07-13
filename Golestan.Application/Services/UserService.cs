@@ -29,6 +29,17 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
             UserType = UserType.Instructor
         };
 
+        var instructor = new Instructor()
+        {
+            FullName = appUser.FirstName + " " + appUser.LastName,
+            AppUser = appUser,
+            HireDate = dto.HireDate,
+            Salary = dto.Salary,
+            FacultyId = dto.FacultyId
+        };
+
+        appUser.InstructorProfile = instructor;
+
         var result = await userManager.CreateAsync(appUser, dto.Password);
 
         if (result.Succeeded){
@@ -40,16 +51,6 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
                 return finalResult;
             }
 
-            var instructor = new Instructor()
-            {
-                FullName = appUser.FirstName + " " + appUser.LastName,
-                AppUser = appUser,
-                HireDate = dto.HireDate,
-                Salary = dto.Salary,
-                FacultyId = dto.FacultyId
-            };
-
-            appUser.InstructorProfile = instructor;
 
             return await userRepository.AddInstructor(instructor);
         }
@@ -79,6 +80,17 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
                 UserType = UserType.Student,
             };
 
+            var studentProfile = new Student()
+            {
+                FullName = appUser.FirstName + " " + appUser.LastName,
+                AppUser = appUser,
+                FacultyId = dto.FacultyId,
+                EnteredDate = DateTime.UtcNow,
+                StudentNumber = await GetUniversalNumber(UserType.Student, dto.FacultyId)
+            };
+
+            appUser.StudentProfile = studentProfile;
+
             var result = await userManager.CreateAsync(appUser, dto.Password);
 
             if (!result.Succeeded){
@@ -95,17 +107,6 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
                 return finalResult;
             }
 
-
-            var studentProfile = new Student()
-            {
-                FullName = appUser.FirstName + " " + appUser.LastName,
-                AppUser = appUser,
-                FacultyId = dto.FacultyId,
-                EnteredDate = DateTime.UtcNow,
-                StudentNumber = await GetUniversalNumber(UserType.Student, dto.FacultyId)
-            };
-
-            appUser.StudentProfile = studentProfile;
 
             return await userRepository.AddStudent(studentProfile);
         }

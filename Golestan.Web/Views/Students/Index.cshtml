@@ -1,276 +1,139 @@
-﻿@{
+﻿@model StudentDto
+@{
     ViewData["Title"] = "Student Dashboard";
 }
-<!-- Navigation -->
-<nav class="glass-effect sticky top-0 z-50 border-b border-white/20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-            <div class="flex items-center space-x-4">
-                <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center shadow-lg">
-                    <i class="fas fa-user-graduate text-white text-lg"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                        UniManage Pro </h1>
-                    <p class="text-xs text-gray-500">Student Dashboard</p>
-                </div>
-            </div>
-            <div class="flex items-center space-x-4">
-                <div class="flex space-x-2">
-                    <a href="admin.html" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-purple-600 transition-colors">
-                        <i class="fas fa-user-shield mr-2"></i>Admin </a>
-                    <a href="professor.html" class="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-purple-600 transition-colors">
-                        <i class="fas fa-chalkboard-teacher mr-2"></i>Professor </a>
-                </div>
-                <div class="px-4 py-2 bg-white/50 rounded-lg">
-                        <span class="text-sm font-medium text-gray-700">
-                            <i class="fas fa-user-graduate mr-2 text-purple-600"></i>John Doe (2024001)
-                        </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav><!-- Main Content -->
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <!-- Dashboard Header -->
-    <div id="dashboardView" class="animate-fade-in">
-        <div class="mb-8">
-            <h2 class="text-4xl font-bold text-gray-800 mb-2">Student Dashboard</h2>
-            <p class="text-gray-600 text-lg">Track your academic progress and courses</p>
-        </div>
-        <!-- Student Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-medium text-gray-600">Enrolled Courses</p>
-                        <p class="text-3xl font-bold text-purple-600" id="enrolledCourses">0</p>
-                    </div>
-                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-book-open text-purple-600 text-xl"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-medium text-gray-600">Current GPA</p>
-                        <p class="text-3xl font-bold text-green-600" id="currentGPA">0.0</p>
-                    </div>
-                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-trophy text-green-600 text-xl"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-medium text-gray-600">Credits Earned</p>
-                        <p class="text-3xl font-bold text-blue-600" id="creditsEarned">0</p>
-                    </div>
-                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-medal text-blue-600 text-xl"></i>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-white/20 card-hover">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-sm font-medium text-gray-600">Semester</p>
-                        <p class="text-3xl font-bold text-orange-600">6th</p>
-                    </div>
-                    <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-                        <i class="fas fa-calendar text-orange-600 text-xl"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Student Menu -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div onclick="showSection('myCourses')" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
-                        <i class="fas fa-book text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">My Courses</h3>
-                    <p class="text-gray-600">View enrolled courses and schedules</p>
-                </div>
-            </div>
-            <div onclick="showSection('myGrades')" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
-                        <i class="fas fa-chart-bar text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Grade Report</h3>
-                    <p class="text-gray-600">View grades and academic progress</p>
-                </div>
-            </div>
-            <div onclick="showSection('studentProfile')" class="bg-white/70 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 cursor-pointer card-hover group">
-                <div class="text-center">
-                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-200">
-                        <i class="fas fa-user text-white text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">My Profile</h3>
-                    <p class="text-gray-600">Comprehensive academic information</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Content Sections -->
-    <div id="contentArea" class="hidden animate-slide-up">
-        <!-- Back Button -->
-        <button onclick="goBack()" class="mb-6 flex items-center text-gray-600 hover:text-gray-800 transition-colors">
-            <i class="fas fa-arrow-left mr-2"></i>Back to Dashboard
-        </button>
-        <!-- My Courses -->
-        <div id="myCourses" class="hidden">
-            <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden">
-                <div class="bg-gradient-to-r from-purple-500 to-pink-500 p-6">
+<!-- Main Content -->
+<div class="bg-gradient-to-br from-white via-blue-50 to-blue-100 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Dashboard Header -->
+        <div id="dashboardView" class="animate-fade-in">
+            <div class="bg-blue-600 rounded-lg shadow-sm border border-blue-700 mb-8 overflow-hidden">
+                <div class="px-8 py-6 border-b border-blue-500">
                     <div class="flex justify-between items-center">
                         <div>
-                            <h3 class="text-2xl font-bold text-white mb-2">My Courses</h3>
-                            <p class="text-white/80">View your enrolled courses and schedules</p>
+                            <p class="text-3xl font-bold text-white mb-2">Student Dashboard</p>
+                            <p class="text-blue-100 text-lg">Track your academic progress and courses</p>
                         </div>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="courseCards">
-                        <!-- Dynamic content -->
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- My Grades -->
-        <div id="myGrades" class="hidden">
-            <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden">
-                <div class="bg-gradient-to-r from-green-500 to-teal-500 p-6">
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <h3 class="text-2xl font-bold text-white mb-2">Grade Report</h3>
-                            <p class="text-white/80">View your grades and academic progress</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <div class="overflow-x-auto">
-                        <table class="w-full">
-                            <thead>
-                                <tr class="border-b border-gray-200">
-                                    <th class="text-left py-4 px-4 font-semibold text-gray-700">Course Code</th>
-                                    <th class="text-left py-4 px-4 font-semibold text-gray-700">Course Name</th>
-                                    <th class="text-left py-4 px-4 font-semibold text-gray-700">Credits</th>
-                                    <th class="text-left py-4 px-4 font-semibold text-gray-700">Midterm</th>
-                                    <th class="text-left py-4 px-4 font-semibold text-gray-700">Final</th>
-                                    <th class="text-left py-4 px-4 font-semibold text-gray-700">Total Grade</th>
-                                    <th class="text-left py-4 px-4 font-semibold text-gray-700">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="gradesTable" class="divide-y divide-gray-100">
-                                <!-- Dynamic content -->
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="mt-6 p-4 bg-gray-50 rounded-xl">
-                        <div class="flex justify-between items-center">
-                            <span class="text-lg font-semibold text-gray-700">Overall GPA:</span>
-                            <span class="text-2xl font-bold text-green-600" id="overallGPA">0.00</span>
+                        <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center shadow-md">
+                            <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Student Profile -->
-        <div id="studentProfile" class="hidden">
-            <div class="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-white/20 overflow-hidden">
-                <div class="bg-gradient-to-r from-blue-500 to-indigo-500 p-6">
-                    <div class="flex justify-between items-center">
+            <!-- Student Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
+                    <div class="flex items-center justify-between">
                         <div>
-                            <h3 class="text-2xl font-bold text-white mb-2">My Profile</h3>
-                            <p class="text-white/80">Comprehensive academic information</p>
+                            <p class="text-sm font-medium text-blue-800">Enrolled Courses</p>
+                            <p class="text-3xl font-bold text-slate-900" id="enrolledCourses">0</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
                         </div>
                     </div>
                 </div>
-                <div class="p-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <!-- Personal Information -->
-                        <div class="space-y-6">
-                            <h4 class="text-xl font-bold text-gray-800 mb-4">Personal Information</h4>
-                            <div class="space-y-4">
-                                <div class="flex items-center p-4 bg-gray-50 rounded-xl">
-                                    <i class="fas fa-user text-blue-600 text-xl mr-4"></i>
-                                    <div>
-                                        <p class="text-sm text-gray-600">Full Name</p>
-                                        <p class="font-semibold text-gray-800">John Doe</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center p-4 bg-gray-50 rounded-xl">
-                                    <i class="fas fa-id-card text-purple-600 text-xl mr-4"></i>
-                                    <div>
-                                        <p class="text-sm text-gray-600">Student ID</p>
-                                        <p class="font-semibold text-gray-800">2024001</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center p-4 bg-gray-50 rounded-xl">
-                                    <i class="fas fa-university text-green-600 text-xl mr-4"></i>
-                                    <div>
-                                        <p class="text-sm text-gray-600">Faculty</p>
-                                        <p class="font-semibold text-gray-800">Computer Science</p>
-                                    </div>
-                                </div>
-                                <div class="flex items-center p-4 bg-gray-50 rounded-xl">
-                                    <i class="fas fa-calendar text-orange-600 text-xl mr-4"></i>
-                                    <div>
-                                        <p class="text-sm text-gray-600">Current Semester</p>
-                                        <p class="font-semibold text-gray-800">6th Semester</p>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-blue-800">Current GPA</p>
+                            <p class="text-3xl font-bold text-slate-900" id="currentGPA">0.0</p>
                         </div>
-                        <!-- Academic Summary -->
-                        <div class="space-y-6">
-                            <h4 class="text-xl font-bold text-gray-800 mb-4">Academic Summary</h4>
-                            <div class="space-y-4">
-                                <div class="p-4 bg-gradient-to-r from-green-100 to-teal-100 rounded-xl">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <p class="text-sm text-gray-600">Current GPA</p>
-                                            <p class="text-2xl font-bold text-green-600" id="profileGPA">0.00</p>
-                                        </div>
-                                        <i class="fas fa-trophy text-green-600 text-3xl"></i>
-                                    </div>
-                                </div>
-                                <div class="p-4 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-xl">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <p class="text-sm text-gray-600">Total Credits</p>
-                                            <p class="text-2xl font-bold text-blue-600" id="profileCredits">0</p>
-                                        </div>
-                                        <i class="fas fa-medal text-blue-600 text-3xl"></i>
-                                    </div>
-                                </div>
-                                <div class="p-4 bg-gradient-to-r from-purple-100 to-pink-100 rounded-xl">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <p class="text-sm text-gray-600">Courses Passed</p>
-                                            <p class="text-2xl font-bold text-purple-600" id="coursesPassed">0</p>
-                                        </div>
-                                        <i class="fas fa-check-circle text-purple-600 text-3xl"></i>
-                                    </div>
-                                </div>
-                                <div class="p-4 bg-gradient-to-r from-orange-100 to-red-100 rounded-xl">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <p class="text-sm text-gray-600">Academic Standing</p>
-                                            <p class="text-lg font-bold text-orange-600" id="academicStanding">
-                                                Excellent</p>
-                                        </div>
-                                        <i class="fas fa-star text-orange-600 text-3xl"></i>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2m0 0V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2"></path>
+                            </svg>
                         </div>
                     </div>
                 </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-blue-800">Credits Earned</p>
+                            <p class="text-3xl font-bold text-slate-900" id="creditsEarned">0</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2a3 3 0 00-5.356-1.857M7 20H2v-2a3 3 0 015.356-1.857m0 0A7.962 7.962 0 0112 16a7.962 7.962 0 015.356 1.857m-5.356-1.857C10.832 15.477 9.246 15 7.5 15S4.168 15.477 3 16.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 15.477 14.754 15 16.5 15c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-blue-800">Semester</p>
+                            <p class="text-3xl font-bold text-slate-900">6th</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Announcement and Notification Boxes (Placeholder for now, as per Admin Dashboard) -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 shadow-sm">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-4 mt-1">
+                            <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592L2 13V7a2 2 0 012-2h7.118zM15.923 2.243a2.002 2.002 0 012.574 2.574L15.923 2.243zM12 18.757l-1.5-1.5M12 12l-1.5-1.5"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-800 mb-2">Important Announcement</h3>
+                            <p class="text-blue-700 text-sm">
+                                The system will undergo scheduled maintenance on **July 20th, 2025, from 2:00 AM to 4:00 AM UTC**. During this period, some services may be temporarily unavailable. We apologize for any inconvenience. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 shadow-sm">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-4 mt-1">
+                            <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-800 mb-2">New Message Received</h3>
+                            <p class="text-blue-700 text-sm">
+                                You have received a new message from the IT Department regarding the upcoming software update. Please check your inbox for more details. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Student Menu (Card Style with text below and blue icon box) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a asp-controller="Students" asp-action="Sections" asp-route-studentId="@Model.Id" class="bg-blue-600 rounded-lg p-4 shadow-sm border border-blue-700 cursor-pointer group hover:bg-blue-700 transition-colors duration-200 flex flex-col items-center justify-center text-center">
+                    <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">My Sections</h3>
+                </a>
+                <a asp-controller="Students" asp-action="Schedule" class="bg-blue-600 rounded-lg p-4 shadow-sm border border-blue-700 cursor-pointer group hover:bg-blue-700 transition-colors duration-200 flex flex-col items-center justify-center text-center">
+                    <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2m0 0V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Weekly Schedule</h3>
+                </a>
+                <a asp-controller="Students" asp-action="Terms" asp-route-studentId="@Model.Id" class="bg-blue-600 rounded-lg p-4 shadow-sm border border-blue-700 cursor-pointer group hover:bg-blue-700 transition-colors duration-200 flex flex-col items-center justify-center text-center">
+                    <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Exam Results</h3>
+                </a>
             </div>
         </div>
     </div>

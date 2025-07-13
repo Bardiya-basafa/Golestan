@@ -25,12 +25,24 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
             {
                 Id = c.Id,
                 CourseName = c.CourseName,
+                Unit = c.Unit,
+                Description = c.Description,
+                // Exam = new ExamDto()
+                // {
+                //     Id = c.ExamId,
+                //     Classroom = new ClassroomDto()
+                //     {
+                //         ClassroomNumber = c.Exam.Classroom.ClassNumber,
+                //     },
+                //     ExamDateTime = c.Exam.ExamDateTime,
+                //     TimeSlot = c.Exam.TimeSlot,
+                // },
             })
             .Take(10)
             .ToListAsync();
     }
 
-    public async Task<CourseDto> GetCourseById(int courseId)
+    public async Task<CourseDto> GetCourseDtoById(int courseId)
     {
         return await context.Courses
             .AsNoTracking()
@@ -46,14 +58,21 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
                     MajorName = c.Faculty.MajorName,
                 },
                 Sections = c.Sections.Select(s => new SectionDto()
-                {
-                    Id = s.Id,
-                    Classroom = new ClassroomDto()
                     {
-                        ClassroomNumber = s.Classroom.ClassNumber
-                    },
-                    TimeSlot = s.TimeSlot,
-                    DayOfWeek = s.DayOfWeek,
+                        Id = s.Id,
+                        Classroom = new ClassroomDto()
+                        {
+                            ClassroomNumber = s.Classroom.ClassNumber
+                        },
+                        TimeSlot = s.TimeSlot,
+                        DayOfWeek = s.DayOfWeek,
+                    })
+                    .ToList(),
+                Instructors = c.Instructors.Select(i => new InstructorDto()
+                {
+                    Id = i.Id,
+                    FullName = i.FullName,
+                    InstructorNumber = i.InstructorNumber,
                 }).ToList()
             })
             .FirstOrDefaultAsync() ?? throw new Exception("Course not found");
@@ -62,6 +81,7 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
     public async Task<Dictionary<int, string>?> GetCourseInstructors(int courseId)
     {
         return await context.Instructors
+            .AsNoTracking()
             .Where(i => i.Courses.Any(c => c.Id == courseId))
             .Select(i => new { i.Id, i.FullName })
             .Distinct()
@@ -108,11 +128,13 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
     public async Task<List<Course>> GetAvailableCoursesForStudent(int studentId)
     {
         var studentPassedCourses = await context.Students
+            .AsNoTracking()
             .Where(s => s.Id == studentId)
             .SelectMany(s => s.PassedCourses)
             .ToListAsync();
 
         return await context.Courses
+            .AsNoTracking()
             .Where(c => !studentPassedCourses.Contains(c))
             .Where(c => c.PrerequisiteCourses.All(pc => studentPassedCourses.Select(passed => passed.Id).Contains(pc)))
             .ToListAsync();
@@ -228,7 +250,7 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
 
     public async Task<bool> CourseNameExist(string courseName, int facultyId)
     {
-        return await context.Courses.AnyAsync(c => c.CourseName == courseName && c.FacultyId == facultyId);
+        return await context.Courses.AsNoTracking().AnyAsync(c => c.CourseName == courseName && c.FacultyId == facultyId);
     }
 
     public async Task<Result> SetExam(Exam exam)
@@ -242,6 +264,7 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
     public async Task<bool> IsExamExistInClass(DateTime examDate, TimeSlot timeSlot, int classroomId)
     {
         return await context.Exams
+            .AsNoTracking()
             .Where(e => e.TimeSlot == timeSlot && e.ExamDateTime == examDate)
             .Where(e => e.ClassroomId == classroomId)
             .AnyAsync();

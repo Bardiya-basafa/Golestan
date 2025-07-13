@@ -1,15 +1,34 @@
 ﻿@model TermDto?
 
 @if (Model == null){
-        <p class="text-gray-600 text-lg">Currently, there is no active term</p>
-}
+        <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-blue-200">
+                <h3 class="text-lg font-semibold text-blue-800 mb-4">Current Academic Term</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-700">
+                        <div>
+                                <strong>Currently There is no active term</strong> 
+                        </div>
+                        
+                </div>
+        </div>}
 else{
-        <h3 class="text-gray-800 font-semibold mb-2">Current Term</h3>
-        <div class="space-y-1 text-sm">
-                <p class="text-gray-600">
-                        <span class="font-medium">Term:</span> @Model.TermIdentifier,
-                        <span class="font-medium">Year:</span> @Model.Year,
-                        <span class="font-medium">Exams Period: </span>@Model.ExamsStartTime.ToString("yyyy-M-d dddd") - @Model.ExamsEndTime.ToString("yyyy-M-d dddd")
-                </p>
+        <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-blue-200">
+                <h3 class="text-lg font-semibold text-blue-800 mb-4">Current Academic Term</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-700">
+                        <div>
+                                <strong>Term :</strong> @Model.TermIdentifier,
+                        </div>
+                        <div>
+                                <strong>Year :</strong> @Model.Year,
+                        </div>
+                        <div>
+                                <strong>Start Date:</strong> September 1, 2025
+                        </div>
+                        <div>
+                                <strong>Exams Period:</strong> @Model.ExamsStartTime.ToString("yyyy-M-d dddd") - @Model.ExamsEndTime.ToString("yyyy-M-d dddd")
+                        </div>
+                        <div>
+                                <strong>Selection Period:</strong> @Model.SelectionStartTime.ToString("yyyy-M-d dddd") - @Model.SelectionEndTime.ToString("yyyy-M-d dddd")
+                        </div>
+                </div>
         </div>
 }

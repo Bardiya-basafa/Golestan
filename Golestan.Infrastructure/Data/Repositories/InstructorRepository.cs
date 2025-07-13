@@ -16,9 +16,32 @@ using Shared.Helpers;
 
 public class InstructorRepository(AppDbContext context) : IInstructorRepository {
 
+    public async Task<InstructorDto> GetInstructorAppUser(string instructorId)
+    {
+        return await context.Users
+            .AsNoTracking()
+            .Where(u => u.Id == instructorId)
+            .Select(i => i.InstructorProfile)
+            .Select(i => new InstructorDto()
+            {
+                Id = i.Id,
+                FullName = i.FullName,
+                Salary = i.Salary,
+                HireDate = i.HireDate,
+
+                // InstructorNumber = i.InstructorNumber,
+                Sections = i.Sections.Select(s => new SectionDto()
+                {
+                    Id = s.Id,
+                }).ToList(),
+            })
+            .FirstOrDefaultAsync() ?? throw new KeyNotFoundException($"User with id {instructorId} not found");
+    }
+
     public async Task<InstructorDto> GetInstructorDtoById(int instructorId)
     {
         return await context.Instructors
+                .AsNoTracking()
             .Where(i => i.Id == instructorId)
             .Select(i => new InstructorDto()
             {
@@ -47,6 +70,7 @@ public class InstructorRepository(AppDbContext context) : IInstructorRepository 
     public async Task<List<InstructorDto>> GetFacultyInstructors()
     {
         return await context.Instructors
+            .AsNoTracking()
             .Select(i => new InstructorDto()
             {
                 Id = i.Id,
@@ -72,6 +96,7 @@ public class InstructorRepository(AppDbContext context) : IInstructorRepository 
     public async Task<List<StudentDto>> GetInstructorStudentsOfSection(int sectionId)
     {
         return await context.Sections
+                .AsNoTracking()
             .Where(s => s.Id == sectionId)
             .SelectMany(s => s.Students)
             .Select(s => new StudentDto()
@@ -86,6 +111,7 @@ public class InstructorRepository(AppDbContext context) : IInstructorRepository 
     public async Task<List<ExamResultDto>> GetExamResultsOfSection(int sectionId)
     {
         return await context.ExamResults
+                .AsNoTracking()
             .Where(r => r.SectionId == sectionId)
             .Select(r => new ExamResultDto()
             {

@@ -24,23 +24,7 @@
             </div>
 
             <!-- Current Term Details (Table/Box Style) -->
-            <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-blue-200">
-                <h3 class="text-lg font-semibold text-blue-800 mb-4">Current Academic Term</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-700">
-                    <div>
-                        <strong>Term Name:</strong> Fall 2025
-                    </div>
-                    <div>
-                        <strong>Start Date:</strong> September 1, 2025
-                    </div>
-                    <div>
-                        <strong>End Date:</strong> December 15, 2025
-                    </div>
-                    <div>
-                        <strong>Status:</strong> Active
-                    </div>
-                </div>
-            </div>
+            @await Component.InvokeAsync("CurrentTerm")
 
             <!-- Stats Cards -->
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
@@ -110,9 +94,7 @@
                         <div>
                             <h3 class="text-lg font-semibold text-blue-800 mb-2">Important Announcement</h3>
                             <p class="text-blue-700 text-sm">
-                                The system will undergo scheduled maintenance on **July 20th, 2025, from 2:00 AM to 4:00 AM UTC**.
-                                During this period, some services may be temporarily unavailable. We apologize for any inconvenience.
-                            </p>
+                                The system will undergo scheduled maintenance on **July 20th, 2025, from 2:00 AM to 4:00 AM UTC**. During this period, some services may be temporarily unavailable. We apologize for any inconvenience. </p>
                         </div>
                     </div>
                 </div>
@@ -126,9 +108,7 @@
                         <div>
                             <h3 class="text-lg font-semibold text-blue-800 mb-2">New Message Received</h3>
                             <p class="text-blue-700 text-sm">
-                                You have received a new message from the IT Department regarding the upcoming software update.
-                                Please check your inbox for more details.
-                            </p>
+                                You have received a new message from the IT Department regarding the upcoming software update. Please check your inbox for more details. </p>
                         </div>
                     </div>
                 </div>

@@ -29,13 +29,15 @@ public class InstructorsController : BaseController {
         _instructorService = instructorService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var model = await _instructorService.GetInstructorAppUser("ea2856a2-3089-47f2-9a8b-7b86de653ea4");
+
+        return View(model);
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetInstructorSections(int instructorId)
+    public async Task<IActionResult> Sections(int instructorId)
     {
         var model = await _instructorService.GetInstructorDtoById(instructorId);
 
@@ -43,7 +45,7 @@ public class InstructorsController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetInstructorStudentsFoSection(int sectionId)
+    public async Task<IActionResult> Students(int sectionId)
     {
         var model = await _instructorService.GetInstructorStudentsOfSection(sectionId);
 
@@ -51,7 +53,7 @@ public class InstructorsController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> AdmitStudentsScores(int sectionId)
+    public async Task<IActionResult> SubmitStudentsScores(int sectionId)
     {
         var model = await _instructorService.GetExamResultsOfSection(sectionId);
 
@@ -70,7 +72,7 @@ public class InstructorsController : BaseController {
             ShowMessage(result.Message, result.Succeeded);
         }
 
-        return RedirectToAction("AdmitStudentsScores", new { instructorId = model.InstructorId, sectionId = model.SectionId });
+        return RedirectToAction("SubmitStudentsScores", new { instructorId = model.InstructorId, sectionId = model.SectionId });
     }
 
     [HttpGet]

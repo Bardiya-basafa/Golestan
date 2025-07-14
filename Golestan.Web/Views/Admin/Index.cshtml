@@ -1,0 +1,178 @@
+﻿
+@{
+    ViewData["Title"] = "Admin Dashboard - UniManage Pro";
+}
+
+<div class="bg-gradient-to-br from-white via-blue-50 to-blue-100 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Dashboard Header -->
+        <div id="dashboardView" class="animate-fade-in">
+            <div class="bg-blue-600 rounded-lg shadow-sm border border-blue-700 mb-8 overflow-hidden">
+                <div class="px-8 py-6 border-b border-blue-500">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <p class="text-3xl font-bold text-white mb-2">Admin Dashboard</p>
+                            <p class="text-blue-100 text-lg">Complete control over the university system</p>
+                        </div>
+                        <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center shadow-md">
+                            <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m0 0l7 7 7 7M19 10v10a1 1 0 01-1 1H7a1 1 0 01-1-1V10m6 0a1 1 0 00-1 1v3m-3 0h6"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Term Details (Table/Box Style) -->
+            @await Component.InvokeAsync("CurrentTerm")
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-blue-800">Total Courses</p>
+                            <p class="text-3xl font-bold text-slate-900" id="totalCourses">0</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-blue-800">Active Classes</p>
+                            <p class="text-3xl font-bold text-slate-900" id="totalClasses">0</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2m0 0V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-blue-800">Professors</p>
+                            <p class="text-3xl font-bold text-slate-900" id="totalProfessors">0</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2a3 3 0 00-5.356-1.857M7 20H2v-2a3 3 0 015.356-1.857m0 0A7.962 7.962 0 0112 16a7.962 7.962 0 015.356 1.857m-5.356-1.857C10.832 15.477 9.246 15 7.5 15S4.168 15.477 3 16.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 15.477 14.754 15 16.5 15c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-blue-800">Students</p>
+                            <p class="text-3xl font-bold text-slate-900" id="totalStudents">0</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Announcement and Notification Boxes -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 shadow-sm">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-4 mt-1">
+                            <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592L2 13V7a2 2 0 012-2h7.118zM15.923 2.243a2.002 2.002 0 012.574 2.574L15.923 2.243zM12 18.757l-1.5-1.5M12 12l-1.5-1.5"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-800 mb-2">Important Announcement</h3>
+                            <p class="text-blue-700 text-sm">
+                                The system will undergo scheduled maintenance on **July 20th, 2025, from 2:00 AM to 4:00 AM UTC**. During this period, some services may be temporarily unavailable. We apologize for any inconvenience. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 shadow-sm">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center mr-4 mt-1">
+                            <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-800 mb-2">New Message Received</h3>
+                            <p class="text-blue-700 text-sm">
+                                You have received a new message from the IT Department regarding the upcoming software update. Please check your inbox for more details. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Menu (Card Style with text below and blue icon box) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a asp-controller="Admin" asp-action="AllCourses" class="bg-blue-600 rounded-lg p-4 shadow-sm border border-blue-700 cursor-pointer group hover:bg-blue-700 transition-colors duration-200 flex flex-col items-center justify-center text-center">
+                    <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Course Management</h3>
+                </a>
+                <a asp-controller="Admin" asp-action="AllClassrooms" class="bg-blue-600 rounded-lg p-4 shadow-sm border border-blue-700 cursor-pointer group hover:bg-blue-700 transition-colors duration-200 flex flex-col items-center justify-center text-center">
+                    <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2m0 0V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Class Management</h3>
+                </a>
+                <a asp-controller="Admin" asp-action="AllInstructors" class="bg-blue-600 rounded-lg p-4 shadow-sm border border-blue-700 cursor-pointer group hover:bg-blue-700 transition-colors duration-200 flex flex-col items-center justify-center text-center">
+                    <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2a3 3 0 00-5.356-1.857M7 20H2v-2a3 3 0 015.356-1.857m0 0A7.962 7.962 0 0112 16a7.962 7.962 0 015.356 1.857m-5.356-1.857C10.832 15.477 9.246 15 7.5 15S4.168 15.477 3 16.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 15.477 14.754 15 16.5 15c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Instructor Management</h3>
+                </a>
+                <a asp-controller="Admin" asp-action="AllStudents" class="bg-blue-600 rounded-lg p-4 shadow-sm border border-blue-700 cursor-pointer group hover:bg-blue-700 transition-colors duration-200 flex flex-col items-center justify-center text-center">
+                    <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Student Management</h3>
+                </a>
+                <a asp-controller="Admin" asp-action="AllSections" class="bg-blue-600 rounded-lg p-4 shadow-sm border border-blue-700 cursor-pointer group hover:bg-blue-700 transition-colors duration-200 flex flex-col items-center justify-center text-center">
+                    <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Section Management</h3>
+                </a>
+                <a asp-controller="Admin" asp-action="AllFaculties" class="bg-blue-600 rounded-lg p-4 shadow-sm border border-blue-700 cursor-pointer group hover:bg-blue-700 transition-colors duration-200 flex flex-col items-center justify-center text-center">
+                    <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Faculty Management</h3>
+                </a>
+                <a asp-controller="Term" asp-action="Index" class="bg-blue-600 rounded-lg p-4 shadow-sm border border-blue-700 cursor-pointer group hover:bg-blue-700 transition-colors duration-200 flex flex-col items-center justify-center text-center">
+                    <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Term Management</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

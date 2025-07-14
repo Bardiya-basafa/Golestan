@@ -22,14 +22,16 @@ public class ClassroomsController : BaseController {
         _classroomService = classroomService;
     }
 
-    // GET
-    public IActionResult Index()
+    [HttpGet]
+    public async Task<IActionResult> Index(int classroomId)
     {
-        return View();
+        var model = await _classroomService.GetClassroomById(classroomId);
+
+        return View(model);
     }
 
     [HttpGet]
-    public async Task<IActionResult> AddClassroom(int facultyId)
+    public async Task<IActionResult> Add(int facultyId)
     {
         var detailsFacultyDto = await _facultyService.GetFacultyDtoById(facultyId);
 
@@ -44,13 +46,13 @@ public class ClassroomsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> AddClassroom(AddClassroomDto dto)
+    public async Task<IActionResult> Add(AddClassroomDto dto)
     {
         var result = await _classroomService.AddClassroom(dto);
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("ManageClassrooms", "Admin", dto.FacultyId);
+            return RedirectToAction("Classrooms", "Admin", dto.FacultyId);
         }
 
         return View(dto);
@@ -58,21 +60,14 @@ public class ClassroomsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> RemoveClassroom(int classroomId)
+    public async Task<IActionResult> Remove(int classroomId)
     {
         var result = await _classroomService.RemoveClassroom(classroomId);
         ShowMessage(result.Message, result.Succeeded);
 
-        return RedirectToAction("ManageClassrooms", "Admin", routeValues: new { facultyId = 1 });
+        return RedirectToAction("Classrooms", "Admin", routeValues: new { facultyId = 1 });
     }
 
-    [HttpGet]
-    public async Task<IActionResult> ClassroomActions(int classroomId)
-    {
-        var model = await _classroomService.GetClassroomById(classroomId);
-
-        return View(model);
-    }
 
     public async Task<IActionResult> VerifyClassNumber(string classNumber, int facultyId)
     {

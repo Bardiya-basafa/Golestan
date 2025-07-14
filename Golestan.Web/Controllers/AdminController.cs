@@ -46,19 +46,19 @@ public class AdminController : BaseController {
         _termService = termService;
     }
 
-    public IActionResult Index()
+    public IActionResult Base()
     {
         if (User.Identity.IsAuthenticated){
             if (User.IsInRole(AppRoles.Admin)){
-                return RedirectToAction("AdminDashboard", "Admin");
+                return RedirectToAction("Index", "Admin");
             }
 
             if (User.IsInRole(AppRoles.Instructor)){
-                return RedirectToAction("InstructorDashboard", "Instructors");
+                return RedirectToAction("Index", "Instructors");
             }
 
             if (User.IsInRole(AppRoles.Student)){
-                return RedirectToAction("StudentDashboard", "Students");
+                return RedirectToAction("Index", "Students");
             }
 
             return RedirectToAction("AccessDenied", "Account");
@@ -69,7 +69,7 @@ public class AdminController : BaseController {
 
 
     // Admin Dashboard
-    public async Task<IActionResult> AdminDashboard()
+    public async Task<IActionResult> Index()
     {
         var faculties = await _facultyService.GetFaculties();
 
@@ -84,7 +84,7 @@ public class AdminController : BaseController {
 
 
     // Managing each section
-    public async Task<IActionResult> ManageStudents(int facultyId)
+    public async Task<IActionResult> Students(int facultyId)
     {
         var model = await _studentService.GetFacultyStudents(facultyId);
         await SeedFacultyData(facultyId);
@@ -92,7 +92,7 @@ public class AdminController : BaseController {
         return View(model);
     }
 
-    public async Task<IActionResult> ManageInstructors(int facultyId)
+    public async Task<IActionResult> Instructors(int facultyId)
     {
         var instructorsDto = await _instructorService.GetFacultyInstructors();
         await SeedFacultyData(facultyId);
@@ -101,7 +101,7 @@ public class AdminController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> ManageCourses(int facultyId)
+    public async Task<IActionResult> Courses(int facultyId)
     {
         var model = await _courseService.GetFacultyCourses(facultyId);
         await SeedFacultyData(facultyId);
@@ -110,7 +110,7 @@ public class AdminController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> ManageClassrooms(int facultyId)
+    public async Task<IActionResult> Classrooms(int facultyId)
     {
         var model = await _classroomService.GetFacultyClassrooms(facultyId);
         await SeedFacultyData(facultyId);
@@ -119,7 +119,7 @@ public class AdminController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> ManageSections(int facultyId)
+    public async Task<IActionResult> Sections(int facultyId)
     {
         var model = await _sectionService.GetFacultySections(facultyId);
         await SeedFacultyData(facultyId);

@@ -37,6 +37,35 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.ToTable("CourseInstructors", (string)null);
                 });
 
+            modelBuilder.Entity("Golestan.Domain.Entities.AppMessage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("AppUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AppUserId1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsSuccess")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId1");
+
+                    b.ToTable("AppMessage");
+                });
+
             modelBuilder.Entity("Golestan.Domain.Entities.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -328,6 +357,10 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("InstructorNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Salary")
                         .HasColumnType("int");
 
@@ -491,19 +524,19 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "7a1db28c-9966-41f2-a28e-eac4165c32bd",
+                            Id = "c7aeb38a-39b2-4989-b629-6bfaf9a918d7",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a9942bc2-9371-4fb5-86f4-9ec553103261",
+                            Id = "27cea1a7-0dac-4e78-af96-a9d219fe2223",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         },
                         new
                         {
-                            Id = "1c3fcabb-69f9-41ff-9fec-d99f551e53ab",
+                            Id = "73a3657b-bc9d-4c64-be7b-3a827750a25d",
                             Name = "Instructor",
                             NormalizedName = "INSTRUCTOR"
                         });
@@ -662,6 +695,17 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .HasForeignKey("InstructorsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Golestan.Domain.Entities.AppMessage", b =>
+                {
+                    b.HasOne("Golestan.Domain.Entities.AppUser", "AppUser")
+                        .WithMany("AppMessages")
+                        .HasForeignKey("AppUserId1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("Golestan.Domain.Entities.Classroom", b =>
@@ -910,6 +954,8 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Golestan.Domain.Entities.AppUser", b =>
                 {
+                    b.Navigation("AppMessages");
+
                     b.Navigation("InstructorProfile")
                         .IsRequired();
 

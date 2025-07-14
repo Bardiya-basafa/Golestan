@@ -11,15 +11,19 @@ public interface ICourseService {
 
     Task<List<CourseDto>> GetFacultyCourses(int facultyId);
 
-    Task<CourseDto> GetCourseById(int courseId);
+    Task<CourseDto> GetCourseDtoById(int courseId);
 
     Task<CourseInstructorDto> GetAvailableInsturctorsForCourse(int facultyId, int courseId);
+
+    Task<List<CourseDto>> GetPrerequisiteCourses(int courseId);
 
     Task<Dictionary<int, string>?> GetCourseInstructors(int courseId);
 
     Task<List<CourseDto>> GetAvailableCoursesForPrerequisite(int courseId);
 
     Task<List<Course>> GetAvailableCoursesForStudent(int studentId);
+
+    Task<Dictionary<int, string>?> GetExamClassrooms(int courseId);
 
     Task<ExamDto?> GetCourseExam(int courseId);
 
@@ -32,5 +36,7 @@ public interface ICourseService {
     Task<Result> RemoveCourse(int courseId);
 
     Task<Result> AddPrerequisiteToCourse(int courseId, int prerequisiteCourseId);
+
+    Task<Result> RemovePrerequisiteFromCourse(int courseId, int prerequisiteCourseId);
 
 }

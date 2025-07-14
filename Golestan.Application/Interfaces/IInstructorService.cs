@@ -10,6 +10,8 @@ using Shared.Helpers;
 
 public interface IInstructorService {
 
+    Task<InstructorDto> GetInstructorAppUser(string instructorId);
+
     Task<List<InstructorDto>> GetFacultyInstructors();
 
     Task<InstructorDto> GetInstructorDtoById(int instructorId);

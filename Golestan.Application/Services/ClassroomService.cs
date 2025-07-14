@@ -14,63 +14,34 @@ public class ClassroomService(IClassroomRepository classroomRepository, ISection
 
     public async Task<List<ClassroomDto>> GetFacultyClassrooms(int facultyId)
     {
-        try{
-            var result = await classroomRepository.GetFacultyClassrooms(facultyId);
-            var model = result.Adapt<List<ClassroomDto>>();
+        var result = await classroomRepository.GetFacultyClassrooms(facultyId);
+        var model = result.Adapt<List<ClassroomDto>>();
 
 
-            return model;
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return model;
     }
 
     public async Task<ClassroomDto> GetClassroomById(int classroomId)
     {
-        try{
-            var result = await classroomRepository.GetClassroomById(classroomId);
-
-            var sections = await sectionRepository.GetClassroomSections(classroomId);
-
-            var model = result.Adapt<ClassroomDto>();
-
-            model.Sections = sections.Adapt<List<SectionDto>>();
-
-
-            return model;
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await classroomRepository.GetClassroomDtoById(classroomId);
     }
 
     public async Task<Result> AddClassroom(AddClassroomDto dto)
     {
-        try{
-            var classroom = new Classroom()
-            {
-                ClassNumber = dto.ClassNumber,
-                Capacity = dto.Capacity,
-                FacultyId = dto.FacultyId,
-            };
+        var classroom = new Classroom()
+        {
+            ClassNumber = dto.ClassNumber,
+            Capacity = dto.Capacity,
+            FacultyId = dto.FacultyId,
+        };
 
 
-            return await classroomRepository.AddClassroom(classroom);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await classroomRepository.AddClassroom(classroom);
     }
 
     public async Task<Result> RemoveClassroom(int classroomId)
     {
-        try{
-            return await classroomRepository.RemoveClassroom(classroomId);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await classroomRepository.RemoveClassroom(classroomId);
     }
 
     public async Task<bool> VerifyClassroomNumber(string classNumber, int facultyId)

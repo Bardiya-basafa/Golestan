@@ -18,8 +18,9 @@ public class TermDto {
 
     public DateTime SelectionEndTime { get; set; }
 
+    public bool IsClosed { get; set; }
+
 
     public string TermIdentifier { get; set; }
-
 
 }

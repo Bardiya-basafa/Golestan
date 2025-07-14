@@ -11,7 +11,7 @@ public interface ISectionService {
 
     Task<SectionDto> GetSectionById(int sectionId);
 
-    Task<List<StudentDto>> GetAvailableStudents(int sectionId, int facultyId);
+    Task<List<StudentDto>> GetAvailableStudents(int sectionId);
 
 
     Task<Result> AddStudentsToSection(List<int> studentIds, int sectionId);

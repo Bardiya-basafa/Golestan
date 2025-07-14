@@ -15,6 +15,7 @@ public class InstructorDto {
 
     public string FullName { get; set; }
 
+    public string InstructorNumber { get; set; }
 
     public DateTime HireDate { get; set; }
 

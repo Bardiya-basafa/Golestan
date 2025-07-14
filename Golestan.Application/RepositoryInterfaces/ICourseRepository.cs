@@ -9,11 +9,17 @@ using Shared.Helpers;
 
 public interface ICourseRepository {
 
+    Task<Course> GetCourseEntityById(int courseId);
+
     Task<List<CourseDto>> GetFacultyCourses(int facultyId);
 
-    Task<CourseDto> GetCourseById(int courseId);
+    Task<CourseDto> GetCourseDtoById(int courseId);
+
+    Task<List<CourseDto>> GetPrerequisiteCourses(List<int> prerequisiteCourseIds);
 
     Task<Dictionary<int, string>?> GetCourseInstructors(int courseId);
+
+    Task<Dictionary<int, string>?> GetExamClassrooms(int courseId);
 
     Task<List<CourseDto>> GetAvailableCoursesForPrerequisite(int courseId);
 
@@ -34,6 +40,8 @@ public interface ICourseRepository {
     Task<bool> CourseNameExist(string courseName, int facultyId);
 
     Task<Result> SetExam(Exam exam);
+
+    Task<Result> RemovePrerequisiteFromCourse(Course course, int prerequisiteId);
 
     Task<bool> IsExamExistInClass(DateTime examDate, TimeSlot timeSlot, int classroomId);
 

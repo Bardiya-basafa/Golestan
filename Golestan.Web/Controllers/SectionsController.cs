@@ -16,22 +16,45 @@ public class SectionsController : BaseController {
 
     private readonly IFacultyService _facultyService;
 
-    public SectionsController(ISectionService sectionService, ICourseService courseService, IFacultyService facultyService) : base(facultyService)
+    private readonly ITermService _termService;
+
+    public SectionsController(ISectionService sectionService, ICourseService courseService, IFacultyService facultyService, ITermService termService) : base(facultyService)
     {
         _sectionService = sectionService;
         _courseService = courseService;
         _facultyService = facultyService;
+        _termService = termService;
     }
 
     [HttpGet]
-    public async Task<IActionResult> AddSection(int facultyId, int classroomId, string classNumber = "", bool isFromClassroom = false)
+    public async Task<IActionResult> Index(int sectionId)
     {
+        if (!ModelState.IsValid){
+            return RedirectToAction("AllSections", "Admin");
+        }
+
+        var model = await _sectionService.GetSectionById(sectionId);
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Add(int facultyId, int classroomId, string classNumber = "", bool isFromClassroom = false)
+    {
+        var currentTerm = await _termService.IsInsideAnyTermCurrently();
+
+        if (currentTerm){
+            ShowMessage("No term available right now add one first", false);
+
+            return RedirectToAction("Sections", "Admin", routeValues: new { facultyId = facultyId });
+        }
+
         var facultyDetails = await _facultyService.GetFacultyDtoById(facultyId);
 
         if (facultyDetails.CoursesCount == 0 || facultyDetails.InstructorsCount == 0 || facultyDetails.ClassesCount == 0){
             ShowMessage("There are no course or instructor in this faculty.", false);
 
-            return RedirectToAction("ManageSections", "Admin", routeValues: new { facultyId = facultyId });
+            return RedirectToAction("Sections", "Admin", routeValues: new { facultyId = facultyId });
         }
 
         var courses = await _facultyService.GetFacultyCoursesOptions(facultyId);
@@ -60,35 +83,24 @@ public class SectionsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> AddSection(AddSectionDto dto)
+    public async Task<IActionResult> Add(AddSectionDto dto)
     {
         var result = await _sectionService.AddSection(dto);
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("ManageSections", "Admin", routeValues: new { facultyId = dto.FacultyId });
+            return RedirectToAction("Sections", "Admin", routeValues: new { facultyId = dto.FacultyId });
         }
 
         return View(dto);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> SectionActions(int sectionId)
-    {
-        if (!ModelState.IsValid){
-            return RedirectToAction("AllSections", "Admin");
-        }
-
-        var model = await _sectionService.GetSectionById(sectionId);
-
-        return View(model);
-    }
 
     [HttpGet]
-    public async Task<IActionResult> AddStudentToSection(int sectionId, int facultyId)
+    public async Task<IActionResult> SetStudents(int sectionId)
     {
         var model = new AddStudentToSectionDto();
-        model.Students = await _sectionService.GetAvailableStudents(sectionId, facultyId);
+        model.Students = await _sectionService.GetAvailableStudents(sectionId);
         var sectionDetails = await _sectionService.GetSectionById(sectionId);
         ViewBag.sectionId = sectionId;
         ViewBag.CourseName = sectionDetails.Course.CourseName;
@@ -102,22 +114,22 @@ public class SectionsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> AddStudentToSection(AddStudentToSectionDto model)
+    public async Task<IActionResult> SetStudents(AddStudentToSectionDto model)
     {
         var result = await _sectionService.AddStudentsToSection(model.StudentIds, model.SectionId);
         ShowMessage(result.Message, result.Succeeded);
 
 
-        return RedirectToAction("SectionActions", routeValues: new { sectionId = model.SectionId });
+        return RedirectToAction("Index", routeValues: new { sectionId = model.SectionId });
     }
 
     [HttpPost]
-    public async Task<IActionResult> RemoveStudentFromSection(int sectionId, int studentId)
+    public async Task<IActionResult> RemoveStudent(int sectionId, int studentId)
     {
         var result = await _sectionService.RemoveStudentFromSection(studentId, sectionId);
         ShowMessage(result.Message, result.Succeeded);
 
-        return RedirectToAction("SectionActions", routeValues: new { sectionId, studentId });
+        return RedirectToAction("Index", routeValues: new { sectionId, studentId });
     }
 
     // Ajaxes

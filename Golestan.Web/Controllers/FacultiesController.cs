@@ -19,7 +19,7 @@ public class FacultiesController : BaseController {
     }
 
 
-    public async Task<IActionResult> FacultyManagement(int facultyId)
+    public async Task<IActionResult> Index(int facultyId)
     {
         var faculty = await _facultyService.GetFacultyDtoById(facultyId);
 
@@ -28,7 +28,7 @@ public class FacultiesController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> EditFaculty(int facultyId)
+    public async Task<IActionResult> Update(int facultyId)
     {
         var faculty = await _facultyService.GetFacultyDtoById(facultyId);
 
@@ -38,7 +38,7 @@ public class FacultiesController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> EditFaculty(UpdateFacultyDto model)
+    public async Task<IActionResult> Update(UpdateFacultyDto model)
     {
         if (!ModelState.IsValid){
             return View(model);
@@ -52,18 +52,18 @@ public class FacultiesController : BaseController {
         }
 
 
-        return RedirectToAction("FacultyManagement");
+        return RedirectToAction("Index");
     }
 
     [HttpGet]
-    public async Task<IActionResult> AddFaculty()
+    public async Task<IActionResult> Add()
     {
         return View();
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> AddFaculty(AddFacultyDto model)
+    public async Task<IActionResult> Add(AddFacultyDto model)
     {
         var result = await _facultyService.AddFaculty(model.Adapt<FacultyDto>());
 
@@ -73,7 +73,7 @@ public class FacultiesController : BaseController {
             return View(model);
         }
 
-        return RedirectToAction("FacultyManagement");
+        return RedirectToAction("Index");
     }
 
 

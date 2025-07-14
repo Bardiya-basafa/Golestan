@@ -25,7 +25,15 @@ public class CoursesController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> AddCourse(int facultyId)
+    public async Task<IActionResult> Index(int courseId)
+    {
+        var model = await _courseService.GetCourseDtoById(courseId);
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Add(int facultyId)
     {
         var faculty = await _facultyService.GetFacultyDtoById(facultyId);
 
@@ -41,7 +49,7 @@ public class CoursesController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> AddCourse(AddCourseDto dto)
+    public async Task<IActionResult> Add(AddCourseDto dto)
     {
         if (!ModelState.IsValid){
             return View(dto);
@@ -51,7 +59,7 @@ public class CoursesController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("ManageCourses", "Admin", new { facultyId = dto.FacultyId });
+            return RedirectToAction("Courses", "Admin", new { facultyId = dto.FacultyId });
         }
 
 
@@ -66,61 +74,72 @@ public class CoursesController : BaseController {
         if (currentTerm == null){
             ShowMessage("Currently you have not any open term", false);
 
-            return RedirectToAction("ManageCourses", "Admin");
+            return RedirectToAction("Index", "Courses", new { courseId = courseId });
         }
+
 
         var model = new SetExamForCourseDto()
         {
             CourseId = courseId,
-            CourseName = _courseService.GetCourseById(courseId).GetAwaiter().GetResult().CourseName,
+            CourseName = _courseService.GetCourseDtoById(courseId).GetAwaiter().GetResult().CourseName,
             ExamStartDate = currentTerm.ExamsStartTime,
             ExamEndDate = currentTerm.ExamsEndTime,
         };
 
+        var classrooms = await _courseService.GetExamClassrooms(courseId);
+
+        if (classrooms == null){
+            ShowMessage("No class available for exam", false);
+
+            return RedirectToAction("Index", "Courses", new { courseId = courseId });
+        }
+
+        model.Classrooms = classrooms;
+
         return View(model);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> SetExamTime(SetExamForCourseDto dto)
+    public async Task<IActionResult> SetExamTime(SetExamForCourseDto model)
     {
-        var result = await _courseService.SetExam(dto);
+        var result = await _courseService.SetExam(model);
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("CourseActions", routeValues: new { courseId = dto.CourseId });
+            return RedirectToAction("Index", routeValues: new { courseId = model.CourseId });
         }
 
-        return View(dto);
+
+        model.CourseName = _courseService.GetCourseDtoById(model.CourseId).GetAwaiter().GetResult().CourseName;
+        model.Classrooms = await _courseService.GetExamClassrooms(model.CourseId);
+        var currentTerm = await _termService.GetCurrentTerm();
+        model.ExamStartDate = currentTerm.ExamsStartTime;
+        model.ExamEndDate = currentTerm.ExamsEndTime;
+
+        return View(model);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> RemoveCourse(int courseId, int facultyId)
+    public async Task<IActionResult> Remove(int courseId, int facultyId)
     {
         var result = await _courseService.RemoveCourse(courseId);
         ShowMessage(result.Message, result.Succeeded);
 
-        return RedirectToAction("ManageCourses", "Admin", new { facultyId = facultyId });
+        return RedirectToAction("Courses", "Admin", new { facultyId = facultyId });
     }
 
-    [HttpGet]
-    public async Task<IActionResult> CourseActions(int courseId)
-    {
-        var model = await _courseService.GetCourseById(courseId);
-
-        return View(model);
-    }
 
     [HttpGet]
-    public async Task<IActionResult> ApplyNewInstructorToCourse(int facultyId, int courseId)
+    public async Task<IActionResult> SetInstructor(int facultyId, int courseId)
     {
         var model = await _courseService.GetAvailableInsturctorsForCourse(facultyId, courseId);
 
         if (model.Instructors.Count == 0){
             ShowMessage("No instructor available for this course", false);
 
-            return RedirectToAction("CourseActions", routeValues: new { courseId = courseId });
+            return RedirectToAction("Index", routeValues: new { courseId = courseId });
         }
 
 
@@ -129,7 +148,7 @@ public class CoursesController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> ApplyNewInstructorToCourse(CourseInstructorDto dto)
+    public async Task<IActionResult> SetInstructor(CourseInstructorDto dto)
     {
         if (!ModelState.ContainsKey("InstructorId") && !ModelState.ContainsKey("CourseId")){
             return View(dto);
@@ -138,25 +157,36 @@ public class CoursesController : BaseController {
         var result = await _courseService.ApplyInstructorToCourse(dto);
         ShowMessage(result.Message, result.Succeeded);
 
-        return RedirectToAction("CourseActions", routeValues: new { courseId = dto.CourseId });
+        return RedirectToAction("Index", routeValues: new { courseId = dto.CourseId });
     }
 
     [HttpGet]
-    public async Task<IActionResult> AddPrerequisiteToCourse(int courseId)
+    public async Task<IActionResult> SetPrerequisite(int courseId)
     {
         var model = await _courseService.GetAvailableCoursesForPrerequisite(courseId);
+        var course = await _courseService.GetCourseDtoById(courseId);
+        ViewBag.courseid = course.Id;
+        ViewBag.coursename = course.CourseName;
 
         return View(model);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> AddPrerequisiteToCourse(int courseId, int prerequisiteCourseId)
+    public async Task<IActionResult> SetPrerequisite(int courseId, int prerequisiteCourseId)
     {
         var result = await _courseService.AddPrerequisiteToCourse(courseId, prerequisiteCourseId);
         ShowMessage(result.Message, result.Succeeded);
 
-        return RedirectToAction("CourseActions", routeValues: new { courseId = courseId });
+        return RedirectToAction("Index", routeValues: new { courseId = courseId });
+    }
+
+    public async Task<IActionResult> RemovePrerequisite(int courseId, int prerequisiteCourseId)
+    {
+        var result = await _courseService.RemovePrerequisiteFromCourse(courseId, prerequisiteCourseId);
+        ShowMessage(result.Message, result.Succeeded);
+
+        return RedirectToAction("Index", routeValues: new { courseId = courseId });
     }
 
 }

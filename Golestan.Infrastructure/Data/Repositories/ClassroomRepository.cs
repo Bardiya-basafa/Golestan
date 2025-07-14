@@ -1,5 +1,11 @@
 ﻿namespace Golestan.Infrastructure.Data.Repositories;
 
+using Application.DTOs.Classroom;
+using Application.DTOs.Course;
+using Application.DTOs.Faculty;
+using Application.DTOs.Instructor;
+using Application.DTOs.Section;
+using Application.DTOs.Student;
 using Application.RepositoryInterfaces;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -17,11 +23,42 @@ public class ClassroomRepository(AppDbContext context) : IClassroomRepository {
             .ToListAsync();
     }
 
-    public async Task<Classroom?> GetClassroomById(int classroomId)
+    public async Task<ClassroomDto> GetClassroomDtoById(int classroomId)
     {
         return await context.Classrooms
             .AsNoTracking()
             .Where(c => c.Id == classroomId)
+            .Select(c => new ClassroomDto()
+            {
+                Id = c.Id,
+                ClassroomNumber = c.ClassNumber,
+                Capacity = c.Capacity,
+                Faculty = new FacultyDto()
+                {
+                    Id = c.FacultyId,
+                    MajorName = c.Faculty.MajorName,
+                },
+                Sections = c.Sections.Select(s => new SectionDto()
+                {
+                    Id = s.Id,
+                    Course = new CourseDto()
+                    {
+                        Id = s.CourseId,
+                        CourseName = s.Course.CourseName,
+                    },
+                    Students = s.Students.Select(st => new StudentDto()
+                    {
+                        Id = st.Id,
+                    }).ToList(),
+                    TimeSlot = s.TimeSlot,
+                    DayOfWeek = s.DayOfWeek,
+                    Instructor = new InstructorDto()
+                    {
+                        Id = s.InstructorId,
+                        FullName = s.Instructor.FullName,
+                    }
+                }).ToList()
+            })
             .FirstOrDefaultAsync() ?? throw new Exception("Class room not found");
     }
 

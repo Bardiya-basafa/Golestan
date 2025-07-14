@@ -13,6 +13,11 @@ using Shared.Helpers;
 
 public class InstructorService(IInstructorRepository instructorRepository) : IInstructorService {
 
+    public async Task<InstructorDto> GetInstructorAppUser(string instructorId)
+    {
+        return await instructorRepository.GetInstructorAppUser(instructorId);
+    }
+
     public async Task<List<InstructorDto>> GetFacultyInstructors()
     {
         try{

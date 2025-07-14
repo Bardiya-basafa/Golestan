@@ -2,6 +2,7 @@
 
 using Application.DTOs.Classroom;
 using Application.DTOs.Course;
+using Application.DTOs.Exam;
 using Application.DTOs.ExamResult;
 using Application.DTOs.Instructor;
 using Application.DTOs.Objection;
@@ -16,6 +17,20 @@ using Shared.Helpers;
 
 
 public class StudentRepository(AppDbContext context) : IStudentRepository {
+
+    public async Task<StudentDto> GetStudentUserApp(string studentId)
+    {
+        return await context.Users
+            .AsNoTracking()
+            .Where(u => u.Id == studentId)
+            .Select(u => new StudentDto()
+            {
+                Id = u.StudentId,
+                AppUser = u,
+                FullName = u.StudentProfile.FullName,
+            })
+            .FirstOrDefaultAsync() ?? throw new Exception($"student with id {studentId} not found");
+    }
 
     public async Task<Student> GetStudentEntityById(int studentId)
     {
@@ -38,6 +53,7 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
                 StudentNumber = s.StudentNumber,
                 Sections = s.Sections.Select(sec => new SectionDto()
                 {
+                    Id = sec.Id,
                     Classroom = new ClassroomDto()
                     {
                         ClassroomNumber = sec.Classroom.ClassNumber,
@@ -47,6 +63,11 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
                     Course = new CourseDto()
                     {
                         CourseName = sec.Course.CourseName,
+                        Unit = sec.Course.Unit,
+                        Exam = new ExamDto()
+                        {
+                            ExamDateTime = sec.Course.Exam.ExamDateTime
+                        }
                     },
                     Instructor = new InstructorDto()
                     {
@@ -86,6 +107,10 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
                 Id = t.Id,
                 Year = t.Year,
                 TermIdentifier = t.TermIdentifier,
+                SelectionEndTime = t.SectionSelectionEndTime,
+                SelectionStartTime = t.SectionSelectionStartTime,
+                ExamsEndTime = t.ExamsEndTime,
+                ExamsStartTime = t.ExamsStartTime,
             })
             .ToListAsync();
     }

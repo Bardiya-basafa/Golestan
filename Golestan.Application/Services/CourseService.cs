@@ -4,29 +4,33 @@ using Domain.Entities;
 using Domain.Enums;
 using DTOs.Course;
 using DTOs.Exam;
-using DTOs.Instructor;
 using Interfaces;
-using Mapster;
-using Microsoft.EntityFrameworkCore;
 using RepositoryInterfaces;
 using Shared.Helpers;
 
 
-public class CourseService(ICourseRepository courseRepository) : ICourseService {
+public class CourseService(ICourseRepository courseRepository, ITermService termService) : ICourseService {
 
     public async Task<List<CourseDto>> GetFacultyCourses(int facultyId)
     {
         return await courseRepository.GetFacultyCourses(facultyId);
     }
 
-    public async Task<CourseDto> GetCourseById(int courseId)
+    public async Task<CourseDto> GetCourseDtoById(int courseId)
     {
-        return await courseRepository.GetCourseById(courseId);
+        return await courseRepository.GetCourseDtoById(courseId);
     }
 
     public async Task<CourseInstructorDto> GetAvailableInsturctorsForCourse(int facultyId, int courseId)
     {
         return await courseRepository.GetAvailableInstructorsForCourse(facultyId, courseId);
+    }
+
+    public async Task<List<CourseDto>> GetPrerequisiteCourses(int courseId)
+    {
+        var ids = courseRepository.GetCourseDtoById(courseId).GetAwaiter().GetResult().PrerequisiteCourses;
+
+        return await courseRepository.GetPrerequisiteCourses(ids);
     }
 
     public async Task<Dictionary<int, string>?> GetCourseInstructors(int courseId)
@@ -43,6 +47,11 @@ public class CourseService(ICourseRepository courseRepository) : ICourseService 
     public async Task<List<Course>> GetAvailableCoursesForStudent(int studentId)
     {
         return await courseRepository.GetAvailableCoursesForStudent(studentId);
+    }
+
+    public async Task<Dictionary<int, string>?> GetExamClassrooms(int courseId)
+    {
+        return await courseRepository.GetExamClassrooms(courseId);
     }
 
     public async Task<ExamDto?> GetCourseExam(int courseId)
@@ -81,32 +90,32 @@ public class CourseService(ICourseRepository courseRepository) : ICourseService 
 
     public async Task<Result> SetExam(SetExamForCourseDto dto)
     {
-        // var currentTerm = await _termService.GetCurrentTerm();
-        //
-        // if (currentTerm == null){
-        //     return new Result() { Message = "Term not found" };
-        // }
-        //
-        // if (currentTerm.ExamsEndTime <= dto.ExamDateTime || dto.ExamDateTime <= currentTerm.ExamsStartTime){
-        //     return new Result()
-        //     {
-        //         Message = $"Exam date must be between {currentTerm.ExamsStartTime.ToString("yyyy-M-d dddd")} - {dto.ExamDateTime.ToString("yyyy-M-d dddd")}",
-        //     };
-        // }
+        var currentTerm = await termService.GetCurrentTerm();
 
-        if (await courseRepository.IsExamExistInClass(dto.ExamDateTime, GetTimeSlot(dto.ExamTimeSlotId), dto.ExamClassroomId)){
+        if (currentTerm == null){
+            return new Result() { Message = "Term not found" };
+        }
+
+        if (currentTerm.ExamsEndTime <= dto.ExamDate || dto.ExamDate <= currentTerm.ExamsStartTime){
+            return new Result()
+            {
+                Message = $"Exam date must be between {currentTerm.ExamsStartTime.ToString("yyyy-M-d dddd")} - {dto.ExamDate.ToString("yyyy-M-d dddd")}",
+            };
+        }
+
+        if (await courseRepository.IsExamExistInClass(dto.ExamDate, GetTimeSlot(dto.TimeSlotId), dto.ClassroomId)){
             return new Result() { Message = "Course already taken for exam" };
         }
 
 
         var exam = new Exam()
         {
-            ClassroomId = dto.ExamClassroomId,
+            ClassroomId = dto.ClassroomId,
             CourseId = dto.CourseId,
 
-            // TermId = currentTerm.Id,
-            TimeSlot = GetTimeSlot(dto.ExamTimeSlotId),
-            ExamDateTime = dto.ExamDateTime,
+            TermId = currentTerm.Id,
+            TimeSlot = GetTimeSlot(dto.TimeSlotId),
+            ExamDateTime = dto.ExamDate,
         };
 
 
@@ -121,6 +130,13 @@ public class CourseService(ICourseRepository courseRepository) : ICourseService 
     public async Task<Result> AddPrerequisiteToCourse(int courseId, int prerequisiteCourseId)
     {
         return await courseRepository.AddPrerequisiteToCourse(courseId, prerequisiteCourseId);
+    }
+
+    public async Task<Result> RemovePrerequisiteFromCourse(int courseId, int prerequisiteCourseId)
+    {
+        var course = await courseRepository.GetCourseEntityById(courseId);
+
+        return await courseRepository.RemovePrerequisiteFromCourse(course, prerequisiteCourseId);
     }
 
 

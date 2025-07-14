@@ -14,7 +14,7 @@
                                         </p>
                                         <p class="text-blue-100 text-lg">Comprehensive academic course administration</p>
                                 </div>
-                                <a asp-controller="Classrooms" asp-action="AddClassroom" asp-route-facultyId="@facultyId" class="group">
+                                <a asp-controller="Classrooms" asp-action="Add" asp-route-facultyId="@facultyId" class="group">
                                         <div class="bg-white hover:bg-blue-50 text-blue-700 px-6 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center shadow-md hover:shadow-lg">
                                                 <svg class="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -76,7 +76,7 @@
                                 </div>
                                 <h3 class="text-xl font-semibold text-blue-900 mb-2">No Classrooms Found</h3>
                                 <p class="text-blue-600 mb-8 max-w-md mx-auto">Start building your academic infrastructure by adding your first classroom to this faculty.</p>
-                                <a asp-controller="Classrooms" asp-action="AddClassroom" asp-route-facultyId="@facultyId" class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition-all duration-200">
+                                <a asp-controller="Classrooms" asp-action="Add" asp-route-facultyId="@facultyId" class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition-all duration-200">
                                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                         </svg>
@@ -142,7 +142,7 @@
                                                                 </td>
                                                                 <td class="px-8 py-6 whitespace-nowrap">
                                                                         <div class="flex space-x-3">
-                                                                                <a asp-controller="Classrooms" asp-action="ClassroomActions" asp-route-classroomId="@classroom.Id" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-md group">
+                                                                                <a asp-controller="Classrooms" asp-action="Index" asp-route-classroomId="@classroom.Id" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-md group">
                                                                                         <svg class="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                                                                         </svg>
@@ -207,7 +207,7 @@
 
 <!-- Remove Confirmation Modal -->
 <div id="confirmRemoveClassroomModal" class="fixed z-50 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-        <form id="removeStudentForm" asp-controller="Classrooms" asp-action="RemoveClassroom">
+        <form id="removeStudentForm" asp-controller="Classrooms" asp-action="Remove">
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="classroomId" id="classroomId" value=""/>
         </form>

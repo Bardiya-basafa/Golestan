@@ -16,6 +16,11 @@ using Shared.Helpers;
 
 public class CourseRepository(AppDbContext context) : ICourseRepository {
 
+    public async Task<Course> GetCourseEntityById(int courseId)
+    {
+        return await context.Courses.FindAsync(courseId) ?? throw new KeyNotFoundException($"Course with id {courseId} not found");
+    }
+
     public async Task<List<CourseDto>> GetFacultyCourses(int facultyId)
     {
         return await context.Courses
@@ -25,12 +30,14 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
             {
                 Id = c.Id,
                 CourseName = c.CourseName,
+                Unit = c.Unit,
+                Description = c.Description,
             })
             .Take(10)
             .ToListAsync();
     }
 
-    public async Task<CourseDto> GetCourseById(int courseId)
+    public async Task<CourseDto> GetCourseDtoById(int courseId)
     {
         return await context.Courses
             .AsNoTracking()
@@ -40,32 +47,76 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
                 Id = c.Id,
                 Unit = c.Unit,
                 CourseName = c.CourseName,
+                PrerequisiteCourses = c.PrerequisiteCourses,
                 Faculty = new FacultyDto()
                 {
                     Id = c.FacultyId,
                     MajorName = c.Faculty.MajorName,
                 },
                 Sections = c.Sections.Select(s => new SectionDto()
-                {
-                    Id = s.Id,
-                    Classroom = new ClassroomDto()
                     {
-                        ClassroomNumber = s.Classroom.ClassNumber
-                    },
-                    TimeSlot = s.TimeSlot,
-                    DayOfWeek = s.DayOfWeek,
+                        Id = s.Id,
+                        Classroom = new ClassroomDto()
+                        {
+                            ClassroomNumber = s.Classroom.ClassNumber
+                        },
+                        Instructor = new InstructorDto()
+                        {
+                            Id = s.InstructorId,
+                            FullName = s.Instructor.FullName,
+                        },
+                        TimeSlot = s.TimeSlot,
+                        DayOfWeek = s.DayOfWeek,
+                    })
+                    .ToList(),
+                Instructors = c.Instructors.Select(i => new InstructorDto()
+                {
+                    Id = i.Id,
+                    FullName = i.FullName,
+                    InstructorNumber = i.InstructorNumber,
                 }).ToList()
             })
             .FirstOrDefaultAsync() ?? throw new Exception("Course not found");
     }
 
+    public async Task<List<CourseDto>> GetPrerequisiteCourses(List<int> prerequisiteCourseIds)
+    {
+        return await context.Courses
+            .AsNoTracking()
+            .Where(c => prerequisiteCourseIds.Contains(c.Id))
+            .Select(c => new CourseDto()
+            {
+                Id = c.Id,
+                CourseName = c.CourseName,
+                Unit = c.Unit,
+            })
+            .ToListAsync();
+    }
+
     public async Task<Dictionary<int, string>?> GetCourseInstructors(int courseId)
     {
         return await context.Instructors
+            .AsNoTracking()
             .Where(i => i.Courses.Any(c => c.Id == courseId))
             .Select(i => new { i.Id, i.FullName })
             .Distinct()
             .ToDictionaryAsync(c => c.Id, c => c.FullName);
+    }
+
+    public async Task<Dictionary<int, string>?> GetExamClassrooms(int courseId)
+    {
+        var facultyId = await context.Courses
+            .AsNoTracking()
+            .Where(c => c.Id == courseId)
+            .Select(c => c.FacultyId)
+            .FirstOrDefaultAsync();
+
+        return await context.Classrooms
+            .AsNoTracking()
+            .Where(c => c.FacultyId == facultyId)
+            .Select(c => new { c.Id, c.ClassNumber })
+            .Distinct()
+            .ToDictionaryAsync(c => c.Id, c => c.ClassNumber);
     }
 
     public async Task<List<CourseDto>> GetAvailableCoursesForPrerequisite(int courseId)
@@ -79,11 +130,11 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
             })
             .FirstOrDefaultAsync() ?? throw new Exception("Course not found");
 
-        var prerequisiteCourseIds = new HashSet<int>(course.PrerequisiteCourseIds);
+        var prerequisiteCourseIds = course.PrerequisiteCourseIds;
 
         return await context.Courses
             .AsNoTracking()
-            .Where(c => c.Id != courseId && !prerequisiteCourseIds.Contains(c.Id))
+            .Where(c => c.Id != courseId && !prerequisiteCourseIds.Contains(c.Id) && !c.PrerequisiteCourses.Contains(courseId))
             .Select(c => new CourseDto()
             {
                 Id = c.Id,
@@ -108,11 +159,13 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
     public async Task<List<Course>> GetAvailableCoursesForStudent(int studentId)
     {
         var studentPassedCourses = await context.Students
+            .AsNoTracking()
             .Where(s => s.Id == studentId)
             .SelectMany(s => s.PassedCourses)
             .ToListAsync();
 
         return await context.Courses
+            .AsNoTracking()
             .Where(c => !studentPassedCourses.Contains(c))
             .Where(c => c.PrerequisiteCourses.All(pc => studentPassedCourses.Select(passed => passed.Id).Contains(pc)))
             .ToListAsync();
@@ -228,7 +281,7 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
 
     public async Task<bool> CourseNameExist(string courseName, int facultyId)
     {
-        return await context.Courses.AnyAsync(c => c.CourseName == courseName && c.FacultyId == facultyId);
+        return await context.Courses.AsNoTracking().AnyAsync(c => c.CourseName == courseName && c.FacultyId == facultyId);
     }
 
     public async Task<Result> SetExam(Exam exam)
@@ -239,9 +292,31 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
         return new Result() { Message = "Exam successfully set", Succeeded = true };
     }
 
+    public async Task<Result> RemovePrerequisiteFromCourse(Course course, int prerequisiteId)
+    {
+        var result = new Result();
+
+        if (!course.PrerequisiteCourses.Contains(prerequisiteId)){
+            result.Message = $"Course prerequisite with id {prerequisiteId} doesn't exist";
+
+            return result;
+        }
+
+        course.PrerequisiteCourses.Remove(prerequisiteId);
+        context.Courses.Update(course);
+        await context.SaveChangesAsync();
+
+        return new Result()
+        {
+            Message = "Prerequisite successfully removed",
+            Succeeded = true
+        };
+    }
+
     public async Task<bool> IsExamExistInClass(DateTime examDate, TimeSlot timeSlot, int classroomId)
     {
         return await context.Exams
+            .AsNoTracking()
             .Where(e => e.TimeSlot == timeSlot && e.ExamDateTime == examDate)
             .Where(e => e.ClassroomId == classroomId)
             .AnyAsync();

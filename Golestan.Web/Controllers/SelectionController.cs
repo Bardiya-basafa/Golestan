@@ -26,7 +26,7 @@ public class SelectionController : BaseController {
 
         ShowMessage(model.Result.Message, model.Result.Succeeded);
 
-        return RedirectToAction("StudentDashboard", "Students");
+        return RedirectToAction("Index", "Students");
     }
 
     public async Task<IActionResult> GetAvailableSectionForSelection(int studentId)
@@ -36,7 +36,7 @@ public class SelectionController : BaseController {
         if (model == null){
             ShowMessage("Right now selection is not available", false);
 
-            return RedirectToAction("StudentDashboard", "Students");
+            return RedirectToAction("Index", "Students");
         }
 
         return View(model);

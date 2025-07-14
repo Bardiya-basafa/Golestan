@@ -14,7 +14,7 @@
                                         </p>
                                         <p class="text-blue-300 text-lg">Comprehensive student administration and oversight</p>
                                 </div>
-                                <a asp-controller="Students" asp-action="AddStudent" asp-route-facultyId="@facultyId" class="group">
+                                <a asp-controller="Students" asp-action="Add" asp-route-facultyId="@facultyId" class="group">
                                         <div class="bg-white hover:bg-blue-50 text-blue-700 px-6 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center shadow-md hover:shadow-lg">
                                                 <svg class="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
@@ -145,7 +145,7 @@
                                 </div>
                                 <h3 class="text-xl font-semibold text-slate-900 mb-2">No Students Found</h3>
                                 <p class="text-slate-600 mb-8 max-w-md mx-auto">Start building your student roster by adding your first student to the system.</p>
-                                <a asp-controller="Students" asp-action="AddStudent" asp-route-facultyId="@facultyId" class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition-all duration-200">
+                                <a asp-controller="Students" asp-action="Add" asp-route-facultyId="@facultyId" class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition-all duration-200">
                                         <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
                                         </svg>

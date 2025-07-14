@@ -1,0 +1,277 @@
+﻿@model ClassroomDto
+
+<div class="min-h-screen bg-gradient-to-br from-white via-blue-50 to-blue-100">
+    <div class="container mx-auto px-6 py-12">
+        <!-- Enhanced Header Section -->
+        <div class="bg-white rounded-lg shadow-sm border border-blue-200 mb-8 overflow-hidden">
+            <div class="bg-blue-700 px-8 py-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-3xl font-bold text-white mb-2">Classroom @Model.ClassroomNumber</p>
+                        <p class="text-blue-300 text-lg">Section Management & Course Scheduling</p>
+                        <div class="flex items-center mt-2 space-x-4">
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                @Model.Faculty.MajorName
+                            </span>
+                            <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                                Capacity: @Model.Capacity
+                            </span>
+                        </div>
+                    </div>
+                    <a asp-controller="Sections" asp-action="Add" asp-route-facultyId="@Model.FacultyId" asp-route-isFromClassroom="true" asp-route-classroomId="@Model.ClassroomId" asp-route-classNumber="@Model.ClassroomNumber" class="group">
+                        <div class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 flex items-center shadow-md hover:shadow-lg transform hover:-translate-y-1">
+                            <svg class="w-5 h-5 mr-3 group-hover:rotate-90 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            Add New Section
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Enhanced Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow-sm border border-blue-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="p-3 bg-blue-100 rounded-xl mb-4">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                            </svg>
+                        </div>
+                        <p class="text-sm font-medium text-blue-800 uppercase tracking-wider mb-1">Total Sections</p>
+                        <p class="text-3xl font-bold text-slate-900">@Model.Sections.Count</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-sm border border-blue-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="p-3 bg-blue-100 rounded-xl mb-4">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <p class="text-sm font-medium text-blue-800 uppercase tracking-wider mb-1">Total Students</p>
+                        <p class="text-3xl font-bold text-slate-900">@Model.Sections.Sum(s => s.Students.Count)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-sm border border-blue-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="p-3 bg-blue-100 rounded-xl mb-4">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <p class="text-sm font-medium text-blue-800 uppercase tracking-wider mb-1">Active Courses</p>
+                        <p class="text-3xl font-bold text-slate-900">@Model.Sections.Select(s => s.Course.Id).Distinct().Count()</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-sm border border-blue-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="p-3 bg-blue-100 rounded-xl mb-4">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <p class="text-sm font-medium text-blue-800 uppercase tracking-wider mb-1">Utilization</p>
+                        <p class="text-3xl font-bold text-slate-900">@(Model.Capacity > 0 ? Math.Round((double)Model.Sections.Sum(s => s.Students.Count) / (Model.Capacity * Model.Sections.Count) * 100, 1) : 0)%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Enhanced Sections Table -->
+        <div class="bg-white rounded-lg shadow-sm border border-blue-300 overflow-hidden">
+            <div class="bg-blue-50 px-8 py-6 border-b border-blue-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">Section Directory</h2>
+                        <p class="text-blue-800 mt-1">Manage course sections and student enrollments</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
+                            @Model.Sections.Count Sections
+                        </span>
+                    </div>
+                </div>
+            </div>
+            @if (Model.Sections.Count == 0){
+                <div class="text-center py-16 border-t border-blue-200">
+                    <div class="mx-auto h-24 w-24 bg-white border border-blue-200 rounded-full flex items-center justify-center mb-6">
+                        <svg class="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-900 mb-2">No Sections Found</h3>
+                    <p class="text-blue-800 mb-8 max-w-md mx-auto">Start scheduling courses by adding your first section to this classroom.</p>
+                    <a asp-controller="Sections" asp-action="Add" asp-route-facultyId="@Model.FacultyId" class="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-200">
+                        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        Add First Section
+                    </a>
+                </div>
+            }
+            else{
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-blue-300">
+                        <thead class="bg-blue-50">
+                            <tr>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-blue-900 uppercase tracking-wider border-r border-blue-300">
+                                    Section ID
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-blue-900 uppercase tracking-wider border-r border-blue-300">
+                                    Course
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-blue-900 uppercase tracking-wider border-r border-blue-300">
+                                    Instructor
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-blue-900 uppercase tracking-wider border-r border-blue-300">
+                                    Time Slot
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-blue-900 uppercase tracking-wider border-r border-blue-300">
+                                    Enrollment
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-blue-900 uppercase tracking-wider">
+                                    Management
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-blue-300">
+                            @foreach (var sec in Model.Sections){
+                                <tr class="hover:bg-blue-50 transition-all duration-200 group">
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-12 w-12 bg-blue-700 rounded-lg flex items-center justify-center shadow-sm">
+                                                <span class="text-white font-bold text-lg">#</span>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-lg font-bold text-slate-900">@sec.Id
+                                                </div>
+                                                <div class="text-sm text-blue-700">Section ID</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 bg-blue-700 rounded-lg flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-semibold text-slate-900">@sec.Course.CourseName
+                                                </div>
+                                                <div class="text-sm text-blue-700"></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 bg-blue-700 rounded-lg flex items-center justify-center">
+                                                <span class="text-white font-semibold text-sm">
+                                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2a3 3 0 00-5.356-1.857M7 20H2v-2a3 3 0 015.356-1.857m0 0A7.962 7.962 0 0112 16a7.962 7.962 0 015.356 1.857m-5.356-1.857C10.832 15.477 9.246 15 7.5 15S4.168 15.477 3 16.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 15.477 14.754 15 16.5 15c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-semibold text-slate-900">@sec.Instructor.FullName
+                                                </div>
+                                                <div class="text-sm text-blue-700"> instructor number
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
+                                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                            </svg>
+                                            @sec.TimeSlot.GetDescription()
+                                        </span>
+                                        <div class="text-xs text-blue-700 mt-1">@sec.DayOfWeek
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                                                </svg>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-semibold text-slate-900">@sec.Students.Count / @Model.Capacity</div>
+                                                <div class="text-sm text-blue-700">Students Enrolled</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap">
+                                        <div class="flex space-x-3">
+                                            <a asp-controller="Sections" asp-action="Index" asp-route-sectionId="@sec.Id" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-md group">
+                                                <svg class="w-4 h-4 mr-2 group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                                </svg>
+                                                View
+                                            </a>
+                                            <button data-section-id="@sec.Id" data-section-name="@sec.Course.CourseName" class="remove-section px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg transition-all duration-200 font-medium">Remove</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+        <!-- Enhanced Pagination -->
+        <div class="bg-white rounded-lg shadow-sm border border-blue-200 px-8 py-6 mt-8">
+            <div class="flex items-center justify-between">
+                <div class="flex-1 flex justify-between sm:hidden">
+                    <a href="#" class="relative inline-flex items-center px-6 py-3 border border-blue-300 text-sm font-semibold rounded-lg text-blue-900 bg-white hover:bg-blue-50 transition-all duration-200"> Previous </a>
+                    <a href="#" class="ml-3 relative inline-flex items-center px-6 py-3 border border-blue-300 text-sm font-semibold rounded-lg text-blue-900 bg-white hover:bg-blue-50 transition-all duration-200"> Next </a>
+                </div>
+                <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-blue-900">
+                            Showing <span class="font-bold text-slate-900">1</span> to
+                            <span class="font-bold text-slate-900">@Model.Sections.Count</span> of
+                            <span class="font-bold text-slate-900">@Model.Sections.Count</span> results
+                        </p>
+                    </div>
+                    <div>
+                        <nav class="relative z-0 inline-flex rounded-lg shadow-sm border border-blue-200 -space-x-px" aria-label="Pagination">
+                            <a href="#" class="relative inline-flex items-center px-4 py-3 rounded-l-lg border-r border-blue-200 bg-white text-sm font-semibold text-blue-900 hover:bg-blue-50 transition-all duration-200">
+                                <span class="sr-only">Previous</span>
+                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="relative inline-flex items-center px-6 py-3 border-r border-blue-200 bg-blue-600 text-sm font-bold text-white transition-all duration-200"> 1 </a>
+                            <a href="#" class="relative inline-flex items-center px-4 py-3 rounded-r-lg bg-white text-sm font-semibold text-blue-900 hover:bg-blue-50 transition-all duration-200">
+                                <span class="sr-only">Next</span>
+                                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Back Navigation -->
+        <div class="mt-8 text-center">
+            <a asp-controller="Admin" asp-action="Classrooms" asp-route-facultyId="@Model.Faculty.Id" class="inline-flex items-center text-blue-800 hover:text-blue-900 transition-colors group font-medium">
+                <svg class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Back to Classroom Management
+            </a>
+        </div>
+    </div>
+</div>

@@ -279,6 +279,18 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
         };
     }
 
+    public async Task<Result> UpdateCourse(Course course)
+    {
+        context.Courses.Update(course);
+        await context.SaveChangesAsync();
+
+        return new Result()
+        {
+            Succeeded = true,
+            Message = "Course successfully updated",
+        };
+    }
+
     public async Task<bool> CourseNameExist(string courseName, int facultyId)
     {
         return await context.Courses.AsNoTracking().AnyAsync(c => c.CourseName == courseName && c.FacultyId == facultyId);

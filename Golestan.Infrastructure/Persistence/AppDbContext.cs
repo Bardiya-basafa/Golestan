@@ -55,11 +55,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
             .WithOne(i => i.AppUser)
             .HasForeignKey<AppUser>(a => a.InstructorId);
 
-        // modelBuilder.Entity<AppUser>()
-        //     .HasMany<AppMessage>(ap => ap.AppMessages)
-        //     .WithOne(m => m.AppUser)
-        //     .HasForeignKey(m => m.AppUserId)
-        //     .OnDelete(DeleteBehavior.Restrict);
 
         // Students
         modelBuilder.Entity<Student>()
@@ -134,6 +129,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
             .HasForeignKey(e => e.InstructorId)
             .OnDelete(DeleteBehavior.NoAction);
 
+
         // Course 
         modelBuilder.Entity<Course>()
             .HasMany(c => c.Sections)
@@ -148,18 +144,29 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
             .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<Course>()
-            .HasOne(c => c.Exam)
-            .WithOne(s => s.Course)
-            .HasForeignKey<Course>(c => c.ExamId)
+            .HasOne<Exam>(c => c.Exam)
+            .WithOne(e => e.Course)
+            .HasForeignKey<Exam>(c => c.CourseId)
             .OnDelete(DeleteBehavior.NoAction);
 
         // Exam 
         modelBuilder.Entity<Exam>()
-            .HasOne(e => e.Term)
-            .WithOne()
-            .HasForeignKey<Exam>(e => e.TermId)
+            .HasOne<Classroom>(e => e.Classroom)
+            .WithMany(c => c.Exams)
+            .HasForeignKey(e => e.ClassroomId)
             .OnDelete(DeleteBehavior.NoAction);
 
+        modelBuilder.Entity<Exam>()
+            .HasOne<Term>(e => e.Term)
+            .WithMany(t => t.Exams)
+            .HasForeignKey(e => e.TermId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+        // modelBuilder.Entity<Exam>()
+        //     .HasOne<Course>(e => e.Course)
+        //     .WithOne(c => c.Exam)
+        //     .HasForeignKey<Course>(c => c.ExamId)
+        //     .OnDelete(DeleteBehavior.NoAction);
 
         // Classroom
         modelBuilder.Entity<Classroom>()
@@ -195,25 +202,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
             .OnDelete(DeleteBehavior.NoAction);
 
 
-        // Exam
-        modelBuilder.Entity<Exam>()
-            .HasOne(e => e.Term)
-            .WithOne()
-            .HasForeignKey<Exam>(e => e.TermId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<Exam>()
-            .HasOne(e => e.Course)
-            .WithOne(e => e.Exam)
-            .HasForeignKey<Exam>(e => e.CourseId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<Exam>()
-            .HasOne(e => e.Classroom)
-            .WithOne()
-            .HasForeignKey<Exam>(e => e.ClassroomId)
-            .OnDelete(DeleteBehavior.NoAction);
-
         // Exam Result 
         modelBuilder.Entity<ExamResult>()
             .HasOne(e => e.Instructor)
@@ -229,14 +217,15 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
 
         modelBuilder.Entity<ExamResult>()
             .HasOne(e => e.Term)
-            .WithOne()
-            .HasForeignKey<ExamResult>(e => e.TermId)
+            .WithMany(t => t.ExamResults)
+            .HasForeignKey(e => e.TermId)
             .OnDelete(DeleteBehavior.NoAction);
+
 
         modelBuilder.Entity<ExamResult>()
             .HasOne(e => e.Student)
-            .WithMany(i => i.ExamResults)
-            .HasForeignKey(i => i.StudentId)
+            .WithMany(s => s.ExamResults)
+            .HasForeignKey(e => e.StudentId)
             .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<ExamResult>()
@@ -245,11 +234,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
             .HasForeignKey<ExamResult>(e => e.SectionId)
             .OnDelete(DeleteBehavior.NoAction);
 
+
         modelBuilder.Entity<ExamResult>()
             .Property(e => e.Score)
             .HasPrecision(18, 2);
 
 
+        // section
         modelBuilder.Entity<Section>()
             .HasOne(s => s.Course)
             .WithMany(c => c.Sections)
@@ -262,25 +253,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
             .HasForeignKey(s => s.InstructorId)
             .OnDelete(DeleteBehavior.NoAction);
 
-
-        // Exam Result 
-        modelBuilder.Entity<ExamResult>()
-            .HasOne(e => e.Instructor)
-            .WithMany(i => i.ExamResults)
-            .HasForeignKey(e => e.InstructorId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<ExamResult>()
-            .HasOne(e => e.Student)
-            .WithMany(s => s.ExamResults)
-            .HasForeignKey(e => e.StudentId)
-            .OnDelete(DeleteBehavior.NoAction);
-
-        modelBuilder.Entity<ExamResult>()
-            .HasOne(e => e.Term)
-            .WithOne()
-            .HasForeignKey<ExamResult>(e => e.TermId)
-            .OnDelete(DeleteBehavior.NoAction);
 
         // Faculty
         modelBuilder.Entity<Faculty>()

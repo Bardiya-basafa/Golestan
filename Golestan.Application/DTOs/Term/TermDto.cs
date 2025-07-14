@@ -6,9 +6,6 @@ public class TermDto {
 
     public int Year { get; set; }
 
-    // public DateTime StartTime { get; set; }
-    //
-    // public DateTime EndTime { get; set; }
 
     public DateTime ExamsStartTime { get; set; }
 
@@ -17,10 +14,13 @@ public class TermDto {
     public DateTime SelectionStartTime { get; set; }
 
     public DateTime SelectionEndTime { get; set; }
+    public DateTime StartTime { get; set; }
 
     public bool IsClosed { get; set; }
 
 
     public string TermIdentifier { get; set; }
+
+    public string TermName { get; set; }
 
 }

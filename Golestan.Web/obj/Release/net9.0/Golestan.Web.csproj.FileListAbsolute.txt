@@ -242,4 +242,4 @@ E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\staticwebassets.
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\compressed\vfgl4y0ek2-it79h6owlo.gz
 E:\AspNetCore-Projects\Golestan\Golestan.Web\bin\Release\net9.0\Mapster.dll
 E:\AspNetCore-Projects\Golestan\Golestan.Web\bin\Release\net9.0\Mapster.Core.dll
-E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\compressed\q31cya5ajk-a97z4nzk0w.gz
+E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\compressed\q31cya5ajk-0h6ram8ojs.gz

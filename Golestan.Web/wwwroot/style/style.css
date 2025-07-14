@@ -220,3 +220,30 @@ button:focus, a:focus {
         transform: translateY(-5px);
     }
 }
+
+.overflow-y-auto {
+    -webkit-overflow-scrolling: touch; /* For smoother scrolling on iOS */
+    overflow-anchor: none; /* Prevents scroll jumping */
+}
+
+.overflow-y-auto {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Add this to your stylesheet */
+table {
+    will-change: transform; /* Improves scrolling performance */
+}
+
+tbody tr {
+    transition: none; /* Remove transition if not critical */
+    /* Or use a simpler transition */
+    transition: background-color 0.1s ease-out;
+}
+
+tbody {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}

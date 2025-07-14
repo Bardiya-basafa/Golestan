@@ -23,6 +23,9 @@ public class TermRepository(AppDbContext context) : ITermRepository {
                 ExamsEndTime = t.ExamsEndTime,
                 SelectionStartTime = t.SectionSelectionStartTime,
                 SelectionEndTime = t.SectionSelectionEndTime,
+                TermIdentifier = t.TermIdentifier,
+                StartTime = t.StartTime,
+                TermName = t.TermName,
                 Year = t.Year,
                 Id = t.Id
             })
@@ -72,16 +75,38 @@ public class TermRepository(AppDbContext context) : ITermRepository {
         };
     }
 
-    public async Task<Result> CloseTerm(Term term)
+    public async Task<Result> EditTerm(Term term)
     {
         context.Terms.Update(term);
         await context.SaveChangesAsync();
+
+        return new Result()
+        {
+            Succeeded = true,
+            Message = "Term updated",
+        };
+    }
+
+    public async Task<Result> CloseTerm(Term term)
+    {
+        context.Terms.Update(term);
 
         var sections = await context.Sections
             .Where(s => s.TermId == term.Id)
             .ToListAsync();
 
         context.Sections.RemoveRange(sections);
+        context.Update(sections);
+
+        var courses = await context.Courses
+            .ToListAsync();
+
+        foreach (var course in courses){
+            course.ExamIsSet = false;
+            context.Courses.Update(course);
+        }
+
+        await context.SaveChangesAsync();
 
         return new Result()
         {

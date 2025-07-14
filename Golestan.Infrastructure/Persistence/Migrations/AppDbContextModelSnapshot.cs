@@ -192,6 +192,9 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Property<int>("ExamId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("ExamIsSet")
+                        .HasColumnType("bit");
+
                     b.Property<int>("FacultyId")
                         .HasColumnType("int");
 
@@ -239,14 +242,12 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassroomId")
-                        .IsUnique();
+                    b.HasIndex("ClassroomId");
 
                     b.HasIndex("CourseId")
                         .IsUnique();
 
-                    b.HasIndex("TermId")
-                        .IsUnique();
+                    b.HasIndex("TermId");
 
                     b.ToTable("Exams");
                 });
@@ -301,8 +302,7 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.HasIndex("TermId")
-                        .IsUnique();
+                    b.HasIndex("TermId");
 
                     b.ToTable("ExamResults");
                 });
@@ -460,6 +460,9 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("ExamSuspended")
                         .HasColumnType("bit");
 
@@ -478,10 +481,17 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("SectionSelectionStartTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("StudentId")
                         .HasColumnType("int");
 
                     b.Property<string>("TermIdentifier")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TermName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -524,19 +534,19 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "c7aeb38a-39b2-4989-b629-6bfaf9a918d7",
+                            Id = "0b8c7de4-b24a-4c49-9444-0f38dd73d0d5",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "27cea1a7-0dac-4e78-af96-a9d219fe2223",
+                            Id = "fc8bd2d3-a82e-4ad4-8541-820b58bbd6ae",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         },
                         new
                         {
-                            Id = "73a3657b-bc9d-4c64-be7b-3a827750a25d",
+                            Id = "f04c3b2a-bb9d-446c-880d-176167e70b4a",
                             Name = "Instructor",
                             NormalizedName = "INSTRUCTOR"
                         });
@@ -738,8 +748,8 @@ namespace Golestan.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Golestan.Domain.Entities.Exam", b =>
                 {
                     b.HasOne("Golestan.Domain.Entities.Classroom", "Classroom")
-                        .WithOne()
-                        .HasForeignKey("Golestan.Domain.Entities.Exam", "ClassroomId")
+                        .WithMany("Exams")
+                        .HasForeignKey("ClassroomId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -750,8 +760,8 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Golestan.Domain.Entities.Term", "Term")
-                        .WithOne()
-                        .HasForeignKey("Golestan.Domain.Entities.Exam", "TermId")
+                        .WithMany("Exams")
+                        .HasForeignKey("TermId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -789,8 +799,8 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Golestan.Domain.Entities.Term", "Term")
-                        .WithOne()
-                        .HasForeignKey("Golestan.Domain.Entities.ExamResult", "TermId")
+                        .WithMany("ExamResults")
+                        .HasForeignKey("TermId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -965,6 +975,8 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Golestan.Domain.Entities.Classroom", b =>
                 {
+                    b.Navigation("Exams");
+
                     b.Navigation("Sections");
                 });
 
@@ -1001,6 +1013,13 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Navigation("PassedCourses");
 
                     b.Navigation("Terms");
+                });
+
+            modelBuilder.Entity("Golestan.Domain.Entities.Term", b =>
+                {
+                    b.Navigation("ExamResults");
+
+                    b.Navigation("Exams");
                 });
 #pragma warning restore 612, 618
         }

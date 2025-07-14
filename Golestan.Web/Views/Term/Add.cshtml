@@ -10,7 +10,6 @@
                         <h1 class="text-3xl font-bold text-gray-800 mb-2">Create New Academic Term</h1>
                         <p class="text-gray-600">Set up dates and schedules for the upcoming term</p>
                 </div>
-
                 <!-- Form Container -->
                 <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
                         <form asp-controller="Term" asp-action="Add" method="post">
@@ -18,42 +17,47 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                         <!-- Left Column -->
                                         <div class="space-y-6">
-                                                <div class="bg-gray-100 rounded-xl p-6 border border-gray-200">
-                                                        <h3 class="text-lg font-bold text-gray-800 mb-4">Examination Period</h3>
+                                                <div class="bg-blue-50 rounded-xl p-6 border border-blue-100">
+                                                        <h3 class="text-lg font-bold text-slate-900 mb-4">Term Details</h3>
                                                         <div class="space-y-4">
                                                                 <div>
-                                                                        <label for="examsStartTime" asp-for="ExamsStartTime" class="block text-sm font-bold text-gray-700 mb-2"> Exams Start Date </label>
-                                                                        <input type="date" asp-for="ExamsStartTime" id="examsStartTime" name="ExamsStartTime" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-700 focus:border-gray-700 text-gray-800">
+                                                                        <label asp-for="TermIdentifier" class="block text-sm font-bold text-blue-800 mb-2"> Term Identifier </label>
+                                                                        <input asp-for="TermIdentifier" placeholder="like : 2025/3,2026/1" type="text" id="termIdentifier" name="TermIdentifier" value="FA2024" required class="w-full px-4 py-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-slate-900"/>
                                                                 </div>
                                                                 <div>
-                                                                        <label for="examsEndTime" asp-for="ExamsEndTime" class="block text-sm font-bold text-gray-700 mb-2"> Exams End Date </label>
-                                                                        <input type="date" asp-for="ExamsEndTime" id="examsEndTime" name="ExamsEndTime" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-700 focus:border-gray-700 text-gray-800">
+                                                                        <label asp-for="TermName" for="termName" class="block text-sm font-bold text-blue-800 mb-2"> Term Name </label>
+                                                                        <input asp-for="TermName" placeholder="like : fall 2024, summer 2025" type="text" id="termName" name="TermName" value="Fall 2024" required class="w-full px-4 py-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-slate-900"/>
                                                                 </div>
                                                         </div>
                                                 </div>
                                         </div>
                                         <!-- Right Column -->
                                         <div class="space-y-6">
-                                                <div class="bg-gray-100 rounded-xl p-6 border border-gray-200">
-                                                        <h3 class="text-lg font-bold text-gray-800 mb-4">Section Selection Period</h3>
+                                                <div class="bg-blue-50 rounded-xl p-6 border border-blue-100">
+                                                        <h3 class="text-lg font-bold text-slate-900 mb-4">Examination Period</h3>
                                                         <div class="space-y-4">
                                                                 <div>
-                                                                        <label for="sectionSelectionStartTime" class="block text-sm font-bold text-gray-700 mb-2"> Registration Opens </label>
-                                                                        <input type="date" asp-for="SectionSelectionStartTime" id="sectionSelectionStartTime" name="SectionSelectionStartTime" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-700 focus:border-gray-700 text-gray-800">
+                                                                        <label for="examsStartTime" asp-for="ExamsStartTime" class="block text-sm font-bold text-blue-800 mb-2"> Exams Start Date </label>
+                                                                        <input type="date" asp-for="ExamsStartTime" id="examsStartTime" name="ExamsStartTime" value="2024-12-01" required class="w-full px-4 py-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-slate-900">
                                                                 </div>
                                                                 <div>
-                                                                        <label for="sectionSelectionEndTime" class="block text-sm font-bold text-gray-700 mb-2"> Registration Closes </label>
-                                                                        <input type="date" asp-for="SectionSelectionEndTime" id="sectionSelectionEndTime" name="SectionSelectionEndTime" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-700 focus:border-gray-700 text-gray-800">
+                                                                        <label for="examsEndTime" asp-for="ExamsEndTime" class="block text-sm font-bold text-blue-800 mb-2"> Exams End Date </label>
+                                                                        <input type="date" asp-for="ExamsEndTime" id="examsEndTime" name="ExamsEndTime" value="2024-12-10" required class="w-full px-4 py-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-slate-900">
                                                                 </div>
                                                         </div>
                                                 </div>
-                                                <div class="bg-gray-100 rounded-xl p-6 border border-gray-200">
-                                                        <h4 class="text-lg font-bold text-gray-800 mb-3">Important Notes</h4>
-                                                        <ul class="text-sm text-gray-700 space-y-2 list-disc pl-5">
-                                                                <li>Section selection should open before term starts</li>
-                                                                <li>Exam period typically occurs at the end of term</li>
-                                                                <li>All dates will be validated for logical sequence</li>
-                                                        </ul>
+                                                <div class="bg-blue-50 rounded-xl p-6 border border-blue-100">
+                                                        <h3 class="text-lg font-bold text-slate-900 mb-4">Section Selection Period</h3>
+                                                        <div class="space-y-4">
+                                                                <div>
+                                                                        <label for="sectionSelectionStartTime" class="block text-sm font-bold text-blue-800 mb-2"> Registration Opens </label>
+                                                                        <input type="date" asp-for="SectionSelectionStartTime" id="sectionSelectionStartTime" name="SectionSelectionStartTime" value="2024-08-15" required class="w-full px-4 py-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-slate-900">
+                                                                </div>
+                                                                <div>
+                                                                        <label for="sectionSelectionEndTime" class="block text-sm font-bold text-blue-800 mb-2"> Registration Closes </label>
+                                                                        <input type="date" asp-for="SectionSelectionEndTime" id="sectionSelectionEndTime" name="SectionSelectionEndTime" value="2024-09-05" required class="w-full px-4 py-3 border border-blue-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-slate-900">
+                                                                </div>
+                                                        </div>
                                                 </div>
                                         </div>
                                 </div>

@@ -1,0 +1,306 @@
+﻿@model SelectionDto
+
+@* load student data with view component *@
+<div class="bg-gradient-to-br from-white via-blue-50 to-blue-100 min-h-screen py-8">
+  <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header Section -->
+    <div class="bg-blue-600 rounded-lg shadow-sm border border-blue-700 mb-8 overflow-hidden">
+      <div class="px-8 py-6 border-b border-blue-500">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="text-3xl font-bold text-white mb-2">Section Selection</p>
+            <p class="text-blue-100 text-lg">Manage available and selected sections for students</p>
+          </div>
+          <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center shadow-md">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open text-white text-2xl">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h6z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    @await Component.InvokeAsync("SelectionInfo", Model.studentId)
+
+    <!-- Two-Column Layout for Tables -->
+    <div class="grid grid-cols-1 mt-10 lg:grid-cols-2 gap-8">
+      <!-- Available Sections Table -->
+      <div class="bg-white rounded-lg shadow-sm border border-blue-300 overflow-hidden">
+        <div class="px-8 py-6 border-b border-blue-300">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-2xl font-bold text-slate-900">Available Sections</h2>
+              <p class="text-slate-600 mt-1">Select sections to add</p>
+            </div>
+            <div class="flex items-center space-x-2">
+            <span id="availableSectionsCount" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
+              @Model.AvailableSections.Count Total
+            </span>
+            </div>
+          </div>
+          <!-- Search Box for Available Sections -->
+          <div class="mt-4">
+            <label for="searchAvailableSections" class="sr-only">Search Available Sections by ID</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search text-gray-400">
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="m21 21-4.3-4.3"/>
+                </svg>
+              </div>
+              <input type="text" id="searchAvailableSections" name="searchAvailableSections" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Search by Section ID">
+            </div>
+          </div>
+        </div>
+        <div class="overflow-y-auto" style="max-height: 1000px;">
+          @if (Model.AvailableSections.Count > 0){
+            <table class="min-w-full divide-y divide-blue-300">
+              <thead class="bg-blue-50  top-0 z-10">
+                <tr>
+                  <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                    Section ID
+                  </th>
+                  <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                    Course Name
+                  </th>
+                  <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                    Instructor
+                  </th>
+                  <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                    Time Slot & Day
+                  </th>
+                  <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="availableSectionsTableBody" class="bg-white divide-y divide-blue-300">
+                @foreach (var sec in Model.AvailableSections){
+                  <tr class="hover:bg-blue-50 transition-all duration-200 group" data-section-id="@sec.Id">
+                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                      <div class="flex items-center">
+                        <div class="flex-shrink-0 h-12 w-12 bg-blue-700 rounded-lg flex items-center justify-center shadow-sm">
+                          <span class="text-white font-bold text-lg">#@sec.Id</span>
+                        </div>
+                        <div class="ml-4">
+                          <div class="text-sm text-slate-500">Section Code</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                      <div class="text-lg font-bold text-slate-900">@sec.Course.CourseName</div>
+                      <div class="text-sm text-slate-500">@sec.Course.Unit Unit</div>
+                    </td>
+                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                    <span class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold bg-blue-100 text-blue-800 border border-blue-200">
+                      @sec.Instructor.FullName
+                    </span>
+                    </td>
+                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                      <div class="text-lg font-bold text-slate-900">@(@sec.TimeSlot.GetDescription())</div>
+                      <div class="text-sm text-slate-500">@sec.DayOfWeek</div>
+                    </td>
+                    <td class="px-8 py-6 whitespace-nowrap">
+                      <a asp-controller="Selection" asp-action="SelectSection" asp-route-studentId="@Model.studentId" asp-route-sectionId="@sec.Id" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-md group select-button" data-section-id="@sec.Id">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus mr-3 group-hover:rotate-90 transition-transform duration-300">
+                          <path d="M12 5v14"/>
+                          <path d="M5 12h14"/>
+                        </svg>
+                        Select </a>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          }
+          else{
+            <div id="noAvailableSections" class="text-center py-16 border-t border-blue-200">
+              <div class="mx-auto h-24 w-24 bg-white border border-blue-200 rounded-full flex items-center justify-center mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search text-blue-600 text-3xl">
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="m21 21-4.3-4.3"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-slate-900 mb-2">No Available Sections</h3>
+              <p class="text-slate-600 mb-8 max-w-md mx-auto">There are no sections currently available for selection.</p>
+            </div>
+          }
+        </div>
+      </div>
+      <!-- Selected Sections Table -->
+      <div class="bg-white rounded-lg shadow-sm border border-blue-300 overflow-hidden">
+        <div class="px-8 py-6 border-b border-blue-300">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-2xl font-bold text-slate-900">Selected Sections</h2>
+              <p class="text-slate-600 mt-1">Sections you have chosen</p>
+            </div>
+            <div class="flex items-center space-x-2">
+            <span id="selectedSectionsCount" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
+              @Model.SelectedSections.Count Total
+            </span>
+            </div>
+          </div>
+          <!-- Search Box for Selected Sections -->
+          <div class="mt-4">
+            <label for="searchSelectedSections" class="sr-only">Search Selected Sections by ID</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search text-gray-400">
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="m21 21-4.3-4.3"/>
+                </svg>
+              </div>
+              <input type="text" id="searchSelectedSections" name="searchSelectedSections" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="Search by Section ID">
+            </div>
+          </div>
+        </div>
+        <div class="overflow-y-auto" style="max-height: 1000px;">
+          @if (Model.SelectedSections.Count > 0){
+            <table class="min-w-full divide-y divide-blue-300">
+              <thead class="bg-blue-50  top-0 z-10">
+                <tr>
+                  <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                    Section ID
+                  </th>
+                  <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                    Course Name
+                  </th>
+                  <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                    Instructor
+                  </th>
+                  <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                    Time Slot & Day
+                  </th>
+                  <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="selectedSectionsTableBody" class="bg-white divide-y divide-blue-300">
+                @foreach (var sec in Model.SelectedSections){
+                  <tr class="hover:bg-red-50 transition-all duration-200 group" data-section-id="@sec.Id">
+                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                      <div class="flex items-center">
+                        <div class="flex-shrink-0 h-12 w-12 bg-blue-700 rounded-lg flex items-center justify-center shadow-sm">
+                          <span class="text-white font-bold text-lg">#@sec.Id</span>
+                        </div>
+                        <div class="ml-4">
+                          <div class="text-sm text-slate-500">Section Code</div>
+                        </div>
+                      </div>
+                    </td>
+                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                      <div class="text-lg font-bold text-slate-900">@sec.Course.CourseName</div>
+                      <div class="text-sm text-slate-500">@sec.Course.Unit Credits</div>
+                    </td>
+                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                    <span class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold bg-blue-100 text-blue-800 border border-blue-200">
+                      @sec.Instructor.FullName
+                    </span>
+                    </td>
+                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                      <div class="text-lg font-bold text-slate-900">@(@sec.TimeSlot.GetDescription())</div>
+                      <div class="text-sm text-slate-500">@sec.DayOfWeek</div>
+                    </td>
+                    <td class="px-8 py-6 whitespace-nowrap">
+                      <a asp-controller="Selection" asp-action="UnselectSection" asp-route-studentId="@Model.studentId" asp-route-sectionId="@sec.Id" class="inline-flex items-center px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-md group remove-button" data-section-id="@sec.Id">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minus-circle mr-3 group-hover:rotate-90 transition-transform duration-300">
+                          <circle cx="12" cy="12" r="10"/>
+                          <path d="M8 12h8"/>
+                        </svg>
+                        Remove </a>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          }
+          else{
+            <div id="noSelectedSections" class="text-center py-16 border-t border-blue-200">
+              <div class="mx-auto h-24 w-24 bg-white border border-blue-200 rounded-full flex items-center justify-center mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clipboard-list text-blue-600 text-3xl">
+                  <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                  <path d="M12 11h4"/>
+                  <path d="M12 16h4"/>
+                  <path d="M8 11h.01"/>
+                  <path d="M8 16h.01"/>
+                </svg>
+              </div>
+              <h3 class="text-xl font-semibold text-slate-900 mb-2">No Sections Selected</h3>
+              <p class="text-slate-600 mb-8 max-w-md mx-auto">Select sections from the left to add them here.</p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="text-center mt-10">
+      <a asp-controller="Students" asp-action="Selection" asp-route-studentId="@Model.studentId" class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors group font-medium">
+        <svg class="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Back </a>
+    </div>
+  </div>
+</div>
+<script>
+  // Function to filter table rows based on search input
+  function filterTable(inputId, tableBodyId, noSectionsMessageId) {
+    const input = document.getElementById(inputId);
+    const filter = input.value.toUpperCase();
+    const tableBody = document.getElementById(tableBodyId);
+    const rows = tableBody.getElementsByTagName('tr');
+    const noSectionsMessage = document.getElementById(noSectionsMessageId);
+    let visibleRowCount = 0;
+
+    for (let i = 0; i < rows.length; i++) {
+      const sectionIdCell = rows[i].querySelector('[data-section-id]'); // Get the row itself, which has the data-section-id
+      if (sectionIdCell) {
+        const textValue = sectionIdCell.dataset.sectionId || ''; // Get ID from data attribute
+        if (textValue.toUpperCase().indexOf(filter) > -1) {
+          rows[i].style.display = '';
+          visibleRowCount++;
+        } else {
+          rows[i].style.display = 'none';
+        }
+      }
+    }
+
+    // Show/hide "No sections found" message based on filter results
+    if (visibleRowCount === 0 && rows.length > 0) {
+      noSectionsMessage.classList.remove('hidden');
+      noSectionsMessage.querySelector('h3').textContent = 'No Matching Sections Found';
+      noSectionsMessage.querySelector('p').textContent = 'Please try a different Section ID.';
+    } else if (rows.length === 0) { // If table is empty initially (no rows from backend)
+      if (tableBodyId === 'availableSectionsTableBody') {
+        noSectionsMessage.classList.remove('hidden');
+        noSectionsMessage.querySelector('h3').textContent = 'No Available Sections';
+        noSectionsMessage.querySelector('p').textContent = 'There are no sections currently available for selection.';
+      } else {
+        noSectionsMessage.classList.remove('hidden');
+        noSectionsMessage.querySelector('h3').textContent = 'No Sections Selected';
+        noSectionsMessage.querySelector('p').textContent = 'Select sections from the left to add them here.';
+      }
+    } else {
+      noSectionsMessage.classList.add('hidden');
+    }
+  }
+
+  // Attach search event listeners
+  document.getElementById('searchAvailableSections').addEventListener('keyup', () => filterTable('searchAvailableSections', 'availableSectionsTableBody', 'noAvailableSections'));
+  document.getElementById('searchSelectedSections').addEventListener('keyup', () => filterTable('searchSelectedSections', 'selectedSectionsTableBody', 'noSelectedSections'));
+
+  // Initial check for empty tables (if no data from backend)
+  document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('availableSectionsTableBody').getElementsByTagName('tr').length === 0) {
+      document.getElementById('noAvailableSections').classList.remove('hidden');
+    }
+    if (document.getElementById('selectedSectionsTableBody').getElementsByTagName('tr').length === 0) {
+      document.getElementById('noSelectedSections').classList.remove('hidden');
+    }
+  });
+</script>

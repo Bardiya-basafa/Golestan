@@ -17,12 +17,18 @@ public class StudentsController : BaseController {
 
     private readonly IUserService _userService;
 
+    private readonly ITermService _termService;
 
-    public StudentsController(IStudentService studentService, IFacultyService facultyService, IUserService userService) : base(facultyService)
+    private readonly ISelectionService _selectionService;
+
+
+    public StudentsController(IStudentService studentService, IFacultyService facultyService, IUserService userService, ITermService termService, ISelectionService selectionService) : base(facultyService)
     {
         _studentService = studentService;
         _facultyService = facultyService;
         _userService = userService;
+        _termService = termService;
+        _selectionService = selectionService;
     }
 
     public async Task<IActionResult> Index()
@@ -32,6 +38,29 @@ public class StudentsController : BaseController {
         // var model = await _studentService.GetStudentUserApp(userId);
         // strongly typed
         var model = await _studentService.GetStudentUserApp("84f21f1c-cddd-46bc-8744-4a25183ed4de");
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Selection(int studentId)
+    {
+        var model = await _termService.GetCurrentTerm();
+        ViewBag.studentId = studentId;
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> AvailableSections(int studentId)
+    {
+        var model = await _selectionService.GetAvailableSectionsForSelection(studentId);
+
+        if (model == null){
+            ShowMessage("The selection time passed, no sections available", false);
+
+            return RedirectToAction("Selection");
+        }
 
         return View(model);
     }

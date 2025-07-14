@@ -15,6 +15,8 @@ public interface ITermRepository {
 
     Task<Result> AddTerm(Term term);
 
+    Task<Result> EditTerm(Term term);
+
     Task<Result> CloseTerm(Term term);
 
     Task<bool> IsInsideAnyTermCurrently();

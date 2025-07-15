@@ -130,7 +130,7 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[9.0.5, )"
+              "version": "[9.0.7, )"
             }
           },
           "imports": [

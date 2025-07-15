@@ -243,3 +243,5 @@ E:\AspNetCore-Projects\Golestan\Golestan.Web\bin\Release\net9.0\Mapster.Core.dll
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\compressed\q31cya5ajk-0h6ram8ojs.gz
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\compressed\vfgl4y0ek2-580y3y7v4i.gz
 E:\AspNetCore-Projects\Golestan\Golestan.Web\obj\Release\net9.0\compressed\a8ngr4024z-domob6b58v.gz
+E:\AspNetCore-Projects\Golestan\Golestan.Web\bin\Release\net9.0\System.Formats.Asn1.dll
+E:\AspNetCore-Projects\Golestan\Golestan.Web\bin\Release\net9.0\System.Text.Json.dll

@@ -128,6 +128,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5zdHJ1Y3RvcnNcU2VjdGlvbnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Instructors/Students.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5zdHJ1Y3RvcnNcU3R1ZGVudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/AspNetCore-Projects/Golestan/Golestan.Web/Views/Sections/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VjdGlvbnNcQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

@@ -12,6 +12,9 @@ public interface IInstructorRepository {
 
     Task<InstructorDto> GetInstructorAppUser(string instructorId);
 
+    Task<InstructorDto> GetInstructorInfo(int instructorId);
+
+
     Task<InstructorDto> GetInstructorDtoById(int instructorId);
 
     Task<List<InstructorDto>> GetFacultyInstructors();

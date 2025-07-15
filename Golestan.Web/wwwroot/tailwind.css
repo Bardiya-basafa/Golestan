@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind utilities-legacy;
+@layer base {
+    @layer utilities-legacy;
+
+}
+
+@layer components {
+    @layer utilities-legacy;
+
+}
+
+@layer utilities-legacy;

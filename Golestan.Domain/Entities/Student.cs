@@ -15,6 +15,8 @@ public class Student {
 
     public string StudentNumber { get; set; }
 
+    public decimal Gpa { get; set; }
+
     public DateTime EnteredDate { get; set; }
 
     public int FacultyId { get; set; }

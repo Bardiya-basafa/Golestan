@@ -191,16 +191,18 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
         section.Students = sectionStudents;
         context.Sections.Update(section);
 
-        var newExamResult = new ExamResult()
-        {
-            CourseId = course.Id,
-            SectionId = sectionId,
-            ExamDate =  course.Exam.ExamDateTime,
-            InstructorId = section.InstructorId,
-            TermId = term.Id,
-        };
 
         foreach (var student in students){
+            var newExamResult = new ExamResult()
+            {
+                CourseId = course.Id,
+                SectionId = sectionId,
+                ExamDate = course.Exam.ExamDateTime,
+                InstructorId = section.InstructorId,
+                TermId = term.Id,
+                StudentId = student.Id,
+            };
+
             student.ExamResults.Add(newExamResult);
             context.Students.Update(student);
         }

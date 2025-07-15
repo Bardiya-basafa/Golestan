@@ -40,10 +40,7 @@ public class InstructorService(IInstructorRepository instructorRepository) : IIn
         return await instructorRepository.GetInstructorStudentsOfSection(sectionId);
     }
 
-    public async Task<List<ExamResultDto>> GetExamResultsOfSection(int sectionId)
-    {
-        return await instructorRepository.GetExamResultsOfSection(sectionId);
-    }
+    
 
   
 

@@ -21,12 +21,15 @@ public class InstructorsController : BaseController {
 
     private readonly IInstructorService _instructorService;
 
-    public InstructorsController(IFacultyService facultyService, UserManager<AppUser> userManager, IUserService userService, IInstructorService instructorService) : base(facultyService)
+    private readonly ITermService _termService;
+
+    public InstructorsController(IFacultyService facultyService, UserManager<AppUser> userManager, IUserService userService, IInstructorService instructorService, ITermService termService) : base(facultyService)
     {
         _facultyService = facultyService;
         _userManager = userManager;
         _userService = userService;
         _instructorService = instructorService;
+        _termService = termService;
     }
 
     public async Task<IActionResult> Index()
@@ -66,16 +69,14 @@ public class InstructorsController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> SubmitStudentsScores(int sectionId)
+    public async Task<IActionResult> Exams(int instructorId)
     {
-        var model = await _instructorService.GetExamResultsOfSection(sectionId);
-
-        // invoke the view component async 
+        var model = await _termService.GetCurrentTerm();
+        ViewBag.InstructorId = instructorId;
 
         return View(model);
     }
 
-    
 
     [HttpGet]
     public async Task<IActionResult> Add()

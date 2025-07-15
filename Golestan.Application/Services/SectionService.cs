@@ -79,8 +79,8 @@ public class SectionService(ISectionRepository sectionRepository, ICourseReposit
         await sectionRepository.RemoveStudent(section, student);
 
 
-        return await sectionRepository.RemoveExamResult(sectionId, studentId);
-      
+        // return await sectionRepository.RemoveExamResult(sectionId, studentId);
+      return new Result();
     }
 
     public async Task<Result> AddSection(AddSectionDto dto)

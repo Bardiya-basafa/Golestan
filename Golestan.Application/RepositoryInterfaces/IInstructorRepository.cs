@@ -21,7 +21,6 @@ public interface IInstructorRepository {
 
     Task<List<StudentDto>> GetInstructorStudentsOfSection(int sectionId);
 
-    Task<List<ExamResultDto>> GetExamResultsOfSection(int sectionId);
 
 
     Task<Result> RemoveCourseInstructor(int instructorId, int courseId);

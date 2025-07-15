@@ -1,0 +1,135 @@
+﻿@model List<ExamResultDto>
+@{
+    var sectionId = (int)ViewBag.sectionid;
+}
+<div class="bg-gradient-to-br from-white via-blue-50 to-blue-100 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Section -->
+        <div class="bg-blue-600 rounded-lg shadow-sm border border-blue-700 mb-8 overflow-hidden">
+            <div class="px-8 py-6 border-b border-blue-500">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-3xl font-bold text-white mb-2">Submit Exam Results</p>
+                        <p class="text-blue-100 text-lg">Enter and manage scores for students in this exam</p>
+                    </div>
+                    <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center shadow-md">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Exam Details (Optional - for context) -->
+        @await Component.InvokeAsync("ExamInfo", sectionId)
+        <!-- Students Table for Result Submission -->
+        <div class="bg-white rounded-lg shadow-sm border border-blue-300 overflow-hidden">
+            <div class="px-8 py-6 border-b border-blue-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">Students for Exam Result Submission</h2>
+                        <p class="text-slate-600 mt-1">Enter scores and descriptions for each student</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
+                            @Model.Count Total Students
+                        </span>
+                    </div>
+                </div>
+            </div>
+            @if (Model.Count > 0){
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-blue-300">
+                        <thead class="bg-blue-50">
+                            <tr>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Student Info
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Student Number
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Objection
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Description
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Score
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-blue-300">
+                            @foreach (var result in Model){
+                                <tr class="hover:bg-blue-50 transition-all duration-200 group">
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-12 w-12 bg-blue-700 rounded-lg flex items-center justify-center shadow-sm">
+                                                <span class="text-white font-bold text-lg">@result.Student.Id</span>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-lg font-bold text-slate-900">@result.Student.FullName</div>
+                                                <div class="text-sm text-slate-500">@result.Student.Email</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="text-lg font-bold text-slate-900">@result.Student.StudentNumber</div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <span class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold @(!string.IsNullOrEmpty(result.Objection) ? "bg-red-100 text-red-800 border border-red-200" : "bg-green-100 text-green-800 border border-green-200"))">
+                                            @(string.IsNullOrEmpty(result.Objection) ? "-" : result.Objection)
+                                        </span>
+                                    </td>
+                                    <form asp-controller="Exam" asp-action="SubmitStudentsScores" method="post">
+                                        <input type="hidden" name="SectionId" value="@result.Section.Id" />
+                                        <input type="hidden" name="StudentId" value="@result.Student.Id" />
+                                        <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                            <input type="text" value="@result.Description" name="Description" rows="2" class="form-textarea w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800" placeholder="Add description"/>
+                                        </td>
+                                        <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                            <input type="number" name="Score" min="0" max="20" step="0.25" class="form-input w-24 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800" placeholder="@(result.Score == -1 ? "N/A" : "")" value="@(result.Score == -1 ? "" : result.Score)">
+                                        </td>
+                                        <td class="px-8 py-6 whitespace-nowrap">
+                                            <button type="submit" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-md group">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle mr-2">
+                                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-8.16"/>
+                                                    <path d="m9 11 3 3L22 4"/>
+                                                </svg>
+                                                Submit Score
+                                            </button>
+                                        </td>
+                                    </form>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else{
+                <!-- No Students Found Message -->
+                <div class="text-center py-16 border-t border-blue-200">
+                    <div class="mx-auto h-24 w-24 bg-white border border-blue-200 rounded-full flex items-center justify-center mb-6">
+                        <svg class="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2a3 3 0 00-5.356-1.857M7 20H2v-2a3 3 0 015.356-1.857m0 0A7.962 7.962 0 0112 16a7.962 7.962 0 015.356 1.857m-5.356-1.857C10.832 15.477 9.246 15 7.5 15S4.168 15.477 3 16.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 15.477 14.754 15 16.5 15c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-900 mb-2">No Students Found</h3>
+                    <p class="text-slate-600 mb-8 max-w-md mx-auto">There are no students enrolled in this exam to submit results for.</p>
+                </div>
+            }
+        </div>
+        <!-- Back Link -->
+        <div class="text-center mt-8">
+            <a href="#" class="text-gray-600 hover:text-gray-900 font-medium flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left mr-2">
+                    <path d="m12 19-7-7 7-7"/>
+                    <path d="M19 12H5"/>
+                </svg>
+                Back to Exam Results </a>
+        </div>
+    </div>
+</div>

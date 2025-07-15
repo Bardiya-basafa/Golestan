@@ -12,6 +12,7 @@ public class ExamController(IExamService examService, IFacultyService facultySer
     public async Task<IActionResult> Index(int sectionId)
     {
         var model = await examService.GetSectionExamResults(sectionId);
+        ViewBag.SectionId = sectionId;
 
         return View(model);
     }
@@ -22,11 +23,10 @@ public class ExamController(IExamService examService, IFacultyService facultySer
     {
         var result = await examService.SubmitStudentScore(model);
 
-        if (!result.Succeeded){
-            ShowMessage(result.Message, result.Succeeded);
-        }
+        ShowMessage(result.Message, result.Succeeded);
 
-        return RedirectToAction("SubmitStudentsScores", new { instructorId = model.InstructorId, sectionId = model.SectionId });
+
+        return RedirectToAction("Index", new { sectionId = model.SectionId });
     }
 
 }

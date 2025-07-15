@@ -159,10 +159,6 @@ public class InstructorRepository(AppDbContext context) : IInstructorRepository 
             .ToListAsync();
     }
 
-   
-    
-
-    
 
     public async Task<Result> RemoveCourseInstructor(int instructorId, int courseId)
     {

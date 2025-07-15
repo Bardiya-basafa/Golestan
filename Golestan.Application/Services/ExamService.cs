@@ -1,6 +1,7 @@
 ﻿namespace Golestan.Application.Services;
 
 using Domain.Entities;
+using DTOs.Exam;
 using DTOs.ExamResult;
 using DTOs.Score;
 using Interfaces;
@@ -26,6 +27,11 @@ public class ExamService(IExamRepository examRepository) : IExamService {
     public async Task<List<ExamResultDto>> GetSectionExamResults(int sectionId)
     {
         return await examRepository.GetSectionExamResults(sectionId);
+    }
+
+    public async Task<ExamDto> GetExamInfo(int sectionId)
+    {
+        return await examRepository.GetExamInfo(sectionId);
     }
 
 }

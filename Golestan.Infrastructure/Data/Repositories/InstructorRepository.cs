@@ -146,7 +146,8 @@ public class InstructorRepository(AppDbContext context) : IInstructorRepository 
                 Id = s.Id,
                 FullName = s.FullName,
                 StudentNumber = s.StudentNumber,
-                Gpa = s.ExamResults.Where(e => e.Score != -1).Sum(e => e.Score) / s.ExamResults.Where(e => e.Score != -1).Count(),
+                Email = s.AppUser.Email,
+                Gpa = s.ExamResults.Count(examResult => examResult.Score != -1) == 0 ? -1 : (s.ExamResults.Where(e => e.Score != -1).Sum(e => e.Score) / s.ExamResults.Count(e => e.Score != -1)),
                 Sections = s.Sections.Select(ss => new SectionDto()
                 {
                     Course = new CourseDto()

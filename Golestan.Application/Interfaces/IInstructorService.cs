@@ -22,7 +22,6 @@ public interface IInstructorService {
 
     Task<List<ExamResultDto>> GetExamResultsOfSection(int sectionId);
 
-    Task<Result> SubmitStudentScore(ScoreDto model);
 
     Task<Result> RemoveCourseInstructor(int instructorId, int courseId);
 

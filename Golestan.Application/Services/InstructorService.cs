@@ -45,17 +45,7 @@ public class InstructorService(IInstructorRepository instructorRepository) : IIn
         return await instructorRepository.GetExamResultsOfSection(sectionId);
     }
 
-    public async Task<Result> SubmitStudentScore(ScoreDto model)
-    {
-        if (model.Score < 0 || model.Score > 20){
-            return new Result()
-            {
-                Message = "Score must be between 0 and 20"
-            };
-        }
-
-        return await instructorRepository.SubmitExamResult(model.Adapt<ExamResult>());
-    }
+  
 
 
     public async Task<Result> RemoveCourseInstructor(int instructorId, int courseId)

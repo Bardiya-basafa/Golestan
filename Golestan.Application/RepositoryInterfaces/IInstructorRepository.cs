@@ -23,7 +23,6 @@ public interface IInstructorRepository {
 
     Task<List<ExamResultDto>> GetExamResultsOfSection(int sectionId);
 
-    Task<Result> SubmitExamResult(ExamResult examResult);
 
     Task<Result> RemoveCourseInstructor(int instructorId, int courseId);
 

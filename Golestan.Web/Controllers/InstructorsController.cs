@@ -49,9 +49,18 @@ public class InstructorsController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> Students(int sectionId)
+    public async Task<IActionResult> Students(int sectionId, int instructorId)
     {
         var model = await _instructorService.GetInstructorStudentsOfSection(sectionId);
+        ViewBag.InstructorId = instructorId;
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ExamSections(int instructorId)
+    {
+        var model = await _instructorService.GetInstructorDtoById(instructorId);
 
         return View(model);
     }
@@ -66,18 +75,7 @@ public class InstructorsController : BaseController {
         return View(model);
     }
 
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> SubmitStudentsScores(ScoreDto model)
-    {
-        var result = await _instructorService.SubmitStudentScore(model);
-
-        if (!result.Succeeded){
-            ShowMessage(result.Message, result.Succeeded);
-        }
-
-        return RedirectToAction("SubmitStudentsScores", new { instructorId = model.InstructorId, sectionId = model.SectionId });
-    }
+    
 
     [HttpGet]
     public async Task<IActionResult> Add()

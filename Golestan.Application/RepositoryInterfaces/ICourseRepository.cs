@@ -37,6 +37,8 @@ public interface ICourseRepository {
 
     Task<Result> AddPrerequisiteToCourse(int courseId, int prerequisiteId);
 
+    Task<Result> UpdateCourse(Course course);
+
     Task<bool> CourseNameExist(string courseName, int facultyId);
 
     Task<Result> SetExam(Exam exam);

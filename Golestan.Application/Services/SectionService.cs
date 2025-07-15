@@ -71,21 +71,16 @@ public class SectionService(ISectionRepository sectionRepository, ICourseReposit
 
     public async Task<Result> RemoveStudentFromSection(int studentId, int sectionId)
     {
-        var section = await sectionRepository.GetSectionEntityById(sectionId);
+        var student = await sectionRepository.GetStudent(studentId);
 
-        var student = await studentRepository.GetStudentEntityById(studentId);
+        var section = await sectionRepository.GetSection(sectionId);
 
 
-        if (section.Students.Contains(student)){
-            section.Students.Remove(student);
-        }
-
-        if (student.Sections.Contains(section)){
-            student.Sections.Remove(section);
-        }
+        await sectionRepository.RemoveStudent(section, student);
 
 
         return await sectionRepository.RemoveExamResult(sectionId, studentId);
+      
     }
 
     public async Task<Result> AddSection(AddSectionDto dto)
@@ -93,7 +88,7 @@ public class SectionService(ISectionRepository sectionRepository, ICourseReposit
         var result = new Result();
 
 
-        if (0 < dto.TimeSlotId && dto.TimeSlotId <= 6 && 0 < dto.DayOfWeekId && dto.DayOfWeekId <= 7){
+        if (0 > dto.TimeSlotId || dto.TimeSlotId > 6 || 0 > dto.DayOfWeekId || dto.DayOfWeekId > 7){
             result.Message = "time ranges must valid";
 
             return result;
@@ -109,6 +104,14 @@ public class SectionService(ISectionRepository sectionRepository, ICourseReposit
 
         if (await sectionRepository.IsInstructorTakenAtTime(dto.InstructorId, GetTimeSlot(dto.TimeSlotId), GetDayOfWeek(dto.DayOfWeekId))){
             result.Message = "The instructor time is taken";
+
+            return result;
+        }
+
+        var exam = await sectionRepository.GetCourseExam(dto.CourseId);
+
+        if (exam == null){
+            result.Message = "Set an exam for course before adding section to it";
 
             return result;
         }

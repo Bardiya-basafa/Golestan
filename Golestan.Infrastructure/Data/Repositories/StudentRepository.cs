@@ -4,6 +4,7 @@ using Application.DTOs.Classroom;
 using Application.DTOs.Course;
 using Application.DTOs.Exam;
 using Application.DTOs.ExamResult;
+using Application.DTOs.Faculty;
 using Application.DTOs.Instructor;
 using Application.DTOs.Objection;
 using Application.DTOs.Section;
@@ -58,7 +59,11 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
                     {
                         ClassroomNumber = sec.Classroom.ClassNumber,
                         Capacity = sec.Classroom.Capacity,
-                        Id = sec.ClassroomId
+                        Id = sec.ClassroomId,
+                        Faculty = new FacultyDto()
+                        {
+                            BuildingName = sec.Classroom.Faculty.BuildingName,
+                        }
                     },
                     Course = new CourseDto()
                     {
@@ -66,7 +71,8 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
                         Unit = sec.Course.Unit,
                         Exam = new ExamDto()
                         {
-                            ExamDateTime = sec.Course.Exam.ExamDateTime
+                            ExamDateTime = sec.Course.Exam.ExamDateTime,
+                            TimeSlot = sec.Course.Exam.TimeSlot,
                         }
                     },
                     Instructor = new InstructorDto()
@@ -130,6 +136,19 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
             .ToListAsync();
     }
 
+    public async Task<List<ExamResultDto>> GetAllExamResults(int studentId)
+    {
+        return await context.Students
+            .AsNoTracking()
+            .Where(s => s.Id == studentId)
+            .SelectMany(s => s.ExamResults)
+            .Select(e => new ExamResultDto()
+            {
+                Score = e.Score,
+            })
+            .ToListAsync();
+    }
+
     public async Task<ExamResult> GetExamResultForObjection(ObjectionDto objection)
     {
         return await context.Students
@@ -138,6 +157,7 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
             .Where(e => e.Id == objection.ExamResultId)
             .FirstOrDefaultAsync() ?? throw new Exception($"Student with id {objection.StudentId} not found");
     }
+
 
     public async Task<Result> SubmitObjection(ExamResult examResult, string objection)
     {

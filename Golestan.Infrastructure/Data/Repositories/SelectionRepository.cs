@@ -2,6 +2,8 @@
 
 using Application.DTOs.Classroom;
 using Application.DTOs.Course;
+using Application.DTOs.Exam;
+using Application.DTOs.Faculty;
 using Application.DTOs.Instructor;
 using Application.DTOs.Section;
 using Application.RepositoryInterfaces;
@@ -16,18 +18,37 @@ public class SelectionRepository(AppDbContext context) : ISelectionRepository {
 
     public async Task<List<SectionDto>> GetAvailableSections(List<Course> availableCourses, Student student)
     {
-        return await context.Sections
+        var sections = await context.Sections
             .AsNoTracking()
-            .Where(s => availableCourses.Select(c => c.Id).Contains(s.CourseId) && student.Sections.All(section => section.Id != s.Id))
+            .Include(section => section.Classroom).ThenInclude(c => c.Faculty)
+            .Include(section => section.Course).ThenInclude(c => c.Exam)
+            .Include(section => section.Instructor)
+            .ToListAsync();
+
+        return sections
+            .AsEnumerable()
+            .Where(s => availableCourses.Any(c => c.Id == s.CourseId)
+                        && s.Course.Exam != null
+                        && !student.Sections.Any(section => section.Id == s.Id))
             .Select(s => new SectionDto()
             {
                 Classroom = new ClassroomDto()
                 {
                     ClassroomNumber = s.Classroom.ClassNumber,
+                    Faculty = new FacultyDto()
+                    {
+                        BuildingName = s.Classroom.Faculty.BuildingName,
+                    }
                 },
                 Course = new CourseDto()
                 {
                     CourseName = s.Course.CourseName,
+                    Unit = s.Course.Unit,
+                    Exam = new ExamDto()
+                    {
+                        TimeSlot = s.Course.Exam.TimeSlot,
+                        ExamDateTime = s.Course.Exam.ExamDateTime,
+                    }
                 },
                 DayOfWeek = s.DayOfWeek,
                 TimeSlot = s.TimeSlot,
@@ -36,8 +57,7 @@ public class SelectionRepository(AppDbContext context) : ISelectionRepository {
                 {
                     FullName = s.Instructor.FullName,
                 }
-            })
-            .ToListAsync();
+            }).ToList();
     }
 
     public async Task<List<SectionDto>> GetSelectedSections(int studentId)
@@ -58,6 +78,7 @@ public class SelectionRepository(AppDbContext context) : ISelectionRepository {
                 Course = new CourseDto()
                 {
                     CourseName = sec.Course.CourseName,
+                    Unit = sec.Course.Unit,
                 },
                 Instructor = new InstructorDto()
                 {

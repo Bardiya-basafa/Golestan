@@ -13,8 +13,9 @@ public interface ITermService {
 
     Task<List<TermDto>> GetAllTerms();
 
+    Task<Result> EditTerm(TermDto model);
 
-    Task<Result> OpenNewTerm(OpenNewTermDto dto);
+    Task<Result> OpenNewTerm(OpenNewTermDto model);
 
     Task<Result> CloseTerm(string confirmation, string currentTerm);
 

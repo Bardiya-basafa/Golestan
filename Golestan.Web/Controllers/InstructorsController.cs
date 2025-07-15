@@ -31,6 +31,10 @@ public class InstructorsController : BaseController {
 
     public async Task<IActionResult> Index()
     {
+        var userId = GetUserId();
+
+        // var model = await _studentService.GetStudentUserApp(userId);
+        // strongly typed
         var model = await _instructorService.GetInstructorAppUser("ea2856a2-3089-47f2-9a8b-7b86de653ea4");
 
         return View(model);

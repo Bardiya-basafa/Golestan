@@ -25,6 +25,8 @@ public interface ISectionRepository {
 
     Task<Course> GetCourseBySectionId(int sectionId);
 
+    Task<Exam?> GetCourseExam(int courseId);
+
     Task<Result> AddStudentsToSection(List<int> studentIds, int sectionId, List<int> prerequisitesCourses, TermDto term, Course course);
 
     Task<Result> RemoveExamResult(int sectionId, int studentId);
@@ -34,5 +36,11 @@ public interface ISectionRepository {
     Task<bool> IsClassroomTakenAtTime(int classroomId, TimeSlot timeSlot, DayOfWeek dayOfWeek);
 
     Task<bool> IsInstructorTakenAtTime(int instructorId, TimeSlot timeSlot, DayOfWeek dayOfWeek);
+
+    Task RemoveStudent(Section section, Student student);
+
+    Task<Student> GetStudent(int studentId);
+
+    Task<Section> GetSection(int sectionId);
 
 }

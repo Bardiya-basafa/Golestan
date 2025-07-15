@@ -136,6 +136,14 @@
                     </div>
                     <h3 class="text-lg font-bold text-white">Exam Results</h3>
                 </a>
+                <a asp-controller="Students" asp-action="Selection" asp-route-studentId="@Model.Id" class="bg-blue-600 rounded-lg p-4 shadow-sm border border-blue-700 cursor-pointer group hover:bg-blue-700 transition-colors duration-200 flex flex-col items-center justify-center text-center">
+                    <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v18H3V3zM3 7h18M3 11h18M3 15h18"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-white">Selection</h3>
+                </a>
             </div>
         </div>
     </div>

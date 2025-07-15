@@ -88,7 +88,7 @@ public class CourseService(ICourseRepository courseRepository, ITermService term
         return await courseRepository.AddCourse(course);
     }
 
-    public async Task<Result> SetExam(SetExamForCourseDto dto)
+    public async Task<Result> SetExam(SetExamForCourseDto model)
     {
         var currentTerm = await termService.GetCurrentTerm();
 
@@ -96,27 +96,39 @@ public class CourseService(ICourseRepository courseRepository, ITermService term
             return new Result() { Message = "Term not found" };
         }
 
-        if (currentTerm.ExamsEndTime <= dto.ExamDate || dto.ExamDate <= currentTerm.ExamsStartTime){
+        if (currentTerm.ExamsEndTime <= model.ExamDate || model.ExamDate <= currentTerm.ExamsStartTime){
             return new Result()
             {
-                Message = $"Exam date must be between {currentTerm.ExamsStartTime.ToString("yyyy-M-d dddd")} - {dto.ExamDate.ToString("yyyy-M-d dddd")}",
+                Message = $"Exam date must be between {currentTerm.ExamsStartTime.ToString("yyyy-M-d dddd")} - {model.ExamDate.ToString("yyyy-M-d dddd")}",
             };
         }
 
-        if (await courseRepository.IsExamExistInClass(dto.ExamDate, GetTimeSlot(dto.TimeSlotId), dto.ClassroomId)){
+        if (await courseRepository.IsExamExistInClass(model.ExamDate, GetTimeSlot(model.TimeSlotId), model.ClassroomId)){
             return new Result() { Message = "Course already taken for exam" };
         }
 
 
         var exam = new Exam()
         {
-            ClassroomId = dto.ClassroomId,
-            CourseId = dto.CourseId,
-
+            ClassroomId = model.ClassroomId,
+            CourseId = model.CourseId,
             TermId = currentTerm.Id,
-            TimeSlot = GetTimeSlot(dto.TimeSlotId),
-            ExamDateTime = dto.ExamDate,
+            TimeSlot = GetTimeSlot(model.TimeSlotId),
+            ExamDateTime = model.ExamDate,
         };
+
+        var course = await courseRepository.GetCourseEntityById(model.CourseId);
+        course.ExamIsSet = true;
+        
+
+        var updateResult = await courseRepository.UpdateCourse(course);
+
+        if (!updateResult.Succeeded){
+            return new Result()
+            {
+                Message = "Something went wrong",
+            };
+        }
 
 
         return await courseRepository.SetExam(exam);

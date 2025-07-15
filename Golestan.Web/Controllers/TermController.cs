@@ -55,13 +55,13 @@ public class TermController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Add(OpenNewTermDto dto)
+    public async Task<IActionResult> Add(OpenNewTermDto model)
     {
         if (!ModelState.IsValid){
-            return View(dto);
+            return View(model);
         }
 
-        var result = await _termService.OpenNewTerm(dto);
+        var result = await _termService.OpenNewTerm(model);
 
 
         ShowMessage(result.Message, result.Succeeded);
@@ -70,38 +70,37 @@ public class TermController : BaseController {
             return RedirectToAction("Index");
         }
 
-        return View(dto);
+        return View(model);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Edit()
+    {
+        var model = await _termService.GetCurrentTerm();
 
-    // Edit current term
-    // [HttpGet]
-    // public async Task<IActionResult> EditTermProperties()
-    // {
-    //     var model = await _termService.GetCurrentTerm();
-    //
-    //     if (model == null){
-    //         ShowMessage("Currently no term is available", false);
-    //
-    //         return RedirectToAction("OpenNewTerm");
-    //     }
-    //
-    //     return View();
-    // }
-    //
-    // [HttpPost]
-    // [ValidateAntiForgeryToken]
-    // public async Task<IActionResult> EditTermProperties(EditTermDto dto)
-    // {
-    //     var result = await _termService.EditTermProperties();
-    //     ShowMessage(result.Message, result.Succeeded);
-    //
-    //     if (result.Succeeded){
-    //         return RedirectToAction("CurrentTerm");
-    //     }
-    //
-    //     return View();
-    // }
+        if (model == null){
+            ShowMessage("No term found", false);
+
+            return RedirectToAction("Index");
+        }
+
+        return View(model);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(TermDto model)
+    {
+        var result = await _termService.EditTerm(model);
+        ShowMessage(result.Message, result.Succeeded);
+
+        if (result.Succeeded){
+            return RedirectToAction("Index");
+        }
+
+        return View(model);
+    }
+
 
     [HttpGet]
     public async Task<IActionResult> Close()

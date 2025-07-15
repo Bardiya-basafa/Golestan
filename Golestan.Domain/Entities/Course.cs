@@ -1,8 +1,5 @@
 ﻿namespace Golestan.Domain.Entities;
 
-using System.ComponentModel.DataAnnotations.Schema;
-
-
 public class Course {
 
     public int Id { get; set; }
@@ -13,7 +10,8 @@ public class Course {
 
     public string Description { get; set; }
 
-    [ForeignKey("Exam")]
+    public bool ExamIsSet { get; set; } = false;
+
     public int ExamId { get; set; }
 
     public int FacultyId { get; set; }

@@ -22,6 +22,7 @@ public class StudentDto {
 
 
     public AppUser AppUser { get; set; }
+    public decimal Gpa { get; set; }
 
 
     public DateTime EnteredDate { get; set; }

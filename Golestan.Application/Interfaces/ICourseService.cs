@@ -31,7 +31,7 @@ public interface ICourseService {
 
     Task<Result> AddCourse(AddCourseDto dto);
 
-    Task<Result> SetExam(SetExamForCourseDto dto);
+    Task<Result> SetExam(SetExamForCourseDto model);
 
     Task<Result> RemoveCourse(int courseId);
 

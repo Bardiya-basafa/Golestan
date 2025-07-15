@@ -100,6 +100,7 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
             .Where(s => s.Id == sectionId)
             .Include(s => s.Course).ThenInclude(c => c.Exam)
             .Include(s => s.Students)
+            .Include(s => s.Classroom)
             .FirstOrDefaultAsync() ?? throw new Exception($"Section not found with id: {sectionId}");
     }
 
@@ -153,6 +154,14 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
             .FirstOrDefaultAsync() ?? throw new Exception($"course not found with section id: {sectionId}");
     }
 
+    public async Task<Exam?> GetCourseExam(int courseId)
+    {
+        return await context.Exams
+            .AsNoTracking()
+            .Where(s => s.CourseId == courseId)
+            .FirstOrDefaultAsync();
+    }
+
     public async Task<Result> AddStudentsToSection(List<int> studentIds, int sectionId, List<int> prerequisitesCourses, TermDto term, Course course)
     {
         var sectionStudents = await context.Sections
@@ -181,19 +190,19 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
         sectionStudents.AddRange(students);
         section.Students = sectionStudents;
         context.Sections.Update(section);
-        await context.SaveChangesAsync();
 
         var newExamResult = new ExamResult()
         {
             CourseId = course.Id,
             SectionId = sectionId,
-            ExamDate = course.Exam == null ? default(DateTime) : course.Exam.ExamDateTime,
+            ExamDate =  course.Exam.ExamDateTime,
             InstructorId = section.InstructorId,
             TermId = term.Id,
         };
 
         foreach (var student in students){
             student.ExamResults.Add(newExamResult);
+            context.Students.Update(student);
         }
 
         await context.SaveChangesAsync();
@@ -249,6 +258,29 @@ public class SectionRepository(AppDbContext context) : ISectionRepository {
 
         return instructor.Sections
             .Any(s => s.TimeSlot == timeSlot && s.DayOfWeek == dayOfWeek);
+    }
+
+    public async Task RemoveStudent(Section section, Student student)
+    {
+        section.Students.Remove(student);
+        context.Sections.Update(section);
+        student.Sections.Remove(section);
+        context.Students.Update(student);
+        await context.SaveChangesAsync();
+    }
+
+    public async Task<Student> GetStudent(int studentId)
+    {
+        return await context.Students
+            .Include(s => s.Sections)
+            .FirstOrDefaultAsync(s => s.Id == studentId) ?? throw new Exception($"student not found with id: {studentId}");
+    }
+
+    public async Task<Section> GetSection(int sectionId)
+    {
+        return await context.Sections
+            .Include(s => s.Students)
+            .FirstOrDefaultAsync(s => s.Id == sectionId) ?? throw new Exception($"section not found with id: {sectionId}");
     }
 
 }

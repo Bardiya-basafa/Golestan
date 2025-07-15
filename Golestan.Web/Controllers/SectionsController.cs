@@ -43,7 +43,7 @@ public class SectionsController : BaseController {
     {
         var currentTerm = await _termService.IsInsideAnyTermCurrently();
 
-        if (currentTerm){
+        if (!currentTerm){
             ShowMessage("No term available right now add one first", false);
 
             return RedirectToAction("Sections", "Admin", routeValues: new { facultyId = facultyId });
@@ -58,6 +58,12 @@ public class SectionsController : BaseController {
         }
 
         var courses = await _facultyService.GetFacultyCoursesOptions(facultyId);
+
+        if (courses == null){
+            ShowMessage("No course is in the faculty add one first", false);
+
+            return RedirectToAction("Sections", "Admin", routeValues: new { facultyId = facultyId });
+        }
 
         var model = new AddSectionDto()
         {
@@ -83,16 +89,24 @@ public class SectionsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Add(AddSectionDto dto)
+    public async Task<IActionResult> Add(AddSectionDto model)
     {
-        var result = await _sectionService.AddSection(dto);
+        var result = await _sectionService.AddSection(model);
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("Sections", "Admin", routeValues: new { facultyId = dto.FacultyId });
+            return RedirectToAction("Sections", "Admin", routeValues: new { facultyId = model.FacultyId });
         }
 
-        return View(dto);
+        ViewBag.IsFromClassroom = false;
+        var classrooms = await _facultyService.GetFacultyClassroomsOptions(model.FacultyId);
+        var faculty = await _facultyService.GetFacultyDtoById(model.FacultyId);
+        model.Classrooms = classrooms;
+        model.FacultyId = model.FacultyId;
+        model.FacultyMajorName = faculty.MajorName;
+        model.Courses = await _facultyService.GetFacultyCoursesOptions(model.FacultyId);
+
+        return View(model);
     }
 
 

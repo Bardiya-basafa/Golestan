@@ -26,4 +26,7 @@ public class OpenNewTermDto {
     [Required]
     public string TermIdentifier { get; set; }
 
+    [Required]
+    public string TermName { get; set; }
+
 }

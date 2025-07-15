@@ -1,6 +1,8 @@
 ﻿namespace Golestan.Infrastructure.Data.Repositories;
 
 using Application.DTOs.Classroom;
+using Application.DTOs.Course;
+using Application.DTOs.Exam;
 using Application.DTOs.ExamResult;
 using Application.DTOs.Faculty;
 using Application.DTOs.Instructor;
@@ -38,10 +40,32 @@ public class InstructorRepository(AppDbContext context) : IInstructorRepository 
             .FirstOrDefaultAsync() ?? throw new KeyNotFoundException($"User with id {instructorId} not found");
     }
 
+    public async Task<InstructorDto> GetInstructorInfo(int instructorId)
+    {
+        return await context.Instructors
+            .AsNoTracking()
+            .Where(u => u.Id == instructorId)
+            .Select(i => new InstructorDto()
+            {
+                Id = i.Id,
+                FullName = i.FullName,
+                Salary = i.Salary,
+                HireDate = i.HireDate,
+
+                // InstructorNumber = i.InstructorNumber,
+                Sections = i.Sections.Select(s => new SectionDto()
+                {
+                    Id = s.Id,
+                }).ToList(),
+            })
+            .FirstOrDefaultAsync() ?? throw new KeyNotFoundException($"User with id {instructorId} not found");
+    }
+
+
     public async Task<InstructorDto> GetInstructorDtoById(int instructorId)
     {
         return await context.Instructors
-                .AsNoTracking()
+            .AsNoTracking()
             .Where(i => i.Id == instructorId)
             .Select(i => new InstructorDto()
             {
@@ -60,8 +84,26 @@ public class InstructorRepository(AppDbContext context) : IInstructorRepository 
                     TimeSlot = s.TimeSlot,
                     Classroom = new ClassroomDto()
                     {
-                        ClassroomNumber = s.Classroom.ClassNumber
-                    }
+                        ClassroomNumber = s.Classroom.ClassNumber,
+                        Faculty = new FacultyDto()
+                        {
+                            BuildingName = s.Classroom.Faculty.BuildingName,
+                        }
+                    },
+                    Course = new CourseDto()
+                    {
+                        Id = s.CourseId,
+                        Unit = s.Course.Unit,
+                        CourseName = s.Course.CourseName,
+                        Exam = new ExamDto()
+                        {
+                            ExamDateTime = s.Course.Exam.ExamDateTime,
+                            TimeSlot = s.Course.Exam.TimeSlot,
+                        }
+                    },
+                    Students = s.Students.Select(st => new StudentDto()
+                    {
+                    }).ToList()
                 }).ToList()
             })
             .FirstOrDefaultAsync() ?? throw new NullReferenceException($"Instructor not found with id: {instructorId}");
@@ -96,7 +138,7 @@ public class InstructorRepository(AppDbContext context) : IInstructorRepository 
     public async Task<List<StudentDto>> GetInstructorStudentsOfSection(int sectionId)
     {
         return await context.Sections
-                .AsNoTracking()
+            .AsNoTracking()
             .Where(s => s.Id == sectionId)
             .SelectMany(s => s.Students)
             .Select(s => new StudentDto()
@@ -104,6 +146,14 @@ public class InstructorRepository(AppDbContext context) : IInstructorRepository 
                 Id = s.Id,
                 FullName = s.FullName,
                 StudentNumber = s.StudentNumber,
+                Gpa = s.ExamResults.Where(e => e.Score != -1).Sum(e => e.Score) / s.ExamResults.Where(e => e.Score != -1).Count(),
+                Sections = s.Sections.Select(ss => new SectionDto()
+                {
+                    Course = new CourseDto()
+                    {
+                        Unit = ss.Course.Unit,
+                    }
+                }).ToList(),
             })
             .ToListAsync();
     }
@@ -111,7 +161,7 @@ public class InstructorRepository(AppDbContext context) : IInstructorRepository 
     public async Task<List<ExamResultDto>> GetExamResultsOfSection(int sectionId)
     {
         return await context.ExamResults
-                .AsNoTracking()
+            .AsNoTracking()
             .Where(r => r.SectionId == sectionId)
             .Select(r => new ExamResultDto()
             {

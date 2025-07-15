@@ -10,24 +10,41 @@ public class SelectionController : BaseController {
 
     private readonly ISelectionService _selectionService;
 
+    private readonly ITermService _termService;
 
-    public SelectionController(ISelectionService selectionService, IFacultyService facultyService) : base(facultyService)
+    public SelectionController(ISelectionService selectionService, IFacultyService facultyService, ITermService termService) : base(facultyService)
     {
         _selectionService = selectionService;
+        _termService = termService;
     }
 
-    public async Task<IActionResult> SelectionTermDetails()
+    [HttpGet]
+    public async Task<IActionResult> Index(int studentId)
     {
-        var model = await _selectionService.SelectionTermDetails();
+        var currentTerm = await _termService.GetCurrentTerm();
 
-        if (model.Result.Succeeded){
-            return View(model);
+        if (currentTerm == null){
+            ShowMessage("No term available", false);
+
+            return RedirectToAction("Selection", "Students", new { studentId });
         }
 
-        ShowMessage(model.Result.Message, model.Result.Succeeded);
+        var currentDate = DateTime.UtcNow;
 
-        return RedirectToAction("Index", "Students");
+        if (currentTerm.SelectionStartTime > currentDate || currentTerm.SelectionEndTime < currentDate){
+            ShowMessage("Currently we are not at selection time", false);
+
+            return RedirectToAction("Selection", "Students", new { studentId });
+        }
+
+        var model = await _selectionService.GetSelectionDto(studentId);
+        model.StartDate = currentTerm.SelectionStartTime;
+        model.EndDate = currentTerm.SelectionEndTime;
+        model.Term = currentTerm.TermIdentifier;
+
+        return View(model);
     }
+
 
     public async Task<IActionResult> GetAvailableSectionForSelection(int studentId)
     {
@@ -47,7 +64,7 @@ public class SelectionController : BaseController {
         var result = await _selectionService.SelectSection(studentId, sectionId);
         ShowMessage(result.Message, result.Succeeded);
 
-        return RedirectToAction("GetAvailableSectionForSelection");
+        return RedirectToAction("Index", "Selection", new { studentId = studentId });
     }
 
     public async Task<IActionResult> UnselectSection(int studentId, int sectionId)
@@ -55,7 +72,7 @@ public class SelectionController : BaseController {
         var result = await _selectionService.UnselectSection(studentId, sectionId);
         ShowMessage(result.Message, result.Succeeded);
 
-        return RedirectToAction("GetAvailableSectionForSelection");
+        return RedirectToAction("Index", "Selection", new { studentId = studentId });
     }
 
 }

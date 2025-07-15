@@ -1,0 +1,198 @@
+﻿@model InstructorDto
+
+
+
+<div class="bg-gradient-to-br from-white via-blue-50 to-blue-100 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Header Section -->
+        <div class="bg-blue-600 rounded-lg shadow-sm border border-blue-700 mb-8 overflow-hidden">
+            <div class="px-8 py-6 border-b border-blue-500">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-3xl font-bold text-white mb-2">My Sections</p>
+                        <p class="text-blue-100 text-lg">View your enrolled academic sections</p>
+                    </div>
+                    <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center shadow-md">
+                        <svg class="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Statistics Cards -->
+
+
+        @* view component  *@
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-blue-800">Total Enrolled Sections</p>
+                        <p class="text-3xl font-bold text-slate-900">@Model.Sections.Count</p>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-blue-800">Total Students</p>
+                        <p class="text-3xl font-bold text-slate-900">@Model.Sections.Sum(s => s.Students.Count)</p>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-blue-800">Upcoming Exams</p>
+                        <p class="text-3xl font-bold text-slate-900">@Model.Sections.Select(s => s.Course.Id).Distinct().Count()</p>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-blue-800">Total Credits Enrolled</p>
+                        <p class="text-3xl font-bold text-slate-900">@Model.Sections.Distinct().Sum(s => s.Course.Unit)</p>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
+                        <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2a3 3 0 00-5.356-1.857M7 20H2v-2a3 3 0 015.356-1.857m0 0A7.962 7.962 0 0112 16a7.962 7.962 0 015.356 1.857m-5.356-1.857C10.832 15.477 9.246 15 7.5 15S4.168 15.477 3 16.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 15.477 14.754 15 16.5 15c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sections Table -->
+        <div class="bg-white rounded-lg shadow-sm border border-blue-300 overflow-hidden">
+            <div class="px-8 py-6 border-b border-blue-300">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">My Enrolled Sections</h2>
+                        <p class="text-slate-600 mt-1">Details of your current and past academic sections</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200">
+                            @Model.Sections.Count Total Sections
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            @if (Model.Sections.Count > 0){
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-blue-300">
+                        <thead class="bg-blue-50">
+                            <tr>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Section ID
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Course Name
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Students Count
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Time Slot & Day
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Classroom
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
+                                    Exam Date
+                                </th>
+                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-blue-300">
+                            @foreach (var sec in Model.Sections){
+                                <!-- Placeholder Data -->
+                                <tr class="hover:bg-blue-50 transition-all duration-200 group">
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-12 w-12 bg-blue-700 rounded-lg flex items-center justify-center shadow-sm">
+                                                <span class="text-white font-bold text-lg">#@sec.Id</span>
+                                            </div>
+                                            <div class="ml-4">
+                                                <div class="text-sm text-slate-500">Section Code</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="text-lg font-bold text-slate-900">@sec.Course.CourseName</div>
+                                        <div class="text-sm text-slate-500">@sec.Course.Unit Credits</div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                <span class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold bg-blue-100 text-blue-800 border border-blue-200">
+                                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2a3 3 0 00-5.356-1.857M7 20H2v-2a3 3 0 015.356-1.857m0 0A7.962 7.962 0 0112 16a7.962 7.962 0 015.356 1.857m-5.356-1.857C10.832 15.477 9.246 15 7.5 15S4.168 15.477 3 16.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 15.477 14.754 15 16.5 15c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                    </svg>
+                                    @sec.Students.Count
+                                </span>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="text-lg font-bold text-slate-900">@(@sec.TimeSlot.GetDescription())</div>
+                                        <div class="text-sm text-slate-500">@sec.DayOfWeek</div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="text-lg font-bold text-slate-900">Room @sec.Classroom.ClassroomNumber</div>
+                                        <div class="text-sm text-slate-500">@sec.Classroom.Faculty.BuildingName</div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <div class="text-lg font-bold text-slate-900">@sec.Course.Exam.ExamDateTime.ToString("yyyy-M-d dddd")</div>
+                                        <div class="text-sm text-slate-500">@sec.Course.Exam.TimeSlot.GetDescription()</div>
+                                    </td>
+                                    <td class="px-8 py-6 whitespace-nowrap">
+                                        <div class="text-lg font-bold text-slate-900">
+                                            <a asp-controller="Instructors" asp-action="Students" asp-route-sectionId="@sec.Id" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-md group select-button" data-section-id="@sec.Id">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus mr-3 group-hover:rotate-90 transition-transform duration-300">
+                                                    <path d="M12 5v14"/>
+                                                    <path d="M5 12h14"/>
+                                                </svg>
+                                                Students </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else{
+                <!-- No Sections Found Message -->
+
+                <div class="text-center py-16 border-t border-blue-200">
+                    <div class="mx-auto h-24 w-24 bg-white border border-blue-200 rounded-full flex items-center justify-center mb-6">
+                        <svg class="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-900 mb-2">No Sections Found</h3>
+                    <p class="text-slate-600 mb-8 max-w-md mx-auto">You are not currently enrolled in any sections.</p>
+                </div>
+            }
+        </div>
+    </div>
+</div>

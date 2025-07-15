@@ -20,6 +20,7 @@ public interface IStudentRepository {
     Task<List<TermDto>> GetAllStudentTerms(int studentId);
 
     Task<List<ExamResultDto>> GetAllTermExamResults(int studentId, int termId);
+    Task<List<ExamResultDto>> GetAllExamResults(int studentId);
 
     Task<ExamResult> GetExamResultForObjection(ObjectionDto objection);
 

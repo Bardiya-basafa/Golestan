@@ -21,16 +21,33 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
 
     public async Task<StudentDto> GetStudentUserApp(string studentId)
     {
-        return await context.Users
+        var student = await context.Users
             .AsNoTracking()
             .Where(u => u.Id == studentId)
-            .Select(u => new StudentDto()
+            .Select(u => u.StudentProfile)
+            .Select(s => new StudentDto()
             {
-                Id = u.StudentId,
-                AppUser = u,
-                FullName = u.StudentProfile.FullName,
+                Id = s.Id,
+                FullName = s.FullName,
+                StudentNumber = s.StudentNumber,
+                Email = s.AppUser.UserName,
+                Faculty = new FacultyDto()
+                {
+                    MajorName = s.Faculty.MajorName,
+                },
+                Sections = s.Sections.Select(sec => new SectionDto()
+                {
+                    Course = new CourseDto()
+                    {
+                        Unit = sec.Course.Unit,
+                    }
+                }).ToList(),
             })
             .FirstOrDefaultAsync() ?? throw new Exception($"student with id {studentId} not found");
+
+        student.Gpa = await GetStudentTotalGpa(student.Id);
+
+        return student;
     }
 
     public async Task<Student> GetStudentEntityById(int studentId)
@@ -52,6 +69,12 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
                 Id = s.Id,
                 FullName = s.FullName,
                 StudentNumber = s.StudentNumber,
+                Email = s.AppUser.UserName,
+                Gpa = GetStudentTotalGpa(studentId).GetAwaiter().GetResult(),
+                Faculty = new FacultyDto()
+                {
+                    MajorName = s.Faculty.MajorName,
+                },
                 Sections = s.Sections.Select(sec => new SectionDto()
                 {
                     Id = sec.Id,
@@ -170,6 +193,21 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
             Succeeded = true,
             Message = "Objection submitted successfully.",
         };
+    }
+
+    public async Task<decimal> GetStudentTotalGpa(int studentId)
+    {
+        var scores = await context.ExamResults
+            .AsNoTracking()
+            .Where(e => e.StudentId == studentId && e.Score != -1)
+            .Select(e => e.Score)
+            .ToListAsync();
+
+        if (scores.Count == 0){
+            return -1;
+        }
+
+        return scores.Sum() / scores.Count;
     }
 
 }

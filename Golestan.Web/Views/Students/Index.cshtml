@@ -22,6 +22,32 @@
                     </div>
                 </div>
             </div>
+            <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-blue-200">
+                <h3 class="text-xl font-bold text-black mb-4">Student Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-700">
+                    <div>
+                        <strong>Full Name :</strong> @Model.FullName
+                    </div>
+                    <div>
+                        <strong>Student Number:</strong> @(Model.StudentNumber ?? "N/A")
+                    </div>
+                    <div>
+                        <strong>Email :</strong> @Model.Email
+                    </div>
+                    <div>
+                        <strong>Total Unit :</strong> @(Model.Sections.Any() ? Model.Sections.Sum(s => s.Course.Unit) : "No Sections")
+                    </div>
+                    <div>
+                        <strong>Faculty Date:</strong> @Model.Faculty.MajorName
+                    </div>
+                    <div>
+                        <strong>Total Sections Period:</strong> @(Model.Sections.Any() ? Model.Sections.Count : "No Sections")
+                    </div>
+                    <div>
+                        <strong>Total GPA :</strong> @(Model.Gpa == -1 ? "No Exam" : Model.Gpa)
+                    </div>
+                </div>
+            </div>
             <!-- Current Term Details (Table/Box Style) -->
             @await Component.InvokeAsync("CurrentTerm")
             <!-- Student Stats -->

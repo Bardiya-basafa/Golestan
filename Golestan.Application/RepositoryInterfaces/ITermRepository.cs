@@ -8,6 +8,7 @@ using Shared.Helpers;
 public interface ITermRepository {
 
     Task<TermDto?> GetCurrentTerm();
+    Task<TermDto?> GetLastTerm();
 
     Task<Term?> GetCurrentTermEntity();
 

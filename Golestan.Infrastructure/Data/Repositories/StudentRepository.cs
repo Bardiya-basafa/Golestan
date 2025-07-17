@@ -17,7 +17,7 @@ using Persistence;
 using Shared.Helpers;
 
 
-public class StudentRepository(AppDbContext context) : IStudentRepository {
+public class StudentRepository(AppDbContext context, IUserRepository userRepository) : IStudentRepository {
 
     public async Task<StudentDto> GetStudentUserApp(string studentId)
     {
@@ -25,6 +25,22 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
             .AsNoTracking()
             .Where(u => u.Id == studentId)
             .Select(u => u.StudentProfile)
+            .Select(s => new StudentDto()
+            {
+                Id = s.Id,
+            })
+            .FirstOrDefaultAsync() ?? throw new Exception($"student with id {studentId} not found");
+
+        student.Gpa = await GetStudentTotalGpa(student.Id);
+
+        return student;
+    }
+
+    public async Task<StudentDto> GetStudentInfo(int studentId)
+    {
+        var student = await context.Students
+            .AsNoTracking()
+            .Where(s => s.Id == studentId)
             .Select(s => new StudentDto()
             {
                 Id = s.Id,
@@ -42,10 +58,15 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
                         Unit = sec.Course.Unit,
                     }
                 }).ToList(),
-            })
-            .FirstOrDefaultAsync() ?? throw new Exception($"student with id {studentId} not found");
+                Terms = s.Terms.Select(term => new TermDto()
+                    {
+                        Id = term.Id,
+                    })
+                    .ToList(),
+            }).FirstOrDefaultAsync() ?? throw new Exception($"student with id {studentId} not found");
 
-        student.Gpa = await GetStudentTotalGpa(student.Id);
+        var gpa = await GetStudentTotalGpa(student.Id);
+        student.Gpa = gpa;
 
         return student;
     }
@@ -208,6 +229,46 @@ public class StudentRepository(AppDbContext context) : IStudentRepository {
         }
 
         return scores.Sum() / scores.Count;
+    }
+
+    public async Task<Result> RemoveStudent(int studentId)
+    {
+        var student = await context.Students
+            .Where(s => s.Id == studentId)
+            .Include(s => s.ExamResults)
+            .FirstOrDefaultAsync() ?? throw new Exception($"Student with id {studentId} not found");
+
+        if (student.ExamResults?.Count != 0){
+            context.ExamResults.RemoveRange(student.ExamResults);
+        }
+
+        if (!await userRepository.DeleteUser(student.AppUserId)){
+            return new Result()
+            {
+                Message = "Something went wrong.",
+            };
+        }
+
+        context.Remove(student);
+        await context.SaveChangesAsync();
+
+        return new Result()
+        {
+            Succeeded = true,
+            Message = "Student removed successfully.",
+        };
+    }
+
+    public async Task<Result> UpdateStudent(Student student)
+    {
+        context.Update(student);
+        await context.SaveChangesAsync();
+
+        return new Result()
+        {
+            Succeeded = true,
+            Message = "Student updated successfully.",
+        };
     }
 
 }

@@ -106,7 +106,7 @@ public class InstructorsController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("Instructors", "Admin");
+            return RedirectToAction("Instructors", "Admin", new { facultyId = dto.FacultyId });
         }
 
 

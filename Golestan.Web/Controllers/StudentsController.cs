@@ -145,4 +145,14 @@ public class StudentsController : BaseController {
         return View(model);
     }
 
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Remove(int studentId, int facultyId)
+    {
+        var result = await _studentService.Rmove(studentId);
+        ShowMessage(result.Message, result.Succeeded);
+
+        return RedirectToAction("Students", "Admin", routeValues: new { facultyId = facultyId });
+    }
+
 }

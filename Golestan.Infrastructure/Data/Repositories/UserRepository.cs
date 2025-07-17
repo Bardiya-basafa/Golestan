@@ -3,12 +3,13 @@
 using Application.Interfaces;
 using Application.RepositoryInterfaces;
 using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
 using Shared.Helpers;
 
 
-public class UserRepository(AppDbContext context, ITermService termService) : IUserRepository {
+public class UserRepository(AppDbContext context, ITermService termService, UserManager<AppUser> userManager) : IUserRepository {
 
     public async Task<Result> AddInstructor(Instructor instructor)
     {
@@ -40,6 +41,20 @@ public class UserRepository(AppDbContext context, ITermService termService) : IU
             Message = "Student added"
         };
     }
+
+    public async Task<bool> DeleteUser(string id)
+    {
+        var user = await userManager.FindByIdAsync(id);
+
+        if (user == null){
+            return false;
+        }
+
+        await userManager.DeleteAsync(user);
+
+        return true;
+    }
+
 
     public async Task<int> StudentCount(int facultyId)
     {

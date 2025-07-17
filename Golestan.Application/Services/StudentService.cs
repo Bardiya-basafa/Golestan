@@ -20,6 +20,12 @@ public class StudentService(IStudentRepository studentRepository, UserManager<Ap
         return await studentRepository.GetStudentUserApp(studentId);
     }
 
+    public async Task<StudentDto> GetStudentInfo(int studentId)
+    {
+        
+        return await studentRepository.GetStudentInfo(studentId);
+    }
+
     public async Task<List<StudentDto>> GetFacultyStudents(int facultyId)
     {
         return await studentRepository.GetFacultyStudents(facultyId);
@@ -74,6 +80,11 @@ public class StudentService(IStudentRepository studentRepository, UserManager<Ap
         var examResult = await studentRepository.GetExamResultForObjection(model);
 
         return await studentRepository.SubmitObjection(examResult, model.Objection);
+    }
+
+    public async Task<Result> Rmove(int studentId)
+    {
+        return await studentRepository.RemoveStudent(studentId);
     }
 
 }

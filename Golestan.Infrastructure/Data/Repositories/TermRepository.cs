@@ -32,11 +32,25 @@ public class TermRepository(AppDbContext context) : ITermRepository {
             .FirstOrDefaultAsync();
     }
 
+    public async Task<TermDto?> GetLastTerm()
+    {
+        return await context.Terms
+            .AsNoTracking()
+            .OrderByDescending(t => t.StartTime)
+            .Select(t => new TermDto()
+            {
+                TermIdentifier = t.TermIdentifier,
+                Id = t.Id
+            })
+            .FirstOrDefaultAsync();
+    }
+
     public async Task<Term?> GetCurrentTermEntity()
     {
         var currentDate = DateTime.UtcNow;
 
         return await context.Terms
+            .AsNoTracking()
             .FirstOrDefaultAsync(t => !t.IsClosed);
     }
 
@@ -119,7 +133,9 @@ public class TermRepository(AppDbContext context) : ITermRepository {
     {
         var currentDate = DateTime.UtcNow;
 
-        return context.Terms.AnyAsync(t => !t.IsClosed);
+        return context.Terms
+            .AsNoTracking()
+            .AnyAsync(t => !t.IsClosed);
     }
 
 }

@@ -22,89 +22,10 @@
                     </div>
                 </div>
             </div>
-            <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-blue-200">
-                <h3 class="text-xl font-bold text-black mb-4">Student Information</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-700">
-                    <div>
-                        <strong>Full Name :</strong> @Model.FullName
-                    </div>
-                    <div>
-                        <strong>Student Number:</strong> @(Model.StudentNumber ?? "N/A")
-                    </div>
-                    <div>
-                        <strong>Email :</strong> @Model.Email
-                    </div>
-                    <div>
-                        <strong>Total Unit :</strong> @(Model.Sections.Any() ? Model.Sections.Sum(s => s.Course.Unit) : "No Sections")
-                    </div>
-                    <div>
-                        <strong>Faculty Date:</strong> @Model.Faculty.MajorName
-                    </div>
-                    <div>
-                        <strong>Total Sections Period:</strong> @(Model.Sections.Any() ? Model.Sections.Count : "No Sections")
-                    </div>
-                    <div>
-                        <strong>Total GPA :</strong> @(Model.Gpa == -1 ? "No Exam" : Model.Gpa)
-                    </div>
-                </div>
-            </div>
+            @* Student iformation *@
+            @await Component.InvokeAsync("StudentInfo", Model.Id)
             <!-- Current Term Details (Table/Box Style) -->
             @await Component.InvokeAsync("CurrentTerm")
-            <!-- Student Stats -->
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-blue-800">Enrolled Courses</p>
-                            <p class="text-3xl font-bold text-slate-900" id="enrolledCourses">0</p>
-                        </div>
-                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-blue-800">Current GPA</p>
-                            <p class="text-3xl font-bold text-slate-900" id="currentGPA">0.0</p>
-                        </div>
-                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2m0 0V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2"></path>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-blue-800">Credits Earned</p>
-                            <p class="text-3xl font-bold text-slate-900" id="creditsEarned">0</p>
-                        </div>
-                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a3 3 0 015.356-1.857M7 20v-2a3 3 0 00-5.356-1.857M7 20H2v-2a3 3 0 015.356-1.857m0 0A7.962 7.962 0 0112 16a7.962 7.962 0 015.356 1.857m-5.356-1.857C10.832 15.477 9.246 15 7.5 15S4.168 15.477 3 16.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 15.477 14.754 15 16.5 15c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-lg p-6 shadow-sm border border-blue-200">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-sm font-medium text-blue-800">Semester</p>
-                            <p class="text-3xl font-bold text-slate-900">6th</p>
-                        </div>
-                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Announcement and Notification Boxes (Placeholder for now, as per Admin Dashboard) -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                 <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 shadow-sm">
@@ -160,7 +81,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-white">Exam Results</h3>
+                    <h3 class="text-lg font-bold text-white">Exams</h3>
                 </a>
                 <a asp-controller="Students" asp-action="Selection" asp-route-studentId="@Model.Id" class="bg-blue-600 rounded-lg p-4 shadow-sm border border-blue-700 cursor-pointer group hover:bg-blue-700 transition-colors duration-200 flex flex-col items-center justify-center text-center">
                     <div class="w-16 h-16 bg-blue-700 rounded-lg flex items-center justify-center mx-auto mb-4">

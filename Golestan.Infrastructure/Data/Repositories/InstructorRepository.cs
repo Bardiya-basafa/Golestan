@@ -16,7 +16,7 @@ using Persistence;
 using Shared.Helpers;
 
 
-public class InstructorRepository(AppDbContext context) : IInstructorRepository {
+public class InstructorRepository(AppDbContext context, IUserRepository userRepository) : IInstructorRepository {
 
     public async Task<InstructorDto> GetInstructorAppUser(string instructorId)
     {
@@ -195,14 +195,39 @@ public class InstructorRepository(AppDbContext context) : IInstructorRepository 
             .Include(i => i.Sections)
             .FirstOrDefaultAsync() ?? throw new Exception($"No instructor found for {instructorId}");
 
+        if (instructor.Sections?.Count != 0){
+            context.Sections.RemoveRange(instructor.Sections);
+        }
 
+        var userId = instructor.AppUserId;
         context.Instructors.Remove(instructor);
+
+        if (!await userRepository.DeleteUser(userId)){
+            return new Result()
+            {
+                Message = "Something went wrong",
+            };
+        }
+
         await context.SaveChangesAsync();
+
 
         return new Result()
         {
             Message = "Instructor has been removed",
             Succeeded = true
+        };
+    }
+
+    public async Task<Result> UpdateInstructor(Instructor instructor)
+    {
+        context.Instructors.Update(instructor);
+        await context.SaveChangesAsync();
+
+        return new Result()
+        {
+            Succeeded = true,
+            Message = "Instructor has been updated",
         };
     }
 

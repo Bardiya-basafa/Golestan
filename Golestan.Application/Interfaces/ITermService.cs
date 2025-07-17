@@ -9,6 +9,8 @@ public interface ITermService {
 
     Task<TermDto?> GetCurrentTerm();
 
+    Task<TermDto?> GetLastTerm();
+
     Task<Term?> GetCurrentTermEntity();
 
     Task<List<TermDto>> GetAllTerms();

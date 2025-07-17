@@ -22,9 +22,10 @@ public interface IInstructorRepository {
     Task<List<StudentDto>> GetInstructorStudentsOfSection(int sectionId);
 
 
-
     Task<Result> RemoveCourseInstructor(int instructorId, int courseId);
 
     Task<Result> RemoveInstructor(int instructorId);
+
+    Task<Result> UpdateInstructor(Instructor instructor);
 
 }

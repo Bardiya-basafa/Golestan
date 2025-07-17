@@ -14,7 +14,7 @@ public class TermService(ITermRepository termRepository) : ITermService {
         return await termRepository.GetCurrentTerm();
     }
 
-    public async Task<TermDto?> GetLastTerm()
+    public async Task<Term?> GetLastTerm()
     {
         return await termRepository.GetLastTerm();
     }

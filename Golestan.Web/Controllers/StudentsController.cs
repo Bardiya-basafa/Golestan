@@ -36,8 +36,8 @@ public class StudentsController : BaseController {
         var userId = GetUserId();
 
         // var model = await _studentService.GetStudentUserApp(userId);
-        // strongly typed
-        var model = await _studentService.GetStudentUserApp("84f21f1c-cddd-46bc-8744-4a25183ed4de");
+
+        var model = await _studentService.GetStudentUserApp("6f5d8143-5726-4cbd-952f-c0bd2a57b003");
 
         return View(model);
     }
@@ -112,12 +112,23 @@ public class StudentsController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> Terms(int studentId)
+    public async Task<IActionResult> Exams(int studentId)
+    {
+        // var model = await _studentService.GetAllStudentTerms(studentId);
+        ViewBag.studentId = studentId;
+
+        return View();
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> TermHistory(int studentId)
     {
         var model = await _studentService.GetAllStudentTerms(studentId);
+        ViewBag.studentId = studentId;
 
         return View(model);
     }
+
 
     [HttpGet]
     public async Task<IActionResult> ExamResults(int termId, int studentId)
@@ -131,6 +142,15 @@ public class StudentsController : BaseController {
     [HttpGet]
     public async Task<IActionResult> ActiveExamResults(int studentId)
     {
+        var currentTerm = await _termService.GetCurrentTerm();
+
+        if (currentTerm == null){
+            ShowMessage("Currently there is no active term", false);
+
+            return RedirectToAction("Exams", new { studentId = studentId });
+        }
+
+
         var model = await _studentService.GetActiveExamResults(studentId);
 
         return View(model);

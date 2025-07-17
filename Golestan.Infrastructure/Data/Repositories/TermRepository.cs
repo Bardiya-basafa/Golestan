@@ -32,16 +32,11 @@ public class TermRepository(AppDbContext context) : ITermRepository {
             .FirstOrDefaultAsync();
     }
 
-    public async Task<TermDto?> GetLastTerm()
+    public async Task<Term?> GetLastTerm()
     {
         return await context.Terms
             .AsNoTracking()
             .OrderByDescending(t => t.StartTime)
-            .Select(t => new TermDto()
-            {
-                TermIdentifier = t.TermIdentifier,
-                Id = t.Id
-            })
             .FirstOrDefaultAsync();
     }
 

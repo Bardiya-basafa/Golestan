@@ -9,7 +9,7 @@ public interface ITermService {
 
     Task<TermDto?> GetCurrentTerm();
 
-    Task<TermDto?> GetLastTerm();
+    Task<Term?> GetLastTerm();
 
     Task<Term?> GetCurrentTermEntity();
 

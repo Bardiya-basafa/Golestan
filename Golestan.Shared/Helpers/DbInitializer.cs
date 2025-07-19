@@ -2,55 +2,48 @@
 
 using Constants;
 using Domain.Entities;
+using Domain.Enums;
+using Microsoft.AspNetCore.Identity;
 
 
 public static class DbInitializer {
 
     public static async Task SeedRootAdmin(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
     {
-        // roles 
-        if (!roleManager.Roles.Any()){
-            foreach (var roleName in AppRoles.AllRoles){
-                if (!await roleManager.RoleExistsAsync(roleName)){
-                    await roleManager.CreateAsync(new IdentityRole(roleName));
-                }
+        // Ensure all roles exist
+        foreach (var roleName in AppRoles.AllRoles){
+            if (!await roleManager.RoleExistsAsync(roleName)){
+                await roleManager.CreateAsync(new IdentityRole(roleName));
             }
         }
-    
-        var adminUser = await use
-        // users with roles 
-        // Root user 
-        if (!userManager.Users.Any(u => u)){
+
+        // Check if any admin user exists
+        var adminUsers = await userManager.GetUsersInRoleAsync(AppRoles.Admin);
+
+        // If no admin exists, create one
+        if (!adminUsers.Any()){
+            var adminUser = new AppUser()
+            {
+                FirstName = "Admin",
+                LastName = "User",
+                Email = "admin@golestan.com",
+                UserName = "admin@golestan.com",
+                UserType = UserType.Admin,
+            };
+
             var password = "Bardiya1384$";
-    
-            var newUser = new User()
-            {
-                UserName = "bardiya",
-                Email = "bardiya@gmail.com",
-                EmailConfirmed = true,
-                FullName = "bardiya basafa",
-                ProfilePictureUrl = "https://img-b.udemycdn.com/user/200_H/16004620_10db_5.jpg"
-            };
-    
-            var result = await userManager.CreateAsync(newUser, password);
-    
+            var result = await userManager.CreateAsync(adminUser, password);
+
             if (result.Succeeded){
-                await userManager.AddToRoleAsync(newUser, AppRoles.User);
+                await userManager.AddToRoleAsync(adminUser, AppRoles.Admin);
+
+                // Optionally add to User role as well if needed
             }
-    
-            var newUserAdmin = new User()
-            {
-                UserName = "bardiyaAdmin",
-                Email = "bardiyaAdmin@gmail.com",
-                EmailConfirmed = true,
-                FullName = "bardiya Admin",
-                ProfilePictureUrl = "https://img-b.udemycdn.com/user/200_H/16004620_10db_5.jpg"
-            };
-    
-            var resultAdmin = await userManager.CreateAsync(newUserAdmin, password);
-    
-            if (result.Succeeded){
-                await userManager.AddToRoleAsync(newUserAdmin, AppRoles.Admin);
+            else{
+                // Log errors if creation fails
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+
+                throw new Exception($"Admin user creation failed: {errors}");
             }
         }
     }

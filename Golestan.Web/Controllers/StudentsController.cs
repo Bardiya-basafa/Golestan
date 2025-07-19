@@ -7,6 +7,8 @@ using Application.DTOs.Objection;
 using Application.DTOs.Student;
 using Application.Interfaces;
 using Base;
+using Microsoft.AspNetCore.Authorization;
+using Shared.Constants;
 
 
 public class StudentsController : BaseController {
@@ -34,6 +36,8 @@ public class StudentsController : BaseController {
         _examService = examService;
     }
 
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Student)]
     public async Task<IActionResult> Index()
     {
         var userId = GetUserId();
@@ -46,6 +50,7 @@ public class StudentsController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Student)]
     public async Task<IActionResult> Selection(int studentId)
     {
         var model = await _termService.GetCurrentTerm();
@@ -55,6 +60,7 @@ public class StudentsController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Student)]
     public async Task<IActionResult> AvailableSections(int studentId)
     {
         var model = await _selectionService.GetAvailableSectionsForSelection(studentId);
@@ -69,6 +75,7 @@ public class StudentsController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add(int facultyId)
     {
         var faculty = await _facultyService.GetFacultyDtoById(facultyId);
@@ -90,6 +97,7 @@ public class StudentsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add(AddStudentDto dto)
     {
         if (!ModelState.IsValid){
@@ -107,6 +115,7 @@ public class StudentsController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Student)]
     public async Task<IActionResult> Sections(int studentId)
     {
         var model = await _studentService.GetStudentSections(studentId);
@@ -115,6 +124,7 @@ public class StudentsController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Student)]
     public async Task<IActionResult> Exams(int studentId)
     {
         // var model = await _studentService.GetAllStudentTerms(studentId);
@@ -124,6 +134,7 @@ public class StudentsController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Student)]
     public async Task<IActionResult> TermHistory(int studentId)
     {
         var model = await _studentService.GetAllStudentTerms(studentId);
@@ -134,6 +145,7 @@ public class StudentsController : BaseController {
 
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Student)]
     public async Task<IActionResult> ActiveExamResults(int studentId)
     {
         var currentTerm = await _termService.GetCurrentTerm();
@@ -145,13 +157,13 @@ public class StudentsController : BaseController {
         }
 
 
-        return RedirectToAction("Results","Exam",new { studentId = studentId , termId = currentTerm.Id });
+        return RedirectToAction("Results", "Exam", new { studentId = studentId, termId = currentTerm.Id });
     }
 
-    
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Remove(int studentId, int facultyId)
     {
         var result = await _studentService.Rmove(studentId);

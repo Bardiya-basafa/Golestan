@@ -6,6 +6,8 @@ namespace Golestan.Web.Controllers;
 using Application.DTOs.Section;
 using Application.Interfaces;
 using Base;
+using Microsoft.AspNetCore.Authorization;
+using Shared.Constants;
 
 
 public class SectionsController : BaseController {
@@ -27,6 +29,7 @@ public class SectionsController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Index(int sectionId)
     {
         if (!ModelState.IsValid){
@@ -39,6 +42,7 @@ public class SectionsController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add(int facultyId, int classroomId, string classNumber = "", bool isFromClassroom = false)
     {
         var currentTerm = await _termService.IsInsideAnyTermCurrently();
@@ -89,6 +93,7 @@ public class SectionsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add(AddSectionDto model)
     {
         var result = await _sectionService.AddSection(model);
@@ -111,6 +116,7 @@ public class SectionsController : BaseController {
 
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> SetStudents(int sectionId)
     {
         var model = new AddStudentToSectionDto();
@@ -128,6 +134,7 @@ public class SectionsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> SetStudents(AddStudentToSectionDto model)
     {
         var result = await _sectionService.AddStudentsToSection(model.StudentIds, model.SectionId);
@@ -138,6 +145,7 @@ public class SectionsController : BaseController {
     }
 
     [HttpPost]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> RemoveStudent(int sectionId, int studentId)
     {
         var result = await _sectionService.RemoveStudentFromSection(studentId, sectionId);

@@ -2,7 +2,9 @@
 
 using Application.Interfaces;
 using Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Constants;
 using ISelectionService=Application.Interfaces.ISelectionService;
 
 
@@ -19,6 +21,7 @@ public class SelectionController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Student)]
     public async Task<IActionResult> Index(int studentId)
     {
         var currentTerm = await _termService.GetCurrentTerm();
@@ -45,7 +48,8 @@ public class SelectionController : BaseController {
         return View(model);
     }
 
-
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Student)]
     public async Task<IActionResult> GetAvailableSectionForSelection(int studentId)
     {
         var model = await _selectionService.GetAvailableSectionsForSelection(studentId);
@@ -59,6 +63,8 @@ public class SelectionController : BaseController {
         return View(model);
     }
 
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Student)]
     public async Task<IActionResult> SelectSection(int studentId, int sectionId)
     {
         var result = await _selectionService.SelectSection(studentId, sectionId);
@@ -67,6 +73,8 @@ public class SelectionController : BaseController {
         return RedirectToAction("Index", "Selection", new { studentId = studentId });
     }
 
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Student)]
     public async Task<IActionResult> UnselectSection(int studentId, int sectionId)
     {
         var result = await _selectionService.UnselectSection(studentId, sectionId);

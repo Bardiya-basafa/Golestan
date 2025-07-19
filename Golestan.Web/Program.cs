@@ -4,6 +4,7 @@ using Golestan.Application.Services;
 using Golestan.Domain.Entities;
 using Golestan.Infrastructure.Data.Repositories;
 using Golestan.Infrastructure.Persistence;
+using Golestan.Shared.Helpers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -91,7 +92,19 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 // ========== MIDDLEWARE PIPELINE ========== //
+using (var scope = app.Services.CreateScope()){
+    var services = scope.ServiceProvider;
 
+    try{
+        var userManager = services.GetRequiredService<UserManager<AppUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        await DbInitializer.SeedRootAdmin(userManager, roleManager);
+    }
+    catch (Exception ex){
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while seeding the database.");
+    }
+}
 
 // 1. Exception Handling
 if (app.Environment.IsDevelopment()){

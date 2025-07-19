@@ -15,6 +15,7 @@ using Shared.Constants;
 using Shared.Helpers;
 
 
+[Authorize]
 public class AdminController : BaseController {
 
     private readonly IFacultyService _facultyService;
@@ -67,6 +68,8 @@ public class AdminController : BaseController {
         return RedirectToAction("Login", "Account");
     }
 
+    [Authorize(Roles = AppRoles.Admin)]
+    [HttpGet]
 
     // Admin Dashboard
     public async Task<IActionResult> Index()
@@ -75,13 +78,10 @@ public class AdminController : BaseController {
 
 
         return View(faculties);
-    }public async Task<IActionResult> NewDashboard()
-    {
-
-
-        return View();
     }
 
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
 
     // Managing each section
     public async Task<IActionResult> Students(int facultyId)
@@ -92,6 +92,8 @@ public class AdminController : BaseController {
         return View(model);
     }
 
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Instructors(int facultyId)
     {
         var instructorsDto = await _instructorService.GetFacultyInstructors();
@@ -101,6 +103,7 @@ public class AdminController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Courses(int facultyId)
     {
         var model = await _courseService.GetFacultyCourses(facultyId);
@@ -110,6 +113,7 @@ public class AdminController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Classrooms(int facultyId)
     {
         var model = await _classroomService.GetFacultyClassrooms(facultyId);
@@ -119,6 +123,7 @@ public class AdminController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Sections(int facultyId)
     {
         var model = await _sectionService.GetFacultySections(facultyId);
@@ -127,6 +132,8 @@ public class AdminController : BaseController {
         return View(model);
     }
 
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
 
     // Total overview at the system resources
     public async Task<IActionResult> AllClassrooms()
@@ -136,6 +143,8 @@ public class AdminController : BaseController {
         return View(model);
     }
 
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> AllInstructors()
     {
         var model = await _facultyService.GetFaculties();
@@ -143,6 +152,8 @@ public class AdminController : BaseController {
         return View(model);
     }
 
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> AllCourses()
     {
         var model = await _facultyService.GetFaculties();
@@ -151,6 +162,7 @@ public class AdminController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> AllSections()
     {
         var model = await _facultyService.GetFaculties();
@@ -159,6 +171,7 @@ public class AdminController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> AllStudents()
     {
         var model = await _facultyService.GetFaculties();
@@ -166,6 +179,8 @@ public class AdminController : BaseController {
         return View(model);
     }
 
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> AllFaculties()
     {
         var faculties = await _facultyService.GetFaculties();

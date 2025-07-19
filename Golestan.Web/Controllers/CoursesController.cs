@@ -7,6 +7,8 @@ using Application.DTOs.Course;
 using Application.Interfaces;
 using Base;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Shared.Constants;
 
 
 public class CoursesController : BaseController {
@@ -25,6 +27,7 @@ public class CoursesController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Index(int courseId)
     {
         var model = await _courseService.GetCourseDtoById(courseId);
@@ -33,6 +36,7 @@ public class CoursesController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add(int facultyId)
     {
         var faculty = await _facultyService.GetFacultyDtoById(facultyId);
@@ -49,6 +53,7 @@ public class CoursesController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add(AddCourseDto dto)
     {
         if (!ModelState.IsValid){
@@ -67,6 +72,7 @@ public class CoursesController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> SetExamTime(int courseId)
     {
         var currentTerm = await _termService.GetCurrentTerm();
@@ -101,6 +107,7 @@ public class CoursesController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> SetExamTime(SetExamForCourseDto model)
     {
         var result = await _courseService.SetExam(model);
@@ -122,6 +129,7 @@ public class CoursesController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Remove(int courseId, int facultyId)
     {
         var result = await _courseService.RemoveCourse(courseId);
@@ -132,6 +140,7 @@ public class CoursesController : BaseController {
 
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> SetInstructor(int facultyId, int courseId)
     {
         var model = await _courseService.GetAvailableInsturctorsForCourse(facultyId, courseId);
@@ -148,6 +157,7 @@ public class CoursesController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> SetInstructor(CourseInstructorDto dto)
     {
         if (!ModelState.ContainsKey("InstructorId") && !ModelState.ContainsKey("CourseId")){
@@ -161,6 +171,7 @@ public class CoursesController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> SetPrerequisite(int courseId)
     {
         var model = await _courseService.GetAvailableCoursesForPrerequisite(courseId);
@@ -173,6 +184,7 @@ public class CoursesController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> SetPrerequisite(int courseId, int prerequisiteCourseId)
     {
         var result = await _courseService.AddPrerequisiteToCourse(courseId, prerequisiteCourseId);
@@ -181,6 +193,8 @@ public class CoursesController : BaseController {
         return RedirectToAction("Index", routeValues: new { courseId = courseId });
     }
 
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> RemovePrerequisite(int courseId, int prerequisiteCourseId)
     {
         var result = await _courseService.RemovePrerequisiteFromCourse(courseId, prerequisiteCourseId);

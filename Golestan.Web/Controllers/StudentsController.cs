@@ -21,14 +21,17 @@ public class StudentsController : BaseController {
 
     private readonly ISelectionService _selectionService;
 
+    private readonly IExamService _examService;
 
-    public StudentsController(IStudentService studentService, IFacultyService facultyService, IUserService userService, ITermService termService, ISelectionService selectionService) : base(facultyService)
+
+    public StudentsController(IStudentService studentService, IFacultyService facultyService, IUserService userService, ITermService termService, ISelectionService selectionService, IExamService examService) : base(facultyService)
     {
         _studentService = studentService;
         _facultyService = facultyService;
         _userService = userService;
         _termService = termService;
         _selectionService = selectionService;
+        _examService = examService;
     }
 
     public async Task<IActionResult> Index()
@@ -131,15 +134,6 @@ public class StudentsController : BaseController {
 
 
     [HttpGet]
-    public async Task<IActionResult> ExamResults(int termId, int studentId)
-    {
-        var model = await _studentService.GetAllTermExamResults(termId, studentId);
-        ViewBag.StudentId = studentId;
-
-        return View(model);
-    }
-
-    [HttpGet]
     public async Task<IActionResult> ActiveExamResults(int studentId)
     {
         var currentTerm = await _termService.GetCurrentTerm();
@@ -156,14 +150,7 @@ public class StudentsController : BaseController {
         return View(model);
     }
 
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Objection(ObjectionDto dto)
-    {
-        var model = await _studentService.SubmitObjection(dto);
-
-        return View(model);
-    }
+    
 
     [HttpPost]
     [ValidateAntiForgeryToken]

@@ -40,6 +40,26 @@ public class TermRepository(AppDbContext context) : ITermRepository {
             .FirstOrDefaultAsync();
     }
 
+    public async Task<TermDto> GetTermById(int termId)
+    {
+        return await context.Terms
+            .AsNoTracking()
+            .Where(t => t.Id == termId)
+            .Select(t => new TermDto()
+            {
+                ExamsStartTime = t.ExamsStartTime,
+                ExamsEndTime = t.ExamsEndTime,
+                SelectionStartTime = t.SectionSelectionStartTime,
+                SelectionEndTime = t.SectionSelectionEndTime,
+                TermIdentifier = t.TermIdentifier,
+                StartTime = t.StartTime,
+                TermName = t.TermName,
+                Year = t.Year,
+                Id = t.Id
+            })
+            .FirstOrDefaultAsync() ?? throw new NullReferenceException($"Term with id {termId} not found");
+    }
+
     public async Task<Term?> GetCurrentTermEntity()
     {
         var currentDate = DateTime.UtcNow;

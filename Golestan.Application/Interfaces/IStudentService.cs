@@ -19,11 +19,9 @@ public interface IStudentService {
 
     Task<List<TermDto>> GetAllStudentTerms(int studentId);
 
-    Task<StudentDto> GetAllTermExamResults(int termId, int studentId);
 
     Task<List<ExamResultDto>?> GetActiveExamResults(int studentId);
 
-    Task<Result> SubmitObjection(ObjectionDto model);
 
     Task<Result> Rmove(int studentId);
 

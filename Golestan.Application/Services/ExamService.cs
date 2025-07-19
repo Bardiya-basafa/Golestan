@@ -3,6 +3,7 @@
 using Domain.Entities;
 using DTOs.Exam;
 using DTOs.ExamResult;
+using DTOs.Objection;
 using DTOs.Score;
 using Interfaces;
 using Mapster;
@@ -10,7 +11,7 @@ using RepositoryInterfaces;
 using Shared.Helpers;
 
 
-public class ExamService(IExamRepository examRepository) : IExamService {
+public class ExamService(IExamRepository examRepository, ITermService termService, IStudentRepository studentRepository) : IExamService {
 
     public async Task<Result> SubmitStudentScore(ScoreDto model)
     {
@@ -21,6 +22,7 @@ public class ExamService(IExamRepository examRepository) : IExamService {
             };
         }
 
+
         return await examRepository.SubmitExamResult(model.Adapt<ExamResult>());
     }
 
@@ -28,6 +30,35 @@ public class ExamService(IExamRepository examRepository) : IExamService {
     {
         return await examRepository.GetSectionExamResults(sectionId);
     }
+
+    public async Task<List<ExamResultDto>> GetTermExamResults(int termId, int studentId)
+    {
+        return await examRepository.GetTermExamResults(termId, studentId);
+    }
+
+
+    public async Task<Result> SubmitObjection(ObjectionDto model)
+    {
+        var result = new Result();
+        var isInsideTerm = await termService.IsInsideAnyTermCurrently();
+
+        if (!isInsideTerm){
+            result.Message = "You cant submit an objection right now";
+
+            return result;
+        }
+
+        if (model.Objection == string.Empty){
+            result.Message = "You must provide an objection";
+
+            return result;
+        }
+
+        var examResult = await studentRepository.GetExamResultForObjection(model);
+
+        return await examRepository.SubmitObjection(examResult, model.Objection);
+    }
+
 
     public async Task<ExamDto> GetExamInfo(int sectionId)
     {

@@ -6,6 +6,7 @@ public class ScoreDto {
 
     public int InstructorId { get; set; }
 
+    public int ExamResultId { get; set; }
     public int SectionId { get; set; }
 
     public int CourseId { get; set; }

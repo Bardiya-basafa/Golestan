@@ -195,26 +195,12 @@ public class StudentRepository(AppDbContext context, IUserRepository userReposit
 
     public async Task<ExamResult> GetExamResultForObjection(ObjectionDto objection)
     {
-        return await context.Students
-            .Where(s => s.Id == objection.StudentId)
-            .SelectMany(s => s.ExamResults)
-            .Where(e => e.Id == objection.ExamResultId)
-            .FirstOrDefaultAsync() ?? throw new Exception($"Student with id {objection.StudentId} not found");
+        return await context.ExamResults
+            .FindAsync(objection.ExamResultId) ?? throw new Exception($"Exam result with id {objection.ExamResultId} not found");
     }
 
 
-    public async Task<Result> SubmitObjection(ExamResult examResult, string objection)
-    {
-        examResult.Objection = objection;
-        context.Update(examResult);
-        await context.SaveChangesAsync();
-
-        return new Result()
-        {
-            Succeeded = true,
-            Message = "Objection submitted successfully.",
-        };
-    }
+   
 
     public async Task<decimal> GetStudentTotalGpa(int studentId)
     {

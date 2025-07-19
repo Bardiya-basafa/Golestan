@@ -4,6 +4,7 @@ using Application.DTOs.Classroom;
 using Application.DTOs.Course;
 using Application.DTOs.Exam;
 using Application.DTOs.ExamResult;
+using Application.DTOs.Instructor;
 using Application.DTOs.Section;
 using Application.DTOs.Student;
 using Application.DTOs.Term;
@@ -57,6 +58,49 @@ public class ExamRepository(AppDbContext context) : IExamRepository {
                 Description = r.Description,
             })
             .ToListAsync();
+    }
+
+    public async Task<List<ExamResultDto>> GetTermExamResults(int termId, int studentId)
+    {
+        return await context.ExamResults
+            .AsNoTracking()
+            .Where(e => e.StudentId == studentId && e.TermId == termId)
+            .Select(r => new ExamResultDto()
+            {
+                Id = r.Id,
+                Section = new SectionDto()
+                {
+                    Id = r.SectionId,
+                    Instructor = new InstructorDto()
+                    {
+                        FullName = r.Instructor.FullName,
+                        InstructorNumber = r.Instructor.InstructorNumber,
+                    },
+                    Course = new CourseDto()
+                    {
+                        CourseName = r.Course.CourseName,
+                    },
+                    TimeSlot = r.Section.TimeSlot,
+                    DayOfWeek = r.Section.DayOfWeek,
+                },
+                Score = r.Score,
+                Objection = r.Objection,
+                Description = r.Description,
+            })
+            .ToListAsync();
+    }
+
+    public async Task<Result> SubmitObjection(ExamResult examResult, string objection)
+    {
+        examResult.Objection = objection;
+        context.Update(examResult);
+        await context.SaveChangesAsync();
+
+        return new Result()
+        {
+            Succeeded = true,
+            Message = "Objection submitted successfully.",
+        };
     }
 
     public async Task<ExamDto> GetExamInfo(int sectionId)

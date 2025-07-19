@@ -60,8 +60,8 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
 
 
         instructor.InstructorNumber = await GetUniversalNumber(UserType.Instructor, dto.FacultyId, instructor.Id);
+        
 
-        var lastTerm = await 
         return await instructorRepository.UpdateInstructor(instructor);
     }
 

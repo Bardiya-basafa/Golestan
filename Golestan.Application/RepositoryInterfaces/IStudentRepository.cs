@@ -28,7 +28,6 @@ public interface IStudentRepository {
 
     Task<ExamResult> GetExamResultForObjection(ObjectionDto objection);
 
-    Task<Result> SubmitObjection(ExamResult examResult, string objection);
 
     Task<decimal> GetStudentTotalGpa(int studentId);
 

@@ -1,5 +1,6 @@
 ﻿namespace Golestan.Web.Controllers;
 
+using Application.DTOs.Objection;
 using Application.DTOs.Score;
 using Application.Interfaces;
 using Base;
@@ -17,6 +18,16 @@ public class ExamController(IExamService examService, IFacultyService facultySer
         return View(model);
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Results(int studentId, int termId)
+    {
+        var model = await examService.GetTermExamResults(termId, studentId);
+        ViewBag.StudentId = studentId;
+        ViewBag.TermId = termId;
+
+        return View(model);
+    }
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> SubmitStudentsScores(ScoreDto model)
@@ -27,6 +38,15 @@ public class ExamController(IExamService examService, IFacultyService facultySer
 
 
         return RedirectToAction("Index", new { sectionId = model.SectionId });
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Objection(ObjectionDto dto)
+    {
+        var model = await examService.SubmitObjection(dto);
+
+        return View(model);
     }
 
 }

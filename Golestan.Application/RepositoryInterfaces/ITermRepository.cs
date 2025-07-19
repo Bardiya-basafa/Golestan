@@ -9,6 +9,7 @@ public interface ITermRepository {
 
     Task<TermDto?> GetCurrentTerm();
     Task<Term?> GetLastTerm();
+    Task<TermDto> GetTermById(int termId);
 
     Task<Term?> GetCurrentTermEntity();
 

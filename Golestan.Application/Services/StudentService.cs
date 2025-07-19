@@ -41,13 +41,7 @@ public class StudentService(IStudentRepository studentRepository, UserManager<Ap
         return await studentRepository.GetAllStudentTerms(studentId);
     }
 
-    public async Task<StudentDto> GetAllTermExamResults(int termId, int studentId)
-    {
-        var student = await studentRepository.GetStudentDtoById(studentId);
-        student.ExamResults = await studentRepository.GetAllTermExamResults(studentId, termId);
-
-        return student;
-    }
+   
 
     public async Task<List<ExamResultDto>?> GetActiveExamResults(int studentId)
     {
@@ -60,27 +54,7 @@ public class StudentService(IStudentRepository studentRepository, UserManager<Ap
         return await studentRepository.GetAllTermExamResults(studentId, currentTerm.Id);
     }
 
-    public async Task<Result> SubmitObjection(ObjectionDto model)
-    {
-        var result = new Result();
-        var isInsideTerm = await termService.IsInsideAnyTermCurrently();
-
-        if (!isInsideTerm){
-            result.Message = "You cant submit an objection right now";
-
-            return result;
-        }
-
-        if (model.Objection == string.Empty){
-            result.Message = "You must provide an objection";
-
-            return result;
-        }
-
-        var examResult = await studentRepository.GetExamResultForObjection(model);
-
-        return await studentRepository.SubmitObjection(examResult, model.Objection);
-    }
+  
 
     public async Task<Result> Rmove(int studentId)
     {

@@ -9,6 +9,7 @@ using Application.DTOs.Instructor;
 using Application.DTOs.Score;
 using Application.DTOs.Section;
 using Application.DTOs.Student;
+using Application.DTOs.Term;
 using Application.RepositoryInterfaces;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -59,6 +60,41 @@ public class InstructorRepository(AppDbContext context, IUserRepository userRepo
                 }).ToList(),
             })
             .FirstOrDefaultAsync() ?? throw new KeyNotFoundException($"User with id {instructorId} not found");
+    }
+
+    public async Task<List<TermDto>> GetAllInstructorTerms(int instructorId)
+    {
+        return await context.Instructors
+            .AsNoTracking()
+            .Where(s => s.Id == instructorId)
+            .SelectMany(s => s.Terms)
+            .Select(t => new TermDto()
+            {
+                Id = t.Id,
+                Year = t.Year,
+                TermIdentifier = t.TermIdentifier,
+                SelectionEndTime = t.SectionSelectionEndTime,
+                SelectionStartTime = t.SectionSelectionStartTime,
+                ExamsEndTime = t.ExamsEndTime,
+                ExamsStartTime = t.ExamsStartTime,
+            })
+            .ToListAsync();
+    }
+
+    public async Task<List<CourseDto>> GetCourses(int instructorId)
+    {
+        return await context.Instructors
+            .AsNoTracking()
+            .Where(c => c.Id == instructorId)
+            .SelectMany(i => i.Courses)
+            .Select(c => new CourseDto()
+            {
+                Id = c.Id,
+                CourseName = c.CourseName,
+                Unit = c.Unit,
+                Description = c.Description,
+            })
+            .ToListAsync();
     }
 
 

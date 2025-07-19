@@ -1,6 +1,6 @@
 ﻿@model List<ExamResultDto>
 @{
-    var studentId = (int)ViewBag.studentId;
+    var instructorId = (int)ViewBag.instructorId;
     var termId = (int)ViewBag.termId;
 }
 <div class="bg-gradient-to-br from-white via-blue-50 to-blue-100 min-h-screen">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        @await Component.InvokeAsync("StudentInfo", studentId)
+        @await Component.InvokeAsync("InstructorInfo", instructorId)
         @await Component.InvokeAsync("CurrentTerm", termId)
 
         <!-- Students Table for Result Submission -->
@@ -44,16 +44,16 @@
                         <thead class="bg-blue-50">
                             <tr>
                                 <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
-                                    Instructor Info
+                                    Student Info
                                 </th>
                                 <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
-                                    Instructor Number
+                                    Student Number
                                 </th>
                                 <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
                                     Course
                                 </th>
                                 <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
-                                    Section
+                                    Exam
                                 </th>
                                 <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
                                     Score
@@ -64,9 +64,6 @@
                                 <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider border-r border-blue-300">
                                     Objection
                                 </th>
-                                <th scope="col" class="px-8 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">
-                                    Action
-                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-blue-300">
@@ -75,23 +72,23 @@
                                     <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
                                         <div class="flex items-center">
                                             <div class="flex-shrink-0 h-12 w-12 bg-blue-700 rounded-lg flex items-center justify-center shadow-sm">
-                                                <span class="text-white font-bold text-lg">@result.Section.Instructor.Id</span>
+                                                <span class="text-white font-bold text-lg">@result.Student.Id</span>
                                             </div>
                                             <div class="ml-4">
-                                                <div class="text-lg font-bold text-slate-900">@result.Section.Instructor.FullName</div>
+                                                <div class="text-lg font-bold text-slate-900">@result.Student.FullName</div>
                                                 @* <div class="text-sm text-slate-500">@result.Section.Instructor.</div> *@
                                             </div>
                                         </div>
                                     </td>
                                     <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
-                                        <div class="text-lg font-bold text-slate-900">@result.Section.Instructor.InstructorNumber</div>
+                                        <div class="text-lg font-bold text-slate-900">@result.Student.StudentNumber</div>
                                     </td>
                                     <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
-                                        <div class="text-lg font-bold text-slate-900">@result.Section.Course.CourseName</div>
-                                        <div class="text-sm text-slate-500">@result.Section.Course.Exam.ExamDateTime.ToString("yyyy-MM-dd") - classroom @result.Section.Course.Exam.Classroom.ClassroomNumber</div>
+                                        <div class="text-lg font-bold text-slate-900">@result.Course.CourseName</div>
                                     </td>
                                     <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
-                                        <div class="text-lg font-bold text-slate-900">@result.Section.DayOfWeek / @result.Section.TimeSlot.GetDescription()</div>
+                                        <div class="text-lg font-bold text-slate-900">@result.Course.Exam.ExamDateTime - @result.Course.Exam.Classroom.ClassroomNumber</div>
+                                        <div class="text-sm text-slate-500">@result.Course.Exam.TimeSlot.GetDescription()</div>
                                     </td>
                                     <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
                                         <span class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold  bg-blue-100 text-blue-800 border border-blue-200">
@@ -103,36 +100,11 @@
                                             @(string.IsNullOrEmpty(result.Description) ? "-" : result.Description)
                                         </span>
                                     </td>
-                                    @if (result.Score != -1){
-                                        <form asp-controller="Exam" asp-action="Objection" method="post">
-                                            <input type="hidden" name="ExamResultId" id="ExamResultId" value="@result.Id"/>
-                                            <input type="hidden" name="StudentId" id="StudentId" value="@studentId"/>
-                                            <input type="hidden" name="TermId" id="TermId" value="@termId"/>
-                                            @Html.AntiForgeryToken()
-                                            <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
-                                                <input type="text" value="@result.Objection" name="Objection" id="Objection" rows="2" class="form-textarea w-200 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-800" placeholder="Add Objection"/>
-                                            </td>
-
-                                            <td class="px-8 py-6 whitespace-nowrap">
-                                                <button type="submit" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-md group">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle mr-2">
-                                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-8.16"/>
-                                                        <path d="m9 11 3 3L22 4"/>
-                                                    </svg>
-                                                    Submit Objection
-                                                </button>
-                                            </td>
-                                        </form>
-                                    }
-                                    else{
-                                        <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
-                                            <span class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold  bg-blue-100 text-blue-800 border border-blue-200">-</span>
-                                        </td>
-
-                                        <td class="px-8 py-6 whitespace-nowrap">
-                                            <span class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold  bg-blue-100 text-blue-800 border border-blue-200">-</span>
-                                        </td>
-                                    }
+                                    <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
+                                        <span class="inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold bg-blue-100 text-blue-800 border border-blue-200">
+                                            @(string.IsNullOrEmpty(result.Objection) ? "-" : result.Objection)
+                                        </span>
+                                    </td>
                                 </tr>
                             }
                         </tbody>

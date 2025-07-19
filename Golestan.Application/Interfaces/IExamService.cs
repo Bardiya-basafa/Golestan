@@ -15,6 +15,7 @@ public interface IExamService {
     Task<List<ExamResultDto>> GetSectionExamResults(int sectionId);
 
     Task<List<ExamResultDto>> GetTermExamResults(int termId, int studentId);
+    Task<List<ExamResultDto>> GetTermFinalResults(int termId, int instructorId);
 
     Task<Result> SubmitObjection(ObjectionDto model);
 

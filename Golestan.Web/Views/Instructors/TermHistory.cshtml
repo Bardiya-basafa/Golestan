@@ -1,6 +1,6 @@
 ﻿@model List<TermDto>
 @{
-        var studentId = (int)ViewBag.StudentId;
+        var instructorId = (int)ViewBag.instructorId;
 }
 <div class="bg-gradient-to-br from-white via-blue-50 to-blue-100 min-h-screen">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -21,7 +21,7 @@
                         </div>
                 </div>
                 @* Student Info *@
-                @await Component.InvokeAsync("StudentInfo", studentId)
+                @await Component.InvokeAsync("InstructorInfo", instructorId)
                 <!-- Current Term Details (Table/Box Style) -->
                 @await Component.InvokeAsync("CurrentTerm")
                 <!-- Passed Terms Table -->
@@ -106,12 +106,12 @@
                                                                                 }
                                                                         </td>
                                                                         <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
-                                                                                <a asp-controller="Exam" asp-action="Results" asp-route-studentId="@studentId" asp-route-termId="@term.Id" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-md group select-button">
+                                                                                <a asp-controller="Exam" asp-action="FinalResults" asp-route-instructorId="@instructorId" asp-route-termId="@term.Id" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-md group select-button">
                                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus mr-3 group-hover:rotate-90 transition-transform duration-300">
                                                                                                 <path d="M12 5v14"/>
                                                                                                 <path d="M5 12h14"/>
                                                                                         </svg>
-                                                                                        Exam Results </a>
+                                                                                        Final Results </a>
                                                                         </td>
                                                                 </tr>
                                                         }

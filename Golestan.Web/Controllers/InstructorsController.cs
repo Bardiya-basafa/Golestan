@@ -38,7 +38,7 @@ public class InstructorsController : BaseController {
 
         // var model = await _studentService.GetStudentUserApp(userId);
         // strongly typed
-        var model = await _instructorService.GetInstructorAppUser("ea2856a2-3089-47f2-9a8b-7b86de653ea4");
+        var model = await _instructorService.GetInstructorAppUser("2c2de7b4-2a66-4894-9377-cee3ca13e885");
 
         return View(model);
     }
@@ -72,6 +72,24 @@ public class InstructorsController : BaseController {
     public async Task<IActionResult> Exams(int instructorId)
     {
         var model = await _termService.GetCurrentTerm();
+        ViewBag.InstructorId = instructorId;
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> TermHistory(int instructorId)
+    {
+        var model = await _instructorService.GetAllInstrcutorTerms(instructorId);
+        ViewBag.InstructorId = instructorId;
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Courses(int instructorId)
+    {
+        var model = await _instructorService.GetCourses(instructorId);
         ViewBag.InstructorId = instructorId;
 
         return View(model);

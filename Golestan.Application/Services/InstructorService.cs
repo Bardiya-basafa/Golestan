@@ -1,10 +1,12 @@
 ﻿namespace Golestan.Application.Services;
 
 using Domain.Entities;
+using DTOs.Course;
 using DTOs.ExamResult;
 using DTOs.Instructor;
 using DTOs.Score;
 using DTOs.Student;
+using DTOs.Term;
 using Interfaces;
 using Mapster;
 using RepositoryInterfaces;
@@ -23,6 +25,16 @@ public class InstructorService(IInstructorRepository instructorRepository) : IIn
         return await instructorRepository.GetInstructorInfo(instructorId);
     }
 
+    public async Task<List<TermDto>> GetAllInstrcutorTerms(int instructorId)
+    {
+        return await instructorRepository.GetAllInstructorTerms(instructorId);
+    }
+
+    public async Task<List<CourseDto>> GetCourses(int instructorId)
+    {
+        return await instructorRepository.GetCourses(instructorId); 
+    }
+
     public async Task<List<InstructorDto>> GetFacultyInstructors()
     {
         return await instructorRepository.GetFacultyInstructors();
@@ -39,10 +51,6 @@ public class InstructorService(IInstructorRepository instructorRepository) : IIn
     {
         return await instructorRepository.GetInstructorStudentsOfSection(sectionId);
     }
-
-    
-
-  
 
 
     public async Task<Result> RemoveCourseInstructor(int instructorId, int courseId)

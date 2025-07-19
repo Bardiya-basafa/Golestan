@@ -60,7 +60,11 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
 
 
         instructor.InstructorNumber = await GetUniversalNumber(UserType.Instructor, dto.FacultyId, instructor.Id);
-        
+        var lastTerm = await termService.GetLastTerm();
+
+        if (lastTerm != null){
+            instructor.Terms.Add(lastTerm);
+        }
 
         return await instructorRepository.UpdateInstructor(instructor);
     }
@@ -131,7 +135,6 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
         var finalResult = "";
 
         if (userType == UserType.Student){
-            var studentCount = await userRepository.StudentCount(facultyId);
             string formattedCount = (userId).ToString("D6");// Increment count for new student
 
             finalResult = $"s-{termIdentity}-{facultyId}-{formattedCount}";

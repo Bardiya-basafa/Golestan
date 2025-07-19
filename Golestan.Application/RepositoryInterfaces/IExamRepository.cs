@@ -14,6 +14,8 @@ public interface IExamRepository {
 
     Task<List<ExamResultDto>> GetTermExamResults(int termId, int studentId);
 
+    Task<List<ExamResultDto>> GetTermFinalResults(int termId, int instructorId);
+
     Task<Result> SubmitObjection(ExamResult examResult, string objection);
 
 

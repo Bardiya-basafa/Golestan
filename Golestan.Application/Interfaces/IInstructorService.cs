@@ -1,10 +1,12 @@
 ﻿namespace Golestan.Application.Interfaces;
 
 using Domain.Entities;
+using DTOs.Course;
 using DTOs.ExamResult;
 using DTOs.Instructor;
 using DTOs.Score;
 using DTOs.Student;
+using DTOs.Term;
 using Shared.Helpers;
 
 
@@ -14,6 +16,9 @@ public interface IInstructorService {
 
     Task<InstructorDto> GetInstructorInfo(int instructorId);
 
+    Task<List<TermDto>> GetAllInstrcutorTerms(int instructorId);
+
+    Task<List<CourseDto>> GetCourses(int instructorId);
 
     Task<List<InstructorDto>> GetFacultyInstructors();
 

@@ -27,7 +27,8 @@ public class TermRepository(AppDbContext context) : ITermRepository {
                 StartTime = t.StartTime,
                 TermName = t.TermName,
                 Year = t.Year,
-                Id = t.Id
+                Id = t.Id,
+                IsClosed = t.IsClosed,
             })
             .FirstOrDefaultAsync();
     }
@@ -55,7 +56,8 @@ public class TermRepository(AppDbContext context) : ITermRepository {
                 StartTime = t.StartTime,
                 TermName = t.TermName,
                 Year = t.Year,
-                Id = t.Id
+                Id = t.Id,
+                IsClosed = t.IsClosed,
             })
             .FirstOrDefaultAsync() ?? throw new NullReferenceException($"Term with id {termId} not found");
     }
@@ -93,6 +95,13 @@ public class TermRepository(AppDbContext context) : ITermRepository {
         students.ForEach(student => {
             student.Terms.Add(term);
             context.Students.Update(student);
+        });
+
+        var instructors = await context.Instructors.Include(i => i.Terms).ToListAsync();
+
+        instructors.ForEach(instructor => {
+            instructor.Terms.Add(term);
+            context.Instructors.Update(instructor);
         });
 
         await context.SaveChangesAsync();

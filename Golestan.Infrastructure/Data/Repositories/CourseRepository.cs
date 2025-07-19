@@ -33,7 +33,6 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
                 Unit = c.Unit,
                 Description = c.Description,
             })
-            .Take(10)
             .ToListAsync();
     }
 
@@ -245,7 +244,27 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
         var course = await context.Courses
             .Where(c => c.Id == courseId)
             .Include(c => c.Sections)
+            .Include(c => c.Exam)
             .FirstOrDefaultAsync() ?? throw new Exception("Course not found");
+
+        if (course.Exam != null){
+            context.Exams.Remove(course.Exam);
+        }
+
+        if (course.Sections.Count > 0){
+            context.Sections.RemoveRange(course.Sections);
+        }
+
+        var courses = await context.Courses
+            .Where(c => c.Id != courseId)
+            .ToListAsync();
+
+        foreach (var coursePre in courses){
+            if (coursePre.PrerequisiteCourses.Contains(courseId)){
+                coursePre.PrerequisiteCourses.Remove(courseId);
+                context.Courses.Update(coursePre);
+            }
+        }
 
 
         context.Courses.Remove(course);
@@ -293,7 +312,9 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
 
     public async Task<bool> CourseNameExist(string courseName, int facultyId)
     {
-        return await context.Courses.AsNoTracking().AnyAsync(c => c.CourseName == courseName && c.FacultyId == facultyId);
+        return await context.Courses
+            .AsNoTracking()
+            .AnyAsync(c => c.CourseName == courseName && c.FacultyId == facultyId);
     }
 
     public async Task<Result> SetExam(Exam exam)

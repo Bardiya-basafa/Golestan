@@ -40,7 +40,7 @@ public class StudentsController : BaseController {
 
         // var model = await _studentService.GetStudentUserApp(userId);
 
-        var model = await _studentService.GetStudentUserApp("6f5d8143-5726-4cbd-952f-c0bd2a57b003");
+        var model = await _studentService.GetStudentUserApp("d8801a7e-52d4-4bdf-b519-6dfde3c04df0");
 
         return View(model);
     }
@@ -145,9 +145,7 @@ public class StudentsController : BaseController {
         }
 
 
-        var model = await _studentService.GetActiveExamResults(studentId);
-
-        return View(model);
+        return RedirectToAction("Results","Exam",new { studentId = studentId , termId = currentTerm.Id });
     }
 
     

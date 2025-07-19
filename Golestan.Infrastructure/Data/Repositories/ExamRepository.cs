@@ -21,7 +21,15 @@ public class ExamRepository(AppDbContext context) : IExamRepository {
     {
         var updateExamResult = await context.ExamResults
             .Where(e => e.StudentId == examResult.StudentId && e.SectionId == examResult.SectionId)
+            .Include(e => e.Course.Exam)
             .FirstOrDefaultAsync() ?? throw new Exception($"No exam result found for student  id:{examResult.StudentId}");
+
+        if (DateTime.UtcNow <= updateExamResult.Course.Exam.ExamDateTime + TimeSpan.FromDays(1)){
+            return new Result()
+            {
+                Message = "This course exam date not reached yet",
+            };
+        }
 
 
         updateExamResult.Score = examResult.Score;
@@ -73,12 +81,21 @@ public class ExamRepository(AppDbContext context) : IExamRepository {
                     Id = r.SectionId,
                     Instructor = new InstructorDto()
                     {
+                        Id = r.InstructorId,
                         FullName = r.Instructor.FullName,
                         InstructorNumber = r.Instructor.InstructorNumber,
                     },
                     Course = new CourseDto()
                     {
                         CourseName = r.Course.CourseName,
+                        Exam = new ExamDto()
+                        {
+                            ExamDateTime = r.Course.Exam.ExamDateTime,
+                            Classroom = new ClassroomDto()
+                            {
+                                ClassroomNumber = r.Course.Exam.Classroom.ClassNumber
+                            }
+                        }
                     },
                     TimeSlot = r.Section.TimeSlot,
                     DayOfWeek = r.Section.DayOfWeek,
@@ -90,8 +107,50 @@ public class ExamRepository(AppDbContext context) : IExamRepository {
             .ToListAsync();
     }
 
+    public async Task<List<ExamResultDto>> GetTermFinalResults(int termId, int instructorId)
+    {
+        return await context.ExamResults
+            .AsNoTracking()
+            .Where(e => e.InstructorId == instructorId && e.TermId == termId)
+            .Select(e => new ExamResultDto()
+            {
+                Student = new StudentDto()
+                {
+                    Id = e.StudentId,
+                    FullName = e.Student.FullName,
+                    StudentNumber = e.Student.StudentNumber,
+                },
+                Course = new CourseDto()
+                {
+                    CourseName = e.Course.CourseName,
+                    Exam = new ExamDto()
+                    {
+                        ExamDateTime = e.Course.Exam.ExamDateTime,
+                        TimeSlot = e.Course.Exam.TimeSlot,
+                        Classroom = new ClassroomDto()
+                        {
+                            ClassroomNumber = e.Course.Exam.Classroom.ClassNumber
+                        }
+                    }
+                },
+                Score = e.Score,
+                Objection = e.Objection,
+                Description = e.Description,
+            })
+            .OrderByDescending(e => e.Course.CourseName)
+            .ToListAsync();
+    }
+
     public async Task<Result> SubmitObjection(ExamResult examResult, string objection)
     {
+        if (examResult.Score == -1){
+            return new Result()
+            {
+                Message = "Exam score not set yet",
+                Succeeded = false,
+            };
+        }
+
         examResult.Objection = objection;
         context.Update(examResult);
         await context.SaveChangesAsync();

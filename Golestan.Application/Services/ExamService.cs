@@ -36,6 +36,11 @@ public class ExamService(IExamRepository examRepository, ITermService termServic
         return await examRepository.GetTermExamResults(termId, studentId);
     }
 
+    public async Task<List<ExamResultDto>> GetTermFinalResults(int termId, int instructorId)
+    {
+        return await examRepository.GetTermFinalResults(termId, instructorId);
+    }
+
 
     public async Task<Result> SubmitObjection(ObjectionDto model)
     {

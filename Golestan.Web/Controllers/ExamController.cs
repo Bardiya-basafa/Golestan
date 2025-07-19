@@ -22,7 +22,7 @@ public class ExamController(IExamService examService, IFacultyService facultySer
     public async Task<IActionResult> Results(int studentId, int termId)
     {
         var model = await examService.GetTermExamResults(termId, studentId);
-        ViewBag.StudentId = studentId;
+        ViewBag.studentId = studentId;
         ViewBag.TermId = termId;
 
         return View(model);
@@ -40,13 +40,23 @@ public class ExamController(IExamService examService, IFacultyService facultySer
         return RedirectToAction("Index", new { sectionId = model.SectionId });
     }
 
+    [HttpGet]
+    public async Task<IActionResult> FinalResults(int instructorId, int termId)
+    {
+        var model = await examService.GetTermFinalResults(termId,instructorId);
+        ViewBag.InstructorId = instructorId;
+        ViewBag.TermId = termId;
+
+        return View(model);
+    }
+
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Objection(ObjectionDto dto)
     {
         var model = await examService.SubmitObjection(dto);
 
-        return View(model);
+        return RedirectToAction("Results", new { termId = dto.TermId, studentId = dto.StudentId });
     }
 
 }

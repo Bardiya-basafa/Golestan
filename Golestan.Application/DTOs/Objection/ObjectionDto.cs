@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations;
 
 public class ObjectionDto {
 
+    public int StudentId { get; set; }
+
+    public int TermId { get; set; }
 
     public int ExamResultId { get; set; }
 

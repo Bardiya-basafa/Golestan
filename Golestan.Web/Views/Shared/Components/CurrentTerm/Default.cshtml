@@ -32,6 +32,9 @@ else{
                         <div>
                                 <strong>Current Date Time:</strong> @DateTime.UtcNow.ToString("yyyy-M-d dddd")
                         </div>
+                        <div>
+                                <strong>Status:  </strong> @(Model.IsClosed ? "Completed" : "Active")
+                        </div>
                 </div>
         </div>
 }

@@ -80,7 +80,7 @@ public class SectionService(ISectionRepository sectionRepository, ICourseReposit
 
 
         return await sectionRepository.RemoveExamResult(sectionId, studentId);
-      
+      return new Result();
     }
 
     public async Task<Result> AddSection(AddSectionDto dto)

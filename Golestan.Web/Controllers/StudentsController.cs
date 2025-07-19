@@ -21,14 +21,17 @@ public class StudentsController : BaseController {
 
     private readonly ISelectionService _selectionService;
 
+    private readonly IExamService _examService;
 
-    public StudentsController(IStudentService studentService, IFacultyService facultyService, IUserService userService, ITermService termService, ISelectionService selectionService) : base(facultyService)
+
+    public StudentsController(IStudentService studentService, IFacultyService facultyService, IUserService userService, ITermService termService, ISelectionService selectionService, IExamService examService) : base(facultyService)
     {
         _studentService = studentService;
         _facultyService = facultyService;
         _userService = userService;
         _termService = termService;
         _selectionService = selectionService;
+        _examService = examService;
     }
 
     public async Task<IActionResult> Index()
@@ -36,8 +39,8 @@ public class StudentsController : BaseController {
         var userId = GetUserId();
 
         // var model = await _studentService.GetStudentUserApp(userId);
-        // strongly typed
-        var model = await _studentService.GetStudentUserApp("84f21f1c-cddd-46bc-8744-4a25183ed4de");
+
+        var model = await _studentService.GetStudentUserApp("d8801a7e-52d4-4bdf-b519-6dfde3c04df0");
 
         return View(model);
     }
@@ -112,37 +115,49 @@ public class StudentsController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> Terms(int studentId)
+    public async Task<IActionResult> Exams(int studentId)
     {
-        var model = await _studentService.GetAllStudentTerms(studentId);
+        // var model = await _studentService.GetAllStudentTerms(studentId);
+        ViewBag.studentId = studentId;
 
-        return View(model);
+        return View();
     }
 
     [HttpGet]
-    public async Task<IActionResult> ExamResults(int termId, int studentId)
+    public async Task<IActionResult> TermHistory(int studentId)
     {
-        var model = await _studentService.GetAllTermExamResults(termId, studentId);
-        ViewBag.StudentId = studentId;
+        var model = await _studentService.GetAllStudentTerms(studentId);
+        ViewBag.studentId = studentId;
 
         return View(model);
     }
+
 
     [HttpGet]
     public async Task<IActionResult> ActiveExamResults(int studentId)
     {
-        var model = await _studentService.GetActiveExamResults(studentId);
+        var currentTerm = await _termService.GetCurrentTerm();
 
-        return View(model);
+        if (currentTerm == null){
+            ShowMessage("Currently there is no active term", false);
+
+            return RedirectToAction("Exams", new { studentId = studentId });
+        }
+
+
+        return RedirectToAction("Results","Exam",new { studentId = studentId , termId = currentTerm.Id });
     }
+
+    
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Objection(ObjectionDto dto)
+    public async Task<IActionResult> Remove(int studentId, int facultyId)
     {
-        var model = await _studentService.SubmitObjection(dto);
+        var result = await _studentService.Rmove(studentId);
+        ShowMessage(result.Message, result.Succeeded);
 
-        return View(model);
+        return RedirectToAction("Students", "Admin", routeValues: new { facultyId = facultyId });
     }
 
 }

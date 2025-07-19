@@ -10,6 +10,8 @@ public interface IUserRepository {
 
     Task<Result> AddStudent(Student student);
 
+    Task<bool> DeleteUser(string id);
+
     Task<int> StudentCount(int facultyId);
 
     Task<int> InstructorCount(int facultyId);

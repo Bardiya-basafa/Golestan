@@ -21,12 +21,15 @@ public class InstructorsController : BaseController {
 
     private readonly IInstructorService _instructorService;
 
-    public InstructorsController(IFacultyService facultyService, UserManager<AppUser> userManager, IUserService userService, IInstructorService instructorService) : base(facultyService)
+    private readonly ITermService _termService;
+
+    public InstructorsController(IFacultyService facultyService, UserManager<AppUser> userManager, IUserService userService, IInstructorService instructorService, ITermService termService) : base(facultyService)
     {
         _facultyService = facultyService;
         _userManager = userManager;
         _userService = userService;
         _instructorService = instructorService;
+        _termService = termService;
     }
 
     public async Task<IActionResult> Index()
@@ -35,7 +38,7 @@ public class InstructorsController : BaseController {
 
         // var model = await _studentService.GetStudentUserApp(userId);
         // strongly typed
-        var model = await _instructorService.GetInstructorAppUser("ea2856a2-3089-47f2-9a8b-7b86de653ea4");
+        var model = await _instructorService.GetInstructorAppUser("2c2de7b4-2a66-4894-9377-cee3ca13e885");
 
         return View(model);
     }
@@ -49,35 +52,49 @@ public class InstructorsController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> Students(int sectionId)
+    public async Task<IActionResult> Students(int sectionId, int instructorId)
     {
         var model = await _instructorService.GetInstructorStudentsOfSection(sectionId);
+        ViewBag.InstructorId = instructorId;
 
         return View(model);
     }
 
     [HttpGet]
-    public async Task<IActionResult> SubmitStudentsScores(int sectionId)
+    public async Task<IActionResult> ExamSections(int instructorId)
     {
-        var model = await _instructorService.GetExamResultsOfSection(sectionId);
-
-        // invoke the view component async 
+        var model = await _instructorService.GetInstructorDtoById(instructorId);
 
         return View(model);
     }
 
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> SubmitStudentsScores(ScoreDto model)
+    [HttpGet]
+    public async Task<IActionResult> Exams(int instructorId)
     {
-        var result = await _instructorService.SubmitStudentScore(model);
+        var model = await _termService.GetCurrentTerm();
+        ViewBag.InstructorId = instructorId;
 
-        if (!result.Succeeded){
-            ShowMessage(result.Message, result.Succeeded);
-        }
-
-        return RedirectToAction("SubmitStudentsScores", new { instructorId = model.InstructorId, sectionId = model.SectionId });
+        return View(model);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> TermHistory(int instructorId)
+    {
+        var model = await _instructorService.GetAllInstrcutorTerms(instructorId);
+        ViewBag.InstructorId = instructorId;
+
+        return View(model);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Courses(int instructorId)
+    {
+        var model = await _instructorService.GetCourses(instructorId);
+        ViewBag.InstructorId = instructorId;
+
+        return View(model);
+    }
+
 
     [HttpGet]
     public async Task<IActionResult> Add()
@@ -107,7 +124,7 @@ public class InstructorsController : BaseController {
         ShowMessage(result.Message, result.Succeeded);
 
         if (result.Succeeded){
-            return RedirectToAction("Instructors", "Admin");
+            return RedirectToAction("Instructors", "Admin", new { facultyId = dto.FacultyId });
         }
 
 

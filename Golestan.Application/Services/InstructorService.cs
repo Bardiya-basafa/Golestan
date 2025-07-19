@@ -1,10 +1,12 @@
 ﻿namespace Golestan.Application.Services;
 
 using Domain.Entities;
+using DTOs.Course;
 using DTOs.ExamResult;
 using DTOs.Instructor;
 using DTOs.Score;
 using DTOs.Student;
+using DTOs.Term;
 using Interfaces;
 using Mapster;
 using RepositoryInterfaces;
@@ -23,6 +25,16 @@ public class InstructorService(IInstructorRepository instructorRepository) : IIn
         return await instructorRepository.GetInstructorInfo(instructorId);
     }
 
+    public async Task<List<TermDto>> GetAllInstrcutorTerms(int instructorId)
+    {
+        return await instructorRepository.GetAllInstructorTerms(instructorId);
+    }
+
+    public async Task<List<CourseDto>> GetCourses(int instructorId)
+    {
+        return await instructorRepository.GetCourses(instructorId); 
+    }
+
     public async Task<List<InstructorDto>> GetFacultyInstructors()
     {
         return await instructorRepository.GetFacultyInstructors();
@@ -38,23 +50,6 @@ public class InstructorService(IInstructorRepository instructorRepository) : IIn
     public async Task<List<StudentDto>> GetInstructorStudentsOfSection(int sectionId)
     {
         return await instructorRepository.GetInstructorStudentsOfSection(sectionId);
-    }
-
-    public async Task<List<ExamResultDto>> GetExamResultsOfSection(int sectionId)
-    {
-        return await instructorRepository.GetExamResultsOfSection(sectionId);
-    }
-
-    public async Task<Result> SubmitStudentScore(ScoreDto model)
-    {
-        if (model.Score < 0 || model.Score > 20){
-            return new Result()
-            {
-                Message = "Score must be between 0 and 20"
-            };
-        }
-
-        return await instructorRepository.SubmitExamResult(model.Adapt<ExamResult>());
     }
 
 

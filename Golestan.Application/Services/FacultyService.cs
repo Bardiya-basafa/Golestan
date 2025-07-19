@@ -12,99 +12,59 @@ public class FacultyService(IFacultyRepository facultyRepository) : IFacultyServ
 
     public async Task<List<FacultyDto>> GetFaculties()
     {
-        try{
-            return await facultyRepository.GetFaculties();
-        }
-        catch (Exception ex){
-            throw new Exception(ex.Message);
-        }
+        return await facultyRepository.GetFaculties();
     }
 
     public async Task<FacultyDto> GetFacultyDtoById(int id)
     {
-        try{
-            return await facultyRepository.GetFacultyById(id);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await facultyRepository.GetFacultyById(id);
     }
 
 
     public async Task<Dictionary<int, string>?> GetFacultiesMajorNamesOptions()
     {
-        try{
-            return await facultyRepository.GetFacultyMajorNamesOptions();
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await facultyRepository.GetFacultyMajorNamesOptions();
     }
 
     public async Task<Dictionary<int, string>?> GetFacultyClassroomsOptions(int facultyId)
     {
-        try{
-            return await facultyRepository.GetFacultyClassroomsOptions(facultyId);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await facultyRepository.GetFacultyClassroomsOptions(facultyId);
     }
 
     public async Task<Dictionary<int, string>?> GetFacultyInstructorsOptions(int facultyId)
     {
-        try{
-            return await facultyRepository.GetFacultyInstructorsOptions(facultyId);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await facultyRepository.GetFacultyInstructorsOptions(facultyId);
     }
 
     public async Task<Dictionary<int, string>?> GetFacultyCoursesOptions(int facultyId)
     {
-        try{
-            return await facultyRepository.GetFacultyCoursesOptions(facultyId);
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await facultyRepository.GetFacultyCoursesOptions(facultyId);
     }
 
     public async Task<Result> UpdateFacutly(FacultyDto faculty)
     {
-        try{
-            if (await facultyRepository.BuildingNameExist(faculty.BuildingName)){
-                return new Result()
-                {
-                    Message = "Building name already exist",
-                };
-            }
-
-            if (await facultyRepository.MajorNameExist(faculty.MajorName)){
-                return new Result()
-                {
-                    Message = "Major name already exist",
-                };
-            }
-
-
-            return await facultyRepository.UpdateFaculty(faculty.Adapt<Faculty>());
+        if (await facultyRepository.BuildingNameExist(faculty.BuildingName)){
+            return new Result()
+            {
+                Message = "Building name already exist",
+            };
         }
-        catch (Exception e){
-            throw new Exception(e.Message);
+
+        if (await facultyRepository.MajorNameExist(faculty.MajorName)){
+            return new Result()
+            {
+                Message = "Major name already exist",
+            };
         }
+
+
+        return await facultyRepository.UpdateFaculty(faculty.Adapt<Faculty>());
     }
 
 
     public async Task<Result> AddFaculty(FacultyDto faculty)
     {
-        try{
-            return await facultyRepository.AddFaculty(faculty.Adapt<Faculty>());
-        }
-        catch (Exception e){
-            throw new Exception(e.Message);
-        }
+        return await facultyRepository.AddFaculty(faculty.Adapt<Faculty>());
     }
 
     public async Task<bool> VerifyMajorName(string majorName)

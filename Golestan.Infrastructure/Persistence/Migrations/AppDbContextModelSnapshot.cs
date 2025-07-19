@@ -292,13 +292,11 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId")
-                        .IsUnique();
+                    b.HasIndex("CourseId");
 
                     b.HasIndex("InstructorId");
 
-                    b.HasIndex("SectionId")
-                        .IsUnique();
+                    b.HasIndex("SectionId");
 
                     b.HasIndex("StudentId");
 
@@ -475,6 +473,9 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Property<DateTime>("ExamsStartTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("InstructorId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsClosed")
                         .HasColumnType("bit");
 
@@ -502,6 +503,8 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("InstructorId");
 
                     b.HasIndex("StudentId");
 
@@ -537,19 +540,19 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bae8e4ab-f91f-49bf-abb1-92ba89d99341",
+                            Id = "82741709-3097-4ba4-ba0f-7c618a7e1b75",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "4c5b0241-76c7-46d3-8946-f43c669eb91d",
+                            Id = "245cb452-402f-4fc1-a3b0-4e42cce5bfd4",
                             Name = "Student",
                             NormalizedName = "STUDENT"
                         },
                         new
                         {
-                            Id = "4c226d24-bd36-4709-b79a-b0298ee2e1d4",
+                            Id = "04a81f0f-5e63-4eeb-a425-ed04dda8206a",
                             Name = "Instructor",
                             NormalizedName = "INSTRUCTOR"
                         });
@@ -778,8 +781,8 @@ namespace Golestan.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Golestan.Domain.Entities.ExamResult", b =>
                 {
                     b.HasOne("Golestan.Domain.Entities.Course", "Course")
-                        .WithOne()
-                        .HasForeignKey("Golestan.Domain.Entities.ExamResult", "CourseId")
+                        .WithMany("ExamResults")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -790,8 +793,8 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Golestan.Domain.Entities.Section", "Section")
-                        .WithOne()
-                        .HasForeignKey("Golestan.Domain.Entities.ExamResult", "SectionId")
+                        .WithMany("ExamResults")
+                        .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -893,6 +896,10 @@ namespace Golestan.Infrastructure.Persistence.Migrations
 
             modelBuilder.Entity("Golestan.Domain.Entities.Term", b =>
                 {
+                    b.HasOne("Golestan.Domain.Entities.Instructor", null)
+                        .WithMany("Terms")
+                        .HasForeignKey("InstructorId");
+
                     b.HasOne("Golestan.Domain.Entities.Student", null)
                         .WithMany("Terms")
                         .HasForeignKey("StudentId")
@@ -988,6 +995,8 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Navigation("Exam")
                         .IsRequired();
 
+                    b.Navigation("ExamResults");
+
                     b.Navigation("Sections");
                 });
 
@@ -1007,6 +1016,13 @@ namespace Golestan.Infrastructure.Persistence.Migrations
                     b.Navigation("ExamResults");
 
                     b.Navigation("Sections");
+
+                    b.Navigation("Terms");
+                });
+
+            modelBuilder.Entity("Golestan.Domain.Entities.Section", b =>
+                {
+                    b.Navigation("ExamResults");
                 });
 
             modelBuilder.Entity("Golestan.Domain.Entities.Student", b =>

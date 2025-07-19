@@ -5,11 +5,11 @@
                 <h3 class="text-lg font-semibold text-blue-800 mb-4">Current Academic Term</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-700">
                         <div>
-                                <strong>Currently There is no active term</strong> 
+                                <strong>Currently There is no active term</strong>
                         </div>
-                        
                 </div>
-        </div>}
+        </div>
+}
 else{
         <div class="mb-8 bg-white rounded-lg p-6 shadow-sm border border-blue-200">
                 <h3 class="text-lg font-semibold text-blue-800 mb-4">Current Academic Term</h3>
@@ -28,6 +28,12 @@ else{
                         </div>
                         <div>
                                 <strong>Selection Period:</strong> @Model.SelectionStartTime.ToString("yyyy-M-d dddd") - @Model.SelectionEndTime.ToString("yyyy-M-d dddd")
+                        </div>
+                        <div>
+                                <strong>Current Date Time:</strong> @DateTime.UtcNow.ToString("yyyy-M-d dddd")
+                        </div>
+                        <div>
+                                <strong>Status:  </strong> @(Model.IsClosed ? "Completed" : "Active")
                         </div>
                 </div>
         </div>

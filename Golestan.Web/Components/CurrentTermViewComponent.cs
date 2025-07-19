@@ -13,9 +13,13 @@ public class CurrentTermViewComponent : ViewComponent {
         _termService = termService;
     }
 
-    public async Task<IViewComponentResult> InvokeAsync()
+    public async Task<IViewComponentResult> InvokeAsync(int termId)
     {
-        var model = await _termService.GetCurrentTerm();
+        if (termId == 0){
+            return View(await _termService.GetCurrentTerm());
+        }
+
+        var model = await _termService.GetTermById(termId);
 
         return View(model);
     }

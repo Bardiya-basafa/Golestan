@@ -13,7 +13,7 @@
                         <strong>Salary Date:</strong> @Model.Salary
                 </div>
                 <div>
-                        <strong>Instructor Number:</strong> @Model.InstructorNumber?
+                        <strong>Instructor Number:</strong> @(Model.InstructorNumber ?? "N/A")
                 </div>
                 <div>
                         <strong>Total Sections Period:</strong> @Model.Sections.Count

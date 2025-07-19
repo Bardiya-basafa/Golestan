@@ -27,9 +27,39 @@ public class TermRepository(AppDbContext context) : ITermRepository {
                 StartTime = t.StartTime,
                 TermName = t.TermName,
                 Year = t.Year,
-                Id = t.Id
+                Id = t.Id,
+                IsClosed = t.IsClosed,
             })
             .FirstOrDefaultAsync();
+    }
+
+    public async Task<Term?> GetLastTerm()
+    {
+        return await context.Terms
+            .AsNoTracking()
+            .OrderByDescending(t => t.StartTime)
+            .FirstOrDefaultAsync();
+    }
+
+    public async Task<TermDto> GetTermById(int termId)
+    {
+        return await context.Terms
+            .AsNoTracking()
+            .Where(t => t.Id == termId)
+            .Select(t => new TermDto()
+            {
+                ExamsStartTime = t.ExamsStartTime,
+                ExamsEndTime = t.ExamsEndTime,
+                SelectionStartTime = t.SectionSelectionStartTime,
+                SelectionEndTime = t.SectionSelectionEndTime,
+                TermIdentifier = t.TermIdentifier,
+                StartTime = t.StartTime,
+                TermName = t.TermName,
+                Year = t.Year,
+                Id = t.Id,
+                IsClosed = t.IsClosed,
+            })
+            .FirstOrDefaultAsync() ?? throw new NullReferenceException($"Term with id {termId} not found");
     }
 
     public async Task<Term?> GetCurrentTermEntity()
@@ -37,6 +67,7 @@ public class TermRepository(AppDbContext context) : ITermRepository {
         var currentDate = DateTime.UtcNow;
 
         return await context.Terms
+            .AsNoTracking()
             .FirstOrDefaultAsync(t => !t.IsClosed);
     }
 
@@ -64,6 +95,13 @@ public class TermRepository(AppDbContext context) : ITermRepository {
         students.ForEach(student => {
             student.Terms.Add(term);
             context.Students.Update(student);
+        });
+
+        var instructors = await context.Instructors.Include(i => i.Terms).ToListAsync();
+
+        instructors.ForEach(instructor => {
+            instructor.Terms.Add(term);
+            context.Instructors.Update(instructor);
         });
 
         await context.SaveChangesAsync();
@@ -119,7 +157,9 @@ public class TermRepository(AppDbContext context) : ITermRepository {
     {
         var currentDate = DateTime.UtcNow;
 
-        return context.Terms.AnyAsync(t => !t.IsClosed);
+        return context.Terms
+            .AsNoTracking()
+            .AnyAsync(t => !t.IsClosed);
     }
 
 }

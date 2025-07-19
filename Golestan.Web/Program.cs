@@ -38,6 +38,7 @@ builder.Services.AddScoped<ISectionService, SectionService>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ITermService, TermService>();
 builder.Services.AddScoped<ISelectionService, SelectionService>();
+builder.Services.AddScoped<IExamService, ExamService>();
 
 
 // Repositories 
@@ -50,6 +51,8 @@ builder.Services.AddScoped<IInstructorRepository, InstructorRepository>();
 builder.Services.AddScoped<IClassroomRepository, ClassroomRepository>();
 builder.Services.AddScoped<ISelectionRepository, SelectionRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IExamRepository, ExamRepository>();
+
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options => {
         options.Password.RequireDigit = true;

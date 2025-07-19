@@ -26,6 +26,8 @@ public class Course {
 
     public ICollection<Instructor> Instructors { get; set; } = new HashSet<Instructor>();
 
+    public ICollection<ExamResult> ExamResults { get; set; } = new HashSet<ExamResult>();
+
     public List<int> PrerequisiteCourses { get; set; } = new List<int>();
 
 }

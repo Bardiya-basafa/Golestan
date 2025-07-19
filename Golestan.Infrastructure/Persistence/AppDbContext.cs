@@ -211,8 +211,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
 
         modelBuilder.Entity<ExamResult>()
             .HasOne(e => e.Course)
-            .WithOne()
-            .HasForeignKey<ExamResult>(e => e.CourseId)
+            .WithMany(e => e.ExamResults)
+            .HasForeignKey(e => e.CourseId)
             .OnDelete(DeleteBehavior.NoAction);
 
         modelBuilder.Entity<ExamResult>()
@@ -230,8 +230,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
 
         modelBuilder.Entity<ExamResult>()
             .HasOne(e => e.Section)
-            .WithOne()
-            .HasForeignKey<ExamResult>(e => e.SectionId)
+            .WithMany(s => s.ExamResults)
+            .HasForeignKey(e => e.SectionId)
             .OnDelete(DeleteBehavior.NoAction);
 
 

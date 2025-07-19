@@ -24,11 +24,11 @@ public static class TermHelper {
 
         var currentDate = DateTime.Now;
 
-        if (examStartDate <= currentDate || examEndDate <= currentDate){
-            result.Message = "Exam should be start in the future";
-
-            return result;
-        }
+        // if (examStartDate <= currentDate || examEndDate <= currentDate){
+        //     result.Message = "Exam should be start in the future";
+        //
+        //     return result;
+        // }
 
 
         result.Succeeded = true;

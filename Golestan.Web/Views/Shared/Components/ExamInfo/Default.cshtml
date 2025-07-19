@@ -1,0 +1,14 @@
+﻿@model ExamDto
+<!-- Exam Details (Optional - for context) -->
+<div class="bg-white rounded-lg shadow-sm border border-blue-300 p-6 mb-8">
+        <h2 class="text-2xl font-bold text-slate-900 mb-4">Exam Details: @Model.Course.CourseName - @Model.Term.TermIdentifier</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-slate-700">
+                <div><span class="font-semibold">Exam Date:</span> @Model.ExamDateTime.ToString("yyyy-M-d dddd")
+                </div>
+                <div><span class="font-semibold">Time Slot:</span> @Model.TimeSlot.GetDescription()</div>
+                <div><span class="font-semibold">Classroom:</span> Room @Model.Classroom.ClassroomNumber</div>
+                <div>
+                        <span class="font-semibold">Exams Period:</span> @Model.Term.ExamsStartTime.ToString("yyyy-M-d dddd") / @Model.Term.ExamsEndTime.ToString("yyyy-M-d dddd")
+                </div>
+        </div>
+</div>

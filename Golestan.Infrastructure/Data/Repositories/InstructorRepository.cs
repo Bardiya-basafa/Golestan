@@ -9,6 +9,7 @@ using Application.DTOs.Instructor;
 using Application.DTOs.Score;
 using Application.DTOs.Section;
 using Application.DTOs.Student;
+using Application.DTOs.Term;
 using Application.RepositoryInterfaces;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +17,7 @@ using Persistence;
 using Shared.Helpers;
 
 
-public class InstructorRepository(AppDbContext context) : IInstructorRepository {
+public class InstructorRepository(AppDbContext context, IUserRepository userRepository) : IInstructorRepository {
 
     public async Task<InstructorDto> GetInstructorAppUser(string instructorId)
     {
@@ -59,6 +60,41 @@ public class InstructorRepository(AppDbContext context) : IInstructorRepository 
                 }).ToList(),
             })
             .FirstOrDefaultAsync() ?? throw new KeyNotFoundException($"User with id {instructorId} not found");
+    }
+
+    public async Task<List<TermDto>> GetAllInstructorTerms(int instructorId)
+    {
+        return await context.Instructors
+            .AsNoTracking()
+            .Where(s => s.Id == instructorId)
+            .SelectMany(s => s.Terms)
+            .Select(t => new TermDto()
+            {
+                Id = t.Id,
+                Year = t.Year,
+                TermIdentifier = t.TermIdentifier,
+                SelectionEndTime = t.SectionSelectionEndTime,
+                SelectionStartTime = t.SectionSelectionStartTime,
+                ExamsEndTime = t.ExamsEndTime,
+                ExamsStartTime = t.ExamsStartTime,
+            })
+            .ToListAsync();
+    }
+
+    public async Task<List<CourseDto>> GetCourses(int instructorId)
+    {
+        return await context.Instructors
+            .AsNoTracking()
+            .Where(c => c.Id == instructorId)
+            .SelectMany(i => i.Courses)
+            .Select(c => new CourseDto()
+            {
+                Id = c.Id,
+                CourseName = c.CourseName,
+                Unit = c.Unit,
+                Description = c.Description,
+            })
+            .ToListAsync();
     }
 
 
@@ -159,42 +195,6 @@ public class InstructorRepository(AppDbContext context) : IInstructorRepository 
             .ToListAsync();
     }
 
-    public async Task<List<ExamResultDto>> GetExamResultsOfSection(int sectionId)
-    {
-        return await context.ExamResults
-            .AsNoTracking()
-            .Where(r => r.SectionId == sectionId)
-            .Select(r => new ExamResultDto()
-            {
-                Student = new StudentDto()
-                {
-                    Id = r.StudentId,
-                    FullName = r.Student.FullName,
-                    StudentNumber = r.Student.StudentNumber,
-                },
-                Score = r.Score,
-                Objection = r.Objection,
-                Description = r.Description,
-            })
-            .ToListAsync();
-    }
-
-    public async Task<Result> SubmitExamResult(ExamResult examResult)
-    {
-        var updateExamResult = await context.ExamResults
-            .Where(e => e.StudentId == examResult.StudentId && e.SectionId == examResult.SectionId)
-            .FirstOrDefaultAsync() ?? throw new Exception($"No exam result found for student  id:{examResult.StudentId}");
-
-
-        examResult.Score = examResult.Score;
-        examResult.Description = examResult.Description;
-
-        return new Result()
-        {
-            Message = "Exam result has been saved",
-            Succeeded = true
-        };
-    }
 
     public async Task<Result> RemoveCourseInstructor(int instructorId, int courseId)
     {
@@ -231,14 +231,39 @@ public class InstructorRepository(AppDbContext context) : IInstructorRepository 
             .Include(i => i.Sections)
             .FirstOrDefaultAsync() ?? throw new Exception($"No instructor found for {instructorId}");
 
+        if (instructor.Sections?.Count != 0){
+            context.Sections.RemoveRange(instructor.Sections);
+        }
 
+        var userId = instructor.AppUserId;
         context.Instructors.Remove(instructor);
+
+        if (!await userRepository.DeleteUser(userId)){
+            return new Result()
+            {
+                Message = "Something went wrong",
+            };
+        }
+
         await context.SaveChangesAsync();
+
 
         return new Result()
         {
             Message = "Instructor has been removed",
             Succeeded = true
+        };
+    }
+
+    public async Task<Result> UpdateInstructor(Instructor instructor)
+    {
+        context.Instructors.Update(instructor);
+        await context.SaveChangesAsync();
+
+        return new Result()
+        {
+            Succeeded = true,
+            Message = "Instructor has been updated",
         };
     }
 

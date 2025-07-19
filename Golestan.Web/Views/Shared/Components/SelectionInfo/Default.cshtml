@@ -8,14 +8,14 @@
                 <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
             </svg>
-            <strong>Full Name :    </strong> @Model.FullName
+            <strong>Full Name : </strong> @Model.FullName
         </div>
         <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-credit-card h-5 w-5 text-blue-600 mr-2">
                 <rect width="20" height="14" x="2" y="5" rx="2"></rect>
                 <line x1="2" x2="22" y1="10" y2="10"></line>
             </svg>
-            <strong>Student Number :    </strong> @Model.StudentNumber
+            <strong>Student Number : </strong> @Model.StudentNumber
         </div>
         <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-days h-5 w-5 text-blue-600 mr-2">
@@ -30,14 +30,14 @@
                 <path d="M12 18h.01"></path>
                 <path d="M16 18h.01"></path>
             </svg>
-            <strong>Current Term :    </strong> @Model.Term.TermIdentifier - @Model.Term.TermName
+            <strong>Current Term : </strong> @Model.Term.TermIdentifier - @Model.Term.TermName
         </div>
         <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-open h-5 w-5 text-blue-600 mr-2">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
                 <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
             </svg>
-            <strong>Total Units :    </strong> @Model.TotalUnit
+            <strong>Total Units : </strong> @Model.TotalUnit
         </div>
         <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award h-5 w-5 text-blue-600 mr-2">
@@ -45,14 +45,14 @@
                 <path d="M12 17.8v3.2L10 21l-2-1-2 1v-3.2"></path>
                 <path d="M12 17.8v3.2L14 21l2-1 2 1v-3.2"></path>
             </svg>
-            <strong>GPA :    </strong> @(Model.Gpa == -1 ? "No exam participated" : Model.Gpa)
+            <strong>GPA : </strong> @(Model.Gpa == -1 ? "No exam participated" : Model.Gpa)
         </div>
         <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock h-5 w-5 text-blue-600 mr-2">
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
             </svg>
-            <strong>Selection Time :    </strong> @Model.Term.SelectionStartTime / @Model.Term.SelectionEndTime
+            <strong>Selection Time : </strong> @Model.Term.SelectionStartTime / @Model.Term.SelectionEndTime
         </div>
         <div class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-check h-5 w-5 text-blue-600 mr-2">
@@ -62,7 +62,7 @@
                 <line x1="3" y1="10" x2="21" y2="10"></line>
                 <path d="m9 16 2 2 4-4"></path>
             </svg>
-            <strong>Current Time :    </strong> @DateTime.UtcNow.ToString("u")
+            <strong>Current Time : </strong> @DateTime.UtcNow.ToString("u")
         </div>
     </div>
 </div>

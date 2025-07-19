@@ -47,27 +47,7 @@ public class AdminController : BaseController {
         _termService = termService;
     }
 
-    public IActionResult Base()
-    {
-        if (User.Identity.IsAuthenticated){
-            if (User.IsInRole(AppRoles.Admin)){
-                return RedirectToAction("Index", "Admin");
-            }
-
-            if (User.IsInRole(AppRoles.Instructor)){
-                return RedirectToAction("Index", "Instructors");
-            }
-
-            if (User.IsInRole(AppRoles.Student)){
-                return RedirectToAction("Index", "Students");
-            }
-
-            return RedirectToAction("AccessDenied", "Account");
-        }
-
-        return RedirectToAction("Login", "Account");
-    }
-
+ 
     [Authorize(Roles = AppRoles.Admin)]
     [HttpGet]
 

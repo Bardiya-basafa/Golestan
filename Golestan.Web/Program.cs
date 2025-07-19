@@ -7,6 +7,7 @@ using Golestan.Infrastructure.Persistence;
 using Golestan.Shared.Helpers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,9 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GolestanDB")));
 
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
+    opt.TokenLifespan = TimeSpan.FromHours(2));
+
 // 5. Services 
 builder.Services.AddScoped<IFacultyService, FacultyService>();
 builder.Services.AddScoped<IUserService, UserService>();
@@ -40,6 +44,7 @@ builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ITermService, TermService>();
 builder.Services.AddScoped<ISelectionService, SelectionService>();
 builder.Services.AddScoped<IExamService, ExamService>();
+builder.Services.AddSingleton<IEmailService, EmailService>();
 
 
 // Repositories 
@@ -72,8 +77,8 @@ builder.Services.AddAuthentication(options => {
     .AddCookie();
 
 builder.Services.ConfigureApplicationCookie(options => {
-    options.LoginPath = "/Authentication/Login";
-    options.AccessDeniedPath = "/Authentication/AccessDenied";
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
 });
 
 builder.Services.AddAuthorization();
@@ -134,7 +139,7 @@ app.UseAuthorization();
 // 9. Endpoints
 app.MapControllerRoute(
 "default",
-"{controller=Students}/{action=Index}/{id?}");
+"{controller=Account}/{action=RedirectToRoleBasedPage}/{id?}");
 
 
 app.Run();

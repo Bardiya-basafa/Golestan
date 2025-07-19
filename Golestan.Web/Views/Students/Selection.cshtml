@@ -39,10 +39,10 @@
                                 <h3 class="text-lg font-semibold text-blue-800 mb-4">Term : @Model.TermIdentifier</h3>
                                 <h3 class="text-lg font-semibold text-blue-800 mb-4">Selection Period : @Model.SelectionStartTime.ToString("yyyy-M-d dddd") - @Model.SelectionEndTime.ToString("yyyy-M-d dddd")</h3>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-700"><br/></div>
-                                @if (DateTime.UtcNow > @Model.SelectionEndTime){
+                                @if (DateTime.UtcNow > Model.SelectionEndTime){
                                         <h3 class="text-lg font-semibold text-red-800 mb-4">The Selection Time Passed And No Longer Available</h3>
                                 }
-                                @if (DateTime.UtcNow < @Model.SelectionStartTime){
+                                @if (DateTime.UtcNow < Model.SelectionStartTime){
                                         <h3 class="text-lg font-semibold text-red-800 mb-4">The Selection Time Not Started Yet</h3>
                                 }
                                 @if (Model.SelectionStartTime < DateTime.UtcNow && Model.SelectionEndTime > DateTime.UtcNow){

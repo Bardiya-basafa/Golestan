@@ -4,6 +4,7 @@ using Golestan.Application.Services;
 using Golestan.Domain.Entities;
 using Golestan.Infrastructure.Data.Repositories;
 using Golestan.Infrastructure.Persistence;
+using Golestan.Shared.Constants;
 using Golestan.Shared.Helpers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
@@ -100,15 +101,27 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope()){
     var services = scope.ServiceProvider;
 
-    try{
-        var userManager = services.GetRequiredService<UserManager<AppUser>>();
-        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-        await DbInitializer.SeedRootAdmin(userManager, roleManager);
+    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    var context = services.GetRequiredService<AppDbContext>();
+
+    var studentUsers = await context.Students
+        .Select(s => s.AppUser)
+        .ToListAsync();
+
+    foreach (var user in studentUsers){
+        await userManager.AddToRoleAsync(user, AppRoles.Student);
     }
-    catch (Exception ex){
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while seeding the database.");
+
+    var instrcutorUsers = await context.Instructors
+        .Select(s => s.AppUser)
+        .ToListAsync();
+
+    foreach (var user in instrcutorUsers){
+        await userManager.AddToRoleAsync(user, AppRoles.Instructor);
     }
+
+    await DbInitializer.SeedRootAdmin(userManager, roleManager);
 }
 
 // 1. Exception Handling

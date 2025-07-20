@@ -2,6 +2,7 @@
 
 using Domain.Entities;
 using Domain.Enums;
+using DTOs.Account;
 using DTOs.Instructor;
 using DTOs.Student;
 using Interfaces;
@@ -11,10 +12,7 @@ using Shared.Constants;
 using Shared.Helpers;
 
 
-public class UserService(IUserRepository userRepository, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, ITermService termService, IStudentRepository studentRepository, IInstructorRepository instructorRepository) : IUserService {
-
-    private readonly RoleManager<IdentityRole> _roleManager = roleManager;
-
+public class UserService(IUserRepository userRepository, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, ITermService termService, IStudentRepository studentRepository, IInstructorRepository instructorRepository, SignInManager<AppUser> signInManager) : IUserService {
 
     public async Task<Result> RegisterNewInstructor(AddInstructorDto dto)
     {
@@ -127,6 +125,30 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
         return await studentRepository.UpdateStudent(studentProfile);
     }
 
+    public async Task<Result> UniversalNumberLogin(UniNumberLoginDto model)
+    {
+        var result = new Result();
+        var appUser = await userRepository.GetUserByUniversalNumber(model.UniNumber);
+
+        if (appUser == null){
+            result.Message = "Invalid UniNumber or Password";
+
+            return result;
+        }
+
+        var resul = await signInManager.PasswordSignInAsync(appUser.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+
+        if (!resul.Succeeded){
+            result.Message = "Invalid UniNumber or Password";
+
+            return result;
+        }
+
+        result.Succeeded = true;
+
+        return result;
+    }
+
     private async Task<string> GetUniversalNumber(UserType userType, int facultyId, int userId)
     {
         var lastTerm = await termService.GetLastTerm();
@@ -147,6 +169,5 @@ public class UserService(IUserRepository userRepository, UserManager<AppUser> us
 
         return finalResult;
     }
-
 
 }

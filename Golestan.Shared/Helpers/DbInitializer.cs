@@ -10,13 +10,16 @@ public static class DbInitializer {
 
     public static async Task SeedRootAdmin(UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
     {
-        // Ensure all roles exist
         foreach (var roleName in AppRoles.AllRoles){
-            if (!await roleManager.RoleExistsAsync(roleName)){
+            var exists = await roleManager.RoleExistsAsync(roleName);
+            Console.WriteLine(exists);
+
+
+            if (!exists){
                 await roleManager.CreateAsync(new IdentityRole(roleName));
             }
         }
-
+        
         // Check if any admin user exists
         var adminUsers = await userManager.GetUsersInRoleAsync(AppRoles.Admin);
 
@@ -35,9 +38,13 @@ public static class DbInitializer {
             var result = await userManager.CreateAsync(adminUser, password);
 
             if (result.Succeeded){
-                await userManager.AddToRoleAsync(adminUser, AppRoles.Admin);
+                var resultRole = await userManager.AddToRoleAsync(adminUser, AppRoles.Admin);
 
-                // Optionally add to User role as well if needed
+                if (!resultRole.Succeeded){
+                    var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+
+                    throw new Exception($"Admin user creation failed: {errors}");
+                }
             }
             else{
                 // Log errors if creation fails

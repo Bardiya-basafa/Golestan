@@ -35,13 +35,13 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
 
 
         // Custom table names
-        modelBuilder.Entity<AppUser>().ToTable("Users");
-        modelBuilder.Entity<IdentityRole<string>>().ToTable("Roles");
-        modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
-        modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
-        modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
-        modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
-        modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
+        // modelBuilder.Entity<AppUser>().ToTable("Users");
+        // modelBuilder.Entity<IdentityRole>().ToTable("Roles");
+        // modelBuilder.Entity<IdentityUserRole<string>>().ToTable("UserRoles");
+        // modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
+        // modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
+        // modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("RoleClaims");
+        // modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
 
         // Relations configurations 
         // AppUser
@@ -274,14 +274,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbCo
             .HasMany(f => f.Courses)
             .WithOne(c => c.Faculty)
             .OnDelete(DeleteBehavior.NoAction);
-
-
-        // seed roles 
-        modelBuilder.Entity<IdentityRole>().HasData(
-        new IdentityRole { Name = AppRoles.Admin, NormalizedName = AppRoles.Admin.ToUpper() },
-        new IdentityRole { Name = AppRoles.Student, NormalizedName = AppRoles.Student.ToUpper() },
-        new IdentityRole { Name = AppRoles.Instructor, NormalizedName = AppRoles.Instructor.ToUpper() }
-        );
     }
 
 }

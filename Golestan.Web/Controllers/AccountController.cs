@@ -3,6 +3,7 @@
 
 namespace Golestan.Web.Controllers;
 
+using System.Security.Claims;
 using System.Text.Encodings.Web;
 using Application.DTOs.Account;
 using Application.Interfaces;
@@ -20,13 +21,16 @@ public class AccountController : BaseController {
 
     private readonly UserManager<AppUser> _userManager;
 
-    private readonly IEmailSender _emailSender;
+    private readonly IEmailService _emailService;
 
-    public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IFacultyService facultyService, IEmailSender emailSender) : base(facultyService)
+    private readonly IUserService _userService;
+
+    public AccountController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IFacultyService facultyService, IEmailService emailService, IUserService userService) : base(facultyService)
     {
         _signInManager = signInManager;
         _userManager = userManager;
-        _emailSender = emailSender;
+        _emailService = emailService;
+        _userService = userService;
     }
 
     [HttpGet]
@@ -45,9 +49,6 @@ public class AccountController : BaseController {
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
 
             if (result.Succeeded){
-                var user = await _userManager.FindByEmailAsync(model.Email);
-                var claimsPrincipal = await _signInManager.CreateUserPrincipalAsync(user);
-
                 return RedirectToRoleBasedPage();
             }
 
@@ -62,6 +63,31 @@ public class AccountController : BaseController {
 
 
         return View(model);
+    }
+
+    [HttpGet]
+    public IActionResult UniversalNumberLogin()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> UniversalNumberLogin(UniNumberLoginDto model)
+    {
+        if (!ModelState.IsValid){
+            return View(model);
+        }
+
+        var result = await _userService.UniversalNumberLogin(model);
+
+        if (!result.Succeeded){
+            ShowMessage(result.Message, result.Succeeded);
+
+            return View(model);
+        }
+
+        return RedirectToAction("RedirectToRoleBasedPage");
     }
 
     [HttpGet]
@@ -93,7 +119,7 @@ public class AccountController : BaseController {
         values: new { email = user.Email, token = token },
         protocol: Request.Scheme);
 
-        await _emailSender.SendEmailAsync(
+        await _emailService.SendEmailAsync(
         model.Email,
         "Reset Password",
         $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
@@ -160,23 +186,29 @@ public class AccountController : BaseController {
 
     public IActionResult RedirectToRoleBasedPage()
     {
-        if (!User.Identity.IsAuthenticated){
-            return RedirectToAction("Login", "Account");
+        var roles = User.Claims
+            .Where(c => c.Type == ClaimTypes.Role)
+            .Select(c => c.Value)
+            .ToList();
+
+        if (User.Identity.IsAuthenticated){
+            if (User.IsInRole(AppRoles.Admin)){
+                return RedirectToAction("Index", "Admin");
+            }
+
+            if (User.IsInRole(AppRoles.Instructor)){
+                return RedirectToAction("Index", "Instructors");
+            }
+
+            if (User.IsInRole(AppRoles.Student)){
+                return RedirectToAction("Index", "Students");
+            }
+
+            return RedirectToAction("AccessDenied", "Account");
         }
 
-        if (User.IsInRole(AppRoles.Admin)){
-            return RedirectToAction("Index", "Admin");
-        }
 
-        if (User.IsInRole(AppRoles.Instructor)){
-            return RedirectToAction("Index", "Instructors");
-        }
-
-        if (User.IsInRole(AppRoles.Student)){
-            return RedirectToAction("Index", "Students");
-        }
-
-        return RedirectToAction("AccessDenied", "Account");
+        return RedirectToAction("Login", "Account");
     }
 
 }

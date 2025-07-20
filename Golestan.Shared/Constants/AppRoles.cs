@@ -8,6 +8,6 @@ public static class AppRoles {
 
     public const string Instructor = "Instructor";
 
-    public readonly static string[] AllRoles = { Admin, Student, Instructor };
+    public readonly static string[] AllRoles = [Admin, Student, Instructor];
 
 }

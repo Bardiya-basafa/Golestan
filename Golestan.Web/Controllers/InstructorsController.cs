@@ -40,67 +40,67 @@ public class InstructorsController : BaseController {
     {
         var userId = GetUserId();
 
-        // var model = await _studentService.GetStudentUserApp(userId);
-        // strongly typed
-        var model = await _instructorService.GetInstructorAppUser("2c2de7b4-2a66-4894-9377-cee3ca13e885");
+
+        var model = await _instructorService.GetInstructorAppUser(userId);
 
         return View(model);
     }
 
     [HttpGet]
     [Authorize(Roles = AppRoles.Instructor)]
-    public async Task<IActionResult> Sections(int instructorId)
+    public async Task<IActionResult> Sections()
     {
-        var model = await _instructorService.GetInstructorDtoById(instructorId);
+        var userId = GetUserId();
+        var model = await _instructorService.GetInstructorDtoById(userId);
 
         return View(model);
     }
 
     [HttpGet]
     [Authorize(Roles = AppRoles.Instructor)]
-    public async Task<IActionResult> Students(int sectionId, int instructorId)
+    public async Task<IActionResult> Students(int sectionId)
     {
-        var model = await _instructorService.GetInstructorStudentsOfSection(sectionId);
-        ViewBag.InstructorId = instructorId;
+        var userId = GetUserId();
+        var model = await _instructorService.GetInstructorStudentsOfSection(sectionId , userId);
 
         return View(model);
     }
 
     [HttpGet]
     [Authorize(Roles = AppRoles.Instructor)]
-    public async Task<IActionResult> ExamSections(int instructorId)
+    public async Task<IActionResult> ExamSections()
     {
-        var model = await _instructorService.GetInstructorDtoById(instructorId);
+        var userId = GetUserId();
+        var model = await _instructorService.GetInstructorDtoById(userId);
 
         return View(model);
     }
 
     [HttpGet]
     [Authorize(Roles = AppRoles.Instructor)]
-    public async Task<IActionResult> Exams(int instructorId)
+    public async Task<IActionResult> Exams()
     {
         var model = await _termService.GetCurrentTerm();
-        ViewBag.InstructorId = instructorId;
 
         return View(model);
     }
 
     [HttpGet]
     [Authorize(Roles = AppRoles.Instructor)]
-    public async Task<IActionResult> TermHistory(int instructorId)
+    public async Task<IActionResult> TermHistory()
     {
-        var model = await _instructorService.GetAllInstrcutorTerms(instructorId);
-        ViewBag.InstructorId = instructorId;
+        var userId = GetUserId();
+        var model = await _instructorService.GetAllInstrcutorTerms(userId);
 
         return View(model);
     }
 
     [HttpGet]
     [Authorize(Roles = AppRoles.Instructor)]
-    public async Task<IActionResult> Courses(int instructorId)
+    public async Task<IActionResult> Courses()
     {
-        var model = await _instructorService.GetCourses(instructorId);
-        ViewBag.InstructorId = instructorId;
+        var userId = GetUserId();
+        var model = await _instructorService.GetCourses(userId);
 
         return View(model);
     }

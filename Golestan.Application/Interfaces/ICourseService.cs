@@ -21,7 +21,7 @@ public interface ICourseService {
 
     Task<List<CourseDto>> GetAvailableCoursesForPrerequisite(int courseId);
 
-    Task<List<Course>> GetAvailableCoursesForStudent(int studentId);
+    Task<List<Course>> GetAvailableCoursesForStudent(string studentId);
 
     Task<Dictionary<int, string>?> GetExamClassrooms(int courseId);
 

@@ -9,17 +9,16 @@ using Shared.Helpers;
 
 public class SelectionService(ISelectionRepository selectionRepository, IStudentRepository studentRepository, ISectionRepository sectionRepository, ITermService termService, ICourseService courseService, ISectionService sectionService) : ISelectionService {
 
-    public async Task<SelectionDto> GetSelectionDto(int studentId)
+    public async Task<SelectionDto> GetSelectionDto(string studentId)
     {
         var selectionDto = new SelectionDto();
         selectionDto.AvailableSections = await GetAvailableSectionsForSelection(studentId);
         selectionDto.SelectedSections = await GetSelectedSections(studentId);
-        selectionDto.studentId = studentId;
 
         return selectionDto;
     }
 
-    public async Task<List<SectionDto>?> GetAvailableSectionsForSelection(int studentId)
+    public async Task<List<SectionDto>?> GetAvailableSectionsForSelection(string studentId)
     {
         var currentTerm = await termService.GetCurrentTermEntity();
 
@@ -38,7 +37,7 @@ public class SelectionService(ISelectionRepository selectionRepository, IStudent
         return await selectionRepository.GetAvailableSections(availableCourses, student);
     }
 
-    public async Task<SelectionInfoDto> GetSelectionInfo(int studentId)
+    public async Task<SelectionInfoDto> GetSelectionInfo(string studentId)
     {
         var model = new SelectionInfoDto();
         var student = await studentRepository.GetStudentDtoById(studentId);
@@ -70,12 +69,12 @@ public class SelectionService(ISelectionRepository selectionRepository, IStudent
         return model;
     }
 
-    public async Task<List<SectionDto>> GetSelectedSections(int studentId)
+    public async Task<List<SectionDto>> GetSelectedSections(string studentId)
     {
         return await selectionRepository.GetSelectedSections(studentId);
     }
 
-    public async Task<Result> SelectSection(int studentId, int sectionId)
+    public async Task<Result> SelectSection(string studentId, int sectionId)
     {
         var result = new Result();
 
@@ -126,12 +125,13 @@ public class SelectionService(ISelectionRepository selectionRepository, IStudent
             return result;
         }
 
-        return await sectionService.AddStudentsToSection([studentId], sectionId);
+        return await sectionService.AddStudentsToSection([student.Id], sectionId);
     }
 
-    public async Task<Result> UnselectSection(int studentId, int sectionId)
+    public async Task<Result> UnselectSection(string studentId, int sectionId)
     {
-        return await sectionService.RemoveStudentFromSection(studentId, sectionId);
+        var student = await studentRepository.GetStudentDtoById(studentId);
+        return await sectionService.RemoveStudentFromSection(student.Id, sectionId);
     }
 
 }

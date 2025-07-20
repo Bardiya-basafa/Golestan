@@ -13,7 +13,7 @@ using Shared.Helpers;
 
 public class ExamService(IExamRepository examRepository, ITermService termService, IStudentRepository studentRepository) : IExamService {
 
-    public async Task<Result> SubmitStudentScore(ScoreDto model)
+    public async Task<Result> SubmitStudentScore(ScoreDto model, string instructorId)
     {
         if (model.Score < 0 || model.Score > 20){
             return new Result()
@@ -23,26 +23,26 @@ public class ExamService(IExamRepository examRepository, ITermService termServic
         }
 
 
-        return await examRepository.SubmitExamResult(model.Adapt<ExamResult>());
+        return await examRepository.SubmitExamResult(model.Adapt<ExamResult>(), instructorId);
     }
 
-    public async Task<List<ExamResultDto>> GetSectionExamResults(int sectionId)
+    public async Task<List<ExamResultDto>> GetSectionExamResults(int sectionId, string userId)
     {
-        return await examRepository.GetSectionExamResults(sectionId);
+        return await examRepository.GetSectionExamResults(sectionId, userId);
     }
 
-    public async Task<List<ExamResultDto>> GetTermExamResults(int termId, int studentId)
+    public async Task<List<ExamResultDto>> GetTermExamResults(int termId, string studentId)
     {
         return await examRepository.GetTermExamResults(termId, studentId);
     }
 
-    public async Task<List<ExamResultDto>> GetTermFinalResults(int termId, int instructorId)
+    public async Task<List<ExamResultDto>> GetTermFinalResults(int termId, string instructorId)
     {
         return await examRepository.GetTermFinalResults(termId, instructorId);
     }
 
 
-    public async Task<Result> SubmitObjection(ObjectionDto model)
+    public async Task<Result> SubmitObjection(ObjectionDto model, string studentId)
     {
         var result = new Result();
         var isInsideTerm = await termService.IsInsideAnyTermCurrently();
@@ -59,7 +59,7 @@ public class ExamService(IExamRepository examRepository, ITermService termServic
             return result;
         }
 
-        var examResult = await studentRepository.GetExamResultForObjection(model);
+        var examResult = await studentRepository.GetExamResultForObjection(model, studentId);
 
         return await examRepository.SubmitObjection(examResult, model.Objection);
     }

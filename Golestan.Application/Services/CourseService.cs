@@ -44,7 +44,7 @@ public class CourseService(ICourseRepository courseRepository, ITermService term
     }
 
 
-    public async Task<List<Course>> GetAvailableCoursesForStudent(int studentId)
+    public async Task<List<Course>> GetAvailableCoursesForStudent(string studentId)
     {
         return await courseRepository.GetAvailableCoursesForStudent(studentId);
     }

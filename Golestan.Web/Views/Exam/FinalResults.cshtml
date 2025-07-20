@@ -1,6 +1,5 @@
 ﻿@model List<ExamResultDto>
 @{
-    var instructorId = (int)ViewBag.instructorId;
     var termId = (int)ViewBag.termId;
 }
 <div class="bg-gradient-to-br from-white via-blue-50 to-blue-100 min-h-screen">
@@ -21,7 +20,7 @@
                 </div>
             </div>
         </div>
-        @await Component.InvokeAsync("InstructorInfo", instructorId)
+        @await Component.InvokeAsync("InstructorInfo")
         @await Component.InvokeAsync("CurrentTerm", termId)
 
         <!-- Students Table for Result Submission -->

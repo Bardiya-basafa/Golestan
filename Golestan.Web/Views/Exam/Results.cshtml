@@ -1,6 +1,5 @@
 ﻿@model List<ExamResultDto>
 @{
-    var studentId = (int)ViewBag.studentId;
     var termId = (int)ViewBag.termId;
 }
 <div class="bg-gradient-to-br from-white via-blue-50 to-blue-100 min-h-screen">
@@ -21,7 +20,7 @@
                 </div>
             </div>
         </div>
-        @await Component.InvokeAsync("StudentInfo", studentId)
+        @await Component.InvokeAsync("StudentInfo")
         @await Component.InvokeAsync("CurrentTerm", termId)
 
         <!-- Students Table for Result Submission -->
@@ -106,7 +105,6 @@
                                     @if (result.Score != -1){
                                         <form asp-controller="Exam" asp-action="Objection" method="post">
                                             <input type="hidden" name="ExamResultId" id="ExamResultId" value="@result.Id"/>
-                                            <input type="hidden" name="StudentId" id="StudentId" value="@studentId"/>
                                             <input type="hidden" name="TermId" id="TermId" value="@termId"/>
                                             @Html.AntiForgeryToken()
                                             <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">

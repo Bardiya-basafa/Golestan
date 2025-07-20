@@ -23,7 +23,7 @@ public interface ICourseRepository {
 
     Task<List<CourseDto>> GetAvailableCoursesForPrerequisite(int courseId);
 
-    Task<List<Course>> GetAvailableCoursesForStudent(int studentId);
+    Task<List<Course>> GetAvailableCoursesForStudent(string studentId);
 
     Task<CourseInstructorDto> GetAvailableInstructorsForCourse(int facultyId, int courseId);
 

@@ -173,6 +173,122 @@
                                 </div>
                         }
 
+                        @if (User.IsInRole(AppRoles.Instructor)){
+                                <div class="sidebar fixed inset-y-0 left-0 z-50 w-64 bg-blue-700 border-r border-blue-600 transform -translate-x-full transition-transform duration-200 ease-in-out" id="sidebar">
+                                        <!-- Sidebar Header -->
+                                        <div class="flex items-center justify-between p-4 border-b border-blue-600">
+                                                <div class="flex items-center space-x-3">
+                                                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                                                                <i class="fas fa-graduation-cap text-white text-sm"></i>
+                                                        </div>
+                                                        <div>
+                                                                <h2 class="text-lg font-semibold text-white">UniManage Pro</h2>
+                                                                <p class="text-xs text-blue-200">Instructor Panel</p>
+                                                        </div>
+                                                </div>
+                                                <button class="p-1 rounded-md hover:bg-blue-600" onclick="toggleSidebar()">
+                                                        <i class="fas fa-times text-blue-200"></i>
+                                                </button>
+                                        </div>
+                                        <!-- Sidebar Content -->
+                                        <div class="flex-1 overflow-y-auto p-4">
+                                                <!-- Navigation Menu -->
+                                                <nav class="space-y-2">
+                                                        <div class="pb-2">
+                                                                <h3 class="text-xs font-semibold text-blue-200 uppercase tracking-wider mb-3">Management</h3>
+                                                        </div>
+                                                        <!-- Course Management -->
+                                                        <a asp-controller="Instructors" asp-action="Sections" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                                                <i class="fas fa-book w-5 h-5 mr-3 text-blue-300"></i>
+                                                                <span>Sections</span> </a>
+                                                        <!-- Class Management -->
+                                                        <a asp-controller="Instructors" asp-action="TermHistory" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                                                <i class="fas fa-chalkboard w-5 h-5 mr-3 text-blue-300"></i>
+                                                                <span>Term History</span> </a>
+                                                        <!-- Instructor Management -->
+                                                        <a asp-controller="Instructors" asp-action="Exams" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                                                <i class="fas fa-chalkboard-teacher w-5 h-5 mr-3 text-blue-300"></i>
+                                                                <span>Exams</span> </a>
+                                                        <!-- Student Management -->
+                                                        <a asp-controller="Instructors" asp-action="Courses" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                                                <i class="fas fa-user-graduate w-5 h-5 mr-3 text-blue-300"></i>
+                                                                <span>Courses</span> </a>
+                                                </nav>
+                                        </div>
+                                        <!-- Sidebar Footer -->
+                                        <div class="p-4 border-t border-blue-600">
+                                                <div class="flex items-center space-x-3">
+                                                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                                                                <i class="fas fa-user-shield text-blue-200 text-sm"></i>
+                                                        </div>
+                                                        <div class="flex-1 min-w-0">
+                                                                <p class="text-sm font-medium text-white truncate">Instructor User</p>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        }
+
+                        @if (User.IsInRole(AppRoles.Student)){
+                                <div class="sidebar fixed inset-y-0 left-0 z-50 w-64 bg-blue-700 border-r border-blue-600 transform -translate-x-full transition-transform duration-200 ease-in-out" id="sidebar">
+                                        <!-- Sidebar Header -->
+                                        <div class="flex items-center justify-between p-4 border-b border-blue-600">
+                                                <div class="flex items-center space-x-3">
+                                                        <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                                                                <i class="fas fa-graduation-cap text-white text-sm"></i>
+                                                        </div>
+                                                        <div>
+                                                                <h2 class="text-lg font-semibold text-white">UniManage Pro</h2>
+                                                                <p class="text-xs text-blue-200">Student Panel</p>
+                                                        </div>
+                                                </div>
+                                                <button class="p-1 rounded-md hover:bg-blue-600" onclick="toggleSidebar()">
+                                                        <i class="fas fa-times text-blue-200"></i>
+                                                </button>
+                                        </div>
+                                        <!-- Sidebar Content -->
+                                        <div class="flex-1 overflow-y-auto p-4">
+                                                <!-- Navigation Menu -->
+                                                <nav class="space-y-2">
+                                                        <div class="pb-2">
+                                                                <h3 class="text-xs font-semibold text-blue-200 uppercase tracking-wider mb-3">Management</h3>
+                                                        </div>
+                                                        <!-- Course Management -->
+                                                        <a asp-controller="Students" asp-action="Sections" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                                                <i class="fas fa-book w-5 h-5 mr-3 text-blue-300"></i>
+                                                                <span>Sections</span> </a>
+                                                        <!-- Class Management -->
+                                                        <a asp-controller="Students" asp-action="TermHistory" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                                                <i class="fas fa-chalkboard w-5 h-5 mr-3 text-blue-300"></i>
+                                                                <span>Term History</span> </a>
+                                                        <!-- Instructor Management -->
+                                                        <a asp-controller="Students" asp-action="Exams" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                                                <i class="fas fa-chalkboard-teacher w-5 h-5 mr-3 text-blue-300"></i>
+                                                                <span>Exams</span> </a>
+                                                        <!-- Student Management -->
+                                                        <a asp-controller="Admin" asp-action="AllStudents" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                                                <i class="fas fa-user-graduate w-5 h-5 mr-3 text-blue-300"></i>
+                                                                <span>Student Management</span> </a>
+                                                        <!-- Section Management -->
+                                                        <a asp-controller="Students" asp-action="Selection" class="flex items-center px-3 py-2 text-sm font-medium text-blue-100 rounded-md hover:bg-blue-600 hover:text-white transition-colors">
+                                                                <i class="fas fa-tasks w-5 h-5 mr-3 text-blue-300"></i>
+                                                                <span>Selection</span> </a>
+                                                </nav>
+                                        </div>
+                                        <!-- Sidebar Footer -->
+                                        <div class="p-4 border-t border-blue-600">
+                                                <div class="flex items-center space-x-3">
+                                                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                                                                <i class="fas fa-user-shield text-blue-200 text-sm"></i>
+                                                        </div>
+                                                        <div class="flex-1 min-w-0">
+                                                                <p class="text-sm font-medium text-white truncate">Student User</p>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                        }
+
                         <!-- Sidebar Overlay -->
                         <div class="sidebar-overlay fixed inset-0 bg-black bg-opacity-50 z-40 hidden" id="sidebarOverlay" onclick="toggleSidebar()"></div>
                         <!-- Main Content -->
@@ -186,31 +302,35 @@
                                                                 <button class="p-2 rounded-md text-blue-800 hover:text-blue-900 hover:bg-blue-50 transition-colors" onclick="toggleSidebar()">
                                                                         <i class="fas fa-bars text-lg"></i>
                                                                 </button>
-                                                                <div class="w-10 h-10 bg-blue-700 rounded-xl flex items-center justify-center shadow-lg">
-                                                                        <i class="fas fa-graduation-cap text-white text-lg"></i>
-                                                                </div>
+                                                                <a asp-controller="Account" asp-action="RedirectToRoleBasedPage">
+                                                                        <div class="w-10 h-10 bg-blue-700 rounded-xl flex items-center justify-center shadow-lg">
+                                                                                <i class="fas fa-graduation-cap text-white text-lg"></i>
+                                                                        </div>
+                                                                </a>
                                                                 <div>
-                                                                        <h1 class="text-xl font-bold text-blue-600">
-                                                                                Golestan </h1>
-                                                                        <p class="text-xs text-blue-600">Dashboard</p>
+                                                                        <a asp-controller="Account" asp-action="RedirectToRoleBasedPage">
+                                                                                <h1 class="text-xl font-bold text-blue-600">
+                                                                                        Golestan </h1>
+                                                                                <p class="text-xs text-blue-600">Dashboard</p>
+                                                                        </a>
                                                                 </div>
                                                         </div>
                                                         <div class="flex items-center space-x-4">
-                                                                @if (User.IsInRole(AppRoles.Student)){
-                                                                        <div class="px-4 py-2 bg-white border border-blue-200 rounded-lg">
-                                                                                <span class="text-sm font-medium text-blue-800"><i class="fas fa-user-shield mr-2 text-blue-700"></i>Student Panel</span>
-                                                                        </div>
-                                                                }
-                                                                @if (User.IsInRole(AppRoles.Instructor)){
-                                                                        <div class="px-4 py-2 bg-white border border-blue-200 rounded-lg">
-                                                                                <span class="text-sm font-medium text-blue-800"><i class="fas fa-user-shield mr-2 text-blue-700"></i>Instructor Panel</span>
-                                                                        </div>
-                                                                }
-                                                                @if (User.IsInRole(AppRoles.Admin)){
-                                                                        <div class="px-4 py-2 bg-white border border-blue-200 rounded-lg">
-                                                                                <span class="text-sm font-medium text-blue-800"><i class="fas fa-user-shield mr-2 text-blue-700"></i>Admin Panel</span>
-                                                                        </div>
-                                                                }
+                                                                <a asp-controller="Account" asp-action="RedirectToRoleBasedPage"> @if (User.IsInRole(AppRoles.Student)){
+                                                                                <div class="px-4 py-2 bg-white border border-blue-200 rounded-lg">
+                                                                                        <span class="text-sm font-medium text-blue-800"><i class="fas fa-user-shield mr-2 text-blue-700"></i>Student Panel</span>
+                                                                                </div>
+                                                                        }
+                                                                        @if (User.IsInRole(AppRoles.Instructor)){
+                                                                                <div class="px-4 py-2 bg-white border border-blue-200 rounded-lg">
+                                                                                        <span class="text-sm font-medium text-blue-800"><i class="fas fa-user-shield mr-2 text-blue-700"></i>Instructor Panel</span>
+                                                                                </div>
+                                                                        }
+                                                                        @if (User.IsInRole(AppRoles.Admin)){
+                                                                                <div class="px-4 py-2 bg-white border border-blue-200 rounded-lg">
+                                                                                        <span class="text-sm font-medium text-blue-800"><i class="fas fa-user-shield mr-2 text-blue-700"></i>Admin Panel</span>
+                                                                                </div>
+                                                                        } </a>
                                                                 <a asp-controller="Account" asp-action="Logout" class="p-2 rounded-md text-blue-800 hover:text-blue-900 hover:bg-blue-50 transition-colors" title="Logout">
                                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out">
                                                                                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>

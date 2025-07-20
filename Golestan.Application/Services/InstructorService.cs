@@ -20,17 +20,17 @@ public class InstructorService(IInstructorRepository instructorRepository) : IIn
         return await instructorRepository.GetInstructorAppUser(instructorId);
     }
 
-    public async Task<InstructorDto> GetInstructorInfo(int instructorId)
+    public async Task<InstructorDto> GetInstructorInfo(string instructorId)
     {
         return await instructorRepository.GetInstructorInfo(instructorId);
     }
 
-    public async Task<List<TermDto>> GetAllInstrcutorTerms(int instructorId)
+    public async Task<List<TermDto>> GetAllInstrcutorTerms(string instructorId)
     {
         return await instructorRepository.GetAllInstructorTerms(instructorId);
     }
 
-    public async Task<List<CourseDto>> GetCourses(int instructorId)
+    public async Task<List<CourseDto>> GetCourses(string instructorId)
     {
         return await instructorRepository.GetCourses(instructorId); 
     }
@@ -41,15 +41,15 @@ public class InstructorService(IInstructorRepository instructorRepository) : IIn
     }
 
 
-    public async Task<InstructorDto> GetInstructorDtoById(int instructorId)
+    public async Task<InstructorDto> GetInstructorDtoById(string instructorId)
     {
         return await instructorRepository.GetInstructorDtoById(instructorId);
     }
 
 
-    public async Task<List<StudentDto>> GetInstructorStudentsOfSection(int sectionId)
+    public async Task<List<StudentDto>> GetInstructorStudentsOfSection(int sectionId,string instructorId)
     {
-        return await instructorRepository.GetInstructorStudentsOfSection(sectionId);
+        return await instructorRepository.GetInstructorStudentsOfSection(sectionId, instructorId);
     }
 
 

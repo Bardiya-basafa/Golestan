@@ -10,26 +10,25 @@ using Shared.Helpers;
 
 public interface IStudentRepository {
 
-    Task<StudentDto> GetStudentUserApp(string studentId);
 
-    Task<StudentDto> GetStudentInfo(int studentId);
+    Task<StudentDto> GetStudentInfo(string studentId);
 
-    Task<Student> GetStudentEntityById(int studentId);
+    Task<Student> GetStudentEntityById(string studentId);
 
-    Task<StudentDto> GetStudentDtoById(int studentId);
+    Task<StudentDto> GetStudentDtoById(string studentId);
 
     Task<List<StudentDto>> GetFacultyStudents(int facultyId);
 
-    Task<List<TermDto>> GetAllStudentTerms(int studentId);
+    Task<List<TermDto>> GetAllStudentTerms(string studentId);
 
-    Task<List<ExamResultDto>> GetAllTermExamResults(int studentId, int termId);
+    Task<List<ExamResultDto>> GetAllTermExamResults(string studentId, int termId);
 
-    Task<List<ExamResultDto>> GetAllExamResults(int studentId);
+    Task<List<ExamResultDto>> GetAllExamResults(string studentId);
 
-    Task<ExamResult> GetExamResultForObjection(ObjectionDto objection);
+    Task<ExamResult> GetExamResultForObjection(ObjectionDto objection, string studentId);
 
 
-    Task<decimal> GetStudentTotalGpa(int studentId);
+    Task<decimal> GetStudentTotalGpa(string studentId);
 
     Task<Result> RemoveStudent(int studentId);
 

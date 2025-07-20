@@ -8,13 +8,13 @@ using Shared.Helpers;
 
 public interface IExamRepository {
 
-    Task<Result> SubmitExamResult(ExamResult examResult);
+    Task<Result> SubmitExamResult(ExamResult examResult,string userId);
 
-    Task<List<ExamResultDto>> GetSectionExamResults(int sectionId);
+    Task<List<ExamResultDto>> GetSectionExamResults(int sectionId,string userId);
 
-    Task<List<ExamResultDto>> GetTermExamResults(int termId, int studentId);
+    Task<List<ExamResultDto>> GetTermExamResults(int termId, string studentId);
 
-    Task<List<ExamResultDto>> GetTermFinalResults(int termId, int instructorId);
+    Task<List<ExamResultDto>> GetTermFinalResults(int termId, string instructorId);
 
     Task<Result> SubmitObjection(ExamResult examResult, string objection);
 

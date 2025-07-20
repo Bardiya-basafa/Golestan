@@ -60,11 +60,11 @@ public class SelectionRepository(AppDbContext context) : ISelectionRepository {
             }).ToList();
     }
 
-    public async Task<List<SectionDto>> GetSelectedSections(int studentId)
+    public async Task<List<SectionDto>> GetSelectedSections(string studentId)
     {
         return await context.Students
             .AsNoTracking()
-            .Where(s => s.Id == studentId)
+            .Where(s => s.AppUserId == studentId)
             .SelectMany(s => s.Sections)
             .Select(sec => new SectionDto()
             {
@@ -90,19 +90,19 @@ public class SelectionRepository(AppDbContext context) : ISelectionRepository {
     }
 
 
-    public async Task<bool> IsStudentTimeTaken(int studentId, Section section)
+    public async Task<bool> IsStudentTimeTaken(string studentId, Section section)
     {
         return await context.Students
             .AsNoTracking()
-            .Where(s => s.Id == studentId)
+            .Where(s => s.AppUserId == studentId)
             .SelectMany(s => s.Sections)
             .AnyAsync(sec => sec.TimeSlot == section.TimeSlot && sec.DayOfWeek == section.DayOfWeek);
     }
 
-    public async Task<bool> IsExamTimeTaken(int studentId, DateTime examDate, TimeSlot examTimeSlot)
+    public async Task<bool> IsExamTimeTaken(string studentId, DateTime examDate, TimeSlot examTimeSlot)
     {
         return await context.Students
-            .Where(s => s.Id == studentId)
+            .Where(s => s.AppUserId == studentId)
             .SelectMany(s => s.Sections)
             .Select(s => s.Course.Exam)
             .AnyAsync(e => examDate == e.ExamDateTime && e.TimeSlot == examTimeSlot);

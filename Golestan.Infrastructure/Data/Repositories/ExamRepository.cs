@@ -17,10 +17,10 @@ using Shared.Helpers;
 
 public class ExamRepository(AppDbContext context) : IExamRepository {
 
-    public async Task<Result> SubmitExamResult(ExamResult examResult)
+    public async Task<Result> SubmitExamResult(ExamResult examResult, string userId)
     {
         var updateExamResult = await context.ExamResults
-            .Where(e => e.StudentId == examResult.StudentId && e.SectionId == examResult.SectionId)
+            .Where(e => e.StudentId == examResult.StudentId && e.SectionId == examResult.SectionId && e.Instructor.AppUserId == userId)
             .Include(e => e.Course.Exam)
             .FirstOrDefaultAsync() ?? throw new Exception($"No exam result found for student  id:{examResult.StudentId}");
 
@@ -44,11 +44,11 @@ public class ExamRepository(AppDbContext context) : IExamRepository {
         };
     }
 
-    public async Task<List<ExamResultDto>> GetSectionExamResults(int sectionId)
+    public async Task<List<ExamResultDto>> GetSectionExamResults(int sectionId, string userId)
     {
         return await context.ExamResults
             .AsNoTracking()
-            .Where(e => e.SectionId == sectionId)
+            .Where(e => e.SectionId == sectionId && e.Instructor.AppUserId == userId)
             .Select(r => new ExamResultDto()
             {
                 Student = new StudentDto()
@@ -68,11 +68,11 @@ public class ExamRepository(AppDbContext context) : IExamRepository {
             .ToListAsync();
     }
 
-    public async Task<List<ExamResultDto>> GetTermExamResults(int termId, int studentId)
+    public async Task<List<ExamResultDto>> GetTermExamResults(int termId, string studentId)
     {
         return await context.ExamResults
             .AsNoTracking()
-            .Where(e => e.StudentId == studentId && e.TermId == termId)
+            .Where(e => e.Student.AppUserId == studentId && e.TermId == termId)
             .Select(r => new ExamResultDto()
             {
                 Id = r.Id,
@@ -107,11 +107,11 @@ public class ExamRepository(AppDbContext context) : IExamRepository {
             .ToListAsync();
     }
 
-    public async Task<List<ExamResultDto>> GetTermFinalResults(int termId, int instructorId)
+    public async Task<List<ExamResultDto>> GetTermFinalResults(int termId, string instructorId)
     {
         return await context.ExamResults
             .AsNoTracking()
-            .Where(e => e.InstructorId == instructorId && e.TermId == termId)
+            .Where(e => e.Instructor.AppUserId == instructorId && e.TermId == termId)
             .Select(e => new ExamResultDto()
             {
                 Student = new StudentDto()
@@ -143,6 +143,7 @@ public class ExamRepository(AppDbContext context) : IExamRepository {
 
     public async Task<Result> SubmitObjection(ExamResult examResult, string objection)
     {
+        
         if (examResult.Score == -1){
             return new Result()
             {

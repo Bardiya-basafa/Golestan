@@ -155,11 +155,11 @@ public class CourseRepository(AppDbContext context) : ICourseRepository {
             .ToListAsync();
     }
 
-    public async Task<List<Course>> GetAvailableCoursesForStudent(int studentId)
+    public async Task<List<Course>> GetAvailableCoursesForStudent(string studentId)
     {
         var studentPassedCourses = await context.Students
             .AsNoTracking()
-            .Where(s => s.Id == studentId)
+            .Where(s => s.AppUserId == studentId)
             .SelectMany(s => s.PassedCourses)
             .ToListAsync();
 

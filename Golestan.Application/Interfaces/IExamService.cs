@@ -10,14 +10,14 @@ using Shared.Helpers;
 
 public interface IExamService {
 
-    Task<Result> SubmitStudentScore(ScoreDto model);
+    Task<Result> SubmitStudentScore(ScoreDto model,string instructorId);
 
-    Task<List<ExamResultDto>> GetSectionExamResults(int sectionId);
+    Task<List<ExamResultDto>> GetSectionExamResults(int sectionId,string userId);
 
-    Task<List<ExamResultDto>> GetTermExamResults(int termId, int studentId);
-    Task<List<ExamResultDto>> GetTermFinalResults(int termId, int instructorId);
+    Task<List<ExamResultDto>> GetTermExamResults(int termId, string studentId);
+    Task<List<ExamResultDto>> GetTermFinalResults(int termId, string instructorId);
 
-    Task<Result> SubmitObjection(ObjectionDto model);
+    Task<Result> SubmitObjection(ObjectionDto model,string studentId);
 
 
     Task<ExamDto> GetExamInfo(int sectionId);

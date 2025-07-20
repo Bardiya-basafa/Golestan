@@ -1723,6 +1723,10 @@
       "Golestan.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
+        "dependencies": {
+          "Golestan.Domain": "1.0.0",
+          "Microsoft.Extensions.Identity.Core": "9.0.7"
+        },
         "compile": {
           "bin/placeholder/Golestan.Shared.dll": {}
         },

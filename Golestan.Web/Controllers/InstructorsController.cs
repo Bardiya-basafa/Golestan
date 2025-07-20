@@ -8,7 +8,9 @@ using Application.DTOs.Score;
 using Application.Interfaces;
 using Base;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Shared.Constants;
 
 
 public class InstructorsController : BaseController {
@@ -32,71 +34,80 @@ public class InstructorsController : BaseController {
         _termService = termService;
     }
 
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Instructor)]
     public async Task<IActionResult> Index()
     {
         var userId = GetUserId();
 
-        // var model = await _studentService.GetStudentUserApp(userId);
-        // strongly typed
-        var model = await _instructorService.GetInstructorAppUser("2c2de7b4-2a66-4894-9377-cee3ca13e885");
+
+        var model = await _instructorService.GetInstructorAppUser(userId);
 
         return View(model);
     }
 
     [HttpGet]
-    public async Task<IActionResult> Sections(int instructorId)
+    [Authorize(Roles = AppRoles.Instructor)]
+    public async Task<IActionResult> Sections()
     {
-        var model = await _instructorService.GetInstructorDtoById(instructorId);
+        var userId = GetUserId();
+        var model = await _instructorService.GetInstructorDtoById(userId);
 
         return View(model);
     }
 
     [HttpGet]
-    public async Task<IActionResult> Students(int sectionId, int instructorId)
+    [Authorize(Roles = AppRoles.Instructor)]
+    public async Task<IActionResult> Students(int sectionId)
     {
-        var model = await _instructorService.GetInstructorStudentsOfSection(sectionId);
-        ViewBag.InstructorId = instructorId;
+        var userId = GetUserId();
+        var model = await _instructorService.GetInstructorStudentsOfSection(sectionId , userId);
 
         return View(model);
     }
 
     [HttpGet]
-    public async Task<IActionResult> ExamSections(int instructorId)
+    [Authorize(Roles = AppRoles.Instructor)]
+    public async Task<IActionResult> ExamSections()
     {
-        var model = await _instructorService.GetInstructorDtoById(instructorId);
+        var userId = GetUserId();
+        var model = await _instructorService.GetInstructorDtoById(userId);
 
         return View(model);
     }
 
     [HttpGet]
-    public async Task<IActionResult> Exams(int instructorId)
+    [Authorize(Roles = AppRoles.Instructor)]
+    public async Task<IActionResult> Exams()
     {
         var model = await _termService.GetCurrentTerm();
-        ViewBag.InstructorId = instructorId;
 
         return View(model);
     }
 
     [HttpGet]
-    public async Task<IActionResult> TermHistory(int instructorId)
+    [Authorize(Roles = AppRoles.Instructor)]
+    public async Task<IActionResult> TermHistory()
     {
-        var model = await _instructorService.GetAllInstrcutorTerms(instructorId);
-        ViewBag.InstructorId = instructorId;
+        var userId = GetUserId();
+        var model = await _instructorService.GetAllInstrcutorTerms(userId);
 
         return View(model);
     }
 
     [HttpGet]
-    public async Task<IActionResult> Courses(int instructorId)
+    [Authorize(Roles = AppRoles.Instructor)]
+    public async Task<IActionResult> Courses()
     {
-        var model = await _instructorService.GetCourses(instructorId);
-        ViewBag.InstructorId = instructorId;
+        var userId = GetUserId();
+        var model = await _instructorService.GetCourses(userId);
 
         return View(model);
     }
 
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add()
     {
         var facultyOptions = await _facultyService.GetFacultiesMajorNamesOptions();
@@ -111,6 +122,7 @@ public class InstructorsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add(AddInstructorDto dto)
     {
         if (!ModelState.IsValid){
@@ -133,6 +145,7 @@ public class InstructorsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> RemoveCourseInstructor(int instructorId, int courseId)
     {
         var result = await _instructorService.RemoveCourseInstructor(instructorId, courseId);
@@ -143,6 +156,7 @@ public class InstructorsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Remove(int instructorId, int facultyId)
     {
         var result = await _instructorService.RemoveInstructor(instructorId);

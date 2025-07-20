@@ -9,18 +9,13 @@ using Shared.Helpers;
 
 public interface IStudentService {
 
-    Task<StudentDto> GetStudentUserApp(string studentId);
-
-    Task<StudentDto> GetStudentInfo(int studentId);
+    Task<StudentDto> GetStudentInfo(string studentId);
 
     Task<List<StudentDto>> GetFacultyStudents(int facultyId);
 
-    Task<StudentDto> GetStudentSections(int studentId);
+    Task<StudentDto> GetStudentSections(string studentId);
 
-    Task<List<TermDto>> GetAllStudentTerms(int studentId);
-
-
-    Task<List<ExamResultDto>?> GetActiveExamResults(int studentId);
+    Task<List<TermDto>> GetAllStudentTerms(string studentId);
 
 
     Task<Result> Rmove(int studentId);

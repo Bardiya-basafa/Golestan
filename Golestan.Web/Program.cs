@@ -4,8 +4,11 @@ using Golestan.Application.Services;
 using Golestan.Domain.Entities;
 using Golestan.Infrastructure.Data.Repositories;
 using Golestan.Infrastructure.Persistence;
+using Golestan.Shared.Constants;
+using Golestan.Shared.Helpers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +31,9 @@ builder.Services.AddControllersWithViews()
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("GolestanDB")));
 
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
+    opt.TokenLifespan = TimeSpan.FromHours(2));
+
 // 5. Services 
 builder.Services.AddScoped<IFacultyService, FacultyService>();
 builder.Services.AddScoped<IUserService, UserService>();
@@ -39,6 +45,7 @@ builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ITermService, TermService>();
 builder.Services.AddScoped<ISelectionService, SelectionService>();
 builder.Services.AddScoped<IExamService, ExamService>();
+builder.Services.AddSingleton<IEmailService, EmailService>();
 
 
 // Repositories 
@@ -71,8 +78,8 @@ builder.Services.AddAuthentication(options => {
     .AddCookie();
 
 builder.Services.ConfigureApplicationCookie(options => {
-    options.LoginPath = "/Authentication/Login";
-    options.AccessDeniedPath = "/Authentication/AccessDenied";
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
 });
 
 builder.Services.AddAuthorization();
@@ -91,7 +98,31 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 // ========== MIDDLEWARE PIPELINE ========== //
+using (var scope = app.Services.CreateScope()){
+    var services = scope.ServiceProvider;
 
+    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    var context = services.GetRequiredService<AppDbContext>();
+
+    var studentUsers = await context.Students
+        .Select(s => s.AppUser)
+        .ToListAsync();
+
+    foreach (var user in studentUsers){
+        await userManager.AddToRoleAsync(user, AppRoles.Student);
+    }
+
+    var instrcutorUsers = await context.Instructors
+        .Select(s => s.AppUser)
+        .ToListAsync();
+
+    foreach (var user in instrcutorUsers){
+        await userManager.AddToRoleAsync(user, AppRoles.Instructor);
+    }
+
+    await DbInitializer.SeedRootAdmin(userManager, roleManager);
+}
 
 // 1. Exception Handling
 if (app.Environment.IsDevelopment()){
@@ -121,7 +152,7 @@ app.UseAuthorization();
 // 9. Endpoints
 app.MapControllerRoute(
 "default",
-"{controller=Students}/{action=Index}/{id?}");
+"{controller=Account}/{action=RedirectToRoleBasedPage}/{id?}");
 
 
 app.Run();

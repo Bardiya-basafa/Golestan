@@ -66,7 +66,7 @@
                     </div>
                 </div>
             </div>
-            @if (@Model.ExamResults.Count > 0){
+            @if (Model.ExamResults.Count > 0){
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-blue-300">
                         <thead class="bg-blue-50">
@@ -99,7 +99,7 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-blue-300">
                             <!-- Placeholder Data -->
-                            @foreach (var result in @Model.ExamResults){
+                            @foreach (var result in Model.ExamResults){
                                 <tr class="hover:bg-blue-50 transition-all duration-200 group">
                                     <td class="px-8 py-6 whitespace-nowrap border-r border-blue-300">
                                         <div class="text-lg font-bold text-slate-900">@result.Id</div>

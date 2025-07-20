@@ -14,17 +14,18 @@ public interface IInstructorRepository {
 
     Task<InstructorDto> GetInstructorAppUser(string instructorId);
 
-    Task<InstructorDto> GetInstructorInfo(int instructorId);
+    Task<InstructorDto> GetInstructorInfo(string instructorId);
 
-    Task<List<TermDto>> GetAllInstructorTerms(int instructorId);
-    Task<List<CourseDto>> GetCourses(int instructorId);
+    Task<List<TermDto>> GetAllInstructorTerms(string instructorId);
+
+    Task<List<CourseDto>> GetCourses(string instructorId);
 
 
-    Task<InstructorDto> GetInstructorDtoById(int instructorId);
+    Task<InstructorDto> GetInstructorDtoById(string instructorId);
 
     Task<List<InstructorDto>> GetFacultyInstructors();
 
-    Task<List<StudentDto>> GetInstructorStudentsOfSection(int sectionId);
+    Task<List<StudentDto>> GetInstructorStudentsOfSection(int sectionId, string instructorId);
 
 
     Task<Result> RemoveCourseInstructor(int instructorId, int courseId);

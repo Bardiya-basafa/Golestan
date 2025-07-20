@@ -8,6 +8,8 @@ using Application.Interfaces;
 using Application.Services;
 using Base;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Shared.Constants;
 
 
 public class ClassroomsController : BaseController {
@@ -23,6 +25,7 @@ public class ClassroomsController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Index(int classroomId)
     {
         var model = await _classroomService.GetClassroomById(classroomId);
@@ -31,6 +34,7 @@ public class ClassroomsController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add(int facultyId)
     {
         var detailsFacultyDto = await _facultyService.GetFacultyDtoById(facultyId);
@@ -46,6 +50,7 @@ public class ClassroomsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add(AddClassroomDto dto)
     {
         var result = await _classroomService.AddClassroom(dto);
@@ -60,6 +65,7 @@ public class ClassroomsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Remove(int classroomId)
     {
         var result = await _classroomService.RemoveClassroom(classroomId);

@@ -10,12 +10,12 @@ public interface ISelectionRepository {
 
     Task<List<SectionDto>> GetAvailableSections(List<Course> availableCourses, Student student);
 
-    Task<List<SectionDto>> GetSelectedSections(int studentId);
+    Task<List<SectionDto>> GetSelectedSections(string studentId);
 
    
 
-    Task<bool> IsStudentTimeTaken(int studentId, Section section);
+    Task<bool> IsStudentTimeTaken(string studentId, Section section);
 
-    Task<bool> IsExamTimeTaken(int studentId, DateTime examDate, TimeSlot examTimeSlot);
+    Task<bool> IsExamTimeTaken(string studentId, DateTime examDate, TimeSlot examTimeSlot);
 
 }

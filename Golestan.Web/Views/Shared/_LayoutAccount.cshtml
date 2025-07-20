@@ -1,0 +1,161 @@
+﻿@using Golestan.Shared.Constants
+<!DOCTYPE html>
+<html lang="en">
+        <head>
+                <title></title>
+                <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>@ViewData["Title"]</title>
+                        <script src="https://cdn.tailwindcss.com"></script>
+                        <link rel="stylesheet" href="/style/style.css" asp-append-version="true"/>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.0/dist/css/uikit.min.css"/>
+                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+                        <link rel="stylesheet" href="/style/tailwind.min.css"/>
+                        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+                        <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+                </head>
+        </head>
+
+        @if (TempData["NotificationMessage"] != null){
+                <!-- Success Notification -->
+                <div id="notification" class="fixed top-20 left-5 z-50 animate-slide-in-left z-10">
+                        @if (TempData["Success"] as bool? == true){
+                                <!-- Success Content -->
+                                <div class="min-w-80 max-w-md bg-white rounded-xl shadow-2xl overflow-hidden border-l-4 border-green-500 transform transition-all duration-300 hover:scale-105">
+                                        <div class="flex items-center p-4 bg-gradient-to-r from-green-50 to-emerald-50">
+                                                <div class="flex-shrink-0">
+                                                        <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center shadow-lg">
+                                                                <i class="fas fa-check text-white text-sm"></i>
+                                                        </div>
+                                                </div>
+                                                <div class="ml-3 flex-1">
+                                                        <p class="text-sm font-semibold text-green-800">
+                                                                @TempData["NotificationMessage"]
+                                                        </p>
+                                                </div>
+                                                <div class="ml-4">
+                                                        <button class="close-button text-green-400 hover:text-green-600 transition-colors duration-200">
+                                                                <i class="fas fa-times text-sm"></i>
+                                                        </button>
+                                                </div>
+                                        </div>
+                                        <!-- Progress Bar -->
+                                        <div class="h-1 bg-green-200">
+                                                <div class="h-full bg-gradient-to-r from-green-500 to-emerald-500 animate-progress"></div>
+                                        </div>
+                                </div>
+                        }
+                        else if (TempData["Success"] as bool? == false){
+                                <!-- Error Content -->
+                                <div class="min-w-80 max-w-md bg-white rounded-xl shadow-2xl overflow-hidden border-l-4 from-red-500 transform transition-all duration-300 hover:scale-105">
+                                        <div class="flex items-center p-4 bg-gradient-to-r from-red-50 to-rose-50">
+                                                <div class="flex-shrink-0">
+                                                        <div class="w-10 h-10 bg-gradient-to-r from-red-500 to-rose-500 rounded-full flex items-center justify-center shadow-lg">
+                                                                <i class="fas fa-times text-white text-sm"></i>
+                                                        </div>
+                                                </div>
+                                                <div class="ml-3 flex-1">
+                                                        <p class="text-sm font-semibold text-red-800">
+                                                                @TempData["NotificationMessage"]
+                                                        </p>
+                                                </div>
+                                                <div class="ml-4">
+                                                        <button class="close-button text-red-400 hover:text-red-600 transition-colors duration-200">
+                                                                <i class="fas fa-times text-sm"></i>
+                                                        </button>
+                                                </div>
+                                        </div>
+                                        <!-- Progress Bar -->
+                                        <div class="h-1 bg-red-200">
+                                                <div class="h-full bg-gradient-to-r from-red-500 to-rose-500 animate-progress"></div>
+                                        </div>
+                                </div>
+                        }
+                </div>
+                <script>
+                        setTimeout(function () {
+                                document.getElementById('notification').style.display = 'none';
+                        }, 5000);
+                </script>
+        }
+
+        <body class="bg-gray-50">
+
+
+
+                @RenderBody()
+
+
+                <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+                <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+                <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+                <script src="app.js"></script>
+                <script src="~/app.js"></script>
+                <script>
+                        // Update current time
+                        function updateTime() {
+                                const now = new Date();
+                                document.getElementById('currentTime').textContent = now.toLocaleString();
+                        }
+
+                        updateTime();
+                        setInterval(updateTime, 1000);
+
+                        // Sidebar toggle functionality
+                        function toggleSidebar() {
+                                const sidebar = document.getElementById('sidebar');
+                                const overlay = document.getElementById('sidebarOverlay');
+                                const isOpen = !sidebar.classList.contains('-translate-x-full');
+
+                                if (isOpen) {
+                                        // Close sidebar
+                                        sidebar.classList.add('-translate-x-full');
+                                        overlay.classList.add('hidden');
+                                } else {
+                                        // Open sidebar
+                                        sidebar.classList.remove('-translate-x-full');
+                                        overlay.classList.remove('hidden');
+                                }
+                        }
+
+                        // Close sidebar when clicking outside
+                        document.addEventListener('click', function (event) {
+                                const sidebar = document.getElementById('sidebar');
+                                const toggleButton = event.target.closest('[onclick="toggleSidebar()"]');
+
+                                if (!sidebar.contains(event.target) && !toggleButton && !sidebar.classList.contains('-translate-x-full')) {
+                                        toggleSidebar();
+                                }
+                        });
+
+                        // Close sidebar on escape key
+                        document.addEventListener('keydown', function (event) {
+                                if (event.key === 'Escape') {
+                                        const sidebar = document.getElementById('sidebar');
+                                        if (!sidebar.classList.contains('-translate-x-full')) {
+                                                toggleSidebar();
+                                        }
+                                }
+                        });
+
+                        // Sub-menu toggle functionality
+                        function toggleSubMenu(menuId) {
+                                const subMenu = document.getElementById(menuId);
+                                const arrowIcon = document.getElementById(menuId + 'Arrow');
+
+                                if (subMenu.classList.contains('hidden')) {
+                                        subMenu.classList.remove('hidden');
+                                        arrowIcon.classList.add('rotate-180'); // Rotate arrow up
+                                } else {
+                                        subMenu.classList.add('hidden');
+                                        arrowIcon.classList.remove('rotate-180'); // Rotate arrow down
+                                }
+                        }
+                </script>
+        </body>
+</html>

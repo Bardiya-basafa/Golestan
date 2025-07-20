@@ -1,0 +1,30 @@
+﻿@{
+        Layout = "_LayoutAccount";
+}
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-blue-50 to-blue-100 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8 bg-white rounded-2xl shadow-xl border border-blue-200 p-8 animate-fade-in text-center">
+                <div class="mx-auto h-16 w-16 bg-red-600 rounded-full flex items-center justify-center mb-4 shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-slash text-white">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="m21.4 21.4-17.8-17.8"/>
+                        </svg>
+                </div>
+                <h2 class="mt-6 text-3xl font-bold text-slate-900">
+                        Access Denied </h2>
+                <p class="text-gray-600 text-lg">
+                        You do not have permission to view this page. </p>
+                <div class="mt-8">
+                        @if (User.Identity.IsAuthenticated){
+                                <a asp-controller="Account" asp-action="RedirectToRoleBasedPage" class="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-200 shadow-lg group">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left mr-3 group-hover:-translate-x-1 transition-transform">
+                                                <path d="m12 19-7-7 7-7"/>
+                                                <path d="M19 12H5"/>
+                                        </svg>
+                                        Back to Dashboard </a>
+                        }
+                        <div class="text-sm">
+                                <a asp-controller="Account" asp-action="Login" class="inline-flex px-4 py-2 font-medium text-blue-600 hover:text-blue-500"> Login </a>
+                        </div>
+                </div>
+        </div>
+</div>

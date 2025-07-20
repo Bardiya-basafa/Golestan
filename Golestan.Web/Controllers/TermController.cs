@@ -7,6 +7,8 @@ using Application.DTOs.Term;
 using Application.Interfaces;
 using Base;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Shared.Constants;
 
 
 public class TermController : BaseController {
@@ -19,6 +21,7 @@ public class TermController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Index()
     {
         var model = await _termService.GetCurrentTerm();
@@ -29,6 +32,7 @@ public class TermController : BaseController {
 
     // list all the terms 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Terms()
     {
         var model = await _termService.GetAllTerms();
@@ -38,6 +42,7 @@ public class TermController : BaseController {
 
     // open new term
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add()
     {
         // Make it view component 
@@ -55,6 +60,7 @@ public class TermController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add(OpenNewTermDto model)
     {
         if (!ModelState.IsValid){
@@ -74,6 +80,7 @@ public class TermController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Edit()
     {
         var model = await _termService.GetCurrentTerm();
@@ -89,6 +96,7 @@ public class TermController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Edit(TermDto model)
     {
         var result = await _termService.EditTerm(model);
@@ -103,6 +111,7 @@ public class TermController : BaseController {
 
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Close()
     {
         var model = await _termService.GetCurrentTerm();
@@ -113,17 +122,18 @@ public class TermController : BaseController {
             return RedirectToAction("Add");
         }
 
-        return View(model);
+        return RedirectToAction("Index");
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Close(string confirmation, string currentTerm)
     {
         var result = await _termService.CloseTerm(confirmation, currentTerm);
         ShowMessage(result.Message, result.Succeeded);
 
-        return View();
+        return RedirectToAction("Index");
     }
 
 }

@@ -15,12 +15,9 @@ public class StudentService(IStudentRepository studentRepository, UserManager<Ap
 
     private readonly UserManager<AppUser> _userManager = userManager;
 
-    public async Task<StudentDto> GetStudentUserApp(string studentId)
-    {
-        return await studentRepository.GetStudentUserApp(studentId);
-    }
+   
 
-    public async Task<StudentDto> GetStudentInfo(int studentId)
+    public async Task<StudentDto> GetStudentInfo(string studentId)
     {
         
         return await studentRepository.GetStudentInfo(studentId);
@@ -31,19 +28,19 @@ public class StudentService(IStudentRepository studentRepository, UserManager<Ap
         return await studentRepository.GetFacultyStudents(facultyId);
     }
 
-    public async Task<StudentDto> GetStudentSections(int studentId)
+    public async Task<StudentDto> GetStudentSections(string studentId)
     {
         return await studentRepository.GetStudentDtoById(studentId);
     }
 
-    public async Task<List<TermDto>> GetAllStudentTerms(int studentId)
+    public async Task<List<TermDto>> GetAllStudentTerms(string studentId)
     {
         return await studentRepository.GetAllStudentTerms(studentId);
     }
 
    
 
-    public async Task<List<ExamResultDto>?> GetActiveExamResults(int studentId)
+    public async Task<List<ExamResultDto>?> GetActiveExamResults(string studentId)
     {
         var currentTerm = await termService.GetCurrentTermEntity();
 

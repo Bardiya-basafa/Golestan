@@ -7,6 +7,8 @@ using Application.DTOs.Faculty;
 using Application.Interfaces;
 using Base;
 using Mapster;
+using Microsoft.AspNetCore.Authorization;
+using Shared.Constants;
 
 
 public class FacultiesController : BaseController {
@@ -18,7 +20,8 @@ public class FacultiesController : BaseController {
         _facultyService = facultyService;
     }
 
-
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Index(int facultyId)
     {
         var faculty = await _facultyService.GetFacultyDtoById(facultyId);
@@ -28,6 +31,7 @@ public class FacultiesController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Update(int facultyId)
     {
         var faculty = await _facultyService.GetFacultyDtoById(facultyId);
@@ -38,6 +42,7 @@ public class FacultiesController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Update(UpdateFacultyDto model)
     {
         if (!ModelState.IsValid){
@@ -56,6 +61,7 @@ public class FacultiesController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add()
     {
         return View();
@@ -63,6 +69,7 @@ public class FacultiesController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add(AddFacultyDto model)
     {
         var result = await _facultyService.AddFaculty(model.Adapt<FacultyDto>());

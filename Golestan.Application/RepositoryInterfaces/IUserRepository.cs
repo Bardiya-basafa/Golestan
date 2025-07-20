@@ -6,6 +6,8 @@ using Shared.Helpers;
 
 public interface IUserRepository {
 
+    Task<AppUser?> GetUserByUniversalNumber(string universalNumber);
+
     Task<Result> AddInstructor(Instructor instructor);
 
     Task<Result> AddStudent(Student student);

@@ -2,7 +2,9 @@
 
 using Application.Interfaces;
 using Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Constants;
 using ISelectionService=Application.Interfaces.ISelectionService;
 
 
@@ -19,14 +21,16 @@ public class SelectionController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index(int studentId)
+    [Authorize(Roles = AppRoles.Student)]
+    public async Task<IActionResult> Index()
     {
+        var userId = GetUserId();
         var currentTerm = await _termService.GetCurrentTerm();
 
         if (currentTerm == null){
             ShowMessage("No term available", false);
 
-            return RedirectToAction("Selection", "Students", new { studentId });
+            return RedirectToAction("Selection", "Students");
         }
 
         var currentDate = DateTime.UtcNow;
@@ -34,10 +38,10 @@ public class SelectionController : BaseController {
         if (currentTerm.SelectionStartTime > currentDate || currentTerm.SelectionEndTime < currentDate){
             ShowMessage("Currently we are not at selection time", false);
 
-            return RedirectToAction("Selection", "Students", new { studentId });
+            return RedirectToAction("Selection", "Students");
         }
 
-        var model = await _selectionService.GetSelectionDto(studentId);
+        var model = await _selectionService.GetSelectionDto(userId);
         model.StartDate = currentTerm.SelectionStartTime;
         model.EndDate = currentTerm.SelectionEndTime;
         model.Term = currentTerm.TermIdentifier;
@@ -45,10 +49,12 @@ public class SelectionController : BaseController {
         return View(model);
     }
 
-
-    public async Task<IActionResult> GetAvailableSectionForSelection(int studentId)
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Student)]
+    public async Task<IActionResult> GetAvailableSectionForSelection()
     {
-        var model = await _selectionService.GetAvailableSectionsForSelection(studentId);
+        var userId = GetUserId();
+        var model = await _selectionService.GetAvailableSectionsForSelection(userId);
 
         if (model == null){
             ShowMessage("Right now selection is not available", false);
@@ -59,20 +65,26 @@ public class SelectionController : BaseController {
         return View(model);
     }
 
-    public async Task<IActionResult> SelectSection(int studentId, int sectionId)
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Student)]
+    public async Task<IActionResult> SelectSection(int sectionId)
     {
-        var result = await _selectionService.SelectSection(studentId, sectionId);
+        var userId = GetUserId();
+        var result = await _selectionService.SelectSection(userId, sectionId);
         ShowMessage(result.Message, result.Succeeded);
 
-        return RedirectToAction("Index", "Selection", new { studentId = studentId });
+        return RedirectToAction("Index", "Selection");
     }
 
-    public async Task<IActionResult> UnselectSection(int studentId, int sectionId)
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Student)]
+    public async Task<IActionResult> UnselectSection(int sectionId)
     {
-        var result = await _selectionService.UnselectSection(studentId, sectionId);
+        var userId = GetUserId();
+        var result = await _selectionService.UnselectSection(userId, sectionId);
         ShowMessage(result.Message, result.Succeeded);
 
-        return RedirectToAction("Index", "Selection", new { studentId = studentId });
+        return RedirectToAction("Index", "Selection");
     }
 
 }

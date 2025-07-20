@@ -19,33 +19,20 @@ using Shared.Helpers;
 
 public class StudentRepository(AppDbContext context, IUserRepository userRepository) : IStudentRepository {
 
-    public async Task<StudentDto> GetStudentUserApp(string studentId)
-    {
-        var student = await context.Users
-            .AsNoTracking()
-            .Where(u => u.Id == studentId)
-            .Select(u => u.StudentProfile)
-            .Select(s => new StudentDto()
-            {
-                Id = s.Id,
-            })
-            .FirstOrDefaultAsync() ?? throw new Exception($"student with id {studentId} not found");
-
-        student.Gpa = await GetStudentTotalGpa(student.Id);
-
-        return student;
-    }
-
-    public async Task<StudentDto> GetStudentInfo(int studentId)
+    public async Task<StudentDto> GetStudentInfo(string studentId)
     {
         var student = await context.Students
             .AsNoTracking()
-            .Where(s => s.Id == studentId)
+            .Where(s => s.AppUserId == studentId)
             .Select(s => new StudentDto()
             {
                 Id = s.Id,
                 FullName = s.FullName,
                 StudentNumber = s.StudentNumber,
+                AppUser = new AppUser()
+                {
+                    Id = s.AppUserId,
+                },
                 Email = s.AppUser.UserName,
                 Faculty = new FacultyDto()
                 {
@@ -65,26 +52,26 @@ public class StudentRepository(AppDbContext context, IUserRepository userReposit
                     .ToList(),
             }).FirstOrDefaultAsync() ?? throw new Exception($"student with id {studentId} not found");
 
-        var gpa = await GetStudentTotalGpa(student.Id);
+        var gpa = await GetStudentTotalGpa(student.AppUser.Id);
         student.Gpa = gpa;
 
         return student;
     }
 
-    public async Task<Student> GetStudentEntityById(int studentId)
+    public async Task<Student> GetStudentEntityById(string studentId)
     {
         return await context.Students
             .AsNoTracking()
-            .Where(s => s.Id == studentId)
+            .Where(s => s.AppUserId == studentId)
             .Include(s => s.Sections).ThenInclude(s => s.Course)
             .FirstOrDefaultAsync() ?? throw new Exception($"Student with id {studentId} not found");
     }
 
-    public async Task<StudentDto> GetStudentDtoById(int studentId)
+    public async Task<StudentDto> GetStudentDtoById(string studentId)
     {
         return await context.Students
             .AsNoTracking()
-            .Where(s => s.Id == studentId)
+            .Where(s => s.AppUserId == studentId)
             .Select(s => new StudentDto()
             {
                 Id = s.Id,
@@ -146,11 +133,11 @@ public class StudentRepository(AppDbContext context, IUserRepository userReposit
             .ToListAsync();
     }
 
-    public async Task<List<TermDto>> GetAllStudentTerms(int studentId)
+    public async Task<List<TermDto>> GetAllStudentTerms(string studentId)
     {
         return await context.Students
             .AsNoTracking()
-            .Where(s => s.Id == studentId)
+            .Where(s => s.AppUserId == studentId)
             .SelectMany(s => s.Terms)
             .Select(t => new TermDto()
             {
@@ -165,11 +152,11 @@ public class StudentRepository(AppDbContext context, IUserRepository userReposit
             .ToListAsync();
     }
 
-    public async Task<List<ExamResultDto>> GetAllTermExamResults(int studentId, int termId)
+    public async Task<List<ExamResultDto>> GetAllTermExamResults(string studentId, int termId)
     {
         return await context.Students
             .AsNoTracking()
-            .Where(s => s.Id == studentId)
+            .Where(s => s.AppUserId == studentId)
             .SelectMany(s => s.ExamResults)
             .Where(e => e.TermId == termId)
             .Select(e => new ExamResultDto()
@@ -180,11 +167,11 @@ public class StudentRepository(AppDbContext context, IUserRepository userReposit
             .ToListAsync();
     }
 
-    public async Task<List<ExamResultDto>> GetAllExamResults(int studentId)
+    public async Task<List<ExamResultDto>> GetAllExamResults(string studentId)
     {
         return await context.Students
             .AsNoTracking()
-            .Where(s => s.Id == studentId)
+            .Where(s => s.AppUserId == studentId)
             .SelectMany(s => s.ExamResults)
             .Select(e => new ExamResultDto()
             {
@@ -193,20 +180,19 @@ public class StudentRepository(AppDbContext context, IUserRepository userReposit
             .ToListAsync();
     }
 
-    public async Task<ExamResult> GetExamResultForObjection(ObjectionDto objection)
+    public async Task<ExamResult> GetExamResultForObjection(ObjectionDto objection, string userId)
     {
         return await context.ExamResults
-            .FindAsync(objection.ExamResultId) ?? throw new Exception($"Exam result with id {objection.ExamResultId} not found");
+            .AsNoTracking()
+            .FirstOrDefaultAsync(e => e.Id == objection.ExamResultId && e.Student.AppUserId == userId) ?? throw new Exception($"Exam result with id {objection.ExamResultId} not found");
     }
 
 
-   
-
-    public async Task<decimal> GetStudentTotalGpa(int studentId)
+    public async Task<decimal> GetStudentTotalGpa(string studentId)
     {
         var scores = await context.ExamResults
             .AsNoTracking()
-            .Where(e => e.StudentId == studentId && e.Score != -1)
+            .Where(e => e.Student.AppUserId == studentId && e.Score != -1)
             .Select(e => e.Score)
             .ToListAsync();
 

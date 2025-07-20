@@ -11,6 +11,29 @@ using Shared.Helpers;
 
 public class UserRepository(AppDbContext context, ITermService termService, UserManager<AppUser> userManager) : IUserRepository {
 
+    public async Task<AppUser?> GetUserByUniversalNumber(string universalNumber)
+    {
+        var student = await context.Students
+            .Where(s => s.StudentNumber == universalNumber)
+            .Select(s => s.AppUser)
+            .FirstOrDefaultAsync();
+
+        if (student != null){
+            return student;
+        }
+
+        var instructor = await context.Instructors
+            .Where(i => i.InstructorNumber == universalNumber)
+            .Select(i => i.AppUser)
+            .FirstOrDefaultAsync();
+
+        if (instructor != null){
+            return instructor;
+        }
+
+        return null;
+    }
+
     public async Task<Result> AddInstructor(Instructor instructor)
     {
         context.Instructors.Add(instructor);

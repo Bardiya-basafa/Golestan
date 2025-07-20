@@ -21,10 +21,9 @@ public class InstructorRepository(AppDbContext context, IUserRepository userRepo
 
     public async Task<InstructorDto> GetInstructorAppUser(string instructorId)
     {
-        return await context.Users
+        return await context.Instructors
             .AsNoTracking()
-            .Where(u => u.Id == instructorId)
-            .Select(i => i.InstructorProfile)
+            .Where(i => i.AppUserId == instructorId)
             .Select(i => new InstructorDto()
             {
                 Id = i.Id,
@@ -41,11 +40,11 @@ public class InstructorRepository(AppDbContext context, IUserRepository userRepo
             .FirstOrDefaultAsync() ?? throw new KeyNotFoundException($"User with id {instructorId} not found");
     }
 
-    public async Task<InstructorDto> GetInstructorInfo(int instructorId)
+    public async Task<InstructorDto> GetInstructorInfo(string instructorId)
     {
         return await context.Instructors
             .AsNoTracking()
-            .Where(u => u.Id == instructorId)
+            .Where(u => u.AppUserId == instructorId)
             .Select(i => new InstructorDto()
             {
                 Id = i.Id,
@@ -62,11 +61,11 @@ public class InstructorRepository(AppDbContext context, IUserRepository userRepo
             .FirstOrDefaultAsync() ?? throw new KeyNotFoundException($"User with id {instructorId} not found");
     }
 
-    public async Task<List<TermDto>> GetAllInstructorTerms(int instructorId)
+    public async Task<List<TermDto>> GetAllInstructorTerms(string instructorId)
     {
         return await context.Instructors
             .AsNoTracking()
-            .Where(s => s.Id == instructorId)
+            .Where(s => s.AppUserId == instructorId)
             .SelectMany(s => s.Terms)
             .Select(t => new TermDto()
             {
@@ -81,11 +80,11 @@ public class InstructorRepository(AppDbContext context, IUserRepository userRepo
             .ToListAsync();
     }
 
-    public async Task<List<CourseDto>> GetCourses(int instructorId)
+    public async Task<List<CourseDto>> GetCourses(string instructorId)
     {
         return await context.Instructors
             .AsNoTracking()
-            .Where(c => c.Id == instructorId)
+            .Where(c => c.AppUserId == instructorId)
             .SelectMany(i => i.Courses)
             .Select(c => new CourseDto()
             {
@@ -98,11 +97,11 @@ public class InstructorRepository(AppDbContext context, IUserRepository userRepo
     }
 
 
-    public async Task<InstructorDto> GetInstructorDtoById(int instructorId)
+    public async Task<InstructorDto> GetInstructorDtoById(string instructorId)
     {
         return await context.Instructors
             .AsNoTracking()
-            .Where(i => i.Id == instructorId)
+            .Where(i => i.AppUserId == instructorId)
             .Select(i => new InstructorDto()
             {
                 Id = i.Id,
@@ -171,11 +170,11 @@ public class InstructorRepository(AppDbContext context, IUserRepository userRepo
             .ToListAsync();
     }
 
-    public async Task<List<StudentDto>> GetInstructorStudentsOfSection(int sectionId)
+    public async Task<List<StudentDto>> GetInstructorStudentsOfSection(int sectionId , string instructorId)
     {
         return await context.Sections
             .AsNoTracking()
-            .Where(s => s.Id == sectionId)
+            .Where(s => s.Id == sectionId && s.Instructor.AppUserId == instructorId)
             .SelectMany(s => s.Students)
             .Select(s => new StudentDto()
             {

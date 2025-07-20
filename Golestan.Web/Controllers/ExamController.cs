@@ -4,25 +4,30 @@ using Application.DTOs.Objection;
 using Application.DTOs.Score;
 using Application.Interfaces;
 using Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Constants;
 
 
 public class ExamController(IExamService examService, IFacultyService facultyService) : BaseController(facultyService) {
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Instructor)]
     public async Task<IActionResult> Index(int sectionId)
     {
-        var model = await examService.GetSectionExamResults(sectionId);
+        var userId = GetUserId();
+        var model = await examService.GetSectionExamResults(sectionId, userId);
         ViewBag.SectionId = sectionId;
 
         return View(model);
     }
 
     [HttpGet]
-    public async Task<IActionResult> Results(int studentId, int termId)
+    [Authorize(Roles = AppRoles.Student)]
+    public async Task<IActionResult> Results(int termId)
     {
-        var model = await examService.GetTermExamResults(termId, studentId);
-        ViewBag.studentId = studentId;
+        var userId = GetUserId();
+        var model = await examService.GetTermExamResults(termId, userId);
         ViewBag.TermId = termId;
 
         return View(model);
@@ -30,9 +35,11 @@ public class ExamController(IExamService examService, IFacultyService facultySer
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Instructor)]
     public async Task<IActionResult> SubmitStudentsScores(ScoreDto model)
     {
-        var result = await examService.SubmitStudentScore(model);
+        var userId = GetUserId();
+        var result = await examService.SubmitStudentScore(model, userId);
 
         ShowMessage(result.Message, result.Succeeded);
 
@@ -41,10 +48,11 @@ public class ExamController(IExamService examService, IFacultyService facultySer
     }
 
     [HttpGet]
-    public async Task<IActionResult> FinalResults(int instructorId, int termId)
+    [Authorize(Roles = AppRoles.Instructor)]
+    public async Task<IActionResult> FinalResults( int termId)
     {
-        var model = await examService.GetTermFinalResults(termId,instructorId);
-        ViewBag.InstructorId = instructorId;
+        var userId = GetUserId();
+        var model = await examService.GetTermFinalResults(termId, userId);
         ViewBag.TermId = termId;
 
         return View(model);
@@ -52,11 +60,13 @@ public class ExamController(IExamService examService, IFacultyService facultySer
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Student)]
     public async Task<IActionResult> Objection(ObjectionDto dto)
     {
-        var model = await examService.SubmitObjection(dto);
+        var userId = GetUserId();
+        var model = await examService.SubmitObjection(dto, userId);
 
-        return RedirectToAction("Results", new { termId = dto.TermId, studentId = dto.StudentId });
+        return RedirectToAction("Results", new { termId = dto.TermId});
     }
 
 }

@@ -7,6 +7,8 @@ using Application.DTOs.Objection;
 using Application.DTOs.Student;
 using Application.Interfaces;
 using Base;
+using Microsoft.AspNetCore.Authorization;
+using Shared.Constants;
 
 
 public class StudentsController : BaseController {
@@ -34,30 +36,28 @@ public class StudentsController : BaseController {
         _examService = examService;
     }
 
+    [HttpGet]
+    [Authorize(Roles = AppRoles.Student)]
     public async Task<IActionResult> Index()
     {
-        var userId = GetUserId();
-
-        // var model = await _studentService.GetStudentUserApp(userId);
-
-        var model = await _studentService.GetStudentUserApp("d8801a7e-52d4-4bdf-b519-6dfde3c04df0");
-
-        return View(model);
+        return View();
     }
 
     [HttpGet]
-    public async Task<IActionResult> Selection(int studentId)
+    [Authorize(Roles = AppRoles.Student)]
+    public async Task<IActionResult> Selection()
     {
         var model = await _termService.GetCurrentTerm();
-        ViewBag.studentId = studentId;
 
         return View(model);
     }
 
     [HttpGet]
-    public async Task<IActionResult> AvailableSections(int studentId)
+    [Authorize(Roles = AppRoles.Student)]
+    public async Task<IActionResult> AvailableSections()
     {
-        var model = await _selectionService.GetAvailableSectionsForSelection(studentId);
+        var userId = GetUserId();
+        var model = await _selectionService.GetAvailableSectionsForSelection(userId);
 
         if (model == null){
             ShowMessage("The selection time passed, no sections available", false);
@@ -69,6 +69,7 @@ public class StudentsController : BaseController {
     }
 
     [HttpGet]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add(int facultyId)
     {
         var faculty = await _facultyService.GetFacultyDtoById(facultyId);
@@ -90,6 +91,7 @@ public class StudentsController : BaseController {
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Add(AddStudentDto dto)
     {
         if (!ModelState.IsValid){
@@ -107,51 +109,53 @@ public class StudentsController : BaseController {
     }
 
     [HttpGet]
-    public async Task<IActionResult> Sections(int studentId)
+    [Authorize(Roles = AppRoles.Student)]
+    public async Task<IActionResult> Sections()
     {
-        var model = await _studentService.GetStudentSections(studentId);
+        var userId = GetUserId();
+        var model = await _studentService.GetStudentSections(userId);
 
         return View(model);
     }
 
     [HttpGet]
-    public async Task<IActionResult> Exams(int studentId)
+    [Authorize(Roles = AppRoles.Student)]
+    public IActionResult Exams()
     {
-        // var model = await _studentService.GetAllStudentTerms(studentId);
-        ViewBag.studentId = studentId;
-
         return View();
     }
 
     [HttpGet]
-    public async Task<IActionResult> TermHistory(int studentId)
+    [Authorize(Roles = AppRoles.Student)]
+    public async Task<IActionResult> TermHistory()
     {
-        var model = await _studentService.GetAllStudentTerms(studentId);
-        ViewBag.studentId = studentId;
+        var userId = GetUserId();
+        var model = await _studentService.GetAllStudentTerms(userId);
 
         return View(model);
     }
 
 
     [HttpGet]
-    public async Task<IActionResult> ActiveExamResults(int studentId)
+    [Authorize(Roles = AppRoles.Student)]
+    public async Task<IActionResult> ActiveExamResults()
     {
         var currentTerm = await _termService.GetCurrentTerm();
 
         if (currentTerm == null){
             ShowMessage("Currently there is no active term", false);
 
-            return RedirectToAction("Exams", new { studentId = studentId });
+            return RedirectToAction("Exams");
         }
 
 
-        return RedirectToAction("Results","Exam",new { studentId = studentId , termId = currentTerm.Id });
+        return RedirectToAction("Results", "Exam", new { termId = currentTerm.Id });
     }
 
-    
 
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize(Roles = AppRoles.Admin)]
     public async Task<IActionResult> Remove(int studentId, int facultyId)
     {
         var result = await _studentService.Rmove(studentId);

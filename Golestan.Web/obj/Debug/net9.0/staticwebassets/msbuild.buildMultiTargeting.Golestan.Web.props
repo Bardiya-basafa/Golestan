@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\Golestan.Web.props" />
-</Project>
